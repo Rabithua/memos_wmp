@@ -4,7 +4,7 @@
     <view class="welcom">
       <image class="icon" mode="aspectFill" src="../../images/icon.png"></image><text class="content">欢迎来到麦默~</text>
     </view>
-    <text class="dsc">麦默是基于开源项目usememos/memos的小程序版本，功能较为简单，目前小程序版本只提供浏览功能，想要体验完整功能可访问web。</text>
+    <text class="dsc">麦默是基于开源项目usememos/memos的小程序版本，功能较为简单，目前小程序版本只提供部分简单的功能，想要体验完整功能可访问web。</text>
     <view class="form">
       <text class="title">memos地址</text>
       <input disabled auto-focus type="text" placeholder="{{url}}" model:value="{{url}}" bindlongtap="copy" />
