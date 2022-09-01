@@ -1,0 +1,133 @@
+page {
+  background: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-family: -apple-system, BlinkMacSystemFont, PingFang SC, Noto Sans, Noto Sans CJK SC, Microsoft YaHei UI, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif, Segoe UI, Roboto, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+}
+
+.img {
+  max-width: 80%;
+}
+
+.halfDialog {
+  display: flex;
+  animation: halfDialog 500ms 500ms reverse forwards;
+  overflow: hidden;
+  flex-direction: column;
+  z-index: 2;
+  background: #ffffff;
+  border-radius: 30rpx 30rpx 0rpx 0rpx;
+  width: calc(100% - 60rpx);
+  margin: 10rpx 30rpx;
+  border-radius: 30rpx;
+  box-shadow: 0 0 50rpx #00000008;
+}
+
+.showHalfDialog {
+  animation: halfDialog 500ms 100ms forwards;
+}
+
+.halfDialog .title {
+  margin: 30rpx;
+  color: #00000080;
+}
+
+.halfDialog .close {
+  transform: rotate(45deg);
+  transition: 500ms;
+  position: absolute;
+  margin-top: 25rpx;
+  right: 60rpx;
+  width: 50rpx;
+  height: 50rpx;
+  background-size: cover;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTUiIGhlaWdodD0iNTUiIHZpZXdCb3g9IjAgMCA1NSA1NSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI0MC4xNjMiIHk9IjE0IiB3aWR0aD0iMyIgaGVpZ2h0PSIzNyIgcng9IjEuNSIgdHJhbnNmb3JtPSJyb3RhdGUoNDUgNDAuMTYzIDE0KSIgZmlsbD0iI0M3QzdDNyIvPjxyZWN0IHg9IjQyLjI4NCIgeT0iNDAuMTYzIiB3aWR0aD0iMyIgaGVpZ2h0PSIzNyIgcng9IjEuNSIgdHJhbnNmb3JtPSJyb3RhdGUoMTM1IDQyLjI4NCA0MC4xNjMpIiBmaWxsPSIjQzdDN0M3Ii8+PC9zdmc+);
+}
+
+.halfDialog .open {
+  transform: rotate(0deg);
+  transition: 500ms;
+}
+
+.halfDialog textarea {
+  width: calc(90% - 60rpx);
+  border-radius: 20rpx;
+  padding: 30rpx;
+  background: #f5f5f5;
+  margin: 0rpx 5%;
+  margin-bottom: 20rpx;
+}
+
+.memos {
+  z-index: 1;
+}
+
+.memoCard {
+  /* opacity: 0;
+  animation: show 300ms 300ms forwards; */
+  white-space: pre-wrap;
+  margin: 10rpx 30rpx;
+  padding: 30rpx;
+  background: #ffffff;
+  font-size: 35rpx;
+  /* border: 1rpx solid #e5e7eb; */
+  border-radius: 20rpx;
+}
+
+.memoCard:last-child {
+  margin-bottom: 100rpx;
+}
+
+.memoCard .time {
+  color: #cccccc;
+  font-size: 30rpx;
+  margin-right: 20rpx;
+  letter-spacing: 2rpx;
+}
+
+.memoCard .status {
+  border: 1rpx solid;
+  color: #07C160;
+  font-size: 25rpx;
+  padding: 5rpx 10rpx;
+  border-radius: 10rpx;
+}
+
+.memoCard .content {
+  word-break: break-word;
+  margin: 10rpx;
+  margin-top: 20rpx;
+  font-size: 35rpx;
+  letter-spacing: 2rpx;
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes cardshow {
+  from {
+    transform: rotate3d(0, 1, 0, 30deg);
+  }
+
+  to {
+    transform: rotate3d(1, 0, 0, 0deg);
+  }
+}
+
+@keyframes halfDialog {
+  from {
+    height: 100rpx;
+  }
+
+  to {
+    height: 600rpx;
+  }
+}
