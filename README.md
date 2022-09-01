@@ -22,5 +22,6 @@ git clone https://github.com/Rabithua/memos_wmp
 3. 下载微信小程序[开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)
 4. 导入当前文件夹，选择测试号或者使用你注册好的微信小程序的 appid ，不使用云开发。
 5.不出意外的话编译完毕你就可以看到麦默的欢迎界面了~🎉
+6.在 `app.js` 中修改 `this.globalData.url` 为你自己的域名。
 
 ![](https://talk.wowow.club/assets/files/2022-09-01/1662011213-719049-20220901133041.png)
