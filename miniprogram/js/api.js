@@ -48,7 +48,7 @@ export const deleteMemo = (url, openId, memoId) => {
       success(res) {
         resolve(res.data)
       },
-      fail(err) {s
+      fail(err) {
         reject(err)
       }
     })
