@@ -68,7 +68,7 @@ Page({
           memos[i].time = time
           //memos原版解析
           let md = formatMemoContent(memos[i].content)
-          memos[i].content = md
+          memos[i].formatContent = md
           //开启markdown解析请取消注释并在app.wxss中注释/* white-space: pre-wrap; */
           // let md = app.towxml(memos[i].content, 'markdown', {
           //   base: app.globalData.url, // 相对资源的base路径
@@ -109,6 +109,8 @@ Page({
           wx.vibrateShort()
           var newmemo = res.data
           newmemo.time = app.calTime(newmemo.createdTs)
+          let md = formatMemoContent(newmemo.content)
+          newmemo.formatContent = md
           //开启markdown解析请取消注释并在app.wxss中注释/* white-space: pre-wrap; */
           // newmemo.content = app.towxml(res.data.content, 'markdown', {
           //   base: app.globalData.url,

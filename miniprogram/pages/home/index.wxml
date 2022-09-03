@@ -7,7 +7,7 @@
 <view class="halfDialog {{halfDialog}}" style="margin-top: {{top_btn.height + top_btn.top + 20}}px;">
   <view class=" close {{halfDialog == 'closeHalfDialog' ? ' ' : 'open'}}" catchtap="closeMemo"></view>
   <view class="title">Memos</view>
-  <textarea name="memos" id="memos" cols="30" 	maxlength="-1" rows="10" model:value="{{memo}}" placeholder="记录一下今天发生的事情~" bindconfirm="sendMemo" confirm-type="send"></textarea>
+  <textarea name="memos" id="memos" cols="30" maxlength="-1" rows="10" model:value="{{memo}}" placeholder="记录一下今天发生的事情~" bindconfirm="sendMemo" confirm-type="return"></textarea>
   <button style="margin-right: 50rpx;" type="primary" size="mini" class="memoSendBtn" bindtap="sendMemo">发送</button>
 </view>
 <view class="memos">
@@ -16,9 +16,13 @@
     <text class="status">{{item.visibility}}</text>
     <!-- <view class="content" data-content="{{item.content}}" catchlongtap="copy">{{item.content}}</view> -->
     <view class="content">
-    <rich-text nodes="{{item.content}}"></rich-text>
+      <block wx:if="{{!item.formatContent}}">
+      <view class="loading">加载中……</view>
+      </block>
+      <block wx:else>
+        <rich-text data-content="{{item.content}}" catchlongtap="copy" nodes="{{item.formatContent}}"></rich-text>
+      </block>
     </view>
-    
     <!-- markdown解析请取消注释，并注释掉上一行 -->
     <!-- <towxml nodes="{{item.content}}"/> -->
   </view>

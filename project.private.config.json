@@ -8,6 +8,13 @@
       "list": [
         {
           "name": "",
+          "pathName": "pages/home/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
           "pathName": "pages/welcom/index",
           "query": "",
           "launchMode": "default",

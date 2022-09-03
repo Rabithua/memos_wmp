@@ -1,5 +1,6 @@
 {
   "miniprogramRoot": "miniprogram/",
+  "cloudfunctionRoot": "cloudfunctions/",
   "setting": {
     "urlCheck": true,
     "es6": true,
@@ -41,7 +42,7 @@
     "minifyWXML": true,
     "ignoreUploadUnusedFiles": false
   },
-  "appid": "wx261ada1ee8e73599",
+  "appid": "wx93424d86ffa7d6ac",
   "projectname": "memos",
   "libVersion": "2.14.1",
   "condition": {
