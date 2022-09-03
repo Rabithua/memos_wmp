@@ -29,7 +29,7 @@ Page({
     })
     var openId = this.data.openId
     var url = app.globalData.url
-    app.getMemos(url + '/api/memo', openId).then(result => {
+    app.api.getMemos(url + '/api/memo', openId).then(result => {
       console.log(result.data)
       if (!result.data) {
         wx.vibrateLong()

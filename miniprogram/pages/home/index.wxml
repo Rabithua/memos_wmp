@@ -5,13 +5,19 @@
   <view style="width: 20rpx; height: 20rpx; border-radius: 20rpx; background-color: {{onlineColor}}; margin-left: 20rpx;"></view>
 </view>
 <view class="halfDialog {{halfDialog}}" style="margin-top: {{top_btn.height + top_btn.top + 20}}px;">
-  <view class=" close {{halfDialog == 'closeHalfDialog' ? ' ' : 'open'}}" catchtap="closeMemo"></view>
-  <view class="title">Memos</view>
-  <textarea name="memos" id="memos" cols="30" maxlength="-1" rows="10" model:value="{{memo}}" placeholder="记录一下今天发生的事情~" bindconfirm="sendMemo" confirm-type="return"></textarea>
-  <button style="margin-right: 50rpx;" type="primary" size="mini" class="memoSendBtn" bindtap="sendMemo">发送</button>
+  <view class=" close {{halfDialog == 'closeHalfDialog' ? ' ' : 'open'}}" catchtap="changeCloseMemo"></view>
+  <view class="title">Memos
+  <text wx:if="{{edit}}">编辑中……</text>
+  </view>
+  <textarea name="memos" id="memos" cols="30" maxlength="-1" rows="10" model:value="{{memo}}" placeholder="记录一下今天发生的事情~" bindconfirm="dialog" confirm-type="return"></textarea>
+  <button style="margin-right: 50rpx;" type="primary" size="mini" class="memoSendBtn" bindtap="dialog">发送</button>
 </view>
 <view class="memos">
-  <view class="memoCard" wx:for="{{memos}}" wx:key="memo" style="opacity: {{item.rowStatus == 'ARCHIVED' ? '0.5' : '1'}}">
+  <view class="memoCard" wx:for="{{showMemos}}" wx:key="memo" style="opacity: {{item.rowStatus == 'ARCHIVED' ? '0.5' : '1'}}">
+    <view class="methed">
+    <text class="btn delete" data-memoId="{{item.id}}" catchtap="deleteMemoFaker" catchlongpress="deleteMemo"></text>
+    <text class="btn edit" data-memoId="{{item.id}}" data-content="{{item.content}}"  catchtap="dialogEdit"></text>
+    </view>
     <text class="time">{{item.time}}</text>
     <text class="status">{{item.visibility}}</text>
     <!-- <view class="content" data-content="{{item.content}}" catchlongtap="copy">{{item.content}}</view> -->

@@ -2,6 +2,7 @@
 App({
   // 引入`towxml3.0`解析方法
   // towxml: require('/towxml/index'),
+  api: require('/js/api'),
 
   onLaunch: function () {
     if (!wx.cloud) {
@@ -11,32 +12,12 @@ App({
         traceUser: true,
       });
     }
+
     this.globalData = {
       url: 'https://memos.wowow.club',
       top_btn: null,
     }
     this.globalData.top_btn = wx.getMenuButtonBoundingClientRect()
-  },
-
-  getMemos(url, openId) {
-    return new Promise((resolve, reject) => {
-      wx.request({
-        url: url,
-        data: {
-          openId: openId
-        },
-        success(res) {
-          // console.log(res.data)
-          resolve(res.data)
-        },
-        fail(err) {
-          wx.showToast({
-            title: '获取memos失败',
-          })
-          reject(err)
-        }
-      })
-    })
   },
 
   calTime(timestamp) {
@@ -65,27 +46,6 @@ App({
     } else {
       return ('刚刚发布')
     }
-  },
-
-  sendMemo(url, openId, content) {
-    return new Promise((resolve, reject) => {
-      wx.request({
-        url: url + '?openId=' + openId,
-        method: "POST",
-        data: {
-          content: content
-        },
-        success(res) {
-          resolve(res.data)
-        },
-        fail(err) {
-          wx.showToast({
-            title: '发送memos失败',
-          })
-          reject(err)
-        }
-      })
-    })
   }
 
 });
