@@ -64,7 +64,7 @@ export const editMemo = (url, openId, memoId,data) => {
       success(res) {
         resolve(res.data)
       },
-      fail(err) {s
+      fail(err) {
         reject(err)
       }
     })
