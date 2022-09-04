@@ -3,7 +3,7 @@
 
 > 麦默只是 memos 的一个 api 调用器，所以想要使用这个小程序，你需要先搭建一个 memos ，具体搭建教程参考[碎片化知识卡片管理工具——Memos](https://blog.laoda.de/archives/docker-install-memos)，另外微信小程序对request域名有较[苛刻的限制](https://developers.weixin.qq.com/miniprogram/dev/framework/ability/network.html)，具体可以百度了解一下，应该会有奇奇怪怪的办法能够曲线救国（合法域名代理访问），喜欢折腾的可以自己摸索一下，不然就老实备案。
 
-### 预览 测试appId: `15ba8dce-ed28-4940-9b3f-265ad9fd4f3d`
+### 预览 测试openId: `15ba8dce-ed28-4940-9b3f-265ad9fd4f3d`
 
 ![](https://talk.wowow.club/assets/files/2022-09-01/1662011650-539056-gh-cc069ab0c8ae-344.jpg)
 
