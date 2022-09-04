@@ -7,10 +7,15 @@
 
 ![](https://talk.wowow.club/assets/files/2022-09-01/1662011650-539056-gh-cc069ab0c8ae-344.jpg)
 
+### 获取openId
+
+网页端memo账号登陆后，`setting` - `Open Api` ，其中 `openid=` 后面字段便是 openId
+
 ### 目前功能有：
 
 - 浏览 memos，支持解析部分 memos 语法，使用的是修改版的原 memos 解析方法
-- 发送 memos，目前仅支持纯文本的 memos，不过个人感觉已经足够了😂
+- 发送 memo，目前仅支持纯文本的 memo，不过个人感觉已经足够了😂
+- 编辑 memo，删除 memo
 - 切换用户 openId
 - 内容缓存到手机，没有网络的环境也可以查看，后续可能考虑推出一个单机版？
 
