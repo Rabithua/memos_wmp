@@ -74,6 +74,13 @@ Page({
 
   },
 
+  memoInput(e) {
+    // console.log(e.detail.value)
+    this.setData({
+      memo: e.detail.value
+    })
+  },
+
   dialogEdit(e) {
     console.log(e)
     this.setData({
@@ -165,7 +172,7 @@ Page({
         }
         that.setData({
           memos: memos,
-          showMemos: memos.slice(0,that.data.showMemos.length),
+          showMemos: memos.slice(0, that.data.showMemos.length),
           halfDialog: 'closeHalfDialog',
           memo: '',
           editMemoId: 0,
@@ -211,7 +218,7 @@ Page({
         memos.unshift(newmemo)
         that.setData({
           memos: memos,
-          showMemos: memos.slice(0,this.data.showMemos.length + 1),
+          showMemos: memos.slice(0, this.data.showMemos.length + 1),
           memo: ''
         })
         wx.setStorage({

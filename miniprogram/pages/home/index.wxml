@@ -9,7 +9,7 @@
   <view class="title">Memos
   <text wx:if="{{edit}}">编辑中……</text>
   </view>
-  <textarea name="memos" id="memos" cols="30" maxlength="-1" rows="10" model:value="{{memo}}" placeholder="记录一下今天发生的事情~" bindconfirm="dialog" confirm-type="return"></textarea>
+  <textarea name="memos" id="memos" maxlength="-1"  value="{{memo}}" bindinput="memoInput" placeholder="记录一下今天发生的事情~" bindconfirm="dialog" confirm-type="return"></textarea>
   <button style="margin-right: 50rpx;" type="primary" size="mini" class="memoSendBtn" bindtap="dialog">发送</button>
 </view>
 <view class="memos">
