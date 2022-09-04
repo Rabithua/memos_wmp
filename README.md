@@ -1,6 +1,6 @@
 <h1 align='center'>麦默</h1>
 
-<p align='center'>（基于开源项目[usememos/memos](https://github.com/usememos/memos)）的微信小程序版</p>
+<p align='center'><a href="https://github.com/usememos/memos">usememos/memos</a>的微信小程序版</p>
 
 > 麦默只是 memos 的一个 api 调用器，所以想要使用这个小程序，你需要先搭建一个 memos ，具体搭建教程参考[碎片化知识卡片管理工具——Memos](https://blog.laoda.de/archives/docker-install-memos)，另外微信小程序对request域名有较[苛刻的限制](https://developers.weixin.qq.com/miniprogram/dev/framework/ability/network.html)，具体可以百度了解一下，应该会有奇奇怪怪的办法能够曲线救国（合法域名代理访问），喜欢折腾的可以自己摸索一下，不然就老实备案。
 
