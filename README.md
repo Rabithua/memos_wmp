@@ -8,10 +8,6 @@
 
 ![preview](https://user-images.githubusercontent.com/34543831/188306443-d7e1d601-e258-43ab-ad10-f9174a350e24.png)
 
-### 获取openId
-
-网页端memo账号登陆后，`setting` - `Open Api` ，其中 `openid=` 后面字段便是 openId
-
 ### 目前功能有：
 
 - [x] 浏览 memos，支持解析部分 memos 语法，使用的是修改版的原 memos 解析方法
@@ -19,6 +15,10 @@
 - [x] 编辑 memo，删除 memo
 - [x] 切换用户 openId
 - [x] 内容缓存到手机，没有网络的环境也可以查看，后续可能考虑推出一个单机版？
+
+### 获取openId
+
+网页端memo账号登陆后，`setting` - `Open Api` ，其中 `openid=` 后面字段便是 openId
 
 ## 开始搭建
 
