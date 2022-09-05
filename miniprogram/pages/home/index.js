@@ -24,7 +24,7 @@ Page({
     })
     wx.getStorage({
       key: "openId",
-      encrypt: true,
+      // encrypt: true,
       success(res) {
         // console.log(res.data)
         that.setData({
@@ -74,6 +74,48 @@ Page({
 
   },
 
+  changeMemoPinned(e) {
+    console.log(e.detail.memoid)
+    console.log(e.detail.pinned)
+    var data = {
+      pinned: !e.detail.pinned
+    }
+    var that = this
+    app.api.changeMemoPinned(this.data.url, this.data.openId, e.detail.memoid, data).then(res => {
+      console.log(res)
+      if (res.data) {
+        wx.vibrateShort()
+        if (!e.detail.pinned) {
+          wx.showToast({
+            icon: 'none',
+            title: '已置顶',
+          })
+        } else {
+          wx.showToast({
+            icon: 'none',
+            title: '已取消置顶',
+          })
+        }
+        var memos = that.data.memos
+        for (let i = 0; i < memos.length; i++) {
+          if (memos[i].id == e.detail.memoid) {
+            memos[i].pinned = !e.detail.pinned
+          }
+        }
+        var arrMemos = app.memosArrenge(memos)
+        console.log(arrMemos)
+        that.setData({
+          memos: arrMemos,
+          showMemos: arrMemos.slice(0, that.data.showMemos.length),
+        })
+        wx.setStorage({
+          key: 'memos',
+          data: arrMemos
+        })
+      }
+    })
+  },
+
   memoInput(e) {
     // console.log(e.detail.value)
     this.setData({
@@ -82,12 +124,12 @@ Page({
   },
 
   dialogEdit(e) {
-    console.log(e)
+    // console.log(e)
     this.setData({
       halfDialog: 'showHalfDialog',
       edit: true,
-      editMemoId: e.target.dataset.memoid,
-      memo: e.target.dataset.content
+      editMemoId: e.detail.memoid,
+      memo: e.detail.content
     })
   },
 
@@ -108,26 +150,16 @@ Page({
           //memos原版解析
           let md = formatMemoContent(memos[i].content)
           memos[i].formatContent = md
-          //开启markdown解析请取消注释并在app.wxss中注释/* white-space: pre-wrap; */
-          // let md = app.towxml(memos[i].content, 'markdown', {
-          //   base: app.globalData.url, // 相对资源的base路径
-          //   theme: 'light', // 主题，默认`light`
-          //   events: { // 为元素绑定的事件方法
-          //     tap: (e) => {
-          //       console.log('tap', e);
-          //     }
-          //   }
-          // })
-          // memos[i].content = md
         }
+        var arrMemos = app.memosArrenge(memos)
         that.setData({
-          memos: memos,
-          showMemos: memos.slice(0, 10),
+          memos: arrMemos,
+          showMemos: arrMemos.slice(0, 10),
           onlineColor: '#07C160'
         })
         wx.setStorage({
           key: "memos",
-          data: memos
+          data: arrMemos
         })
       }
     })
@@ -155,7 +187,6 @@ Page({
         title: '内容不能为空',
       })
     }
-
   },
 
   editMemoContent(url, openId, id, data) {
@@ -205,25 +236,16 @@ Page({
         newmemo.time = app.calTime(newmemo.createdTs)
         let md = formatMemoContent(newmemo.content)
         newmemo.formatContent = md
-        //开启markdown解析请取消注释并在app.wxss中注释/* white-space: pre-wrap; */
-        // newmemo.content = app.towxml(res.data.content, 'markdown', {
-        //   base: app.globalData.url,
-        //   theme: 'light',
-        //   events: {
-        //     tap: (e) => {
-        //       console.log('tap', e);
-        //     }
-        //   }
-        // })
         memos.unshift(newmemo)
+        var arrMemos = app.memosArrenge(memos)
         that.setData({
-          memos: memos,
-          showMemos: memos.slice(0, this.data.showMemos.length + 1),
+          memos: arrMemos,
+          showMemos: arrMemos.slice(0, this.data.showMemos.length + 1),
           memo: ''
         })
         wx.setStorage({
           key: 'memos',
-          data: memos
+          data: arrMemos
         })
       } else {
         wx.vibrateLong()
@@ -232,26 +254,22 @@ Page({
           title: 'something wrong',
         })
       }
-
     })
-
-
   },
 
-  deleteMemoFaker() {
+  deleteMemoFaker(e) {
     wx.vibrateShort()
     wx.showToast({
       icon: 'none',
       title: '长按删除！',
     })
-
   },
 
   deleteMemo(e) {
     var that = this
     var memos = this.data.memos
-    var id = e.target.dataset.memoid
-    console.log(e.target.dataset.memoid)
+    var id = e.detail.memoid
+    console.log(e.detail.memoid)
     wx.vibrateLong()
     app.api.deleteMemo(this.data.url, this.data.openId, id).then(res => {
       if (res) {
@@ -259,13 +277,14 @@ Page({
           if (memos[i].id == id) {
             memos.splice(i, 1)
           }
+          var arrMemos = app.memosArrenge(memos)
           that.setData({
-            memos: memos,
-            showMemos: memos.slice(0, that.data.showMemos.length)
+            memos: arrMemos,
+            showMemos: arrMemos.slice(0, that.data.showMemos.length)
           })
           wx.setStorage({
             key: "memos",
-            data: memos
+            data: arrMemos
           })
         }
         wx.showToast({
@@ -288,7 +307,14 @@ Page({
   },
 
   changeCloseMemo() {
-    if (this.data.halfDialog == 'closeHalfDialog') {
+    if (this.data.halfDialog == 'showHalfDialog' && this.data.edit) {
+      this.setData({
+        halfDialog: 'closeHalfDialog',
+        memo: '',
+        editMemoId: 0,
+        edit: false
+      })
+    } else if (this.data.halfDialog == 'closeHalfDialog') {
       this.setData({
         halfDialog: 'showHalfDialog'
       })

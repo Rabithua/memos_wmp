@@ -10,8 +10,10 @@ export const getMemos = (url, openId) => {
         resolve(res.data)
       },
       fail(err) {
+        wx.vibrateLong()
         wx.showToast({
-          title: '获取memos失败',
+          icon: 'none',
+          title: '获取失败',
         })
         reject(err)
       }
@@ -31,8 +33,10 @@ export const sendMemo = (url, openId, content) => {
         resolve(res.data)
       },
       fail(err) {
+        wx.vibrateLong()
         wx.showToast({
-          title: '发送memos失败',
+          icon: 'none',
+          title: '发送失败',
         })
         reject(err)
       }
@@ -49,22 +53,53 @@ export const deleteMemo = (url, openId, memoId) => {
         resolve(res.data)
       },
       fail(err) {
+        wx.vibrateLong()
+        wx.showToast({
+          icon: 'none',
+          title: '删除失败',
+        })
         reject(err)
       }
     })
   })
 }
 
-export const editMemo = (url, openId, memoId,data) => {
+export const editMemo = (url, openId, memoId, data) => {
   return new Promise((resolve, reject) => {
     wx.request({
       url: url + '/api/memo/' + memoId + '?openId=' + openId,
-      method: "PATCH", 
+      method: "PATCH",
       data: data,
       success(res) {
         resolve(res.data)
       },
       fail(err) {
+        wx.vibrateLong()
+        wx.showToast({
+          icon: 'none',
+          title: '更新失败',
+        })
+        reject(err)
+      }
+    })
+  })
+}
+
+export const changeMemoPinned = (url, openId, memoId, data) => {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: url + '/api/memo/' + memoId + '/organizer' + '?openId=' + openId,
+      method: "POST",
+      data: data,
+      success(res) {
+        resolve(res.data)
+      },
+      fail(err) {
+        wx.vibrateLong()
+        wx.showToast({
+          icon: 'none',
+          title: '置顶失败',
+        })
         reject(err)
       }
     })

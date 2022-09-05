@@ -7,31 +7,16 @@
 <view class="halfDialog {{halfDialog}}" style="margin-top: {{top_btn.height + top_btn.top + 20}}px;">
   <view class=" close {{halfDialog == 'closeHalfDialog' ? ' ' : 'open'}}" catchtap="changeCloseMemo"></view>
   <view class="title">Memos
-  <text wx:if="{{edit}}">编辑中……</text>
+    <text wx:if="{{edit}}">编辑中……</text>
   </view>
-  <textarea name="memos" id="memos" maxlength="-1"  value="{{memo}}" bindinput="memoInput" placeholder="记录一下今天发生的事情~" bindconfirm="dialog" confirm-type="return"></textarea>
+  <textarea name="memos" id="memos" maxlength="-1" value="{{memo}}" bindinput="memoInput" placeholder="记录一下今天发生的事情~" bindconfirm="dialog" confirm-type="return"></textarea>
   <button style="margin-right: 50rpx;" type="primary" size="mini" class="memoSendBtn" bindtap="dialog">发送</button>
 </view>
 <view class="memos">
-  <view class="memoCard" wx:for="{{showMemos}}" wx:key="memo" style="opacity: {{item.rowStatus == 'ARCHIVED' ? '0.5' : '1'}}">
-    <view class="methed">
-    <text class="btn delete" data-memoId="{{item.id}}" catchtap="deleteMemoFaker" catchlongpress="deleteMemo"></text>
-    <text class="btn edit" data-memoId="{{item.id}}" data-content="{{item.content}}"  catchtap="dialogEdit"></text>
-    </view>
-    <text class="time">{{item.time}}</text>
-    <text class="status">{{item.visibility}}</text>
-    <!-- <view class="content" data-content="{{item.content}}" catchlongtap="copy">{{item.content}}</view> -->
-    <view class="content">
-      <block wx:if="{{!item.formatContent}}">
-      <view class="loading">加载中……</view>
-      </block>
-      <block wx:else>
-        <rich-text data-content="{{item.content}}" catchlongtap="copy" nodes="{{item.formatContent}}"></rich-text>
-      </block>
-    </view>
-    <!-- markdown解析请取消注释，并注释掉上一行 -->
-    <!-- <towxml nodes="{{item.content}}"/> -->
-  </view>
+  <memoCard memos="{{showMemos}}" pinned="{{true}}" rowStatus="NORMAL" bind:deleteMemoFaker="deleteMemoFaker" bind:deleteMemo="deleteMemo" bind:dialogEdit="dialogEdit" bind:changeMemoPinned="changeMemoPinned" />
+  <memoCard memos="{{showMemos}}" pinned="{{false}}" rowStatus="NORMAL" bind:deleteMemoFaker="deleteMemoFaker" bind:deleteMemo="deleteMemo" bind:dialogEdit="dialogEdit" bind:changeMemoPinned="changeMemoPinned" />
+  <memoCard memos="{{showMemos}}" pinned="{{true}}" rowStatus="ARCHIVED" bind:deleteMemoFaker="deleteMemoFaker" bind:deleteMemo="deleteMemo" bind:dialogEdit="dialogEdit" bind:changeMemoPinned="changeMemoPinned" />
+  <memoCard memos="{{showMemos}}" pinned="{{false}}" rowStatus="ARCHIVED" bind:deleteMemoFaker="deleteMemoFaker" bind:deleteMemo="deleteMemo" bind:dialogEdit="dialogEdit" bind:changeMemoPinned="changeMemoPinned" />
   <block wx:if="{{memos.length == 0}}">
     <view class="none">你的memos和我的口袋一样干净~</view>
   </block>

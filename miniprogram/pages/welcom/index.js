@@ -45,7 +45,7 @@ Page({
         wx.setStorage({
           key: "openId",
           data: openId,
-          encrypt: true,
+          // encrypt: true,
           success(res) {
             console.log(res)
             wx.redirectTo({
@@ -60,7 +60,6 @@ Page({
         })
       }
     })
-
   },
 
   /**

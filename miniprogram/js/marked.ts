@@ -2,7 +2,7 @@
 import { IMAGE_URL_REG, LINK_URL_REG, MEMO_LINK_REG, TAG_REG } from "./consts";
 var app = getApp()
 
-const CODE_BLOCK_REG = /```([\s\S]*?)```/g;
+const CODE_BLOCK_REG = /```\n([\s\S]*?)\n```/g;
 const BOLD_TEXT_REG = /\*\*(.+?)\*\*/g;
 const EM_TEXT_REG = /\*(.+?)\*/g;
 export const TODO_BLOCK_REG = /- \[ \] /g;
