@@ -14,9 +14,9 @@ const parseMarkedToHtml = (markedStr: string): string => {
   const htmlText = markedStr
     .replace(/([\u4e00-\u9fa5])([A-Za-z0-9?.,;[\]]+)/g, "$1 $2")
     .replace(/([A-Za-z0-9?.,;[\]]+)([\u4e00-\u9fa5])/g, "$1 $2")
-    .replace(CODE_BLOCK_REG, "<pre lang=''>$1</pre>")
-    .replace(TODO_BLOCK_REG, "<span class='todo-block todo' data-value='TODO'>⚡</span>")
-    .replace(DONE_BLOCK_REG, "<span class='todo-block done' data-value='DONE'>🌙</span>")
+    .replace(CODE_BLOCK_REG, "<pre class='code' lang=''>$1</pre>")
+    .replace(TODO_BLOCK_REG, "<span class='todo-block todo' data-value='TODO'>◻</span>")
+    .replace(DONE_BLOCK_REG, "<span class='todo-block done' data-value='DONE'>◼</span>")
     .replace(DOT_LI_REG, "<span class='counter-block'>•</span>")
     .replace(NUM_LI_REG, "<span class='counter-block'>$1.</span>")
     .replace(BOLD_TEXT_REG, "<strong>$1</strong>")
