@@ -6,6 +6,15 @@ page {
   font-family: -apple-system, BlinkMacSystemFont, PingFang SC, Noto Sans, Noto Sans CJK SC, Microsoft YaHei UI, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif, Segoe UI, Roboto, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
 }
 
+.link {
+  color: #0077e6;
+}
+.link::before {
+  content: '🔗';
+  opacity: 0.3;
+  font-size: 27rpx;
+}
+
 .content .code {
   margin: 10rpx;
   white-space:pre;
