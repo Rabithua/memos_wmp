@@ -40,6 +40,6 @@ git clone https://github.com/Rabithua/memos_wmp
 9. 不出意外的话编译完毕你就可以看到麦默的欢迎界面了🎉
 10. 尝试输入用户名和密码，看创建新用户是否成功，遇到问题请提交 issue 反馈给我，谢谢。
 
-### 获取openId
+### 获取hostId
 
-网页端memo账号登陆后，`setting` - `Open Api` ，其中 `openid=` 后面字段便是 openId
+网页端管理员账号登陆后，`setting` - `Open Api` ，其中 `openid=` 后面字段便是 openId
