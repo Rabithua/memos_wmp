@@ -1,15 +1,25 @@
 <!--pages/welcom/index.wxml-->
 <view class="container">
   <view class="main">
+    <view class="piecs"></view>
     <view class="welcom">
-      <image class="icon" mode="aspectFill" src="../../images/icon.png"></image><text class="content">欢迎来到麦默~</text>
+      <text class="content">欢迎来到麦默~</text>
     </view>
-    <text class="dsc">麦默是基于开源项目usememos/memos的小程序版本，功能较为简单，目前小程序版本只提供部分简单的功能，想要体验完整功能可访问web。</text>
+    <text class="slogan">把脑袋里的小碎片，收集起来💡</text>
+    <text class="dsc">麦默是开源项目 usememos/memos 的小程序版本。</text>
     <view class="form">
-      <text class="title">memos地址</text>
-      <input disabled auto-focus type="text" placeholder="{{url}}" model:value="{{url}}" bindlongtap="copy" />
-      <text class="title">openId</text>
-      <input type="text" placeholder="memos后台获取" bindconfirm="submit" confirm-type="done" model:value="{{openId}}" />
+      <!-- <text class="title">网址</text>
+      <input disabled auto-focus type="text" placeholder="{{url}}" model:value="{{url}}" bindlongtap="copy" /> -->
+      <text class="title">邮箱</text>
+      <input type="text" placeholder="xxx@xx.com" confirm-type="done" model:value="{{email}}" />
+      <text class="title">密码</text>
+      <input type="text" placeholder="输入密码" confirm-type="done" model:value="{{password}}" />
+      <button wx:if="{{email != '' && password != ''}}" style="margin-top: 60rpx;" type="default" size="default" catchtap="creatUser" disabled="{{btnDisable}}" loading="{{btnDisable}}">注册/登录</button>
     </view>
   </view>
+  <movable-area style="width: 100%; height: 600rpx; position: fixed; bottom: -350rpx;">
+    <movable-view class="tips" direction="vertical" inertia friction='1' out-of-bounds damping='50' y='20rpx'>
+      <view class="content">输入账号密码，账号不存在会自动创建。请妥善保管好自己的邮箱和密码，目前以缓存形式保存登录信息，清除缓存后会需要重新登陆。</view>
+    </movable-view>
+  </movable-area>
 </view>

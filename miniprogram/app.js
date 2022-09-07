@@ -17,7 +17,9 @@ App({
       url: 'https://memos.wowow.club',
       top_btn: null,
     }
+
     this.globalData.top_btn = wx.getMenuButtonBoundingClientRect()
+
   },
 
   memosArrenge(memos) {

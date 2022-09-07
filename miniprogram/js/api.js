@@ -105,3 +105,25 @@ export const changeMemoPinned = (url, openId, memoId, data) => {
     })
   })
 }
+
+export const signIn = (url, data) => {
+  return new Promise((resolve, reject) => {
+    console.log(data)
+    wx.request({
+      url: url + '/api/auth/signin',
+      method: "POST",
+      data: data,
+      success(res) {
+        resolve(res.data)
+      },
+      fail(err) {
+        wx.vibrateLong()
+        wx.showToast({
+          icon: 'none',
+          title: '登录失败',
+        })
+        reject(err)
+      }
+    })
+  })
+}

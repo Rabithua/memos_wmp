@@ -27,7 +27,7 @@ page {
 
 .halfDialog {
   display: flex;
-  /* animation: halfDialog 500ms 500ms reverse forwards; */
+  /* animation: show 500ms 500ms forwards; */
   overflow: hidden;
   flex-direction: column;
   z-index: 2;

@@ -6,7 +6,7 @@
     <text class="btn edit" data-memoId="{{item.id}}" data-content="{{item.content}}" catchtap="dialogEdit"></text>
   </view>
   <text class="time">{{item.time}}</text>
-  <text class="status">{{item.visibility}}</text>
+  <!-- <text class="status">{{item.visibility}}</text> -->
   <!-- <view class="content" data-content="{{item.content}}" catchlongtap="copy">{{item.content}}</view> -->
   <view class="content">
     <block wx:if="{{!item.formatContent}}">

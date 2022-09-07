@@ -1,4 +1,8 @@
 /* pages/home/index.wxss */
+page {
+  opacity: 0;
+  animation: show 500ms 500ms forwards;
+}
 .counter-block {
   margin: 10rpx;
 }
