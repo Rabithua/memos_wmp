@@ -13,7 +13,9 @@ Page({
     memos: [],
     showMemos: [],
     memo: '',
-    onlineColor: '#eeeeee'
+    onlineColor: '#eeeeee',
+    showArchived: false,
+    sendLoading: false
   },
 
   onLoad(options) {
@@ -27,6 +29,7 @@ Page({
       // encrypt: true,
       success(res) {
         // console.log(res.data)
+        app.globalData.openId = res.data
         that.setData({
           url: app.globalData.url,
           openId: res.data,
@@ -108,11 +111,19 @@ Page({
           memos: arrMemos,
           showMemos: arrMemos.slice(0, that.data.showMemos.length),
         })
+        app.globalData.memos = arrMemos
         wx.setStorage({
           key: 'memos',
           data: arrMemos
         })
       }
+    })
+  },
+
+  changeshowArchived() {
+    wx.vibrateShort()
+    this.setData({
+      showArchived: !this.data.showArchived
     })
   },
 
@@ -157,6 +168,7 @@ Page({
           showMemos: arrMemos.slice(0, 10),
           onlineColor: '#07C160'
         })
+        app.globalData.memos = arrMemos
         wx.setStorage({
           key: "memos",
           data: arrMemos
@@ -169,6 +181,9 @@ Page({
     var that = this
     var content = this.data.memo
     if (content !== '') {
+      this.setData({
+        sendLoading: true
+      })
       if (!this.data.edit) {
         this.sendMemo()
       } else {
@@ -205,6 +220,7 @@ Page({
           memos: memos,
           showMemos: memos.slice(0, that.data.showMemos.length),
           halfDialog: 'closeHalfDialog',
+          sendLoading: false,
           memo: '',
           editMemoId: 0,
           edit: false
@@ -214,6 +230,36 @@ Page({
           icon: 'none',
           title: '已更改',
         })
+        app.globalData.memos = memos
+        wx.setStorage({
+          key: 'memos',
+          data: memos
+        })
+      }
+    })
+  },
+
+  editMemoRowStatus(url, openId, id, data) {
+    var that = this
+    app.api.editMemo(url, openId, id, data).then(res => {
+      console.log(res)
+      if (res.data) {
+        var memos = that.data.memos
+        for (let i = 0; i < memos.length; i++) {
+          if (memos[i].id == id) {
+            memos[i].rowStatus = data.rowStatus
+          }
+        }
+        that.setData({
+          memos: memos,
+          showMemos: memos.slice(0, that.data.showMemos.length)
+        })
+        wx.vibrateShort()
+        wx.showToast({
+          icon: 'none',
+          title: '归档状态已更改',
+        })
+        app.globalData.memos = memos
         wx.setStorage({
           key: 'memos',
           data: memos
@@ -241,8 +287,10 @@ Page({
         that.setData({
           memos: arrMemos,
           showMemos: arrMemos.slice(0, this.data.showMemos.length + 1),
+          sendLoading: false,
           memo: ''
         })
+        app.globalData.memos = arrMemos
         wx.setStorage({
           key: 'memos',
           data: arrMemos
@@ -258,11 +306,14 @@ Page({
   },
 
   deleteMemoFaker(e) {
-    wx.vibrateShort()
-    wx.showToast({
-      icon: 'none',
-      title: '长按删除！',
-    })
+    console.log(e.detail.rowstatus)
+    var data = {
+      rowStatus: e.detail.rowstatus == "NORMAL" ? 'ARCHIVED' : "NORMAL"
+    }
+    var url = this.data.url
+    var openId = this.data.openId
+    var id = e.detail.memoid
+    this.editMemoRowStatus(url, openId, id, data)
   },
 
   deleteMemo(e) {
@@ -282,6 +333,7 @@ Page({
             memos: arrMemos,
             showMemos: arrMemos.slice(0, that.data.showMemos.length)
           })
+          app.globalData.memos = arrMemos
           wx.setStorage({
             key: "memos",
             data: arrMemos
@@ -301,8 +353,16 @@ Page({
   },
 
   goWelcom() {
+    wx.vibrateShort()
     wx.navigateTo({
       url: '../welcom/index',
+    })
+  },
+
+  goSearch() {
+    wx.vibrateShort()
+    wx.navigateTo({
+      url: '../search/index',
     })
   },
 

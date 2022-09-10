@@ -1,0 +1,102 @@
+/* 
+此文件为开发者工具生成，生成时间: 2022/9/10下午5:10:10
+使用方法：
+在 app.wxss 文件末尾引入样式
+```
+@import "./app-wxa-auto-dark.wxss";
+```
+ */
+
+@media (prefers-color-scheme: dark) {
+  page {
+    background: rgb(17, 17, 17);
+  }
+
+  .searchIcon {
+    border: rgb(0, 0, 0);
+  }
+
+  textarea {
+    color: #ffffff80;
+  }
+
+  .memoCard .content {
+    color: #ffffff80;
+  }
+
+  input {
+    color: #ffffff80;
+  }
+
+  .link {
+    color: rgb(48, 134, 247);
+  }
+
+  .content .code {
+    background-color: rgb(24, 24, 24);
+    color: rgba(255, 255, 255, 0.5019607843137255);
+  }
+
+  .tag-span {
+    color: rgb(48, 134, 247);
+  }
+
+  .halfDialog {
+    background: rgb(24, 24, 24);
+    box-shadow: rgb(0, 0, 0);
+  }
+
+  .halfDialog .title {
+    color: rgba(255, 255, 255, 0.5019607843137255);
+  }
+
+  .halfDialog textarea {
+    background: rgb(17, 17, 17);
+  }
+
+  .memoCard {
+    background: rgb(24, 24, 24);
+  }
+
+  .memoCard .time {
+    color: rgb(55, 55, 55);
+  }
+
+  .none {
+    color: rgba(255, 255, 255, 0.3137254901960784);
+  }
+
+  .memoCard .status {
+    color: rgb(0, 105, 12);
+  }
+
+  @keyframes show {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes cardshow {
+    from {
+      transform: rotate3d(0, 1, 0, 30deg);
+    }
+
+    to {
+      transform: rotate3d(1, 0, 0, 0deg);
+    }
+  }
+
+  @keyframes halfDialog {
+    from {
+      height: 100rpx;
+    }
+
+    to {
+      height: 600rpx;
+    }
+  }
+}

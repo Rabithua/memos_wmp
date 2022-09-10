@@ -1,0 +1,30 @@
+/* pages/search/index.wxss */
+.searchInput {
+  position: fixed;
+  background: #ffffff80;
+  padding-left: 20rpx;
+  border-radius: 50rpx;
+  border: 1rpx solid #cccccc50;
+  z-index: 2;
+  backdrop-filter: blur(100rpx);
+}
+
+.tags {
+  margin: 0rpx 30rpx;
+  line-height: 80rpx;
+}
+
+.tags .tag {
+  padding: 10rpx 20rpx;
+  background: #07C160;
+  margin: 20rpx;
+  color: #ffffff;
+  border-radius: 10rpx;
+  font-size: 30rpx;
+}
+
+.tags .tag::before {
+  content: '#';
+}
+
+@import 'index-wxa-auto-dark.wxss'

@@ -3,6 +3,7 @@ page {
   opacity: 0;
   animation: show 500ms 500ms forwards;
 }
+
 .counter-block {
   margin: 10rpx;
 }
@@ -70,11 +71,5 @@ page {
   margin-right: 20rpx;
 }
 
-.none {
-  margin: 30rpx;
-  font-size: 30rpx;
-  color: #00000050;
-  text-align: center;
-  opacity: 0;
-  animation: show 300ms 500ms forwards;
-}
+
+@import 'index-wxa-auto-dark.wxss'

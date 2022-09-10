@@ -48,7 +48,7 @@ const formatMemoContent = (content: string, addtionConfig?: Partial<FormatterCon
   let outputString = tempElement;
   var url = app.globalData.url;
   // if (config.inlineImage) {
-  outputString = outputString.replace(IMAGE_URL_REG,"<img class='img' src='" + url + "$1'" + "/>");
+  outputString = outputString.replace(IMAGE_URL_REG,"<img 	show-menu-by-longpress 	lazy-load class='img' src='" + url + "$1'" + "/>");
   // } else {
   //   outputString = outputString.replace(IMAGE_URL_REG, "");
   // }

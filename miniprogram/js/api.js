@@ -127,3 +127,23 @@ export const signIn = (url, data) => {
     })
   })
 }
+
+export const getTags = (url, openId) => {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: url + '/api/tag?openId=' + openId,
+      success(res) {
+        console.log(res.data)
+        resolve(res.data)
+      },
+      fail(err) {
+        wx.vibrateLong()
+        wx.showToast({
+          icon: 'none',
+          title: '获取失败',
+        })
+        reject(err)
+      }
+    })
+  })
+}

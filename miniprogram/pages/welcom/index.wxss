@@ -132,3 +132,5 @@ input:focus {
     transform: translateY(-10rpx);
   }
 }
+
+@import 'index-wxa-auto-dark.wxss'

@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/home/index",
-    "pages/welcom/index"
+    "pages/welcom/index",
+    "pages/search/index"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
