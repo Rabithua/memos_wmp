@@ -8,7 +8,7 @@
 
 ### 预览 测试账号：test@mail.com 密码：rabithua
 
-![preview](https://user-images.githubusercontent.com/34543831/188306443-d7e1d601-e258-43ab-ad10-f9174a350e24.png)
+![微信图片_20220901133041](https://user-images.githubusercontent.com/34543831/189478411-a4aecce7-942d-4f03-8ad5-498f0f928511.png)
 
 ### 目前功能有：
 
