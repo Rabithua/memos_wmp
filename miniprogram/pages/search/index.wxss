@@ -2,7 +2,7 @@
 .searchInput {
   position: fixed;
   background: #ffffff80;
-  padding-left: 20rpx;
+  padding-left: 40rpx;
   border-radius: 50rpx;
   border: 1rpx solid #cccccc50;
   z-index: 2;
@@ -14,7 +14,7 @@
   line-height: 80rpx;
 }
 
-.tags .tag {
+.tag {
   padding: 10rpx 20rpx;
   background: #07C160;
   margin: 20rpx;
@@ -23,7 +23,7 @@
   font-size: 30rpx;
 }
 
-.tags .tag::before {
+.tag::before {
   content: '#';
 }
 

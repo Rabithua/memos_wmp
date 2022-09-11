@@ -6,6 +6,33 @@ page {
   font-family: -apple-system, BlinkMacSystemFont, PingFang SC, Noto Sans, Noto Sans CJK SC, Microsoft YaHei UI, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif, Segoe UI, Roboto, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
 }
 
+.todo-block {
+  margin: 0rpx 20rpx;
+}
+
+.todo::before {
+  content: '';
+  position: absolute;
+  margin-left: -40rpx;
+  margin-top: 5rpx;
+  height: 36rpx;
+  width: 57rpx;
+  background-size: cover;
+  animation: show 2s forwards alternate-reverse infinite ease-in-out;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDE5MCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xMjYgMjVINjRhNCA0IDAgMCAwLTQgNHY2MmE0IDQgMCAwIDAgNCA0aDYyYTQgNCAwIDAgMCA0LTRWMjlhNCA0IDAgMCAwLTQtNHpNNjQgMTNjLTguODM3IDAtMTYgNy4xNjMtMTYgMTZ2NjJjMCA4LjgzNyA3LjE2MyAxNiAxNiAxNmg2MmM4LjgzNyAwIDE2LTcuMTYzIDE2LTE2VjI5YzAtOC44MzctNy4xNjMtMTYtMTYtMTZINjR6IiBmaWxsPSIjMDUwNTA1Ii8+PC9zdmc+);
+}
+
+.done::before {
+  content: '';
+  position: absolute;
+  margin-left: -40rpx;
+  margin-top: 5rpx;
+  height: 36rpx;
+  width: 57rpx;
+  background-size: cover;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDE5MCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTcxLjUgNTFsMTkuMDE0IDE3LjYyM2EyIDIgMCAwIDAgMi44NDQtLjEyNkwxMzQgMjMuNSIgc3Ryb2tlPSIjMDUwNTA1IiBzdHJva2Utd2lkdGg9IjEyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTExMy4zMDcgMTguMTIxYzEuODktMS44OS41NTItNS4xMjEtMi4xMjEtNS4xMjFINjRjLTguODM3IDAtMTYgNy4xNjMtMTYgMTZ2NjJjMCA4LjgzNyA3LjE2MyAxNiAxNiAxNmg2MmM4LjgzNyAwIDE2LTcuMTYzIDE2LTE2VjQ4LjI0MWMwLTIuNjcyLTMuMjMxLTQuMDEtNS4xMjEtMi4xMmwtNiA2YTIuOTk5IDIuOTk5IDAgMCAwLS44NzkgMi4xMlY5MWE0IDQgMCAwIDEtNCA0SDY0YTQgNCAwIDAgMS00LTRWMjlhNCA0IDAgMCAxIDQtNGg0MS4xODZjLjc5NiAwIDEuNTU5LS4zMTYgMi4xMjEtLjg3OWw2LTZ6IiBmaWxsPSIjMDUwNTA1Ii8+PC9zdmc+);
+}
+
 .searchIcon {
   position: fixed;
   z-index: 3;
@@ -19,6 +46,9 @@ page {
 
 .link {
   color: #0077e6;
+  line-height: 80rpx;
+  font-weight: 900;
+  font-family:Noto Sans;
 }
 
 .link::before {
@@ -40,6 +70,9 @@ page {
 
 .tag-span {
   color: #0077e6;
+  line-height: 80rpx;
+  font-weight: 900;
+  font-family:Noto Sans;
 }
 
 .img {
@@ -50,8 +83,9 @@ page {
 .halfDialog {
   display: flex;
   position: sticky;
+  box-shadow: 0px 10px 10px #f5f5f5;
   top: 200rpx;
-  /* animation: show 500ms 500ms forwards; */
+  transition: height 0.2s ease-in-out;
   overflow: hidden;
   flex-direction: column;
   z-index: 2;
@@ -63,20 +97,20 @@ page {
   box-shadow: 0 0 50rpx #00000008;
 }
 
-.showHalfDialog {
+/* .showHalfDialog {
   animation: halfDialog 500ms 100ms forwards;
 }
 
 .closeHalfDialog {
   animation: halfDialog 500ms reverse forwards;
-}
+} */
 
-.halfDialog .title {
+.title {
   margin: 30rpx;
   color: #00000080;
 }
 
-.halfDialog .close {
+.close {
   transform: rotate(45deg);
   transition: 500ms;
   position: absolute;
@@ -88,7 +122,7 @@ page {
   background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTUiIGhlaWdodD0iNTUiIHZpZXdCb3g9IjAgMCA1NSA1NSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB4PSI0MC4xNjMiIHk9IjE0IiB3aWR0aD0iMyIgaGVpZ2h0PSIzNyIgcng9IjEuNSIgdHJhbnNmb3JtPSJyb3RhdGUoNDUgNDAuMTYzIDE0KSIgZmlsbD0iI0M3QzdDNyIvPjxyZWN0IHg9IjQyLjI4NCIgeT0iNDAuMTYzIiB3aWR0aD0iMyIgaGVpZ2h0PSIzNyIgcng9IjEuNSIgdHJhbnNmb3JtPSJyb3RhdGUoMTM1IDQyLjI4NCA0MC4xNjMpIiBmaWxsPSIjQzdDN0M3Ii8+PC9zdmc+);
 }
 
-.halfDialog .open {
+.open {
   transform: rotate(0deg);
   transition: 500ms;
 }
@@ -110,7 +144,7 @@ page {
   /* opacity: 0;
   animation: show 300ms 300ms forwards; */
   white-space: pre-wrap;
-  margin: 10rpx 30rpx;
+  margin: 20rpx 30rpx;
   padding: 30rpx;
   background: #ffffff;
   font-size: 35rpx;
@@ -119,7 +153,7 @@ page {
 }
 
 .memoCard:last-child {
-  margin-bottom: 100rpx;
+  margin-bottom: 40rpx;
 }
 
 .memoCard .time {
@@ -128,7 +162,6 @@ page {
   font-size: 30rpx;
   margin-right: 20rpx;
   letter-spacing: 2rpx;
-  font-family: source-code-pro, Monaco, Consolas, "Courier New", -apple-system, BlinkMacSystemFont, PingFang SC, Noto Sans, Noto Sans CJK SC, Microsoft YaHei UI, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif, Segoe UI, Roboto, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
 }
 
 

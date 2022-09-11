@@ -77,6 +77,30 @@ Page({
 
   },
 
+  inputTag() {
+    this.setData({
+      memo: this.data.memo + '#tag '
+    })
+  },
+
+  inputTodo() {
+    wx.vibrateShort()
+    wx.showToast({
+      icon:'none',
+      title: ' - [x] 表示done',
+    })
+    this.setData({
+      memo: this.data.memo + ' - [ ] '
+    })
+  },
+
+  inputCode() {
+    console.log(this.data.memo + '\n```\n```')
+    this.setData({
+      memo: this.data.memo + '\n```\n```'
+    })
+  },
+
   changeMemoPinned(e) {
     console.log(e.detail.memoid)
     console.log(e.detail.pinned)
@@ -367,6 +391,7 @@ Page({
   },
 
   changeCloseMemo() {
+    wx.vibrateShort()
     if (this.data.halfDialog == 'showHalfDialog' && this.data.edit) {
       this.setData({
         halfDialog: 'closeHalfDialog',
