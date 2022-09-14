@@ -1,4 +1,4 @@
-<h1 align='center'>麦默</h1>
+<h1 align='center'>麦默（单站点版本分支）</h1>
 
 <p align='center'><a href="https://github.com/usememos/memos">usememos/memos</a>的微信小程序版</p>
 
