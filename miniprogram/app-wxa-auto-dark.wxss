@@ -12,6 +12,10 @@
     background: rgb(17, 17, 17);
   }
 
+  .maskHeader {
+    background: linear-gradient(180deg, #111111 0%, rgba(0, 0, 0, 0.773) 58.12%, rgba(8, 8, 8, 0) 100%);
+  }
+
   .searchIcon {
     border: rgb(0, 0, 0);
   }

@@ -1,4 +1,5 @@
 <!--pages/home/index.wxml-->
+<view class="maskHeader"></view>
 <view bindtap="goWelcom" class="header" style="height:{{top_btn.height}}px; margin: {{top_btn.top}}px 60rpx 30rpx 50rpx;">
   <image src="../../images/icon.png" class="icon"></image>
   <view>切换用户</view>
@@ -27,7 +28,7 @@
   <block wx:if="{{showMemos.length == 0}}">
     <view class="none">你的memos和我的口袋一样干净~</view>
   </block>
-  <view class="archivedbtn" style="margin-bottom: {{ showArchived? 20:80 }}rpx; margin-top: {{showArchived? -10:30}}rpx;" catchtap="changeshowArchived">已归档</view>
+  <view class="archivedbtn" style="margin-bottom: {{ showArchived? 20:80 }}rpx; margin-top: {{showArchived? 10:40}}rpx;" catchtap="changeshowArchived">已归档</view>
   <block wx:if="{{showArchived}}">
     <memoCard memos="{{showMemos}}" pinned="{{true}}" rowStatus="ARCHIVED" bind:deleteMemoFaker="deleteMemoFaker" bind:deleteMemo="deleteMemo" bind:dialogEdit="dialogEdit" bind:changeMemoPinned="changeMemoPinned" />
     <memoCard memos="{{showMemos}}" pinned="{{false}}" rowStatus="ARCHIVED" bind:deleteMemoFaker="deleteMemoFaker" bind:deleteMemo="deleteMemo" bind:dialogEdit="dialogEdit" bind:changeMemoPinned="changeMemoPinned" />

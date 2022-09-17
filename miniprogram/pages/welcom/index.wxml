@@ -5,7 +5,7 @@
     <view class="welcom">
       <text class="content">欢迎来到麦默~</text>
     </view>
-    <text class="slogan">把脑袋里的小碎片，收集起来💡</text>
+    <text class="slogan">把脑袋里的小碎片，收集起来✨</text>
     <text class="dsc">麦默是 Github 开源项目 usememos/memos 的小程序版本。</text>
     <view class="form">
       <!-- <text class="title">网址</text>
@@ -14,12 +14,7 @@
       <input type="text" placeholder="xxx@xx.com" confirm-type="done" model:value="{{email}}" />
       <text class="title">密码</text>
       <input type="text" placeholder="输入密码" confirm-type="done" model:value="{{password}}" />
-      <button wx:if="{{email != '' && password != ''}}" style="margin-top: 60rpx;" type="default" size="default" catchtap="creatUser" disabled="{{btnDisable}}" loading="{{btnDisable}}">注册/登录</button>
+      <button style="margin-top: 60rpx;" type="primary" size="default" catchtap="creatUser" disabled="{{btnDisable}}" loading="{{btnDisable}}">注册/登录</button>
     </view>
   </view>
-  <movable-area style="width: 100%; height: 600rpx; position: fixed; bottom: -350rpx;">
-    <movable-view class="tips" direction="vertical" inertia friction='1' out-of-bounds damping='50' y='20rpx'>
-      <view class="content">输入账号密码，账号不存在会自动创建。请妥善保管好自己的邮箱和密码！</view>
-    </movable-view>
-  </movable-area>
 </view>

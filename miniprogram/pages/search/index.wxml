@@ -1,4 +1,5 @@
 <!--pages/search/index.wxml-->
+<view class="maskHeader"></view>
 <view style="height:{{top_btn.height}}px; margin: {{top_btn.top}}px 60rpx 30rpx 50rpx;">
   <input class="searchInput" style="width: calc(100% - {{top_btn.width + 90}}px); height: {{top_btn.height}}px;" type="text" focus placeholder="搜索memos内容……" bindinput="search" />
 </view>
