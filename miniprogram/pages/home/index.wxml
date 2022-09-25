@@ -11,7 +11,7 @@
   <view class="title">Memos
     <text wx:if="{{edit}}">编辑中……</text>
   </view>
-  <textarea name="memos" id="memos" maxlength="-1" value="{{memo}}" bindinput="memoInput" placeholder="记录一下今天发生的事情~" bindconfirm="dialog" confirm-type="return"></textarea>
+  <textarea name="memos" id="memos" maxlength="-1" value="{{memo}}" bindinput="memoInput" placeholder="记录一下今天发生的事情~" bindconfirm="dialog" confirm-type="return" focus="{{editfocus}}"></textarea>
   <view class="btns">
     <view class="inputTypeBtn">
       <view class="typeBtn tagBtn" catchtap="inputTag"></view>

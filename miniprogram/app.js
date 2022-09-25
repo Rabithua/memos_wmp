@@ -13,9 +13,42 @@ App({
       });
     }
 
+<<<<<<< Updated upstream
+=======
+    //小程序更新提醒
+    if (options.scene == 1154) {
+
+    } else {
+      if (wx.canIUse('getUpdateManager')) {
+        const updateManager = wx.getUpdateManager()
+        updateManager.onCheckForUpdate(function (res) {
+          if (res.hasUpdate) {
+            updateManager.onUpdateReady(function () {
+              updateManager.applyUpdate()
+            })
+          }
+        })
+      } else {
+        wx.showModal({
+          title: '提示',
+          content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
+        })
+      }
+    }
+
+    // 声明新的 cloud 实例
+    const cloud_rp = new wx.cloud.Cloud({
+      // 资源方 AppID
+      resourceAppid: 'wx3138964dbb7e0bda',
+      // 资源方环境 ID
+      resourceEnv: 'rpshare-8gugy8ft27e4fe36',
+    })
+
+>>>>>>> Stashed changes
     this.globalData = {
       url: 'https://memos.wowow.club',
       top_btn: null,
+      cloud_rp: cloud_rp
     }
 
     this.globalData.top_btn = wx.getMenuButtonBoundingClientRect()

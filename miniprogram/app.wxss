@@ -93,7 +93,7 @@ page {
   display: flex;
   position: sticky;
   box-shadow: 0px 10px 10px #f5f5f5;
-  top: 160rpx;
+  top: 180rpx;
   transition: height 0.2s ease-in-out;
   overflow: hidden;
   flex-direction: column;

@@ -1,5 +1,6 @@
 export const getMemos = (url, openId) => {
   return new Promise((resolve, reject) => {
+<<<<<<< Updated upstream
     wx.request({
       url: url + '/api/memo',
       data: {
@@ -17,12 +18,36 @@ export const getMemos = (url, openId) => {
         })
         reject(err)
       }
+=======
+    getApp().globalData.cloud_rp.init().then(() => {
+      getApp().globalData.cloud_rp.callFunction({
+        name: 'apiPub',
+        data: {
+          url: url,
+          openId: openId,
+          method: 'getMemo'
+        },
+        success(res) {
+          console.log(res)
+          if (res.result) {
+            resolve(JSON.parse(res.result))
+          } else {
+            reject(res)
+          }
+        },
+        fail(err) {
+          console.log(err)
+          reject(err)
+        }
+      })
+>>>>>>> Stashed changes
     })
   })
 }
 
 export const sendMemo = (url, openId, content) => {
   return new Promise((resolve, reject) => {
+<<<<<<< Updated upstream
     wx.request({
       url: url + '?openId=' + openId,
       method: "POST",
@@ -40,12 +65,41 @@ export const sendMemo = (url, openId, content) => {
         })
         reject(err)
       }
+=======
+    getApp().globalData.cloud_rp.init().then(() => {
+      getApp().globalData.cloud_rp.callFunction({
+        name: 'apiPub',
+        data: {
+          url: url,
+          openId: openId,
+          method: 'sendMemo',
+          data: {
+            body: {
+              content: content
+            }
+          }
+        },
+        success(res) {
+          console.log(res)
+          if (res.result) {
+            resolve(res.result)
+          } else {
+            reject(res)
+          }
+        },
+        fail(err) {
+          console.log(err)
+          reject(err)
+        }
+      })
+>>>>>>> Stashed changes
     })
   })
 }
 
 export const deleteMemo = (url, openId, memoId) => {
   return new Promise((resolve, reject) => {
+<<<<<<< Updated upstream
     wx.request({
       url: url + '/api/memo/' + memoId + '?openId=' + openId,
       method: "DELETE",
@@ -60,12 +114,39 @@ export const deleteMemo = (url, openId, memoId) => {
         })
         reject(err)
       }
+=======
+    getApp().globalData.cloud_rp.init().then(() => {
+      getApp().globalData.cloud_rp.callFunction({
+        name: 'apiPub',
+        data: {
+          url: url,
+          openId: openId,
+          method: 'deleteMemo',
+          data: {
+            memoId: memoId
+          }
+        },
+        success(res) {
+          console.log(res.result)
+          if (res.result) {
+            resolve(res.result)
+          } else {
+            reject(res)
+          }
+        },
+        fail(err) {
+          console.log(err)
+          reject(err)
+        }
+      })
+>>>>>>> Stashed changes
     })
   })
 }
 
 export const editMemo = (url, openId, memoId, data) => {
   return new Promise((resolve, reject) => {
+<<<<<<< Updated upstream
     wx.request({
       url: url + '/api/memo/' + memoId + '?openId=' + openId,
       method: "PATCH",
@@ -81,12 +162,40 @@ export const editMemo = (url, openId, memoId, data) => {
         })
         reject(err)
       }
+=======
+    getApp().globalData.cloud_rp.init().then(() => {
+      getApp().globalData.cloud_rp.callFunction({
+        name: 'apiPub',
+        data: {
+          url: url,
+          openId: openId,
+          method: 'editMemo',
+          data: {
+            body: data,
+            memoId: memoId
+          }
+        },
+        success(res) {
+          console.log(res.result)
+          if (res.result) {
+            resolve(res.result)
+          } else {
+            reject(res)
+          }
+        },
+        fail(err) {
+          console.log(err)
+          reject(err)
+        }
+      })
+>>>>>>> Stashed changes
     })
   })
 }
 
 export const changeMemoPinned = (url, openId, memoId, data) => {
   return new Promise((resolve, reject) => {
+<<<<<<< Updated upstream
     wx.request({
       url: url + '/api/memo/' + memoId + '/organizer' + '?openId=' + openId,
       method: "POST",
@@ -102,12 +211,40 @@ export const changeMemoPinned = (url, openId, memoId, data) => {
         })
         reject(err)
       }
+=======
+    getApp().globalData.cloud_rp.init().then(() => {
+      getApp().globalData.cloud_rp.callFunction({
+        name: 'apiPub',
+        data: {
+          url: url,
+          openId: openId,
+          method: 'changeMemoPinned',
+          data: {
+            body: data,
+            memoId: memoId
+          }
+        },
+        success(res) {
+          console.log(res.result)
+          if (res.result) {
+            resolve(res.result)
+          } else {
+            reject(res)
+          }
+        },
+        fail(err) {
+          console.log(err)
+          reject(err)
+        }
+      })
+>>>>>>> Stashed changes
     })
   })
 }
 
 export const signIn = (url, data) => {
   return new Promise((resolve, reject) => {
+<<<<<<< Updated upstream
     console.log(data)
     wx.request({
       url: url + '/api/auth/signin',
@@ -124,12 +261,38 @@ export const signIn = (url, data) => {
         })
         reject(err)
       }
+=======
+    getApp().globalData.cloud_rp.init().then(() => {
+      getApp().globalData.cloud_rp.callFunction({
+        name: 'apiPub',
+        data: {
+          url: url,
+          method: 'signIn',
+          data: {
+            body: data
+          }
+        },
+        success(res) {
+          console.log(res.result)
+          if (res.result) {
+            resolve(res.result)
+          } else {
+            reject(res)
+          }
+        },
+        fail(err) {
+          console.log(err)
+          reject(err)
+        }
+      })
+>>>>>>> Stashed changes
     })
   })
 }
 
 export const getTags = (url, openId) => {
   return new Promise((resolve, reject) => {
+<<<<<<< Updated upstream
     wx.request({
       url: url + '/api/tag?openId=' + openId,
       success(res) {
@@ -144,6 +307,29 @@ export const getTags = (url, openId) => {
         })
         reject(err)
       }
+=======
+    getApp().globalData.cloud_rp.init().then(() => {
+      getApp().globalData.cloud_rp.callFunction({
+        name: 'apiPub',
+        data: {
+          url: url,
+          openId: openId,
+          method: 'getTags'
+        },
+        success(res) {
+          console.log(res)
+          if (res.result) {
+            resolve(JSON.parse(res.result))
+          } else {
+            reject(res)
+          }
+        },
+        fail(err) {
+          console.log(err)
+          reject(err)
+        }
+      })
+>>>>>>> Stashed changes
     })
   })
 }

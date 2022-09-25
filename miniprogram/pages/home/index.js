@@ -6,6 +6,11 @@ Page({
   data: {
     halfDialog: "closeHalfDialog",
     edit: false,
+<<<<<<< Updated upstream
+=======
+    editfocus: false,
+    state: '加载中……',
+>>>>>>> Stashed changes
     editMemoId: 0,
     memos: [],
     showMemos: [],
@@ -51,10 +56,17 @@ Page({
       fail(err) {
         console.log(err);
         wx.redirectTo({
+<<<<<<< Updated upstream
           url: "../welcom/index",
         });
       },
     });
+=======
+          url: '../welcom/index',
+        })
+      }
+    })
+>>>>>>> Stashed changes
   },
 
   onReachBottom() {
@@ -75,8 +87,14 @@ Page({
 
   inputTag() {
     this.setData({
+<<<<<<< Updated upstream
       memo: this.data.memo + "#tag ",
     });
+=======
+      memo: this.data.memo + '#tag ',
+      editfocus: true
+    })
+>>>>>>> Stashed changes
   },
 
   inputTodo() {
@@ -86,15 +104,27 @@ Page({
       title: " - [x] 表示done",
     });
     this.setData({
+<<<<<<< Updated upstream
       memo: this.data.memo + " - [ ] ",
     });
+=======
+      memo: this.data.memo + ' - [ ] ',
+      editfocus: true
+    })
+>>>>>>> Stashed changes
   },
 
   inputCode() {
     console.log(this.data.memo + "\n```\n```");
     this.setData({
+<<<<<<< Updated upstream
       memo: this.data.memo + "\n```\n```",
     });
+=======
+      memo: this.data.memo + '\n```\n```',
+      editfocus: true
+    })
+>>>>>>> Stashed changes
   },
 
   changeMemoPinned(e) {
@@ -161,6 +191,7 @@ Page({
     this.setData({
       halfDialog: "showHalfDialog",
       edit: true,
+      editfocus: true,
       editMemoId: e.detail.memoid,
       memo: e.detail.content,
     });
@@ -407,11 +438,21 @@ Page({
         memo: "",
         editMemoId: 0,
         edit: false,
+<<<<<<< Updated upstream
       });
     } else if (this.data.halfDialog == "closeHalfDialog") {
       this.setData({
         halfDialog: "showHalfDialog",
       });
+=======
+        editfocus: false
+      })
+    } else if (this.data.halfDialog == 'closeHalfDialog') {
+      this.setData({
+        halfDialog: 'showHalfDialog',
+        editfocus: true
+      })
+>>>>>>> Stashed changes
     } else {
       this.setData({
         halfDialog: "closeHalfDialog",
