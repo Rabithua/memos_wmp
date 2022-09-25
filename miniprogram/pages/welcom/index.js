@@ -4,7 +4,8 @@ var app = getApp()
 Page({
 
   data: {
-
+    mode: 'pri',
+    tips: '输入账号密码，账号不存在会自动创建。请妥善保管好自己的邮箱和密码！'
   },
 
   /**
@@ -12,16 +13,35 @@ Page({
    */
   onLoad(options) {
     this.setData({
-      url: app.globalData.url,
+      top_btn: app.globalData.top_btn,
+      url: app.globalData.url_back,
       email: '',
       password: '',
       btnDisable: false
     })
   },
 
+  changeIcon() {
+    wx.vibrateShort()
+    if (this.data.mode == 'pub') {
+      this.setData({
+        url: 'https://memos.wowow.club',
+        tips: '输入账号密码，账号不存在会自动创建。请妥善保管好自己的邮箱和密码！',
+        mode: 'pri'
+      })
+    } else {
+      this.setData({
+        url: '',
+        tips: '多站点登录模式，如不懂此项请切换回去，此模式不支持创建用户，只能登录站点已有用户，且访问速度较慢！',
+        mode: 'pub'
+      })
+    }
+
+  },
+
   copy() {
     wx.setClipboardData({
-      data: app.globalData.url,
+      data: app.globalData.url_back,
     })
   },
 
@@ -49,89 +69,6 @@ Page({
       this.setData({
         btnDisable: false
       })
-<<<<<<< Updated upstream
-    } else {
-      wx.cloud.callFunction({
-        name: 'creatuser',
-        data: {
-          method: 'POST',
-          needHost: true,
-          body: {
-            "email": this.data.email,
-            "password": this.data.password,
-            "role": "USER"
-          },
-          url: app.globalData.url + '/api/user',
-        },
-        success: function (res) {
-          //500 邮箱已占用，401 用户权限不足，undefined 创建成功
-          console.log(res.result.statusCode)
-          var code = res.result.statusCode
-          console.log(res)
-          if (!code) {
-            //创建成功
-            wx.vibrateShort()
-            wx.showToast({
-              title: '创建成功',
-            })
-            var openId = res.result.data.openId
-            wx.setStorage({
-              key: "openId",
-              data: openId,
-              // encrypt: true,
-              success(res) {
-                console.log(res)
-                wx.redirectTo({
-                  url: '../home/index',
-                })
-              },
-              fail(err) {
-                wx.showToast({
-                  title: 'something wrong',
-                })
-              }
-            })
-          } else if (code == 500) {
-            app.api.signIn(that.data.url, {
-              "email": that.data.email,
-              "password": that.data.password,
-            }).then(res => {
-              if (res.data) {
-                console.log(res.data.openId)
-                wx.vibrateShort()
-                wx.showToast({
-                  title: '登录成功',
-                })
-                wx.setStorage({
-                  key: "openId",
-                  data: res.data.openId,
-                  // encrypt: true,
-                  success(res) {
-                    console.log(res)
-                    wx.redirectTo({
-                      url: '../home/index',
-                    })
-                  },
-                  fail(err) {
-                    wx.showToast({
-                      title: 'something wrong',
-                    })
-                  }
-                })
-              } else {
-                console.log(res)
-                wx.vibrateLong()
-                wx.showToast({
-                  icon: 'none',
-                  title: '密码错误',
-                })
-                that.setData({
-                  btnDisable: false
-                })
-              }
-            })
-          } else {
-=======
     } else if (that.data.mode == 'pri') {
       console.log(app.globalData.cloud_rp)
       app.globalData.cloud_rp.init().then(() => {
@@ -196,7 +133,6 @@ Page({
           },
           fail: function (error) {
             console.log(error)
->>>>>>> Stashed changes
             wx.vibrateLong()
             wx.showToast({
               icon: 'none',
@@ -208,8 +144,6 @@ Page({
           }
         })
       })
-<<<<<<< Updated upstream
-=======
 
     } else {
       that.singnIn()
@@ -334,7 +268,6 @@ Page({
           })
         }
       })
->>>>>>> Stashed changes
     }
 
   },
@@ -385,13 +318,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {
-<<<<<<< Updated upstream
-
-=======
     return {
       title: '麦默——闪念记录',
       path: '/pages/welcom/index'
     }
->>>>>>> Stashed changes
   }
 })

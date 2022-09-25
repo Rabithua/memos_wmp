@@ -1,6 +1,6 @@
 <!--components/memoCard/memoCard.wxml-->
 <view class="memoCard" wx:for="{{memos}}" wx:if="{{item.pinned == pinned && item.rowStatus == rowStatus }}" wx:key="memo" style="opacity: {{item.rowStatus == 'ARCHIVED' ? '0.5' : '1'}}">
-  <view class="methed">
+  <view class="method">
     <text class="btn top" style="opacity: {{item.pinned ? 1:0.2}};" data-memoId="{{item.id}}" data-pinned="{{item.pinned}}" catchtap="changeMemoPinned"></text>
     <text class="btn delete" data-memoId="{{item.id}}" data-rowStatus="{{item.rowStatus}}" catchtap="deleteMemoFaker" catchlongpress="deleteMemo"></text>
     <text class="btn edit" data-memoId="{{item.id}}" data-content="{{item.content}}" catchtap="dialogEdit"></text>

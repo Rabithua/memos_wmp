@@ -1,10 +1,9 @@
 // app.js
 App({
-  // 引入`towxml3.0`解析方法
-  // towxml: require('/towxml/index'),
-  api: require('/js/api'),
+  apicloud: require('/js/api'),
+  apidirect: require('/js/apidirect'),
 
-  onLaunch: function () {
+  onLaunch: function (options) {
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力');
     } else {
@@ -13,8 +12,6 @@ App({
       });
     }
 
-<<<<<<< Updated upstream
-=======
     //小程序更新提醒
     if (options.scene == 1154) {
 
@@ -44,12 +41,27 @@ App({
       resourceEnv: 'rpshare-8gugy8ft27e4fe36',
     })
 
->>>>>>> Stashed changes
     this.globalData = {
       url: 'https://memos.wowow.club',
+      url_back: 'https://memos.wowow.club',
       top_btn: null,
       cloud_rp: cloud_rp
     }
+
+    var that = this
+    wx.getStorage({
+      key: 'url',
+      success(res) {
+        if (res.data == that.globalData.url_back) {
+          getApp().api = require('/js/apidirect')
+        } else {
+          getApp().api = require('/js/api')
+        }
+      },
+      fail(res) {
+        getApp().api = require('/js/api')
+      }
+    })
 
     this.globalData.top_btn = wx.getMenuButtonBoundingClientRect()
 

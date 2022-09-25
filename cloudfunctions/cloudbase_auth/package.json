@@ -1,5 +1,5 @@
 {
-  "name": "api",
+  "name": "cloudbase_auth",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,8 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.27.2",
-    "request-promise": "^4.2.6",
     "wx-server-sdk": "~2.6.3"
   }
 }

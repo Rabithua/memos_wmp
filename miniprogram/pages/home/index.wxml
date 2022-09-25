@@ -2,11 +2,11 @@
 <view class="maskHeader"></view>
 <view bindtap="goWelcom" class="header" style="height:{{top_btn.height}}px; margin: {{top_btn.top}}px 60rpx 30rpx 50rpx;">
   <image src="../../images/icon.png" class="icon"></image>
-  <view>切换用户</view>
+  <view>{{state}}</view>
   <view style="width: 20rpx; height: 20rpx; border-radius: 20rpx; background-color: {{onlineColor}}; margin-left: 20rpx;"></view>
 </view>
 <view class="searchIcon" style="height:{{top_btn.height}}px;width:{{top_btn.height}}px; margin: {{top_btn.top}}px 60rpx 30rpx 50rpx; right: {{top_btn.width}}px;" catchtap="goSearch"></view>
-<view class="halfDialog" style="margin-top: {{top_btn.height + top_btn.top + 20}}px; height: {{halfDialog == 'showHalfDialog'? '600' : '100'}}rpx;">
+<view class="halfDialog" style="margin-top: {{top_btn.height + top_btn.top + 20}}px; height: {{halfDialog == 'showHalfDialog'? '500' : '100'}}rpx;">
   <view class=" close {{halfDialog == 'closeHalfDialog' ? ' ' : 'open'}}" catchtap="changeCloseMemo"></view>
   <view class="title">Memos
     <text wx:if="{{edit}}">编辑中……</text>

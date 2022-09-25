@@ -153,7 +153,7 @@ page {
   /* opacity: 0;
   animation: show 300ms 300ms forwards; */
   white-space: pre-wrap;
-  margin: 10rpx 30rpx;
+  margin: 20rpx 30rpx;
   padding: 30rpx;
   background: #ffffff;
   font-size: 35rpx;
