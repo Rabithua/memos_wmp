@@ -1,0 +1,3 @@
+[submodule "miniprogram/components/painter"]
+	path = miniprogram/components/painter
+	url = https://github.com/Kujiale-Mobile/PainterCore.git
