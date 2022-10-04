@@ -2,7 +2,8 @@
   "pages": [
     "pages/home/index",
     "pages/welcom/index",
-    "pages/search/index"
+    "pages/search/index",
+    "pages/webview/webview"
   ],
   "window": {
     "backgroundTextStyle": "light",

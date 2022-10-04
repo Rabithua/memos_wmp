@@ -15,30 +15,33 @@ page {
   background: linear-gradient(180deg, #F5F5F5 0%, rgba(239, 239, 239, 0.772917) 58.12%, rgba(217, 217, 217, 0) 100%);
 }
 
-.todo-block {
-  margin: 0rpx 20rpx;
+.todo-text {
+  display:initial;
+  vertical-align: middle;
 }
 
-.todo::before {
-  content: '';
-  position: absolute;
-  margin-left: -40rpx;
-  margin-top: 5rpx;
-  height: 36rpx;
-  width: 57rpx;
+.todo-text-done {
+  opacity: 0.3;
+  /* text-decoration:line-through; */
+}
+
+.todo-block {
+  display: inline-block;
+  vertical-align: middle;
+  padding-right: 20rpx;
+  /* margin-top: -10rpx; */
+  height: 37rpx;
+  width: 45rpx;
   background-size: cover;
+}
+
+.todo {
   animation: show 2s forwards alternate-reverse infinite ease-in-out;
   background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDE5MCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xMjYgMjVINjRhNCA0IDAgMCAwLTQgNHY2MmE0IDQgMCAwIDAgNCA0aDYyYTQgNCAwIDAgMCA0LTRWMjlhNCA0IDAgMCAwLTQtNHpNNjQgMTNjLTguODM3IDAtMTYgNy4xNjMtMTYgMTZ2NjJjMCA4LjgzNyA3LjE2MyAxNiAxNiAxNmg2MmM4LjgzNyAwIDE2LTcuMTYzIDE2LTE2VjI5YzAtOC44MzctNy4xNjMtMTYtMTYtMTZINjR6IiBmaWxsPSIjMDUwNTA1Ii8+PC9zdmc+);
 }
 
-.done::before {
-  content: '';
-  position: absolute;
-  margin-left: -40rpx;
-  margin-top: 5rpx;
-  height: 36rpx;
-  width: 57rpx;
-  background-size: cover;
+.done {
+  opacity: 0.3;
   background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDE5MCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTcxLjUgNTFsMTkuMDE0IDE3LjYyM2EyIDIgMCAwIDAgMi44NDQtLjEyNkwxMzQgMjMuNSIgc3Ryb2tlPSIjMDUwNTA1IiBzdHJva2Utd2lkdGg9IjEyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTExMy4zMDcgMTguMTIxYzEuODktMS44OS41NTItNS4xMjEtMi4xMjEtNS4xMjFINjRjLTguODM3IDAtMTYgNy4xNjMtMTYgMTZ2NjJjMCA4LjgzNyA3LjE2MyAxNiAxNiAxNmg2MmM4LjgzNyAwIDE2LTcuMTYzIDE2LTE2VjQ4LjI0MWMwLTIuNjcyLTMuMjMxLTQuMDEtNS4xMjEtMi4xMmwtNiA2YTIuOTk5IDIuOTk5IDAgMCAwLS44NzkgMi4xMlY5MWE0IDQgMCAwIDEtNCA0SDY0YTQgNCAwIDAgMS00LTRWMjlhNCA0IDAgMCAxIDQtNGg0MS4xODZjLjc5NiAwIDEuNTU5LS4zMTYgMi4xMjEtLjg3OWw2LTZ6IiBmaWxsPSIjMDUwNTA1Ii8+PC9zdmc+);
 }
 
@@ -66,6 +69,12 @@ page {
   font-size: 27rpx;
 }
 
+.link:hover::after {
+  content: attr(data-href);
+  opacity: 0.3;
+  /* font-size: 27rpx; */
+}
+
 .content .code {
   margin: 10rpx;
   white-space: pre;
@@ -77,16 +86,30 @@ page {
   font-family: source-code-pro, Monaco, Consolas, "Courier New", -apple-system, BlinkMacSystemFont, PingFang SC, Noto Sans, Noto Sans CJK SC, Microsoft YaHei UI, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif, Segoe UI, Roboto, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
 }
 
+.shortCode {
+  margin: 10rpx;
+  display: inline;
+  white-space:pre-wrap;
+  background-color: #f5f5f5;
+  color: #9c1111;
+  padding: 5rpx 20rpx;
+  border-radius: 10rpx;
+  font-family: source-code-pro, Monaco, Consolas, "Courier New", -apple-system, BlinkMacSystemFont, PingFang SC, Noto Sans, Noto Sans CJK SC, Microsoft YaHei UI, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif, Segoe UI, Roboto, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+}
+
 .tag-span {
   color: #0077e6;
-  line-height: 80rpx;
+  /* line-height: 80rpx; */
   font-weight: 900;
   font-family:Noto Sans;
 }
 
 .img {
-  max-width: 80%;
-  min-height: 200rpx;
+  background-color: #f5f5f5;
+  max-height: 200rpx;
+  max-width: 200rpx;
+  margin: 5rpx;
+  border-radius: 10rpx;
 }
 
 .halfDialog {
@@ -94,7 +117,7 @@ page {
   position: sticky;
   box-shadow: 0px 10px 10px #f5f5f5;
   top: 180rpx;
-  transition: height 0.2s ease-in-out;
+  transition: height 0.5s cubic-bezier(0.71,-0.16,0.25,1.18);
   overflow: hidden;
   flex-direction: column;
   z-index: 2;
@@ -105,14 +128,6 @@ page {
   border-radius: 30rpx;
   box-shadow: 0 0 50rpx #00000008;
 }
-
-/* .showHalfDialog {
-  animation: halfDialog 500ms 100ms forwards;
-}
-
-.closeHalfDialog {
-  animation: halfDialog 500ms reverse forwards;
-} */
 
 .title {
   margin: 30rpx;
@@ -208,11 +223,14 @@ page {
 }
 
 .memoCard .content {
+  /* font-family: "Noto Serif SC"; */
   word-break: break-word;
+  max-height: 800rpx;
   margin: 10rpx;
   margin-top: 20rpx;
   font-size: 35rpx;
   letter-spacing: 2rpx;
+  overflow: scroll;
 }
 
 @keyframes show {

@@ -12,13 +12,14 @@
     <view class="form">
       <block wx:if="{{mode == 'pub'}}">
         <text class="title">网址</text>
-        <input type="text" 	cursor-spacing='100' confirm-type="next" placeholder="https://memos.wowow.club" model:value="{{url}}" />
+        <input type="text" cursor-spacing='100' confirm-type="next" placeholder="https://memos.wowow.club" bindinput='nothing' model:value="{{url}}" />
       </block>
       <text class="title">邮箱</text>
-      <input cursor-spacing='100' confirm-type="next" focus type="text" placeholder="xxx@xx.com" confirm-type="done" model:value="{{email}}" />
+      <input cursor-spacing='100' confirm-type="next" focus type="text" placeholder="xxx@xx.com" confirm-type="done" bindinput='nothing' model:value="{{email}}" />
       <text class="title">密码</text>
-      <input type="text" placeholder="输入密码" confirm-type="done" model:value="{{password}}" bindconfirm="creatUser"/>
-      <button style="margin-top: 60rpx;" type="default" size="default" catchtap="creatUser" disabled="{{btnDisable}}" loading="{{btnDisable}}">{{ mode == 'pri' ? '注册/登录':'登录'}}</button>
+      <input type="text" placeholder="输入密码" confirm-type="done" model:value="{{password}}" bindinput='nothing' bindconfirm="signIn" />
+      <button style="margin-top: 60rpx;" type="default" size="default" catchtap="signIn" disabled="{{btnDisable}}" loading="{{btnDisable}}">{{ mode == 'pri' ? '注册/登录':'登录'}}</button>
+      <view style="color: #66666630; text-align: center; padding-top: 30rpx; font-size: 30rpx; text-decoration: underline;" bindtap="goWebview">打开麦默网页端</view>
     </view>
   </view>
   <!-- <movable-area style="width: 100%; height: 600rpx; position: fixed; bottom: -350rpx; z-index: 1;">

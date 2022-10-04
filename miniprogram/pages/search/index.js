@@ -19,11 +19,13 @@ Page({
       openId: app.globalData.openId
     })
     // console.log(this)
-    app.api.getTags(this.data.url, this.data.openId).then(res => {
-      that.setData({
-        tags: res.data
+    app.api.getTags(this.data.url, this.data.openId)
+      .then(res => {
+        that.setData({
+          tags: res.data
+        })
       })
-    })
+      .catch((err) => console.log(err))
   },
 
   onReady() {

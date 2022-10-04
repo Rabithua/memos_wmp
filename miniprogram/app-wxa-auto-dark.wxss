@@ -12,8 +12,16 @@
     background: rgb(17, 17, 17);
   }
 
+  .shortCode {
+    background: rgb(30, 30, 30);
+  }
+
+  .todo-block {
+    filter:invert(60%)
+  }
+
   .maskHeader {
-    background: linear-gradient(180deg, #111111 0%, rgba(0, 0, 0, 0.773) 58.12%, rgba(8, 8, 8, 0) 100%);
+    background: linear-gradient(180deg, #0c0c0c 0%, rgba(20, 20, 20, 0.773) 58.12%, rgba(8, 8, 8, 0) 100%);
   }
 
   .searchIcon {

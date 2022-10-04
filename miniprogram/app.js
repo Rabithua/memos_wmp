@@ -33,6 +33,15 @@ App({
       }
     }
 
+    //加载字体
+    // wx.loadFontFace({
+    //   global: true,
+    //   family: 'Noto Serif SC',
+    //   source:
+    //     'https://img.rabithua.club/others/NotoSerifSC-SemiBold.otf',
+    //   scopes: ['webview', 'native'],
+    // });
+
     // 声明新的 cloud 实例
     const cloud_rp = new wx.cloud.Cloud({
       // 资源方 AppID
@@ -67,6 +76,14 @@ App({
 
   },
 
+  loadFont() {
+    wx.loadFontFace({
+      family: 'Noto Serif SC',
+      source: 'url("https://img.rabithua.club/others/NotoSerifSC-SemiBold.otf")',
+      success: console.log
+    })
+  },
+
   memosArrenge(memos) {
     var pinnedNormalMemo = []
     var nopinnerNormalMemo = []
@@ -94,7 +111,7 @@ App({
       var date = new Date(timestamp * 1000)
       var Y = date.getFullYear() + '/'
       var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '/'
-      var D = date.getDate() + ' '
+      var D = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) + ' '
       var h = date.getHours() + ':'
       var m = (date.getMinutes() > 10 ? date.getMinutes() : '0' + date.getMinutes()) + ':'
       var s = (date.getSeconds() > 10 ? date.getSeconds() : '0' + date.getSeconds())

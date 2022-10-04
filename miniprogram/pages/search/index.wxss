@@ -10,14 +10,15 @@
 }
 
 .tags {
-  margin: 0rpx 30rpx;
-  line-height: 80rpx;
+  margin: 0rpx 40rpx;
+  /* line-height: 80rpx; */
 }
 
 .tag {
+  display: inline-block;
   padding: 10rpx 20rpx;
   background: #07C160;
-  margin: 20rpx;
+  margin: 10rpx;
   color: #ffffff;
   border-radius: 10rpx;
   font-size: 30rpx;

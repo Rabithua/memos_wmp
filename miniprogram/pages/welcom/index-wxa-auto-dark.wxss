@@ -9,7 +9,7 @@
 
 @media (prefers-color-scheme: dark) {
   page {
-    background: rgb(17, 17, 17) !important;
+    background: rgb(30, 30, 30);
   }
 
   page::before {

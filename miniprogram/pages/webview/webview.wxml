@@ -1,0 +1,2 @@
+<!--pages/webview/webview.wxml-->
+<web-view src="https://memos.wowow.club" binderror='weberror'></web-view>
