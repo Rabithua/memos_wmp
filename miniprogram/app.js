@@ -1,10 +1,8 @@
 // app.js
 App({
-  // 引入`towxml3.0`解析方法
-  // towxml: require('/towxml/index'),
-  api: require('/js/api'),
+  api: require('/js/apidirect'),
 
-  onLaunch: function () {
+  onLaunch: function (options) {
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力');
     } else {
@@ -13,9 +11,31 @@ App({
       });
     }
 
+    //小程序更新提醒
+    if (options.scene == 1154) {
+
+    } else {
+      if (wx.canIUse('getUpdateManager')) {
+        const updateManager = wx.getUpdateManager()
+        updateManager.onCheckForUpdate(function (res) {
+          if (res.hasUpdate) {
+            updateManager.onUpdateReady(function () {
+              updateManager.applyUpdate()
+            })
+          }
+        })
+      } else {
+        wx.showModal({
+          title: '提示',
+          content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
+        })
+      }
+    }
+
     this.globalData = {
       url: 'https://memos.wowow.club',
-      top_btn: null,
+      url_back: 'https://memos.wowow.club',
+      top_btn: null
     }
 
     this.globalData.top_btn = wx.getMenuButtonBoundingClientRect()
@@ -49,7 +69,7 @@ App({
       var date = new Date(timestamp * 1000)
       var Y = date.getFullYear() + '/'
       var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '/'
-      var D = date.getDate() + ' '
+      var D = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) + ' '
       var h = date.getHours() + ':'
       var m = (date.getMinutes() > 10 ? date.getMinutes() : '0' + date.getMinutes()) + ':'
       var s = (date.getSeconds() > 10 ? date.getSeconds() : '0' + date.getSeconds())

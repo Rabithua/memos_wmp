@@ -7,6 +7,7 @@ export const getMemos = (url, openId) => {
       },
       success(res) {
         // console.log(res.data)
+        // console.log('直接api')
         resolve(res.data)
       },
       fail(err) {
@@ -24,7 +25,7 @@ export const getMemos = (url, openId) => {
 export const sendMemo = (url, openId, content) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: url + '?openId=' + openId,
+      url: url + '/api/memo?openId=' + openId,
       method: "POST",
       data: {
         content: content

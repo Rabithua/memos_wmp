@@ -12,7 +12,7 @@
     color: rgb(0, 105, 12);
   }
 
-  .methed {
+  .method {
     filter: brightness(0.5);
   }
 

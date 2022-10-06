@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "memoCard": "../../components/memoCard/memoCard"
+    "memoCard": "../../components/memoCard/memoCard",
+    "painter":"/components/painter/painter"
   },
   "navigationStyle": "custom"
 }

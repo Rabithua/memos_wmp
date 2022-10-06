@@ -9,15 +9,11 @@
 
 @media (prefers-color-scheme: dark) {
   page {
-    background: rgb(17, 17, 17) !important;
+    background: rgb(30, 30, 30);
   }
 
-  .piecs {
-    filter: brightness(0.5);
-  }
-
-  button {
-    filter: brightness(0.5);
+  page::before {
+    filter: brightness(0.4);
   }
 
   .welcom .content {
@@ -25,7 +21,11 @@
   }
 
   .tips .content {
-    color: #07C16080;
+    color: #ffffff80;
+  }
+
+  .piecs {
+    filter: brightness(0.5);
   }
 
   .tips {
