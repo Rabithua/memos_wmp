@@ -17,7 +17,7 @@
     </block>
   </view>
   <view class="imgList">
-    <image class="img" show-menu-by-longpress lazy-load mode="aspectFill" wx:key="image" wx:for="{{item.imgList_preview}}" wx:for-item="image" src="{{image.url}}"></image>
+    <image class="img" catchtap="preview" data-src="{{image.url}}" data-url="{{item.imgList_preview}}" lazy-load mode="aspectFill" wx:key="image" wx:for="{{item.imgList_preview}}" wx:for-item="image" src="{{image.url}}"></image>
   </view>
   <view class="fileList">
     <view class="file" wx:for="{{item.fileList_preview}}" wx:key="file" wx:for-item="file" data-url="{{file.url}}" catchtap="copy">{{file.name}}</view>

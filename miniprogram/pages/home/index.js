@@ -261,6 +261,7 @@ Page({
             key: "memos",
             data: arrMemos
           })
+          wx.stopPullDownRefresh()
         }
       })
       .catch((err) => console.log(err))
@@ -540,6 +541,18 @@ Page({
         halfDialog: 'closeHalfDialog'
       })
     }
+  },
 
+  onPullDownRefresh() {
+    let that = this
+    // wx.startPullDownRefresh()
+    that.setData({
+      state: '刷新中……',
+      onlineColor: '#FCA417'
+    })
+    that.getMemos(that.data.openId)
+    // setTimeout(() => {
+    //   wx.stopPullDownRefresh()
+    // }, 300);
   }
 })

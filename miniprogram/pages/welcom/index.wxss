@@ -120,6 +120,7 @@ input {
   padding: 10rpx 30rpx;
   margin-top: 10rpx;
   margin-bottom: 20rpx;
+  border: 5rpx solid #00000020;
 }
 
 input:focus {
