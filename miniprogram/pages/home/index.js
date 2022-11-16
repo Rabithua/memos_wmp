@@ -126,7 +126,7 @@ Page({
       title: ' - [x] 表示done',
     })
     this.setData({
-      memo: this.data.memo + ' - [ ] ',
+      memo: this.data.memo + '- [ ] ',
       editfocus: true
     })
   },
@@ -420,37 +420,49 @@ Page({
     var memos = this.data.memos
     var id = e.detail.memoid
     console.log(e.detail.memoid)
-    wx.vibrateLong()
-    app.api.deleteMemo(this.data.url, this.data.openId, id)
-      .then(res => {
-        if (res) {
-          for (let i = 0; i < memos.length; i++) {
-            if (memos[i].id == id) {
-              memos.splice(i, 1)
-            }
-            var arrMemos = app.memosArrenge(memos)
-            that.setData({
-              memos: arrMemos,
-              showMemos: arrMemos.slice(0, that.data.showMemos.length)
-            })
-            app.globalData.memos = arrMemos
-            wx.setStorage({
-              key: "memos",
-              data: arrMemos
-            })
-          }
-          wx.showToast({
-            icon: 'none',
-            title: '已删除！',
+    wx.showModal({
+      confirmText: '删除',
+      confirmColor: '#B85156',
+      title: '删除提示',
+      content: '永久删除当前memo？',
+      success(res) {
+        if (res.confirm) {
+          wx.vibrateShort({
+            type: 'light',
           })
-        } else {
-          wx.showToast({
-            icon: 'none',
-            title: 'something wrong',
-          })
+          app.api.deleteMemo(that.data.url, that.data.openId, id)
+            .then(res => {
+              if (res) {
+                for (let i = 0; i < memos.length; i++) {
+                  if (memos[i].id == id) {
+                    memos.splice(i, 1)
+                  }
+                  var arrMemos = app.memosArrenge(memos)
+                  that.setData({
+                    memos: arrMemos,
+                    showMemos: arrMemos.slice(0, that.data.showMemos.length)
+                  })
+                  app.globalData.memos = arrMemos
+                  wx.setStorage({
+                    key: "memos",
+                    data: arrMemos
+                  })
+                }
+                wx.showToast({
+                  icon: 'none',
+                  title: '已删除！',
+                })
+              } else {
+                wx.showToast({
+                  icon: 'none',
+                  title: 'something wrong',
+                })
+              }
+            })
+            .catch((err) => console.log(err))
         }
-      })
-      .catch((err) => console.log(err))
+      }
+    })
   },
 
   goWelcom() {

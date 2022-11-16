@@ -1,6 +1,6 @@
 /* pages/welcom/index.wxss */
 page {
-  background-color: #FFF9E930;
+  background-color: #f5f5f5;
 }
 
 .changeIcon {
