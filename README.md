@@ -1,6 +1,6 @@
 <h1 align='center'>麦默（单站点版本分支）</h1>
 
-<p align='center'><a href="https://github.com/usememos/memos">usememos/memos</a>的微信小程序版</p>
+<p align='center'><a href="https://github.com/usememos/memos">usememos/memos</a>的微信小程序版，因为本人使用的是<a href="https://github.com/Rabithua/memos_wmp/tree/memo_wmp_pub_cloudShare">共享云环境版本分支</a>，所以真正与线上版最接近的是<a href="https://github.com/Rabithua/memos_wmp/tree/memo_wmp_pub_cloudShare">共享云环境版本分支</a>！</p>
 
 > 麦默只是 memos 的一个 api 调用器，所以想要使用这个小程序，你需要先搭建一个 memos ，具体搭建教程参考[碎片化知识卡片管理工具——Memos](https://blog.laoda.de/archives/docker-install-memos)，另外微信小程序对request域名有较[苛刻的限制](https://developers.weixin.qq.com/miniprogram/dev/framework/ability/network.html)，具体可以百度了解一下，应该会有奇奇怪怪的办法能够曲线救国（合法域名代理访问，需要处理跨域问题，并且依然需要一个合法的域名来代理请求👶），喜欢折腾的可以自己摸索一下，不然就老实备案。
 > 
@@ -43,3 +43,6 @@ git clone https://github.com/Rabithua/memos_wmp
 ### 获取hostId
 
 网页端管理员账号登陆后，`setting` - `Open Api` ，其中 `openid=` 后面字段便是 openId
+
+### 取消自动发送memos教程
+每次重新登陆会自动发布一条memosWMP使用教程得memos，觉得麻烦的可以在 `pages/welcom/index.js` 中搜索 `that.sendMemo(openId)` 并注释。
