@@ -1,0 +1,17 @@
+<!--pages/search/index.wxml-->
+<view class="maskHeader"></view>
+<view style="height:{{top_btn.height}}px; margin: {{top_btn.top}}px 60rpx 30rpx 50rpx;">
+  <input class="searchInput" style="width: calc(100% - {{top_btn.width + 90}}px); height: {{top_btn.height}}px;" type="text" focus placeholder="搜索memos内容……" bindinput="search" />
+</view>
+<view class="tags">
+  <text class="tag" wx:for="{{tags}}" wx:key="tag" data-keyword="{{item}}" bindtap="searchTag">{{item}}</text>
+</view>
+<view class="memos">
+  <memoCard memos="{{showMemos}}" pinned="{{true}}" rowStatus="NORMAL" />
+  <memoCard memos="{{showMemos}}" pinned="{{false}}" rowStatus="NORMAL" />
+  <memoCard memos="{{showMemos}}" pinned="{{true}}" rowStatus="ARCHIVED" />
+  <memoCard memos="{{showMemos}}" pinned="{{false}}" rowStatus="ARCHIVED" />
+  <block wx:if="{{showMemos.length == 0}}">
+    <view class="none">欸，竟然没有搜到🕸~</view>
+  </block>
+</view>
