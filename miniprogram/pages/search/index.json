@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "memoCard": "../../components/memoCard/memoCard"
-  },
-  "navigationStyle": "custom"
-}
