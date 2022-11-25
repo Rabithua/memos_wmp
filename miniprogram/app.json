@@ -1,0 +1,16 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/welcom/index",
+    "pages/search/index",
+    "pages/webview/webview"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarTitleText": "memos",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents"
+}
