@@ -51,7 +51,7 @@
   <view class="mask" style="animation: {{showSidebar? 'show 300ms 500ms forwards': 'none'}};" catchtouchstart="hideSidebar"></view>
   <view class="container">
     <view class="user">
-      <view class="name">{{me.name?me.name:me.email}}</view>
+      <view class="name">{{me.username?me.username:me.email}}</view>
       <view class="badge">{{me.role}}</view>
     </view>
     <view class="count">

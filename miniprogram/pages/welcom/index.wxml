@@ -1,5 +1,6 @@
 <!--pages/welcom/index.wxml-->
 <view class="maskHeader"></view>
+<view class="changeIcon" style="height:{{top_btn.height}}px;width:{{top_btn.height}}px; margin: {{top_btn.top}}px 60rpx 30rpx 50rpx; right: {{top_btn.width}}px;" catchtap="changeLanguage"></view>
 <view class="container">
   <view class="main">
     <view class="piecs"></view>
@@ -9,8 +10,8 @@
     <text class="slogan">{{language.welcom.secondTitle}}</text>
     <text class="dsc">{{language.welcom.dsc}}</text>
     <view class="form">
-      <text class="title">{{language.welcom.mail}}</text>
-      <input cursor-spacing='100' confirm-type="next" focus type="text" placeholder="{{language.welcom.mailPlaceholder}}" confirm-type="done" bindinput='nothing' model:value="{{email}}" />
+      <text class="title">{{language.welcom.username}}</text>
+      <input cursor-spacing='100' confirm-type="next" focus type="text" placeholder="{{language.welcom.usernamePlaceholder}}" confirm-type="done" bindinput='nothing' model:value="{{username}}" />
       <text class="title">{{language.welcom.password}}</text>
       <input type="text" placeholder="{{language.welcom.passwordPlaceholder}}" confirm-type="done" model:value="{{password}}" bindinput='nothing' bindconfirm="signIn" />
       <button style="margin-top: 60rpx;" type="default" size="default" catchtap="signIn" disabled="{{btnDisable}}" loading="{{btnDisable}}">{{language.welcom.button}}</button>
