@@ -33,6 +33,19 @@ Page({
       language: app.language.english
     })
     wx.getStorage({
+      key: "language",
+      success(res) {
+        if (res.data == 'chinese') {
+          that.setData({
+            language: app.language.chinese
+          })
+        }
+      },
+      fail(err) {
+        console.log(err)
+      }
+    })
+    wx.getStorage({
       key: "openId",
       // encrypt: true,
       success(res) {
@@ -449,11 +462,13 @@ Page({
             me: me
           })
           if (item.value == "\"zh\"") {
+            wx.setStorageSync('language', 'chinese')
             this.setData({
               language: app.language.chinese,
               state: app.language.chinese.home.state.online
             })
           } else if (item.value == "\"en\"") {
+            wx.setStorageSync('language', 'english')
             this.setData({
               language: app.language.english,
               state: app.language.english.home.state.online
@@ -475,24 +490,39 @@ Page({
     app.api.getMe(this.data.url, openId)
       .then(result => {
         let me = result.data
+        let defaultUserSettingList = [{
+            UserID: result.data.id,
+            key: 'locale',
+            value: "\"en\""
+          },
+          {
+            UserID: result.data.id,
+            key: 'memoVisibility',
+            value: "\"PRIVATE\""
+          }
+        ]
         me.day = parseInt((new Date().getTime() - me.createdTs * 1000) / 86400000)
-        for (let i = 0; i < me.userSettingList.length; i++) {
-          if (me.userSettingList[i].key == 'locale') {
-            if (me.userSettingList[i].value == '\"zh\"') {
-              wx.setStorageSync('language', 'chinese')
-              that.setData({
-                language: app.language.chinese,
-                state: app.language.chinese.home.state.online
-              })
-            } else {
-              wx.setStorageSync('language', 'english')
-              that.setData({
-                language: app.language.english,
-                state: app.language.english.home.state.online
-              })
+        for (let j = 0; j < defaultUserSettingList.length; j++) {
+          for (let i = 0; i < me.userSettingList.length; i++) {
+            if (me.userSettingList[i].key == defaultUserSettingList[j].key) {
+              defaultUserSettingList[j] = me.userSettingList[i]
+              if (me.userSettingList[i].value == '\"zh\"') {
+                wx.setStorageSync('language', 'chinese')
+                that.setData({
+                  language: app.language.chinese,
+                  state: app.language.chinese.home.state.online
+                })
+              } else if (me.userSettingList[i].value == '\"en\"') {
+                wx.setStorageSync('language', 'english')
+                that.setData({
+                  language: app.language.english,
+                  state: app.language.english.home.state.online
+                })
+              }
             }
           }
         }
+        me.userSettingList = defaultUserSettingList
         that.setData({
           me: me
         })

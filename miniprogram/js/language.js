@@ -1,4 +1,5 @@
 export const chinese = {
+  language: 'zh',
   common: {
     notSupport: '还未支持',
     loading: '加载中…',
@@ -17,14 +18,14 @@ export const chinese = {
     headTitle: '欢迎来到麦默👋',
     secondTitle: '脑袋里的小碎片，收集起来✨',
     dsc: '麦默是 Github 开源项目 usememos/memos 的小程序版本，同样的，麦默 Rabithua/memos_wmp 也是开源的！',
-    mail: '邮箱',
-    mailPlaceholder: 'XXX@XX.com',
+    username: '用户名',
+    usernamePlaceholder: 'XXX@XX.com',
     password: '密码',
     passwordPlaceholder: 'password',
     button: '登录/注册',
     webview: '打开网页版',
     signUpSuc: '注册成功!',
-    mailErr: '邮箱格式错误',
+    usernameErr: '用户名错误',
     passwordCheckErr: '密码长度需大于六位',
     passwordErr: '密码错误',
     signInSuc: '登录成功',
@@ -89,6 +90,7 @@ export const chinese = {
 }
 
 export const english = {
+  language: 'en',
   common: {
     notSupport: 'Not support',
     loading: 'Loading...',
@@ -107,14 +109,14 @@ export const english = {
     headTitle: 'Welcom Maimo👋',
     secondTitle: 'Collect the small pieces in your head.✨',
     dsc: 'Maimo is a WechatMiniProgram version of Github\'s open source project usememos/memos. Similarly, Maimo Rabithua/memos_wmp is also open source!',
-    mail: 'Mail',
-    mailPlaceholder: 'XXX@XX.com',
+    username: 'Username',
+    usernamePlaceholder: 'XXX@XX.com',
     password: 'Password',
     passwordPlaceholder: 'password',
     button: 'SIGN IN/UP',
     webview: 'Open webview',
     signUpSuc: 'Sign up success!',
-    mailErr: 'Mail error',
+    usernameErr: 'Username error',
     passwordCheckErr: 'password length shoud > 6',
     passwordErr: 'password wrong',
     signInSuc: 'Sign In success',
