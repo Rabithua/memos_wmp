@@ -20,8 +20,8 @@ App({
         updateManager.onCheckForUpdate(function (res) {
           if (res.hasUpdate) {
             updateManager.onUpdateReady(function () {
-              wx.clearStorageSync()
               updateManager.applyUpdate()
+              wx.clearStorageSync()
             })
           }
         })
