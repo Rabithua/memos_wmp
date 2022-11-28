@@ -11,15 +11,6 @@ export const getMemos = (url, openId) => {
         resolve(res.data)
       },
       fail(err) {
-        wx.vibrateLong()
-        wx.showToast({
-          icon: 'none',
-          title: '获取失败',
-        })
-        wx.clearStorageSync()
-        wx.redirectTo({
-          url: '../pages/welcom',
-        })
         reject(err)
       }
     })

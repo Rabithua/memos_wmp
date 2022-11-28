@@ -6,6 +6,16 @@ page {
   font-family: -apple-system, BlinkMacSystemFont, PingFang SC, Noto Sans, Noto Sans CJK SC, Microsoft YaHei UI, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif, Segoe UI, Roboto, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
 }
 
+.line {
+  margin: 20rpx 0;
+  opacity: 0.2;
+}
+
+.listDiv {
+  display: flex;
+  align-items:flex-start;
+}
+
 .maskHeader {
   position: fixed;
   top: 0;
@@ -26,8 +36,8 @@ page {
 }
 
 .todo-block {
-  display: inline-block;
-  vertical-align: middle;
+  /* display: inline-block;
+  vertical-align: middle; */
   padding-right: 20rpx;
   /* margin-top: -10rpx; */
   height: 37rpx;

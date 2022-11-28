@@ -90,9 +90,7 @@ Page({
       },
       fail(err) {
         console.log(err)
-        wx.redirectTo({
-          url: '../welcom/index',
-        })
+
       }
     })
   },
@@ -356,10 +354,16 @@ Page({
       .then(result => {
         // console.log(result)
         if (!result.data) {
+          wx.vibrateLong()
+          wx.showToast({
+            icon: 'error',
+            title: that.data.language.common.wrong,
+          })
           that.setData({
             state: that.data.language.home.state.offline,
             onlineColor: '#eeeeee',
           })
+          wx.stopPullDownRefresh()
         } else {
           var memos = result.data
           for (let i = 0; i < memos.length; i++) {
@@ -406,7 +410,19 @@ Page({
           wx.stopPullDownRefresh()
         }
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        console.log(err)
+        wx.vibrateLong()
+        wx.showToast({
+          icon: 'error',
+          title: that.data.language.common.wrong,
+        })
+        that.setData({
+          state: that.data.language.home.state.offline,
+          onlineColor: '#eeeeee',
+        })
+        wx.stopPullDownRefresh()
+      })
   },
 
   changeUserSetting(e) {

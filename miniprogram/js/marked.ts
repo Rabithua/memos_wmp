@@ -3,6 +3,7 @@ import { IMAGE_URL_REG, IMAGE_LOCAL_URL_REG, LINK_URL_REG, MEMO_LINK_REG, TAG_RE
 var app = getApp()
 
 const CODE_BLOCK_REG = /```\n([\s\S]*?)\n```/g;
+const HORIZONTAL_RULES_REG = /\n---\n|\n\*\*\*\n|\n___\n/g;
 const SHORT_CODE_BLOCK_REG = /`([\s\S]*?)`/g;
 const BOLD_TEXT_REG = /\*\*(.+?)\*\*/g;
 const EM_TEXT_REG = /\*(.+?)\*/g;
@@ -17,12 +18,13 @@ const parseMarkedToHtml = (markedStr: string): string => {
     .replace(/([A-Za-z0-9?.,;[\]]+)([\u4e00-\u9fa5])/g, "$1 $2")
     .replace(CODE_BLOCK_REG, "<pre class='code' lang=''>$1</pre>")
     .replace(SHORT_CODE_BLOCK_REG, "<pre class='shortCode' lang=''>$1</pre>")
-    .replace(TODO_BLOCK_REG, "<span class='todo-block todo' data-value='TODO'></span><span class='todo-text'>$1</span><br>")
-    .replace(DONE_BLOCK_REG, "<span class='todo-block done' data-value='DONE'></span><span class='todo-text todo-text-done'>$1</span><br>")
+    .replace(TODO_BLOCK_REG, "<div class='listDiv'><span class='todo-block todo' data-value='TODO'></span><span class='todo-text'>$1</span><br></div>")
+    .replace(DONE_BLOCK_REG, "<div class='listDiv'><span class='todo-block done' data-value='DONE'></span><span class='todo-text todo-text-done'>$1</span><br></div>")
     .replace(DOT_LI_REG, "<span class='counter-block'>•</span>")
     .replace(NUM_LI_REG, "<span class='counter-block'>$1.</span>")
     .replace(BOLD_TEXT_REG, "<strong>$1</strong>")
-    .replace(EM_TEXT_REG, "<em>$1</em>");
+    .replace(EM_TEXT_REG, "<em>$1</em>")
+    .replace(HORIZONTAL_RULES_REG, "<hr class='line'>");
   return htmlText;
 };
 
