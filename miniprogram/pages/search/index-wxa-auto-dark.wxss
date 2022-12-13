@@ -1,0 +1,25 @@
+/* 
+此文件为开发者工具生成，生成时间: 2022/9/10下午5:10:10
+使用方法：
+在 index.wxss 文件末尾引入样式
+```
+@import "./index-wxa-auto-dark.wxss";
+```
+ */
+
+@media (prefers-color-scheme: dark) {
+  page {
+    background: rgb(17, 17, 17);
+  }
+
+  .searchInput {
+    background: rgba(24, 24, 24);
+    border: rgb(0, 0, 0);
+  }
+
+  .tags .tag {
+    background: rgb(0, 105, 12);
+    color: #ffffff;
+  }
+
+}
