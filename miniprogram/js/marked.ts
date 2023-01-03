@@ -7,8 +7,8 @@ const HORIZONTAL_RULES_REG = /\n---\n|\n\*\*\*\n|\n___\n/g;
 const SHORT_CODE_BLOCK_REG = /`([\s\S]*?)`/g;
 const BOLD_TEXT_REG = /\*\*(.+?)\*\*/g;
 const EM_TEXT_REG = /\*(.+?)\*/g;
-export const TODO_BLOCK_REG = /- \[ \] (.+?)\n/g;
-export const DONE_BLOCK_REG = /- \[x\] (.+?)\n/g;
+export const TODO_BLOCK_REG = /- \[ \] (.+?)(\n|$)/g;
+export const DONE_BLOCK_REG = /- \[x\] (.+?)(\n|$)/g;
 const DOT_LI_REG = /[*-] /g;
 const NUM_LI_REG = /(\d+)\. /g;
 
