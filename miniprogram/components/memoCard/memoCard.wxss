@@ -1,4 +1,3 @@
-/* components/memoCard/memoCard.wxss */
 .file {
   background-color: #ffca2730;
   border: 4rpx dashed #ffca27;
