@@ -1,0 +1,24 @@
+<view class="memoCard" wx:for="{{memos}}" style="color: #ffffff!important;">
+  <view class="method">
+    <text class="btn edit" data-memoId="{{item.id}}" data-content="{{item.content}}" catchtap="dialogEdit"></text>
+  </view>
+  <text class="time">{{item.time}}</text>
+  <text class="status" data-memoId="{{item.id}}" data-visibility="{{item.visibility}}" catchtap="changeMemoVisibility">{{item.visibility}}</text>
+  <!-- <view class="content" data-content="{{item.content}}" catchlongtap="copy">{{item.content}}</view> -->
+  <view class="content">
+    <block wx:if="{{!item.formatContent}}">
+      <view class="loading">加载中……</view>
+    </block>
+    <block wx:else>
+      <rich-text data-content="{{item.content}}" nodes="{{item.formatContent}}"></rich-text>
+    </block>
+  </view>
+  <view class="imgList">
+    <image class="img" catchtap="preview" data-src="{{image.url}}" data-url="{{item.imgList_preview}}" lazy-load mode="aspectFill" wx:key="image" wx:for="{{item.imgList_preview}}" wx:for-item="image" src="{{image.url}}"></image>
+  </view>
+  <view class="fileList">
+    <view class="file" wx:for="{{item.fileList_preview}}" wx:key="file" wx:for-item="file" data-url="{{file.url}}" catchtap="copy">{{file.name}}</view>
+  </view>
+  <!-- markdown解析请取消注释，并注释掉上一行 -->
+  <!-- <towxml nodes="{{item.content}}"/> -->
+</view>
