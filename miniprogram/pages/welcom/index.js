@@ -21,6 +21,10 @@ Page({
       btnDisable: false,
       language: app.language.english
     })
+
+    //请求csrf
+    this.reqCookie()
+
     wx.getStorage({
       key: "language",
       success(res) {
@@ -33,6 +37,18 @@ Page({
       fail(err) {
         console.log(err)
       }
+    })
+
+  },
+
+  reqCookie() {
+    wx.showLoading({
+      title: '',
+    })
+    app.api.status(app.globalData.url).then((res) => {
+      console.log(res.header["Set-Cookie"])
+      wx.setStorageSync('cookie', res.header["Set-Cookie"])
+      wx.hideLoading()
     })
   },
 
@@ -71,7 +87,7 @@ Page({
     })
     app.api.signUp(app.globalData.url, data)
       .then(res => {
-        console.log(res.data)
+        console.log(res)
         if (!res.data.error) {
           //创建成功
           wx.vibrateShort()
@@ -85,7 +101,14 @@ Page({
             // encrypt: true,
             success(res) {
               console.log(res)
-              that.sendMemo(openId)
+              app.api.getMemos(that.data.url, openId)
+              .then((res) => {
+                console.log(res)
+                that.sendMemo(openId)
+              })
+              .catch((err) =>{
+                console.log(err)
+              })
             },
             fail(err) {
               wx.showToast({
