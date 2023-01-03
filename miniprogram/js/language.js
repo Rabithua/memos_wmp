@@ -56,7 +56,7 @@ export const chinese = {
     rowStatusChange: '归档状态已更改',
     visibilityChange: '可见性已更改',
     archived: '已归档',
-    deleted: 'Deleted',
+    deleted: '已删除',
     DeleteMemoModal: {
       title: '提示',
       confirmText: '删除',

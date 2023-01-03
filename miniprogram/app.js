@@ -47,7 +47,30 @@ App({
     }
 
     this.globalData.top_btn = wx.getMenuButtonBoundingClientRect()
+    
+    let that = this
+    //请求csrf
+    function reqCookie() {
+      wx.showLoading({
+        title: '',
+      })
+      that.api.status(that.globalData.url).then((res) => {
+        console.log(res.header["Set-Cookie"])
+        wx.setStorageSync('cookie', res.header["Set-Cookie"])
+        wx.hideLoading()
+      })
+    }
 
+    //检查csrf
+    if (!wx.getStorageSync('cookie')) {
+      reqCookie()
+    } else {
+      let expires = wx.getStorageSync('cookie').match(/Expires=(.+?)($)/g)[0].substring(8)
+      let now = new Date().getTime()
+      if (now > new Date(expires).getTime()) {
+        reqCookie()
+      }
+    }
   },
 
   loadFont() {

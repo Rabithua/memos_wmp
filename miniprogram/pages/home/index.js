@@ -278,12 +278,12 @@ Page({
           wx.vibrateShort()
           if (!e.detail.pinned) {
             wx.showToast({
-              icon: 'success',
+              icon: 'none',
               title: that.data.language.home.pinned,
             })
           } else {
             wx.showToast({
-              icon: 'success',
+              icon: 'none',
               title: that.data.language.home.unpinned,
             })
           }
@@ -330,7 +330,7 @@ Page({
           })
           wx.vibrateShort()
           wx.showToast({
-            icon: 'success',
+            icon: 'none',
             title: that.data.language.home.visibilityChange,
           })
           app.globalData.memos = memos
@@ -632,7 +632,7 @@ Page({
           })
           wx.vibrateShort()
           wx.showToast({
-            icon: 'success',
+            icon: 'none',
             title: that.data.language.home.editChanged,
           })
           app.globalData.memos = memos
@@ -663,7 +663,7 @@ Page({
           })
           wx.vibrateShort()
           wx.showToast({
-            icon: 'success',
+            icon: 'none',
             title: that.data.language.home.rowStatusChange,
           })
           app.globalData.memos = memos
@@ -792,7 +792,7 @@ Page({
                   })
                 }
                 wx.showToast({
-                  icon: 'success',
+                  icon: 'none',
                   title: that.data.language.home.deleted,
                 })
               } else {
