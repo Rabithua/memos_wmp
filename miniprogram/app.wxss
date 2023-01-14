@@ -56,8 +56,6 @@ page {
 }
 
 .searchIcon {
-  position: fixed;
-  z-index: 3;
   border-radius: 50%;
   opacity: 0.6;
   backdrop-filter: blur(100rpx);

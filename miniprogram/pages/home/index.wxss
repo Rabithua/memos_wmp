@@ -10,6 +10,14 @@ page {
     transform-origin: 100% 0 0;
 }
 
+.headerContainer {
+  display: flex;
+  position: fixed;
+  margin: 90rpx 60rpx 30rpx 50rpx;
+  z-index: 5;
+  width: calc(100% - 100rpx);
+}
+
 .sidebar {
     position: fixed;
     width: 750rpx;
@@ -287,8 +295,6 @@ page {
 }
 
 .header {
-    z-index: 5;
-    position: fixed;
     display: flex;
     align-items: center;
     color: #cccccc;

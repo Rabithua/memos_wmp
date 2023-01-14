@@ -352,7 +352,6 @@ Page({
             state: that.data.language.home.state.offline,
             onlineColor: '#eeeeee',
           })
-          wx.stopPullDownRefresh()
         } else {
           var memos = result.data
           for (let i = 0; i < memos.length; i++) {
@@ -396,7 +395,6 @@ Page({
             key: "memos",
             data: arrMemos
           })
-          wx.stopPullDownRefresh()
         }
       })
       .catch((err) => {
@@ -763,14 +761,13 @@ Page({
 
   onPullDownRefresh() {
     let that = this
-    // wx.startPullDownRefresh()
     that.setData({
       state: this.data.language.common.refreshing,
       onlineColor: '#FCA417'
     })
     that.getMemos(that.data.openId)
-    // setTimeout(() => {
-    //   wx.stopPullDownRefresh()
-    // }, 300);
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 300);
   }
 })
