@@ -3,7 +3,8 @@
     "pages/home/index",
     "pages/welcom/index",
     "pages/search/index",
-    "pages/webview/webview"
+    "pages/webview/webview",
+    "pages/edit/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

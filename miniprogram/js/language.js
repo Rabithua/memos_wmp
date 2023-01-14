@@ -80,6 +80,13 @@ export const chinese = {
       date_1: '注册于 ',
       date_2: '天前。',
       heatTipMemo: '条记录'
+    },
+    Tips: {
+      p_close: '(长按不再显示)',
+      title_1: '操作改版',
+      p_1: '新建 Memos ，现在通过侧滑手势触发',
+      title_2: '功能更新',
+      p_2: 'Search 页面新增 Tag 建议，支持从建议创建 Tag'
     }
   },
   search: {
@@ -98,7 +105,9 @@ export const chinese = {
     pageTitle_add: '记录新的想法',
     pageTitle_edit: '编辑Memo',
     placeHolder: '请输入...',
-    send: '发送'
+    send: '发送',
+    previewRender: '语法渲染预览',
+    rendering: '渲染中...'
   }
 }
 
@@ -184,6 +193,13 @@ export const english = {
       date_1: 'Registered for ',
       date_2: 'Days.',
       heatTipMemo: 'Memos'
+    },
+    Tips: {
+      p_close:'(Long press no longer display)',
+      title_1: 'Operation revision',
+      p_1: 'New Memos are now triggered by side swipe gestures',
+      title_2: 'Feature update',
+      p_2: 'Added Tag suggestions on the Search page, which supports creating Tags from suggestions'
     }
   },
   search: {
@@ -202,6 +218,8 @@ export const english = {
     pageTitle_add: 'New Memo',
     pageTitle_edit: 'Edit Memo',
     placeHolder: 'Here input...',
-    send: 'Send'
+    send: 'Send',
+    previewRender: 'Render preview',
+    rendering: 'Rendering...'
   }
 }

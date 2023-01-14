@@ -23,7 +23,7 @@
 .tags {
   margin: 0rpx 40rpx;
   display: flex;
-  overflow: scroll;
+  flex-wrap: wrap;
   opacity: 0;
   animation: show forwards 500ms;
   /* line-height: 80rpx; */
@@ -35,7 +35,7 @@
 
 .arrow {
   opacity: 0;
-  animation: show infinite alternate-reverse ease-in-out 2s;
+  animation: show forwards ease-in-out 2s;
   flex-shrink: 0;
   width: 100rpx;
   height: 50rpx;

@@ -26,7 +26,7 @@
 <view wx:if="{{tagsSuggestionList.length > 0 || tags.length > 0}}" class="line">
 
 </view>
-<view class="memos">
+<view class="memos" style="margin-top: 0rpx;">
   <memoCard memos="{{showMemos}}" pinned="{{true}}" rowStatus="NORMAL" />
   <memoCard memos="{{showMemos}}" pinned="{{false}}" rowStatus="NORMAL" />
   <memoCard memos="{{showMemos}}" pinned="{{true}}" rowStatus="ARCHIVED" />

@@ -170,7 +170,7 @@ Page({
     console.log(e.currentTarget.dataset.keyword)
     var key = {
       detail: {
-        value: '#' + e.currentTarget.dataset.keyword + ' '
+        value: '#' + e.currentTarget.dataset.keyword
       }
     }
 
