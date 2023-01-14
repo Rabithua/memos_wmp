@@ -85,7 +85,20 @@ export const chinese = {
   search: {
     inputPlaceHolder: '根据内容搜索…',
     cantEmpty: '搜索内容不能为空',
-    nothing: '这里什么也没有 🕸'
+    nothing: '这里什么也没有 🕸',
+    searchResultPlaceholder: '采菊东篱下，悠然现南山',
+    tagDeleteModal: {
+      title: '提示',
+      confirmText: '删除',
+      cancelText: '取消',
+      content: '删除标签?',
+    },
+  },
+  edit: {
+    pageTitle_add: '记录新的想法',
+    pageTitle_edit: '编辑Memo',
+    placeHolder: '请输入...',
+    send: '发送'
   }
 }
 
@@ -176,6 +189,19 @@ export const english = {
   search: {
     inputPlaceHolder: 'Search by content...',
     cantEmpty: 'Cannot be empty.',
-    nothing: 'There is nothing 🕸'
+    nothing: 'There is nothing 🕸',
+    searchResultPlaceholder: '采菊东篱下，悠然现南山',
+    tagDeleteModal: {
+      title: 'Tips',
+      confirmText: 'Delete',
+      cancelText: 'Cancel',
+      content: 'Delete Tag?',
+    },
+  },
+  edit: {
+    pageTitle_add: 'New Memo',
+    pageTitle_edit: 'Edit Memo',
+    placeHolder: 'Here input...',
+    send: 'Send'
   }
 }

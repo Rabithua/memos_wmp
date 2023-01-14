@@ -1,10 +1,30 @@
 <!--pages/search/index.wxml-->
 <view class="maskHeader"></view>
 <view style="height:{{top_btn.height}}px; margin: {{top_btn.top}}px 60rpx 30rpx 50rpx;">
-  <input class="searchInput" style="width: calc(100% - {{top_btn.width + 90}}px); height: {{top_btn.height}}px;" type="text" focus placeholder="{{language.search.inputPlaceHolder}}" bindinput="search" />
+  <input class="searchInput" style="width: calc(100% - {{top_btn.width + 90}}px); height: {{top_btn.height}}px;" type="text" focus placeholder="{{language.search.inputPlaceHolder}}" placeholder-style="color: #00000010;" bindinput="search" />
 </view>
-<view class="tags">
-  <text class="tag" wx:for="{{tags}}" wx:key="tag" data-keyword="{{item}}" bindtap="searchTag">{{item}}</text>
+<block wx:if="{{tags.length > 0}}">
+  <view style="font-size: 26rpx; margin: 0rpx 80rpx; color: #00000030;">
+    标签
+  </view>
+  <view class="tags">
+    <text class="tag" wx:for="{{tags}}" wx:key="tag" data-keyword="{{item}}" bindtap="searchTag" bindlongpress="deleteTag">{{item}}</text>
+  </view>
+</block>
+
+<block wx:if="{{tagsSuggestionList.length > 0}}">
+  <view style="font-size: 26rpx; margin: 0rpx 80rpx; margin-top: 10px; color: #00000030;">
+    标签建议
+  </view>
+  <view class="flex">
+    <view class="tags">
+      <text class="tag" style="background-color: #00000002; border-color: #00000008; color: #00000030;" wx:for="{{tagsSuggestionList}}" wx:key="tag" data-keyword="{{item}}" bindtap="upsertTag">{{item}}</text>
+    </view>
+    <view class="arrow"></view>
+  </view>
+</block>
+<view wx:if="{{tagsSuggestionList.length > 0 || tags.length > 0}}" class="line">
+
 </view>
 <view class="memos">
   <memoCard memos="{{showMemos}}" pinned="{{true}}" rowStatus="NORMAL" />
@@ -12,6 +32,6 @@
   <memoCard memos="{{showMemos}}" pinned="{{true}}" rowStatus="ARCHIVED" />
   <memoCard memos="{{showMemos}}" pinned="{{false}}" rowStatus="ARCHIVED" />
   <block wx:if="{{showMemos.length == 0}}">
-    <view class="none">{{language.search.nothing}}</view>
+    <view class="none">{{language.search.searchResultPlaceholder}}</view>
   </block>
 </view>

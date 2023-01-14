@@ -269,6 +269,86 @@ export const getTags = (url, openId) => {
   })
 }
 
+export const getTagsSuggestionList = (url, openId) => {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: url + '/api/tag/suggestion?openId=' + openId,
+      header: {
+        cookie: wx.getStorageSync("cookie")
+      },
+      success(res) {
+        if (res.header["Set-Cookie"]) {
+          wx.setStorageSync('cookie', res.header["Set-Cookie"])
+        }
+        resolve(res.data)
+      },
+      fail(err) {
+        wx.vibrateLong()
+        wx.showToast({
+          icon: 'none',
+          title: '获取失败',
+        })
+        reject(err)
+      }
+    })
+  })
+}
+
+export const upsertTag = (url, openId, TagName) => {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: url + '/api/tag?openId=' + openId,
+      method: "POST",
+      header: {
+        cookie: wx.getStorageSync("cookie")
+      },
+      data: {
+        name: TagName
+      },
+      success(res) {
+        if (res.header["Set-Cookie"]) {
+          wx.setStorageSync('cookie', res.header["Set-Cookie"])
+        }
+        resolve(res.data)
+      },
+      fail(err) {
+        wx.vibrateLong()
+        wx.showToast({
+          icon: 'none',
+          title: '获取失败',
+        })
+        reject(err)
+      }
+    })
+  })
+}
+
+export const deleteTag = (url, openId, TagName) => {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: url + '/api/tag/' + TagName + '?openId=' + openId,
+      method: "DELETE",
+      header: {
+        cookie: wx.getStorageSync("cookie")
+      },
+      success(res) {
+        if (res.header["Set-Cookie"]) {
+          wx.setStorageSync('cookie', res.header["Set-Cookie"])
+        }
+        resolve(res.data)
+      },
+      fail(err) {
+        wx.vibrateLong()
+        wx.showToast({
+          icon: 'none',
+          title: '失败',
+        })
+        reject(err)
+      }
+    })
+  })
+}
+
 export const status = (url) => {
   return new Promise((resolve, reject) => {
     wx.request({
