@@ -24,6 +24,7 @@
     <view class="typeBtn tagBtn" bindtap="inputTag"></view>
     <view class="typeBtn codeBtn" bindtap="inputTodo"></view>
     <view class="typeBtn todoBtn" bindtap="inputCode"></view>
+    <view wx:if="{{keyBoardHeight != 0}}" class="typeBtn keyBoardDownBtn" ></view>
   </view>
   <button style="margin-right: 50rpx;" type="primary" size="mini" class="memoSendBtn" bindtap="send" loading="{{sendLoading}}" disabled="{{sendLoading}}">{{language.edit.send}}</button>
 </view>

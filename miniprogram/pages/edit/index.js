@@ -15,7 +15,8 @@ Page({
     memo: '',
     memoFocus: false,
     keyBoardHeight: '0',
-    sendLoading: false
+    sendLoading: false,
+    eventChannel: null
   },
 
   /**
@@ -24,6 +25,10 @@ Page({
   onLoad(o) {
     let that = this
     const eventChannel = this.getOpenerEventChannel()
+    this.setData({
+      eventChannel: eventChannel
+    })
+
     try {
       let memoDraft = wx.getStorageSync('memoDraft')
       if (memoDraft) {
@@ -36,9 +41,9 @@ Page({
       }
     } catch (error) {}
 
-    //页面监听器bug，eventChannel.listener一直存在
+    //页面监听器
     if (eventChannel.listener) {
-      eventChannel.on('acceptDataFromOpenerPage', function (data) {
+      eventChannel.once('acceptDataFromOpenerPage', function (data) {
         let formatMemo = formatMemoContent(data.memo)
         that.setData({
           ...data,
@@ -47,6 +52,7 @@ Page({
         })
       })
     }
+
     //获取url以及openid判断登录态
     wx.getStorage({
       key: "openId",
@@ -115,7 +121,7 @@ Page({
 
   memoInput(e) {
     // console.log(e.detail.cursor)
-    console.log(e.detail.value)
+    // console.log(e.detail.value)
     let formatMemo = formatMemoContent(e.detail.value)
     this.setData({
       memo: e.detail.value,
@@ -206,12 +212,15 @@ Page({
   },
 
   editMemoContent(url, openId, id, data) {
+    let that = this
     app.api.editMemo(url, openId, id, data)
       .then(res => {
-        console.log(res)
+        // console.log(res)
         if (res.data) {
           wx.setStorageSync('memoDraft', '')
           if (getCurrentPages().length > 1) {
+            let eventChannel = that.data.eventChannel
+            eventChannel.emit('acceptDataFromOpenedPage', 'refresh')
             wx.navigateBack()
           }
         }
@@ -227,10 +236,12 @@ Page({
     var that = this
     app.api.sendMemo(url, openId, content)
       .then(res => {
-        console.log(res.data)
+        // console.log(res.data)
         if (res.data) {
           wx.setStorageSync('memoDraft', '')
           if (getCurrentPages().length > 1) {
+            let eventChannel = that.data.eventChannel
+            eventChannel.emit('acceptDataFromOpenedPage', 'refresh')
             wx.navigateBack()
           }
         } else {
