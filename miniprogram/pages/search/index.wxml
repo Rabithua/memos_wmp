@@ -5,7 +5,7 @@
 </view>
 <block wx:if="{{tags.length > 0}}">
   <view style="font-size: 26rpx; margin: 0rpx 80rpx; color: #00000030;">
-    标签
+    {{language.search.tagTitle}}
   </view>
   <view class="tags">
     <text class="tag" wx:for="{{tags}}" wx:key="tag" data-keyword="{{item}}" bindtap="searchTag" bindlongpress="deleteTag">{{item}}</text>
@@ -14,7 +14,7 @@
 
 <block wx:if="{{tagsSuggestionList.length > 0}}">
   <view style="font-size: 26rpx; margin: 0rpx 80rpx; margin-top: 10px; color: #00000030;">
-    标签建议
+    {{language.search.tagSuggestionTitle}}
   </view>
   <view class="flex">
     <view class="tags">
