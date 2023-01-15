@@ -62,7 +62,7 @@ Page({
             })
             that.getMemos(openId)
             that.getMe(openId)
-            app.api.getTags(that.data.url, that.data.openId)
+            app.api.getTags(app.globalData.url, that.data.openId)
               .then(res => {
                 that.setData({
                   tags: res.data
@@ -96,10 +96,7 @@ Page({
   },
 
   onShow() {
-    // wx.startPullDownRefresh()
-    // if (this.data.url && this.data.openId) {
-    //   this.getMemos(this.data.openId)
-    // }
+
   },
 
   onReachBottom() {
@@ -356,7 +353,7 @@ Page({
 
   getMemos(openId) {
     var that = this
-    app.api.getMemos(this.data.url, openId)
+    app.api.getMemos(app.globalData.url, openId)
       .then(result => {
         // console.log(result)
         if (!result.data) {
@@ -507,7 +504,7 @@ Page({
 
   getMe(openId) {
     var that = this
-    app.api.getMe(this.data.url, openId)
+    app.api.getMe(app.globalData.url, openId)
       .then(result => {
         let me = result.data
         let defaultUserSettingList = [{
