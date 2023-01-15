@@ -40,7 +40,8 @@
       "typescript"
     ],
     "minifyWXML": true,
-    "ignoreUploadUnusedFiles": false
+    "ignoreUploadUnusedFiles": false,
+    "condition": false
   },
   "appid": "wx93424d86ffa7d6ac",
   "projectname": "memos",

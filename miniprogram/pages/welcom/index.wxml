@@ -4,10 +4,10 @@
 <view class="container">
   <view class="main">
     <view class="piecs"></view>
+    <text class="slogan">{{language.welcom.secondTitle}}</text>
     <view class="welcom">
       <text class="content">{{language.welcom.headTitle}}</text>
     </view>
-    <text class="slogan">{{language.welcom.secondTitle}}</text>
     <text class="dsc">{{language.welcom.dsc}}</text>
     <view class="form">
       <text class="title">{{language.welcom.username}}</text>

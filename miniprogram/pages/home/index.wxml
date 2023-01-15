@@ -1,35 +1,45 @@
 <!--pages/home/index.wxml-->
 <painter style="position: absolute; top: -9999rpx;" use2D="true" palette="{{imgDraw}}" bind:imgOK="onPainterOK" bind:imgErr="onPainterErr" />
 <view class="maskHeader"></view>
-<view class="headerContainer">
-  <view bindtap="goWelcom" class="header" style="height:{{top_btn.height}}px; margin: {{top_btn.top}}px 60rpx 30rpx 50rpx;">
+<view class="headerContainer" style="margin-top: {{top_btn.top}}px">
+  <view bindtap="goWelcom" class="header" style="height:{{top_btn.height}}px;">
     <image src="../../images/icon.png" class="icon"></image>
     <view>{{state}}</view>
     <view style="width: 20rpx; height: 20rpx; border-radius: 20rpx; background-color: {{onlineColor}}; margin-left: 20rpx;"></view>
   </view>
-  <view class="searchIcon" style="height:{{top_btn.height}}px;width:{{top_btn.height}}px; margin: {{top_btn.top}}px 60rpx 30rpx 50rpx; right: {{top_btn.width}}px;" catchtap="goSearch"></view>
+  <view class="searchIcon" style="height:{{top_btn.height}}px;width:{{top_btn.height}}px; margin-left: auto; margin-right: {{top_btn.width}}px;" catchtap="goSearch"></view>
 </view>
-<view catchtap="hideShreImg" wx:if="{{showShareImg}}" class="shareImg_block">
+<view catchtap="hideShreImg" catchtouchmove="none" wx:if="{{showShareImg}}" class="shareImg_block">
   <image class="shareImg" catchtap="none" show-menu-by-longpress src="{{shareImgUrl}}"></image>
 </view>
-<view class="container" style="transform: scale({{showSidebar?'0.95':'1'}});">
-  <view class="halfDialog"  style="margin-top: {{top_btn.height + top_btn.top + 20}}px; height: {{halfDialog == 'showHalfDialog'? (500 + fullScreen) : '100'}}rpx;">
-    <view class=" close {{halfDialog == 'closeHalfDialog' ? ' ' : 'open'}}" catchtap="changeCloseMemo"></view>
-    <view class="title">Memos
-      <text wx:if="{{edit}}">{{language.home.edit}}</text>
+<view catchtap="hideTips" wx:if="{{showTips}}" class="shareImg_block">
+  <view class="Tips" catchlongpress="closeTips">
+    <view class="Tip_title">
+      {{language.home.Tips.title_1}}
     </view>
-    <textarea name="memos" id="memos" maxlength="-1" value="{{memo}}" catchinput="memoInput" bindblur="memoCursor" placeholder="{{language.home.newMemoPlaceholder}}" bindconfirm="dialog" confirm-type="return" focus="{{editfocus}}" cursor="{{cursor}}"></textarea>
-    <view class="btns">
-      <view class="inputTypeBtn">
-        <view class="typeBtn tagBtn" bindtap="inputTag"></view>
-        <view class="typeBtn codeBtn" bindtap="inputTodo"></view>
-        <view class="typeBtn todoBtn" bindtap="inputCode"></view>
-        <view class="typeBtn fullScrBtn" bindtap="fullScreen"></view>
-      </view>
-      <button style="margin-right: 50rpx;" type="primary" size="mini" class="memoSendBtn" bindtap="dialog" loading="{{sendLoading}}" disabled="{{sendLoading}}">{{language.home.send}}</button>
+    <view class="Tip_p">
+      {{language.home.Tips.p_1}}
     </view>
-
+    <view class="Tip_p">
+      {{language.home.Tips.p_4}}
+    </view>
+    <view class="Tip_pic_1"></view>
+    <view class="line"></view>
+    <view class="Tip_title">
+      {{language.home.Tips.title_2}}
+    </view>
+    <view class="Tip_p">
+      {{language.home.Tips.p_2}}
+    </view>
+    <view class="Tip_p">
+      {{language.home.Tips.p_3}}
+    </view>
+    <view class="Tip_p" style="text-align: right; color: #00000060; animation: show infinite alternate-reverse 2s; font-size: 14px;">
+      {{language.home.Tips.p_close}}
+    </view>
   </view>
+</view>
+<view class="container" style="transform: scale({{showSidebar?'0.95':'1'}});">
   <view class="memos" bindtouchstart="setSidebar" bindtouchmove="showSidebar">
     <memoCard memos="{{showMemos}}" pinned="{{true}}" rowStatus="NORMAL" bind:deleteMemoFaker="deleteMemoFaker" bind:deleteMemo="deleteMemo" bind:dialogEdit="dialogEdit" bind:changeMemoPinned="changeMemoPinned" bind:changeMemoVisibility="changeMemoVisibility" bind:shareMemo="canvas_start" />
     <memoCard memos="{{showMemos}}" pinned="{{false}}" rowStatus="NORMAL" bind:deleteMemoFaker="deleteMemoFaker" bind:deleteMemo="deleteMemo" bind:dialogEdit="dialogEdit" bind:changeMemoPinned="changeMemoPinned" bind:changeMemoVisibility="changeMemoVisibility" bind:shareMemo="canvas_start" />

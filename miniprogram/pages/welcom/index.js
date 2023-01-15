@@ -1,7 +1,3 @@
-import {
-  english
-} from "../../js/language"
-
 // pages/welcom/index.js
 var app = getApp()
 

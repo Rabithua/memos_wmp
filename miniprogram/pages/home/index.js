@@ -9,20 +9,16 @@ Page({
   data: {
     halfDialog: 'closeHalfDialog',
     showSidebar: false,
-    fullScreen: 0,
-    edit: false,
-    editfocus: false,
     state: app.language.english.common.loading,
-    editMemoId: 0,
     memos: [],
     showMemos: [],
-    memo: '',
     onlineColor: '#eeeeee',
     showArchived: false,
     sendLoading: false,
     imgDraw: null,
     showShareImg: false,
-    shareImgUrl: ''
+    shareImgUrl: '',
+    showTips: false
   },
 
   onLoad(options) {
@@ -95,6 +91,15 @@ Page({
         })
       }
     })
+
+    that.checkTips()
+  },
+
+  onShow() {
+    // wx.startPullDownRefresh()
+    // if (this.data.url && this.data.openId) {
+    //   this.getMemos(this.data.openId)
+    // }
   },
 
   onReachBottom() {
@@ -114,6 +119,20 @@ Page({
 
   },
 
+  checkTips() {
+    let that = this
+    let showTips = wx.getStorageSync('showTips')
+    console.log(showTips)
+    if (showTips == 'false') {} else {
+      wx.setStorageSync('showTips', 'true')
+      setTimeout(() => {
+        that.setData({
+          showTips: true
+        })
+      }, 3000);
+    }
+  },
+
   setSidebar(e) {
     // console.log(e.touches[0])
     this.setData({
@@ -124,12 +143,33 @@ Page({
   showSidebar(e) {
     // console.log(e)
     let that = this
-    if (e.touches[0].clientX - this.data.sidebarStart.clientX > 50 && Math.abs(e.touches[0].clientY - this.data.sidebarStart.clientY) < 20) {
-      wx.vibrateShort()
-      this.setData({
-        showSidebar: true
-      })
+    if (this.data.sidebarStart.clientX) {
+      if (e.touches[0].clientX - this.data.sidebarStart.clientX > 50 && Math.abs(e.touches[0].clientY - this.data.sidebarStart.clientY) < 20) {
+        wx.vibrateShort()
+        this.setData({
+          showSidebar: true
+        })
+      } else if (e.touches[0].clientX - this.data.sidebarStart.clientX < -50 && Math.abs(e.touches[0].clientY - this.data.sidebarStart.clientY) < 20) {
+        that.setData({
+          sidebarStart: {}
+        })
+        wx.navigateTo({
+          url: '../edit/index',
+          events: {
+            // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+            acceptDataFromOpenedPage: function (data) {
+              switch (data) {
+                case 'refresh':
+                  that.getMemos(that.data.openId)
+                default:
+                  break;
+              }
+            }
+          }
+        })
+      }
     }
+
   },
 
   setHeatMap() {
@@ -199,68 +239,6 @@ Page({
 
   onPainterErr(e) {
     console.log('生成失败', e)
-  },
-
-  inputTag(e) {
-    wx.vibrateShort()
-    setTimeout(() => {
-      let memo = this.data.memo
-      let cursor = this.data.cursor
-      let newmemo = memo.slice(0, cursor) + ' #TAG ' + memo.substring(cursor, memo.length)
-      this.setData({
-        memo: newmemo,
-        cursor: cursor + 2,
-        editfocus: true,
-      })
-    }, 100);
-  },
-
-  inputTodo() {
-    wx.vibrateShort()
-    wx.showToast({
-      icon: 'none',
-      title: ' - [x] DONE',
-    })
-    setTimeout(() => {
-      let memo = this.data.memo
-      let cursor = this.data.cursor
-      let newmemo = memo.slice(0, cursor) + '\n- [ ] ' + memo.substring(cursor, memo.length)
-      this.setData({
-        memo: newmemo,
-        cursor: cursor + 7,
-        editfocus: true,
-      })
-    }, 100);
-  },
-
-  inputCode() {
-    wx.vibrateShort()
-    // console.log(this.data.memo + '\n```\n```')
-    setTimeout(() => {
-      let memo = this.data.memo
-      let cursor = this.data.cursor
-      let newmemo = memo.slice(0, cursor) + '\n```\n\n```' + memo.substring(cursor, memo.length)
-      this.setData({
-        memo: newmemo,
-        cursor: cursor + 5,
-        editfocus: true,
-      })
-    }, 100);
-  },
-
-  fullScreen() {
-    wx.vibrateShort()
-    if (this.data.fullScreen == 0) {
-      this.setData({
-        fullScreen: 500,
-        editfocus: true
-      })
-    } else {
-      this.setData({
-        fullScreen: 0,
-        editfocus: true
-      })
-    }
   },
 
   changeMemoPinned(e) {
@@ -350,30 +328,29 @@ Page({
     })
   },
 
-  memoInput(e) {
-    // console.log(e.detail.cursor)
-    this.setData({
-      memo: e.detail.value,
-      // cursor: e.detail.cursor
-    })
-  },
-
-  memoCursor(e) {
-    console.log(e.detail.cursor)
-    this.setData({
-      cursor: e.detail.cursor
-    })
-  },
-
-
   dialogEdit(e) {
     // console.log(e)
-    this.setData({
-      halfDialog: 'showHalfDialog',
-      edit: true,
-      editfocus: true,
-      editMemoId: e.detail.memoid,
-      memo: e.detail.content
+    let that = this
+    wx.navigateTo({
+      url: '../edit/index?edit=true',
+      events: {
+        // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+        acceptDataFromOpenedPage: function (data) {
+          switch (data) {
+            case 'refresh':
+              that.getMemos(that.data.openId)
+            default:
+              break;
+          }
+        }
+      },
+      success: function (res) {
+        // 通过 eventChannel 向被打开页面传送数据
+        res.eventChannel.emit('acceptDataFromOpenerPage', {
+          editMemoId: e.detail.memoid,
+          memo: e.detail.content
+        })
+      }
     })
   },
 
@@ -392,7 +369,6 @@ Page({
             state: that.data.language.home.state.offline,
             onlineColor: '#eeeeee',
           })
-          wx.stopPullDownRefresh()
         } else {
           var memos = result.data
           for (let i = 0; i < memos.length; i++) {
@@ -436,7 +412,6 @@ Page({
             key: "memos",
             data: arrMemos
           })
-          wx.stopPullDownRefresh()
         }
       })
       .catch((err) => {
@@ -581,70 +556,6 @@ Page({
     })
   },
 
-  dialog() {
-    var that = this
-    var content = this.data.memo
-    if (content !== '') {
-      this.setData({
-        sendLoading: true
-      })
-      if (!this.data.edit) {
-        this.sendMemo()
-      } else {
-        var url = this.data.url
-        var openId = this.data.openId
-        var id = this.data.editMemoId
-        var data = {
-          content: content
-        }
-        that.editMemoContent(url, openId, id, data)
-      }
-    } else {
-      wx.vibrateLong()
-      wx.showToast({
-        icon: 'error',
-        title: that.data.language.home.editErr,
-      })
-    }
-  },
-
-  editMemoContent(url, openId, id, data) {
-    var that = this
-    app.api.editMemo(url, openId, id, data)
-      .then(res => {
-        console.log(res)
-        if (res.data) {
-          var memos = that.data.memos
-          for (let i = 0; i < memos.length; i++) {
-            if (memos[i].id == that.data.editMemoId) {
-              memos[i].content = that.data.memo
-              memos[i].formatContent = formatMemoContent(that.data.memo)
-            }
-          }
-          that.setData({
-            memos: memos,
-            showMemos: memos.slice(0, that.data.showMemos.length),
-            halfDialog: 'closeHalfDialog',
-            sendLoading: false,
-            memo: '',
-            editMemoId: 0,
-            edit: false
-          })
-          wx.vibrateShort()
-          wx.showToast({
-            icon: 'none',
-            title: that.data.language.home.editChanged,
-          })
-          app.globalData.memos = memos
-          wx.setStorage({
-            key: 'memos',
-            data: memos
-          })
-        }
-      })
-      .catch((err) => console.log(err))
-  },
-
   editMemoRowStatus(url, openId, id, data) {
     var that = this
     app.api.editMemo(url, openId, id, data)
@@ -700,50 +611,6 @@ Page({
     this.setData({
       heatTipTimer: heatTipTimer
     })
-  },
-
-  sendMemo() {
-    var content = this.data.memo
-    var url = this.data.url
-    var openId = this.data.openId
-    var memos = this.data.memos
-    var that = this
-    app.api.sendMemo(url, openId, content)
-      .then(res => {
-        console.log(res.data)
-        if (res.data) {
-          wx.vibrateShort()
-          var newmemo = res.data
-          newmemo.time = app.calTime(newmemo.createdTs)
-          let md = formatMemoContent(newmemo.content)
-          newmemo.formatContent = md
-          memos.unshift(newmemo)
-          var arrMemos = app.memosArrenge(memos)
-          that.setData({
-            memos: arrMemos,
-            showMemos: arrMemos.slice(0, this.data.showMemos.length + 1),
-            sendLoading: false,
-            memo: '',
-            halfDialog: 'closeHalfDialog',
-            fullScreen: 0
-          })
-          app.globalData.memos = arrMemos
-          wx.setStorage({
-            key: 'memos',
-            data: arrMemos
-          })
-        } else {
-          wx.vibrateLong()
-          wx.showToast({
-            icon: 'error',
-            title: that.data.language.common.wrong,
-          })
-          that.setData({
-            sendLoading: false
-          })
-        }
-      })
-      .catch((err) => console.log(err))
   },
 
   deleteMemoFaker(e) {
@@ -894,40 +761,32 @@ Page({
     })
   },
 
-  none() {},
+  hideTips() {
+    this.setData({
+      showTips: false
+    })
+  },
 
-  changeCloseMemo() {
-    wx.vibrateShort()
-    if (this.data.halfDialog == 'showHalfDialog' && this.data.edit) {
-      this.setData({
-        halfDialog: 'closeHalfDialog',
-        memo: '',
-        editMemoId: 0,
-        edit: false,
-        editfocus: false
-      })
-    } else if (this.data.halfDialog == 'closeHalfDialog') {
-      this.setData({
-        halfDialog: 'showHalfDialog',
-        editfocus: true
-      })
-    } else {
-      this.setData({
-        halfDialog: 'closeHalfDialog'
-      })
-    }
+  closeTips() {
+    wx.setStorageSync('showTips', 'false')
+    this.setData({
+      showTips: false
+    })
+  },
+
+  none(e) {
+    // console.log(e)
   },
 
   onPullDownRefresh() {
     let that = this
-    // wx.startPullDownRefresh()
     that.setData({
       state: this.data.language.common.refreshing,
       onlineColor: '#FCA417'
     })
     that.getMemos(that.data.openId)
-    // setTimeout(() => {
-    //   wx.stopPullDownRefresh()
-    // }, 300);
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 300);
   }
 })
