@@ -63,7 +63,7 @@ export const sendMemo = (url, openId, content) => {
         cookie: wx.getStorageSync("cookie")
       },
       success(res) {
-        console.log(res)
+        // console.log(res)
         if (res.header["Set-Cookie"]) {
           wx.setStorageSync('cookie', res.header["Set-Cookie"])
         }
