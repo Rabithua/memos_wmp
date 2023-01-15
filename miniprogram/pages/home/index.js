@@ -96,10 +96,10 @@ Page({
   },
 
   onShow() {
-    wx.startPullDownRefresh()
-    if (this.data.url && this.data.openId) {
-      this.getMemos(this.data.openId)
-    }
+    // wx.startPullDownRefresh()
+    // if (this.data.url && this.data.openId) {
+    //   this.getMemos(this.data.openId)
+    // }
   },
 
   onReachBottom() {
@@ -155,6 +155,17 @@ Page({
         })
         wx.navigateTo({
           url: '../edit/index',
+          events: {
+            // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+            acceptDataFromOpenedPage: function (data) {
+              switch (data) {
+                case 'refresh':
+                  that.getMemos(that.data.openId)
+                default:
+                  break;
+              }
+            }
+          }
         })
       }
     }
@@ -319,12 +330,18 @@ Page({
 
   dialogEdit(e) {
     // console.log(e)
+    let that = this
     wx.navigateTo({
       url: '../edit/index?edit=true',
       events: {
         // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
         acceptDataFromOpenedPage: function (data) {
-          console.log(data)
+          switch (data) {
+            case 'refresh':
+              that.getMemos(that.data.openId)
+            default:
+              break;
+          }
         }
       },
       success: function (res) {
@@ -757,7 +774,9 @@ Page({
     })
   },
 
-  none() {},
+  none(e) {
+    // console.log(e)
+  },
 
   onPullDownRefresh() {
     let that = this

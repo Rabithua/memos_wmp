@@ -9,7 +9,7 @@
   </view>
   <view class="searchIcon" style="height:{{top_btn.height}}px;width:{{top_btn.height}}px; margin-left: auto; margin-right: {{top_btn.width}}px;" catchtap="goSearch"></view>
 </view>
-<view catchtap="hideShreImg" wx:if="{{showShareImg}}" class="shareImg_block">
+<view catchtap="hideShreImg" catchtouchmove="none" wx:if="{{showShareImg}}" class="shareImg_block">
   <image class="shareImg" catchtap="none" show-menu-by-longpress src="{{shareImgUrl}}"></image>
 </view>
 <view catchtap="hideTips" wx:if="{{showTips}}" class="shareImg_block">
@@ -20,6 +20,9 @@
     <view class="Tip_p">
       {{language.home.Tips.p_1}}
     </view>
+    <view class="Tip_p">
+      {{language.home.Tips.p_4}}
+    </view>
     <view class="Tip_pic_1"></view>
     <view class="line"></view>
     <view class="Tip_title">
@@ -28,7 +31,10 @@
     <view class="Tip_p">
       {{language.home.Tips.p_2}}
     </view>
-    <view class="Tip_p" style="text-align: center; color: #00000060; animation: show infinite alternate-reverse 2s; font-size: 14px;">
+    <view class="Tip_p">
+      {{language.home.Tips.p_3}}
+    </view>
+    <view class="Tip_p" style="text-align: right; color: #00000060; animation: show infinite alternate-reverse 2s; font-size: 14px;">
       {{language.home.Tips.p_close}}
     </view>
   </view>
