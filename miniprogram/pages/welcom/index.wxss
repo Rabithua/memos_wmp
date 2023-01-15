@@ -34,6 +34,8 @@ page::before {
   animation: show 300ms 100ms forwards;
   width: 100%;
   height: 100vh;
+  display: flex;
+  align-items: center;
 }
 
 .main {
@@ -61,7 +63,7 @@ page::before {
   align-items: center;
   gap: 25px;
   font-size: 60rpx;
-  margin: auto;
+  margin: 0rpx auto 20rpx auto;
 }
 
 .tips .content {
