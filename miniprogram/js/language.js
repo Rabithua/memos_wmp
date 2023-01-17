@@ -108,7 +108,7 @@ export const chinese = {
   edit: {
     pageTitle_add: '记录新的想法',
     pageTitle_edit: '编辑Memo',
-    placeHolder: '请输入...',
+    placeHolder: '让回忆有迹可循...',
     send: '发送',
     previewRender: '语法渲染预览',
     rendering: '渲染中...'
@@ -225,7 +225,7 @@ export const english = {
   edit: {
     pageTitle_add: 'New Memo',
     pageTitle_edit: 'Edit Memo',
-    placeHolder: 'Here input...',
+    placeHolder: 'Record a good day...',
     send: 'Send',
     previewRender: 'Render preview',
     rendering: 'Rendering...'

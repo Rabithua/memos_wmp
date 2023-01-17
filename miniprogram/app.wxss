@@ -77,9 +77,10 @@ page {
   font-size: 27rpx;
 }
 
-.link:hover::after {
+.link::after {
   content: attr(data-href);
   opacity: 0.3;
+  margin-left: 10rpx;
   /* font-size: 27rpx; */
 }
 

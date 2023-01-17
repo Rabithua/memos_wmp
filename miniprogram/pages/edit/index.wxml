@@ -2,29 +2,32 @@
 <textarea class="memoEditTextarea" maxlength="3000" placeholder="{{language.edit.placeHolder}}" value="{{memo}}" catchinput="memoInput" focus="{{memoFocus}}" cursor-spacing="30" bindfocus="memoFocus" bindblur="memoBlur" adjust-position="{{false}}" show-confirm-bar="{{false}}" cursor="{{cursor}}">
 </textarea>
 
-<view class="title" style="margin-bottom: 0rpx;">
+<view class="title" style="margin-bottom: 0rpx; margin-left: 60rpx; font-size: 26rpx;">
   {{language.edit.previewRender}}
 </view>
 
 <view class="memoCard" style="margin-bottom: 220rpx;">
   <view class="content">
-  <block wx:if="{{!formatContent}}">
-    <view class="loading">{{language.edit.rendering}}</view>
-  </block>
-  <block wx:else>
-    <rich-text nodes="{{formatContent}}"></rich-text>
-  </block>
+    <block wx:if="{{!formatContent}}">
+      <view class="loading">{{language.edit.rendering}}</view>
+    </block>
+    <block wx:else>
+      <rich-text nodes="{{formatContent}}"></rich-text>
+    </block>
+  </view>
 </view>
-</view>
 
 
 
-<view class="btns" style="bottom: {{keyBoardHeight}}px;">
+<view class="btns" bindtouchstart="setTapPoint" bindtouchmove="slideFocus" style="bottom: {{keyBoardHeight}}px;">
   <view class="inputTypeBtn">
     <view class="typeBtn tagBtn" bindtap="inputTag"></view>
     <view class="typeBtn codeBtn" bindtap="inputTodo"></view>
     <view class="typeBtn todoBtn" bindtap="inputCode"></view>
-    <view wx:if="{{keyBoardHeight != 0}}" class="typeBtn keyBoardDownBtn" ></view>
   </view>
-  <button style="margin-right: 50rpx;" type="primary" size="mini" class="memoSendBtn" bindtap="send" loading="{{sendLoading}}" disabled="{{sendLoading}}">{{language.edit.send}}</button>
+  <view class="flex" style="margin-right: 50rpx;margin-left: auto;">
+    <view wx:if="{{keyBoardHeight != 0}}" class="typeBtn keyBoardDownBtn" bindtap="memoBlur"></view>
+    <button type="primary" size="mini" class="memoSendBtn" bindtap="send" loading="{{sendLoading}}" disabled="{{sendLoading}}">{{language.edit.send}}</button>
+  </view>
+
 </view>
