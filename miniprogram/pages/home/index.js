@@ -140,30 +140,33 @@ Page({
   showSidebar(e) {
     // console.log(e)
     let that = this
-    if (this.data.sidebarStart.clientX) {
-      if (e.touches[0].clientX - this.data.sidebarStart.clientX > 50 && Math.abs(e.touches[0].clientY - this.data.sidebarStart.clientY) < 20) {
-        wx.vibrateShort()
-        this.setData({
-          showSidebar: true
-        })
-      } else if (e.touches[0].clientX - this.data.sidebarStart.clientX < -50 && Math.abs(e.touches[0].clientY - this.data.sidebarStart.clientY) < 20) {
-        that.setData({
-          sidebarStart: {}
-        })
-        wx.navigateTo({
-          url: '../edit/index',
-          events: {
-            // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
-            acceptDataFromOpenedPage: function (data) {
-              switch (data) {
-                case 'refresh':
-                  that.getMemos(that.data.openId)
-                default:
-                  break;
+    if (!this.data.showSidebar) {
+      if (this.data.sidebarStart.clientX) {
+        if (e.touches[0].clientX - this.data.sidebarStart.clientX > 50 && Math.abs(e.touches[0].clientY - this.data.sidebarStart.clientY) < 20) {
+          wx.vibrateShort()
+          this.setData({
+            showSidebar: true
+          })
+        } else if (e.touches[0].clientX - this.data.sidebarStart.clientX < -50 && Math.abs(e.touches[0].clientY - this.data.sidebarStart.clientY) < 20) {
+          wx.vibrateShort()
+          that.setData({
+            sidebarStart: {}
+          })
+          wx.navigateTo({
+            url: '../edit/index',
+            events: {
+              // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+              acceptDataFromOpenedPage: function (data) {
+                switch (data) {
+                  case 'refresh':
+                    that.getMemos(that.data.openId)
+                  default:
+                    break;
+                }
               }
             }
-          }
-        })
+          })
+        }
       }
     }
 
@@ -328,6 +331,7 @@ Page({
   dialogEdit(e) {
     // console.log(e)
     let that = this
+    wx.vibrateShort()
     wx.navigateTo({
       url: '../edit/index?edit=true',
       events: {

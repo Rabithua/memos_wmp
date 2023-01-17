@@ -106,16 +106,37 @@ Page({
     })
   },
 
+  setTapPoint(e) {
+    this.setData({
+      bottomTapPoint: e.touches[0]
+    })
+  },
+
+  slideFocus(e) {
+    if (this.data.keyBoardHeight == 0) {
+      if (e.touches[0].clientY - this.data.bottomTapPoint.clientY < -50 && Math.abs(e.touches[0].clientX - this.data.bottomTapPoint.clientX) < 20) {
+        wx.vibrateShort()
+        this.setData({
+          memoFocus: true
+        })
+      }
+    }
+
+  },
+
   memoFocus(e) {
+    wx.vibrateShort()
     this.setData({
       keyBoardHeight: (e.detail.height - 30).toString()
     })
   },
 
   memoBlur(e) {
+    wx.vibrateShort()
+    // console.log(e)
     this.setData({
       keyBoardHeight: '0',
-      cursor: e.detail.cursor
+      cursor: this.data.memo.length
     })
   },
 
@@ -125,8 +146,8 @@ Page({
     let formatMemo = formatMemoContent(e.detail.value)
     this.setData({
       memo: e.detail.value,
-      formatContent: formatMemo
-      // cursor: e.detail.cursor
+      formatContent: formatMemo,
+      cursor: e.detail.cursor
     })
     wx.setStorageSync('memoDraft', e.detail.value)
   },
@@ -185,6 +206,7 @@ Page({
   },
 
   send() {
+    wx.vibrateShort()
     var that = this
     var content = this.data.memo
     if (content !== '') {

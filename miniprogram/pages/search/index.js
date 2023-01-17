@@ -137,6 +137,7 @@ Page({
   deleteTag(e) {
     let TagName = e.currentTarget.dataset.keyword
     let that = this
+    wx.vibrateShort()
     wx.showModal({
       title: this.data.language.search.tagDeleteModal.title,
       content: this.data.language.search.tagDeleteModal.content,
@@ -168,12 +169,12 @@ Page({
 
   searchTag(e) {
     console.log(e.currentTarget.dataset.keyword)
+    wx.vibrateShort()
     var key = {
       detail: {
         value: '#' + e.currentTarget.dataset.keyword
       }
     }
-
     this.search(key)
   },
 
