@@ -140,6 +140,9 @@ Page({
   showSidebar(e) {
     // console.log(e)
     let that = this
+    if (!this.data.me.email) {
+      this.getMe(this.data.openId)
+    }
     if (!this.data.showSidebar) {
       if (this.data.sidebarStart.clientX) {
         if (e.touches[0].clientX - this.data.sidebarStart.clientX > 50 && Math.abs(e.touches[0].clientY - this.data.sidebarStart.clientY) < 20) {
@@ -738,15 +741,15 @@ Page({
             "type": "text",
             "text": e.detail.content,
             "css": {
-              "fontSize": "40px",
+              "fontSize": "70px",
               "color": "#07C160",
               "width": "620px",
               "height": "400px",
               "top": "274px",
               "left": "132px",
-              "fontWeight": "normal",
-              "maxLines": "9",
-              "lineHeight": "50px",
+              "fontWeight": "bolder",
+              "maxLines": "6",
+              "lineHeight": "80px",
               "textAlign": "left",
             }
           }

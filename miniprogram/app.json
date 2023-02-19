@@ -9,9 +9,12 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarTitleText": "memos",
-    "navigationBarTextStyle": "black"
+    "navigationBarBackgroundColor": "@navBgColor",
+    "navigationBarTextStyle": "@navTxtStyle"
   },
   "sitemapLocation": "sitemap.json",
   "style": "v2",
-  "lazyCodeLoading": "requiredComponents"
+  "lazyCodeLoading": "requiredComponents",
+  "themeLocation": "theme.json",
+  "darkmode": true
 }

@@ -9,8 +9,8 @@ const BOLD_TEXT_REG = /\*\*(.+?)\*\*/g;
 const EM_TEXT_REG = /\*(.+?)\*/g;
 export const TODO_BLOCK_REG = /- \[ \] (.+?)(\n|$)/g;
 export const DONE_BLOCK_REG = /- \[x\] (.+?)(\n|$)/g;
-const DOT_LI_REG = /[*-] /g;
-const NUM_LI_REG = /(\d+)\. /g;
+const DOT_LI_REG = /[^|\n]( *)[*-] (.+?)(\n|$)/g;
+const NUM_LI_REG = /[^|\n]( *\d+)\. (.+?)(\n|$)/g;
 
 const parseMarkedToHtml = (markedStr: string): string => {
   const htmlText = markedStr
@@ -20,8 +20,8 @@ const parseMarkedToHtml = (markedStr: string): string => {
     .replace(SHORT_CODE_BLOCK_REG, "<pre class='shortCode' lang=''>$1</pre>")
     .replace(TODO_BLOCK_REG, "<div class='listDiv'><span class='todo-block todo' data-value='TODO'></span><span class='todo-text'>$1</span><br></div>")
     .replace(DONE_BLOCK_REG, "<div class='listDiv'><span class='todo-block done' data-value='DONE'></span><span class='todo-text todo-text-done'>$1</span><br></div>")
-    .replace(DOT_LI_REG, "<span class='counter-block'>•</span>")
-    .replace(NUM_LI_REG, "<span class='counter-block'>$1.</span>")
+    .replace(DOT_LI_REG, "<div class='counter-block'><div class='dotlist-dot'>$1•</div><div class='dotlist-content'>$2</div></div>")
+    .replace(NUM_LI_REG, "<div class='counter-block'><div class='orderlist-dot'>$1.</div><div class='orderlist-content'>$2</div></div>")
     .replace(BOLD_TEXT_REG, "<strong>$1</strong>")
     .replace(EM_TEXT_REG, "<em>$1</em>")
     .replace(HORIZONTAL_RULES_REG, "<hr class='line'>");

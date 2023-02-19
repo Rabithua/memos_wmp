@@ -4,7 +4,7 @@
   <input class="searchInput" style="width: calc(100% - {{top_btn.width + 90}}px); height: {{top_btn.height}}px;" type="text" focus placeholder="{{language.search.inputPlaceHolder}}" placeholder-style="color: #00000010;" bindinput="search" />
 </view>
 <block wx:if="{{tags.length > 0}}">
-  <view style="font-size: 26rpx; margin: 0rpx 80rpx; color: #00000030;">
+  <view class="tagtitle">
     {{language.search.tagTitle}}
   </view>
   <view class="tags">
@@ -13,12 +13,12 @@
 </block>
 
 <block wx:if="{{tagsSuggestionList.length > 0}}">
-  <view style="font-size: 26rpx; margin: 0rpx 80rpx; margin-top: 10px; color: #00000030;">
+  <view class="tagtitle">
     {{language.search.tagSuggestionTitle}}
   </view>
   <view class="flex">
     <view class="tags">
-      <text class="tag" style="background-color: #00000002; border-color: #00000008; color: #00000030;" wx:for="{{tagsSuggestionList}}" wx:key="tag" data-keyword="{{item}}" bindtap="upsertTag">{{item}}</text>
+      <text class="tag sugTag" wx:for="{{tagsSuggestionList}}" wx:key="tag" data-keyword="{{item}}" bindtap="upsertTag">{{item}}</text>
     </view>
     <view class="arrow"></view>
   </view>

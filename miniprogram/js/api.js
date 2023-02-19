@@ -326,10 +326,13 @@ export const upsertTag = (url, openId, TagName) => {
 export const deleteTag = (url, openId, TagName) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: url + '/api/tag/' + TagName + '?openId=' + openId,
-      method: "DELETE",
+      url: url + '/api/tag/delete?openId=' + openId,
+      method: "POST",
       header: {
         cookie: wx.getStorageSync("cookie")
+      },
+      data: {
+        name: TagName
       },
       success(res) {
         if (res.header["Set-Cookie"]) {

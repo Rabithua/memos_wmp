@@ -21,8 +21,10 @@ export const chinese = {
     username: '用户名',
     usernamePlaceholder: 'XXX@XX.com',
     password: '密码',
+    passwordAgain: '确认密码',
     passwordPlaceholder: 'password',
-    button: '登录/注册',
+    btnLog: '登录',
+    btnReg: '注册',
     webview: '打开网页版',
     signUpSuc: '注册成功!',
     usernameErr: '用户名错误',
@@ -85,7 +87,7 @@ export const chinese = {
       p_close: '(长按不再显示)',
       title_1: '操作改版',
       p_1: '新建 Memos ，现在通过侧滑手势触发👇',
-      p_4:'Search 页面可以长按 Tag 删除（删除后会出现在 Tag 建议中）🤸‍♂️',
+      p_4: 'Search 页面可以长按 Tag 删除（删除后会出现在 Tag 建议中）🤸‍♂️',
       title_2: '功能更新',
       p_2: 'Search 页面新增 Tag 建议，支持从建议创建 Tag✨',
       p_3: '新建或编辑 memo 时自动缓存，妈妈再也不会担心我写了一半的小作文丢失了✌',
@@ -102,8 +104,8 @@ export const chinese = {
       cancelText: '取消',
       content: '删除标签?',
     },
-    tagTitle:'标签',
-    tagSuggestionTitle:'标签建议'
+    tagTitle: '标签',
+    tagSuggestionTitle: '标签建议'
   },
   edit: {
     pageTitle_add: '记录新的想法',
@@ -138,8 +140,10 @@ export const english = {
     username: 'Username',
     usernamePlaceholder: 'XXX@XX.com',
     password: 'Password',
+    passwordAgain: 'password again',
     passwordPlaceholder: 'password',
-    button: 'SIGN IN/UP',
+    btnLog: 'logIn',
+    btnReg: 'signUp',
     webview: 'Open webview',
     signUpSuc: 'Sign up success!',
     usernameErr: 'Username error',
@@ -199,13 +203,13 @@ export const english = {
       heatTipMemo: 'Memos'
     },
     Tips: {
-      p_close:'(Long press no longer display)',
+      p_close: '(Long press no longer display)',
       title_1: 'Operation revision',
       p_1: 'New Memos are now triggered by side swipe gestures👇',
-      p_4:'On the Search page, you can long press to delete the Tag (it will appear in the Tag suggestion after deletion)🤸‍♂️',
+      p_4: 'On the Search page, you can long press to delete the Tag (it will appear in the Tag suggestion after deletion)🤸‍♂️',
       title_2: 'Feature update',
       p_2: 'Added Tag suggestions on the Search page, which supports creating Tags from suggestions✨',
-      p_3:'Automatic caching when creating or editing a memo, my mother will never worry about losing my half-written essay✌'
+      p_3: 'Automatic caching when creating or editing a memo, my mother will never worry about losing my half-written essay✌'
     }
   },
   search: {
@@ -219,8 +223,8 @@ export const english = {
       cancelText: 'Cancel',
       content: 'Delete Tag?',
     },
-    tagTitle:'Tags',
-    tagSuggestionTitle:'Tags suggestion'
+    tagTitle: 'Tags',
+    tagSuggestionTitle: 'Tags suggestion'
   },
   edit: {
     pageTitle_add: 'New Memo',

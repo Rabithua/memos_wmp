@@ -3,6 +3,27 @@ page {
   background-color: #ffffff;
 }
 
+.btn {
+  width: 100%;
+  padding: 7rpx 14rpx;
+  height: 70rpx;
+  border-radius: 10rpx;
+  line-height: 70rpx;
+  background: #f5f5f5;
+  color: #FCA417;
+  display:block;
+  text-align: center;
+}
+
+.btn:active {
+  opacity: 0.8;
+}
+
+.primaryBtn {
+  color: #ffffff;
+  background-color: #FCA417;
+}
+
 .changeIcon {
   position: fixed;
   z-index: 3;
