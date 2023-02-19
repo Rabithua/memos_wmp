@@ -1,6 +1,6 @@
 {
-  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarBackgroundColor": "@navBgColor",
   "navigationBarTitleText": "欢迎页",
   "navigationStyle": "custom",
-  "backgroundColor": "#ffffff"
+  "backgroundColor": "@navBgColor"
 }

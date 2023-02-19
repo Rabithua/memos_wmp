@@ -1,0 +1,20 @@
+/* 
+此文件为开发者工具生成，生成时间: 2023/2/14上午12:31:19
+使用方法：
+在 index.wxss 文件末尾引入样式
+```
+@import "./index-wxa-auto-dark.wxss";
+```
+ */
+
+@media (prefers-color-scheme: dark) {
+    .memoEditTextarea {
+        background-color: rgba(30, 30, 30);
+        border: rgb(0, 0, 0);
+        box-shadow: rgb(0, 0, 0);
+    }
+
+    .btns {
+        background-color: rgb(17, 17, 17);
+    }
+}

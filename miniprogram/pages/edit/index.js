@@ -162,8 +162,8 @@ Page({
       this.setData({
         memo: newmemo,
         formatContent: formatMemo,
-        cursor: cursor + 2,
         memoFocus: true,
+        cursor: cursor + 2,
       })
     }, 100);
   },
@@ -182,8 +182,8 @@ Page({
       this.setData({
         memo: newmemo,
         formatContent: formatMemo,
-        cursor: cursor + 7,
         memoFocus: true,
+        cursor: cursor + 7,
       })
     }, 100);
   },
@@ -199,8 +199,8 @@ Page({
       this.setData({
         memo: newmemo,
         formatContent: formatMemo,
-        cursor: cursor + 5,
         memoFocus: true,
+        cursor: cursor + 5,
       })
     }, 100);
   },

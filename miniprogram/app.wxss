@@ -43,6 +43,7 @@ page {
   height: 37rpx;
   width: 45rpx;
   background-size: cover;
+  flex-shrink: 0;
 }
 
 .todo {
@@ -171,7 +172,7 @@ page {
 }
 
 .memos {
-  margin-top: 200rpx;
+  /* margin-top: 200rpx; */
   z-index: 1;
 }
 
@@ -251,6 +252,22 @@ page {
   font-weight: 400;
   line-height: 1.5;
 }
+
+.counter-block {
+  display: flex;
+}
+
+.orderlist-dot{
+  flex-shrink: 0;
+  padding-right: 10px;
+  font-weight: bold;
+  color: #07C160;
+}
+
+.dotlist-dot{
+  padding-right: 10px;
+}
+
 
 @keyframes show {
   from {

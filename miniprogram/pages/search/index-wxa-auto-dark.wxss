@@ -9,7 +9,21 @@
 
 @media (prefers-color-scheme: dark) {
   page {
-    background: rgb(17, 17, 17);
+    background: rgb(24, 24, 24);
+  }
+
+  input {
+    background-color: rgb(50, 50, 50)!important;
+  }
+
+  .tagtitle{
+    color: #ffffff80;
+  }
+
+  .sugTag {
+    color: #ffffff !important;
+    border-color: #ffffff30!important;
+    background-color: #ffffff10 !important;
   }
 
   .searchInput {

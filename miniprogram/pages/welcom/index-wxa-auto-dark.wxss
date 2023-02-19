@@ -11,9 +11,17 @@
   page {
     background: rgb(30, 30, 30);
   }
+  
+  button {
+    filter: brightness(0.6);
+  }
 
   page::before {
     filter: brightness(0.4);
+  }
+
+  .btn {
+    filter: brightness(0.6);
   }
 
   .welcom .content {

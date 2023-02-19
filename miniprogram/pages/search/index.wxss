@@ -1,9 +1,9 @@
 /* pages/search/index.wxss */
 ::-webkit-scrollbar {
-  display:none;
-  width:0;
-  height:0;
-  color:transparent;
+  display: none;
+  width: 0;
+  height: 0;
+  color: transparent;
 }
 
 .searchInput {
@@ -31,6 +31,19 @@
 
 .flex {
   display: flex;
+}
+
+.tagtitle {
+  font-size: 26rpx;
+  margin: 0rpx 80rpx;
+  margin-top: 10px;
+  color: #00000030;
+}
+
+.sugTag {
+  background-color: #00000002 !important;
+  border-color: #00000008 !important;
+  color: #00000030 !important;
 }
 
 .arrow {
