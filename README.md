@@ -39,10 +39,6 @@ git clone https://github.com/Rabithua/memos_wmp
 6. 不出意外的话编译完毕你就可以看到麦默的欢迎界面了🎉
 7. 尝试输入用户名和密码，看创建新用户是否成功（**需要管理员开启允许用户注册**），遇到问题请提交 issue 反馈给我，谢谢。
 
-### 获取hostId
-
-网页端管理员账号登陆后，`setting` - `Open Api` ，其中 `openid=` 后面字段便是 openId
-
 ### 取消自动发送memos教程
 
 每次重新登陆会自动发布一条memosWMP使用教程的memos，觉得麻烦的可以在 `pages/welcom/index.js` 中搜索 `that.sendMemo(openId)` 并注释。
