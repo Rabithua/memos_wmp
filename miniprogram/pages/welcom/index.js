@@ -216,6 +216,9 @@ Page({
                 success(res) {
                   if (res.confirm) {
                     console.log('用户点击确定')
+                    that.setData({
+                      btnDisable: false
+                    })
                     that.signUp()
                   } else if (res.cancel) {
                     console.log('用户点击取消')
