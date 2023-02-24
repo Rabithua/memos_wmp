@@ -88,7 +88,7 @@ Page({
       app.api.signUp(app.globalData.url, data)
         .then(res => {
           console.log(res)
-          if (!res.data.error) {
+          if (res.data) {
             //创建成功
             wx.vibrateShort()
             wx.showLoading({
@@ -116,6 +116,15 @@ Page({
                 })
               }
             })
+          } else if (res.message) {
+            wx.vibrateLong()
+            wx.showToast({
+              icon: 'none',
+              title: that.data.language.common.usernameNo,
+            })
+            that.setData({
+              btnDisable: false
+            })
           } else {
             wx.vibrateLong()
             wx.showToast({
@@ -127,7 +136,12 @@ Page({
             })
           }
         })
-        .catch((err) => console.log(err))
+        .catch((err) => {
+          console.log(err)
+          that.setData({
+            btnDisable: false
+          })
+        })
     }
 
   },

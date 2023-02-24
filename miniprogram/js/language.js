@@ -4,6 +4,7 @@ export const chinese = {
     notSupport: '还未支持',
     loading: '加载中…',
     refreshing: '刷新中…',
+    usernameNo: '邮箱被占用',
     wrong: '未知错误!',
     changeLanguage: '语言',
     languageList: ['中文', 'English'],
@@ -122,6 +123,7 @@ export const english = {
   common: {
     notSupport: 'Not support',
     loading: 'Loading...',
+    usernameNo: 'userName is occupied',
     refreshing: 'Refreshing...',
     wrong: 'something wrong!',
     changeLanguage: 'Language',
