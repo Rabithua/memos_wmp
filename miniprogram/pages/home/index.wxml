@@ -39,8 +39,8 @@
     </view>
   </view>
 </view>
-<view class="container" style="transform: scale({{showSidebar?'0.95':'1'}});">
-  <view style="margin-top: {{top_btn.top + top_btn.height + 20}}px;" bindtouchstart="setSidebar" bindtouchmove="showSidebar">
+<view class="container" style="transform: scale({{showSidebar?'0.95':'1'}});" bindtouchstart="setSidebar" bindtouchmove="showSidebar">
+  <view style="margin-top: {{top_btn.top + top_btn.height + 20}}px;">
     <memoCard memos="{{showMemos}}" pinned="{{true}}" rowStatus="NORMAL" bind:deleteMemoFaker="deleteMemoFaker" bind:deleteMemo="deleteMemo" bind:dialogEdit="dialogEdit" bind:changeMemoPinned="changeMemoPinned" bind:changeMemoVisibility="changeMemoVisibility" bind:shareMemo="canvas_start" />
     <memoCard memos="{{showMemos}}" pinned="{{false}}" rowStatus="NORMAL" bind:deleteMemoFaker="deleteMemoFaker" bind:deleteMemo="deleteMemo" bind:dialogEdit="dialogEdit" bind:changeMemoPinned="changeMemoPinned" bind:changeMemoVisibility="changeMemoVisibility" bind:shareMemo="canvas_start" />
     <block wx:if="{{showMemos.length == 0}}">
