@@ -67,9 +67,10 @@ page {
 
 .link {
   color: #0077e6;
-  line-height: 80rpx;
+  /* line-height: 80rpx; */
   font-weight: 900;
   font-family: Noto Sans;
+  word-break: break-all;
 }
 
 .link::before {
@@ -82,6 +83,7 @@ page {
   content: attr(data-href);
   opacity: 0.3;
   margin-left: 10rpx;
+  font-weight: 400;
   /* font-size: 27rpx; */
 }
 

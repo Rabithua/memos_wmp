@@ -157,7 +157,7 @@ Page({
     setTimeout(() => {
       let memo = this.data.memo
       let cursor = this.data.cursor
-      let newmemo = memo.slice(0, cursor) + ' #TAG ' + memo.substring(cursor, memo.length)
+      let newmemo = memo.slice(0, cursor) + ' #todo ' + memo.substring(cursor, memo.length)
       let formatMemo = formatMemoContent(newmemo)
       this.setData({
         memo: newmemo,

@@ -1,7 +1,7 @@
 // import { escape } from "lodash-es";
 var app = getApp()
 
-const CODE_BLOCK_REG = /```\n([\s\S]*?)\n```/g;
+const CODE_BLOCK_REG = /```[\s\S]*?\n([\s\S]*?)\n```/g;
 const HORIZONTAL_RULES_REG = /\n---\n|\n\*\*\*\n|\n___\n/g;
 const SHORT_CODE_BLOCK_REG = /`([\s\S]*?)`/g;
 const BOLD_TEXT_REG = /\*\*(.+?)\*\*/g;
@@ -15,10 +15,11 @@ const IMAGE_URL_REG = /!\[.*?\]\(http(.+?)\)/g;
 const IMAGE_LOCAL_URL_REG = /!\[.*?\]\((.+?)\)/g;
 const LINK_URL_REG = /\[(.*?)\]\((.+?)\)/g;
 const MEMO_LINK_REG = /@\[(.+?)\]\((.+?)\)/g;
+const TITLE_TEXT_REG = /(^|\n)#{1,6}\s(.+)/g;
 
 const parseMarkedToHtml = (markedStr: string): string => {
   const htmlText = markedStr
-  // 注释自动在英文和中文间添加空格的正则
+    // 注释自动在英文和中文间添加空格的正则
     // .replace(/([\u4e00-\u9fa5])([A-Za-z0-9?.,;[\]]+)/g, "$1 $2")
     // .replace(/([A-Za-z0-9?.,;[\]]+)([\u4e00-\u9fa5])/g, "$1 $2")
     .replace(CODE_BLOCK_REG, "<pre class='code' lang=''>$1</pre>")
@@ -29,6 +30,17 @@ const parseMarkedToHtml = (markedStr: string): string => {
     .replace(NUM_LI_REG, "<div class='counter-block'><div class='orderlist-dot'>$1.</div><div class='orderlist-content'>$2</div></div>")
     .replace(BOLD_TEXT_REG, "<strong>$1</strong>")
     .replace(EM_TEXT_REG, "<em>$1</em>")
+    .replace(TITLE_TEXT_REG, (match, offset) => {
+      let res = TITLE_TEXT_REG.exec(match)
+      console.log(TITLE_TEXT_REG.exec(match))
+      if (res) {
+        console.log(res)
+        let num = res[0].length - res[1].length - res[2].length - 1
+        return '<h' + num + '>' + res[2] + '</h' + num + '>';
+      } else {
+        return ''
+      }
+    })
     .replace(HORIZONTAL_RULES_REG, "<hr class='line'>");
   return htmlText;
 };
@@ -63,7 +75,7 @@ const formatMemoContent = (content: string, addtionConfig?: Partial<FormatterCon
 
   return outputString
     .replace(MEMO_LINK_REG, "<span class='memo-link-text' data-value='$2'>$1</span>")
-    .replace(LINK_URL_REG, "<a class='link' target='_blank' rel='noreferrer'data-href='$2' href='$2'>$1</a>")
+    .replace(LINK_URL_REG, "<a class='link' data-href='$2' href='$2'>$1</a>")
     .replace(TAG_REG, "<span class='tag-span'>#$1</span> ");
 };
 
