@@ -7,7 +7,7 @@ page {
 .memoEditTextarea {
   margin: 40rpx;
   padding: 20rpx;
-  height: 300px;
+  height: 280px;
   width: calc(100% - 120rpx);
   font-size: 16px;
   padding-bottom: 5rpx;
