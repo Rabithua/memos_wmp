@@ -242,7 +242,7 @@ Page({
           wx.setStorageSync('memoDraft', '')
           if (getCurrentPages().length > 1) {
             let eventChannel = that.data.eventChannel
-            eventChannel.emit('acceptDataFromOpenedPage', 'refresh')
+            eventChannel.emit('acceptDataFromOpenedPage', 'refresh', data.content)
             wx.navigateBack()
           }
         }
