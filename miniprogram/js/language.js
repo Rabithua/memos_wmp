@@ -20,7 +20,7 @@ export const chinese = {
     secondTitle: '把脑袋里的小碎片收集起来✨',
     dsc: '麦默是 Github 开源项目 usememos/memos 的小程序版本，同样的，麦默 Rabithua/memos_wmp 也是开源的！',
     username: '用户名',
-    usernamePlaceholder: 'XXX@XX.com',
+    usernamePlaceholder: 'username',
     password: '密码',
     passwordAgain: '确认密码',
     passwordPlaceholder: 'password',
@@ -92,6 +92,7 @@ export const chinese = {
       title_2: '功能更新',
       p_2: 'Search 页面新增 Tag 建议，支持从建议创建 Tag✨',
       p_3: '新建或编辑 memo 时自动缓存，妈妈再也不会担心我写了一半的小作文丢失了✌',
+      p_5: 'Search 页面memo卡片完整操作支持🎉'
     }
   },
   search: {
@@ -140,7 +141,7 @@ export const english = {
     secondTitle: 'Collect the small pieces in your head.✨',
     dsc: 'Maimo is a WechatMiniProgram version of Github\'s open source project usememos/memos. Similarly, Maimo Rabithua/memos_wmp is also open source!',
     username: 'Username',
-    usernamePlaceholder: 'XXX@XX.com',
+    usernamePlaceholder: 'username',
     password: 'Password',
     passwordAgain: 'password again',
     passwordPlaceholder: 'password',
@@ -211,7 +212,8 @@ export const english = {
       p_4: 'On the Search page, you can long press to delete the Tag (it will appear in the Tag suggestion after deletion)🤸‍♂️',
       title_2: 'Feature update',
       p_2: 'Added Tag suggestions on the Search page, which supports creating Tags from suggestions✨',
-      p_3: 'Automatic caching when creating or editing a memo, my mother will never worry about losing my half-written essay✌'
+      p_3: 'Automatic caching when creating or editing a memo, my mother will never worry about losing my half-written essay✌',
+      p_5: 'Search page memo card complete operation support🎉'
     }
   },
   search: {
