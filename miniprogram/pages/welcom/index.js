@@ -15,7 +15,7 @@ Page({
       username: '',
       password: '',
       btnDisable: false,
-      language: app.language.english
+      language: app.language.chinese
     })
 
     //请求csrf
@@ -149,7 +149,7 @@ Page({
   check() {
     let that = this
     var reg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-    if (!reg.test(this.data.username)) {
+    if (!this.data.username) {
       wx.vibrateLong()
       wx.showToast({
         icon: 'none',

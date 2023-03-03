@@ -36,7 +36,7 @@ const parseMarkedToHtml = (markedStr: string): string => {
       if (res) {
         console.log(res)
         let num = res[0].length - res[1].length - res[2].length - 1
-        return '<h' + num + '>' + res[2] + '</h' + num + '>';
+        return '<h' + num + " class='md_title' style='margin: 0;' >" + res[2] + '</h' + num + '>';
       } else {
         return ''
       }

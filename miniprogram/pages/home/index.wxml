@@ -20,10 +20,10 @@
     <view class="Tip_p">
       {{language.home.Tips.p_1}}
     </view>
+    <view class="Tip_pic_1"></view>
     <view class="Tip_p">
       {{language.home.Tips.p_4}}
     </view>
-    <view class="Tip_pic_1"></view>
     <view class="line"></view>
     <view class="Tip_title">
       {{language.home.Tips.title_2}}
@@ -33,6 +33,9 @@
     </view>
     <view class="Tip_p">
       {{language.home.Tips.p_3}}
+    </view>
+    <view class="Tip_p">
+      {{language.home.Tips.p_5}}
     </view>
     <view class="Tip_p" style="text-align: right; color: #00000060; animation: show infinite alternate-reverse 2s; font-size: 14px;">
       {{language.home.Tips.p_close}}

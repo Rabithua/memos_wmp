@@ -27,10 +27,10 @@
 
 </view>
 <view class="memos" style="margin-top: 0rpx;">
-  <memoCard memos="{{showMemos}}" pinned="{{true}}" rowStatus="NORMAL" />
-  <memoCard memos="{{showMemos}}" pinned="{{false}}" rowStatus="NORMAL" />
-  <memoCard memos="{{showMemos}}" pinned="{{true}}" rowStatus="ARCHIVED" />
-  <memoCard memos="{{showMemos}}" pinned="{{false}}" rowStatus="ARCHIVED" />
+  <memoCard memos="{{showMemos}}" pinned="{{true}}" rowStatus="NORMAL"  bind:deleteMemoFaker="deleteMemoFaker" bind:deleteMemo="deleteMemo" bind:changeMemoPinned="changeMemoPinned" bind:dialogEdit="dialogEdit" bind:changeMemoVisibility="changeMemoVisibility" />
+  <memoCard memos="{{showMemos}}" pinned="{{false}}" rowStatus="NORMAL" bind:deleteMemoFaker="deleteMemoFaker" bind:deleteMemo="deleteMemo" bind:changeMemoPinned="changeMemoPinned" bind:dialogEdit="dialogEdit" bind:changeMemoVisibility="changeMemoVisibility" />
+  <memoCard memos="{{showMemos}}" pinned="{{true}}" rowStatus="ARCHIVED" bind:deleteMemoFaker="deleteMemoFaker" bind:deleteMemo="deleteMemo" bind:changeMemoPinned="changeMemoPinned" bind:dialogEdit="dialogEdit" bind:changeMemoVisibility="changeMemoVisibility" />
+  <memoCard memos="{{showMemos}}" pinned="{{false}}" rowStatus="ARCHIVED" bind:deleteMemoFaker="deleteMemoFaker" bind:deleteMemo="deleteMemo" bind:changeMemoPinned="changeMemoPinned" bind:dialogEdit="dialogEdit" bind:changeMemoVisibility="changeMemoVisibility" />
   <block wx:if="{{showMemos.length == 0}}">
     <view class="none">{{language.search.searchResultPlaceholder}}</view>
   </block>
