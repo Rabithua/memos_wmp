@@ -1,2 +1,0 @@
-<!--pages/webview/webview.wxml-->
-<web-view src="{{url}}" binderror='weberror'></web-view>

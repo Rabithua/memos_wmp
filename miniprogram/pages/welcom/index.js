@@ -328,7 +328,7 @@ Page({
   goWebview() {
     wx.vibrateShort()
     wx.navigateTo({
-      url: '../webview/webview'
+      url: '../explore/explore'
     })
   },
 

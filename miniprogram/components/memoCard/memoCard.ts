@@ -9,7 +9,8 @@ Component({
   properties: {
     pinned: Boolean,
     rowStatus: String,
-    memos: Array
+    memos: Array,
+    showCreator: Boolean
   },
 
   /**

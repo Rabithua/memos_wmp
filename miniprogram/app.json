@@ -3,7 +3,7 @@
     "pages/home/index",
     "pages/welcom/index",
     "pages/search/index",
-    "pages/webview/webview",
+    "pages/explore/explore",
     "pages/edit/index"
   ],
   "window": {

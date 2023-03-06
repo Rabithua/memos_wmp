@@ -1,5 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "memoCard": "../../components/memoCard/memoCard"
+  },
   "navigationBarBackgroundColor": "#f5f5f5",
   "backgroundColor": "@navBgColor"
 }

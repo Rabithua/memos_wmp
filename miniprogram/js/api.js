@@ -373,3 +373,22 @@ export const status = (url) => {
     })
   })
 }
+
+export const getExploreMemos = (url, offset, limit) => {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: `${url}/api/memo/all?offset=${offset}&limit=${limit}`,
+      success(res) {
+        resolve(res.data)
+      },
+      fail(err) {
+        wx.vibrateLong()
+        wx.showToast({
+          icon: 'none',
+          title: '获取失败',
+        })
+        reject(err)
+      }
+    })
+  })
+}

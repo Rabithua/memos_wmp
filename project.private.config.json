@@ -57,7 +57,7 @@
         },
         {
           "name": "",
-          "pathName": "pages/home/index",
+          "pathName": "pages/explore/explore",
           "query": "",
           "launchMode": "default",
           "scene": null

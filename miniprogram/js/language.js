@@ -79,7 +79,7 @@ export const chinese = {
       sun: '周日',
       memoVisibility: 'Memo 可见性',
       locale: '语言',
-      openWebview: '网页版 →',
+      openWebview: '探索✨ →',
       date_1: '注册于 ',
       date_2: '天前。',
       heatTipMemo: '条记录'
@@ -200,7 +200,7 @@ export const english = {
       sun: 'Sun',
       memoVisibility: 'MemoVisibility',
       locale: 'Language',
-      openWebview: 'Open Webview →',
+      openWebview: 'Explore✨ →',
       date_1: 'Registered for ',
       date_2: 'Days.',
       heatTipMemo: 'Memos'
