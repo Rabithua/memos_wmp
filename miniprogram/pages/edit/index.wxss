@@ -4,6 +4,28 @@ page {
   overflow: scroll;
 }
 
+.tagsList {
+  position: absolute;
+  top: -80rpx;
+  display: flex;
+  align-items: center;
+  padding: 20rpx 30rpx;
+  overflow: scroll;
+  background-color: #07c160;
+  width: calc(100% - 60rpx);
+  border-radius: 30rpx 30rpx 0rpx 0rpx;
+  z-index: -1;
+}
+.tag {
+  padding: 10rpx 20rpx;
+  background-color: #ffffff;
+  margin: 0 10rpx;
+  border-radius: 50rpx;
+  flex-shrink: 0;
+  font-size: 27rpx;
+  color: #07c160;
+}
+
 .memoEditTextarea {
   margin: 40rpx;
   padding: 20rpx;

@@ -67,6 +67,7 @@ Page({
                 that.setData({
                   tags: res.data
                 })
+                wx.setStorageSync('tags', res.data)
               })
               .catch((err) => console.log(err))
           },

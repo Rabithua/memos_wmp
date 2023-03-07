@@ -16,7 +16,8 @@ Page({
     memoFocus: false,
     keyBoardHeight: '0',
     sendLoading: false,
-    eventChannel: null
+    eventChannel: null,
+    tags: []
   },
 
   /**
@@ -26,7 +27,8 @@ Page({
     let that = this
     const eventChannel = this.getOpenerEventChannel()
     this.setData({
-      eventChannel: eventChannel
+      eventChannel: eventChannel,
+      tags: wx.getStorageSync('tags')
     })
 
     try {
@@ -112,6 +114,30 @@ Page({
     })
   },
 
+  none() {
+    this.setData({
+      memoFocus: true
+    })
+  },
+
+  inputUserTag(e) {
+    console.log(e.currentTarget.dataset.tag)
+    let tag = e.currentTarget.dataset.tag
+    wx.vibrateShort()
+    setTimeout(() => {
+      let memo = this.data.memo
+      let cursor = this.data.cursor
+      let newmemo = `${memo.slice(0, cursor)} #${tag} ${memo.substring(cursor, memo.length)}`
+      let formatMemo = formatMemoContent(newmemo)
+      this.setData({
+        memo: newmemo,
+        formatContent: formatMemo,
+        memoFocus: true,
+        cursor: cursor + 2,
+      })
+    }, 100);
+  },
+
   slideFocus(e) {
     if (this.data.keyBoardHeight == 0) {
       if (e.touches[0].clientY - this.data.bottomTapPoint.clientY < -50 && Math.abs(e.touches[0].clientX - this.data.bottomTapPoint.clientX) < 20) {
@@ -154,10 +180,11 @@ Page({
 
   inputTag(e) {
     wx.vibrateShort()
+    wx.vibrateShort()
     setTimeout(() => {
       let memo = this.data.memo
       let cursor = this.data.cursor
-      let newmemo = memo.slice(0, cursor) + ' #todo ' + memo.substring(cursor, memo.length)
+      let newmemo = `${memo.slice(0, cursor)} #todo ${memo.substring(cursor, memo.length)}`
       let formatMemo = formatMemoContent(newmemo)
       this.setData({
         memo: newmemo,
