@@ -3,8 +3,9 @@
     "pages/home/index",
     "pages/welcom/index",
     "pages/search/index",
-    "pages/explore/explore",
-    "pages/edit/index"
+    "pages/explore/index",
+    "pages/edit/index",
+    "pages/archived/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

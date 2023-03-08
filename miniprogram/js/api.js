@@ -1,10 +1,19 @@
-export const getMemos = (url, openId) => {
+export const getMemos = (url, openId, limit, offset, rowStatus) => {
   return new Promise((resolve, reject) => {
+    let data = {
+      limit,
+      offset,
+      openId
+    }
+    if (rowStatus) {
+      data = {
+        rowStatus,
+        ...data
+      }
+    }
     wx.request({
-      url: url + '/api/memo',
-      data: {
-        'openId': openId
-      },
+      url: `${url}/api/memo`,
+      data,
       header: {
         cookie: wx.getStorageSync("cookie")
       },

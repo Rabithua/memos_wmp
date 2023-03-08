@@ -15,6 +15,14 @@ export const chinese = {
       now: '刚刚发布'
     }
   },
+  archived:{
+    pageTitle: '已归档Memos🌒',
+    nothing: '这是一片无人的荒原🪐'
+  },
+  explore:{
+    pageTitle: '探索✨',
+    nothing: '这是一片无人的荒原🪐'
+  },
   welcom: {
     headTitle: '欢迎来到麦默👋',
     secondTitle: '把脑袋里的小碎片收集起来✨',
@@ -30,7 +38,7 @@ export const chinese = {
     signUpSuc: '注册成功!',
     usernameErr: '用户名错误',
     passwordCheckErr: '密码长度需大于六位',
-    passwordErr: '密码错误',
+    loginCreErr: '登陆凭证错误',
     signInSuc: '登录成功',
     signUpTip: {
       title: '提示',
@@ -47,6 +55,7 @@ export const chinese = {
       online: '在线',
       offline: '离线'
     },
+    thatIsAll: '已全部加载~',
     edit: '编辑中…',
     newMemoPlaceholder: '记录有趣的想法~',
     editErr: '内容不能为空',
@@ -80,6 +89,7 @@ export const chinese = {
       memoVisibility: 'Memo 可见性',
       locale: '语言',
       openWebview: '探索✨ →',
+      goarchived: '已归档🌒 →',
       date_1: '注册于 ',
       date_2: '天前。',
       heatTipMemo: '条记录'
@@ -136,6 +146,14 @@ export const english = {
       now: 'Now'
     }
   },
+  archived:{
+    pageTitle: 'Archived Memos🌒',
+    nothing: "There's nothing here 🪐"
+  },
+  explore:{
+    pageTitle: 'Explore✨',
+    nothing: "There's nothing here 🪐"
+  },
   welcom: {
     headTitle: 'Welcom Maimo👋',
     secondTitle: 'Collect the small pieces in your head.✨',
@@ -151,7 +169,7 @@ export const english = {
     signUpSuc: 'Sign up success!',
     usernameErr: 'Username error',
     passwordCheckErr: 'password length shoud > 6',
-    passwordErr: 'password wrong',
+    loginCreErr: 'Incorrect login credentials',
     signInSuc: 'Sign In success',
     signUpTip: {
       title: 'Tips',
@@ -168,6 +186,7 @@ export const english = {
       online: 'Online',
       offline: 'Offline'
     },
+    thatIsAll: "That's all",
     edit: 'Editing...',
     newMemoPlaceholder: 'Record something interesting~',
     editErr: 'Content cannot be empty.',
@@ -201,6 +220,7 @@ export const english = {
       memoVisibility: 'MemoVisibility',
       locale: 'Language',
       openWebview: 'Explore✨ →',
+      goarchived: 'Archived🌒 →',
       date_1: 'Registered for ',
       date_2: 'Days.',
       heatTipMemo: 'Memos'

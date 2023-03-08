@@ -47,7 +47,7 @@ App({
     }
 
     this.globalData.top_btn = wx.getMenuButtonBoundingClientRect()
-    
+
     let that = this
     //请求csrf
     function reqCookie() {
@@ -137,6 +137,33 @@ App({
     var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '/'
     var D = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate())
     return (Y + M + D)
+  },
+
+  memosRescourse(memo) {
+    let fileList_preview = []
+    let imgList_preview = []
+    for (let l = 0; l < memo.resourceList.length; l++) {
+      const rescource = memo.resourceList[l];
+      const rescource_name = rescource.filename
+      let rescource_url = this.globalData.url + '/o/r/' + rescource.id + '/' + rescource_name
+      if (rescource.externalLink) {
+        rescource_url = rescource.externalLink
+      }
+      if (rescource.type.match(/image/)) {
+        imgList_preview.push({
+          url: rescource_url,
+          name: rescource_name
+        })
+      } else {
+        fileList_preview.push({
+          url: rescource_url,
+          name: rescource_name
+        })
+      }
+    }
+    memo.fileList_preview = fileList_preview
+    memo.imgList_preview = imgList_preview
+    return memo
   }
 
 });

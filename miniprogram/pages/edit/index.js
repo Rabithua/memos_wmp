@@ -115,14 +115,14 @@ Page({
   },
 
   none() {
-    this.setData({
-      memoFocus: true
-    })
   },
 
   inputUserTag(e) {
     console.log(e.currentTarget.dataset.tag)
     let tag = e.currentTarget.dataset.tag
+    this.setData({
+      memoFocus: false
+    })
     wx.vibrateShort()
     setTimeout(() => {
       let memo = this.data.memo
@@ -147,13 +147,19 @@ Page({
         })
       }
     }
-
   },
 
-  memoFocus(e) {
+  setKeyBoard(e) {
     wx.vibrateShort()
     this.setData({
       keyBoardHeight: (e.detail.height - 30).toString()
+    })
+  },
+
+  memoFocus(){
+    wx.vibrateShort()
+    this.setData({
+      memoFocus: true
     })
   },
 
@@ -162,7 +168,8 @@ Page({
     // console.log(e)
     this.setData({
       keyBoardHeight: '0',
-      cursor: this.data.memo.length
+      cursor: this.data.memo.length,
+      memoFocus: false
     })
   },
 
@@ -180,7 +187,6 @@ Page({
 
   inputTag(e) {
     wx.vibrateShort()
-    wx.vibrateShort()
     setTimeout(() => {
       let memo = this.data.memo
       let cursor = this.data.cursor
@@ -190,16 +196,15 @@ Page({
         memo: newmemo,
         formatContent: formatMemo,
         memoFocus: true,
-        cursor: cursor + 2,
+        cursor: newmemo.length,
       })
     }, 100);
   },
 
   inputTodo() {
     wx.vibrateShort()
-    wx.showToast({
-      icon: 'none',
-      title: ' - [x] DONE',
+    this.setData({
+      memoFocus: false
     })
     setTimeout(() => {
       let memo = this.data.memo
@@ -217,7 +222,9 @@ Page({
 
   inputCode() {
     wx.vibrateShort()
-    // console.log(this.data.memo + '\n```\n```')
+    this.setData({
+      memoFocus: false
+    })
     setTimeout(() => {
       let memo = this.data.memo
       let cursor = this.data.cursor
@@ -269,7 +276,7 @@ Page({
           wx.setStorageSync('memoDraft', '')
           if (getCurrentPages().length > 1) {
             let eventChannel = that.data.eventChannel
-            eventChannel.emit('acceptDataFromOpenedPage', 'refresh', data.content)
+            eventChannel.emit('acceptDataFromOpenedPage', 'refresh', res.data)
             wx.navigateBack()
           }
         }
@@ -290,7 +297,7 @@ Page({
           wx.setStorageSync('memoDraft', '')
           if (getCurrentPages().length > 1) {
             let eventChannel = that.data.eventChannel
-            eventChannel.emit('acceptDataFromOpenedPage', 'refresh')
+            eventChannel.emit('acceptDataFromOpenedPage', 'refresh', res.data)
             wx.navigateBack()
           }
         } else {

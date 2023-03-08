@@ -18,6 +18,5 @@
   <view class="fileList">
     <view class="file" wx:for="{{item.fileList_preview}}" wx:key="file" wx:for-item="file" data-url="{{file.url}}" catchtap="copy">{{file.name}}</view>
   </view>
-  <!-- markdown解析请取消注释，并注释掉上一行 -->
-  <!-- <towxml nodes="{{item.content}}"/> -->
+
 </view>
