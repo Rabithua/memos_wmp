@@ -1,5 +1,5 @@
 <!--pages/edit/index.wxml-->
-<textarea class="memoEditTextarea" maxlength="3000" placeholder="{{language.edit.placeHolder}}" value="{{memo}}" catchinput="memoInput" focus="{{memoFocus}}" cursor-spacing="30" bindfocus="memoFocus" bindblur="memoBlur" adjust-position="{{false}}" show-confirm-bar="{{false}}" cursor="{{cursor}}">
+<textarea class="memoEditTextarea" hold-keyboard maxlength="3000" placeholder="{{language.edit.placeHolder}}" value="{{memo}}" catchinput="memoInput" focus="{{memoFocus}}" cursor-spacing="30" bindfocus="setKeyBoard" bindblur="memoBlur" adjust-position="{{false}}" show-confirm-bar="{{false}}" cursor="{{cursor}}">
 </textarea>
 
 <view class="title" style="margin-bottom: 0rpx; margin-left: 60rpx; font-size: 26rpx;">
@@ -17,11 +17,15 @@
   </view>
 </view>
 
-
-
 <view class="btns" bindtouchstart="setTapPoint" bindtouchmove="slideFocus" style="bottom: {{keyBoardHeight}}px;">
+  <view wx:if="{{tags.length > 0 }}" class="tagsList" catchtap="none">
+    <view catchtap="inputUserTag" class="tag" wx:for="{{tags}}" wx:for-item="tag" data-tag="{{tag}}" wx:for-index="index" wx:key="index">
+      #{{tag}}
+    </view>
+  </view>
   <view class="inputTypeBtn">
-    <view class="typeBtn tagBtn" bindtap="inputTag"></view>
+    <view wx:if="{{tags.length == 0}}" class="typeBtn tagBtn" bindtap="inputTag">
+    </view>
     <view class="typeBtn codeBtn" bindtap="inputTodo"></view>
     <view class="typeBtn todoBtn" bindtap="inputCode"></view>
   </view>

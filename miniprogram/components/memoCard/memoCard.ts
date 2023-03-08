@@ -9,7 +9,8 @@ Component({
   properties: {
     pinned: Boolean,
     rowStatus: String,
-    memos: Array
+    memos: Array,
+    showCreator: Boolean
   },
 
   /**
@@ -43,9 +44,7 @@ Component({
     },
     copy(e: { target: { dataset: { url: any } } }) {
       console.log(e)
-      wx.vibrateShort({
-        type: "light"
-      })
+      wx.vibrateShort()
       wx.setClipboardData({
         data: e.target.dataset.url
       })

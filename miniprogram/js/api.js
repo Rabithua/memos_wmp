@@ -1,10 +1,19 @@
-export const getMemos = (url, openId) => {
+export const getMemos = (url, openId, limit, offset, rowStatus) => {
   return new Promise((resolve, reject) => {
+    let data = {
+      limit,
+      offset,
+      openId
+    }
+    if (rowStatus) {
+      data = {
+        rowStatus,
+        ...data
+      }
+    }
     wx.request({
-      url: url + '/api/memo',
-      data: {
-        'openId': openId
-      },
+      url: `${url}/api/memo`,
+      data,
       header: {
         cookie: wx.getStorageSync("cookie")
       },
@@ -361,6 +370,25 @@ export const status = (url) => {
           wx.setStorageSync('cookie', res.header["Set-Cookie"])
         }
         resolve(res)
+      },
+      fail(err) {
+        wx.vibrateLong()
+        wx.showToast({
+          icon: 'none',
+          title: '获取失败',
+        })
+        reject(err)
+      }
+    })
+  })
+}
+
+export const getExploreMemos = (url, offset, limit) => {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: `${url}/api/memo/all?offset=${offset}&limit=${limit}`,
+      success(res) {
+        resolve(res.data)
       },
       fail(err) {
         wx.vibrateLong()

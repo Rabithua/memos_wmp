@@ -6,6 +6,12 @@ page {
   font-family: -apple-system, BlinkMacSystemFont, PingFang SC, Noto Sans, Noto Sans CJK SC, Microsoft YaHei UI, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif, Segoe UI, Roboto, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
 }
 
+.quote {
+  border-left: 10rpx solid #00000010;
+  color: #00000050;
+  padding-left: 20rpx;
+  margin: 10px 0;
+}
 
 .method {
   display: flex;
@@ -97,28 +103,13 @@ page {
   font-weight: 900;
   font-family: Noto Sans;
   word-break: break-all;
+  display: block;
 }
 
 .link::before {
   content: '🔗';
   opacity: 0.3;
   font-size: 27rpx;
-}
-
-.md_title {
-  margin-bottom: 0!important;
-  position: relative;
-}
-
-.md_title::after {
-  content: '';
-  width: 80rpx;
-  height: 20rpx;
-  border-radius: 10rpx;
-  background-color: #07C16020;
-  position: absolute;
-  left: 0;
-  bottom: 0rpx;
 }
 
 .link::after {
@@ -130,7 +121,7 @@ page {
 }
 
 .content .code {
-  margin: 10rpx;
+  margin: 10px;
   white-space: pre-wrap;
   background-color: #f5f5f5;
   color: #00000080;
@@ -225,13 +216,14 @@ page {
   animation: show 300ms 300ms forwards; */
   transform: translateY(20rpx);
   animation: up forwards 500ms 500ms ease-in-out;
-  white-space: pre-wrap;
+  /* white-space: pre-wrap; */
   margin: 20rpx 30rpx;
   padding: 20rpx 30rpx;
   background: #ffffff;
   font-size: 35rpx;
   /* border: 1rpx solid #e5e7eb; */
   border-radius: 20rpx;
+  font-weight: 400;
 }
 
 .memoCard:last-child {
@@ -290,7 +282,6 @@ page {
   margin: 10rpx;
   margin-top: 20rpx;
   font-size: 30rpx;
-  letter-spacing: 1rpx;
   overflow: scroll;
   color: #313131;
   font-weight: 400;
@@ -299,6 +290,8 @@ page {
 
 .counter-block {
   display: flex;
+  align-content: center;
+  margin: 5px 0;
 }
 
 .orderlist-dot {
@@ -306,10 +299,12 @@ page {
   padding-right: 10px;
   font-weight: bold;
   color: #07C160;
+  font-style: italic;
 }
 
 .dotlist-dot {
   padding-right: 10px;
+  color: #07C160;
 }
 
 

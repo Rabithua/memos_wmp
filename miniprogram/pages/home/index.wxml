@@ -44,18 +44,16 @@
 </view>
 <view class="container" style="transform: scale({{showSidebar?'0.95':'1'}});" bindtouchstart="setSidebar" bindtouchmove="showSidebar">
   <view style="margin-top: {{top_btn.top + top_btn.height + 20}}px;">
-    <memoCard memos="{{showMemos}}" pinned="{{true}}" rowStatus="NORMAL" bind:deleteMemoFaker="deleteMemoFaker" bind:deleteMemo="deleteMemo" bind:dialogEdit="dialogEdit" bind:changeMemoPinned="changeMemoPinned" bind:changeMemoVisibility="changeMemoVisibility" bind:shareMemo="canvas_start" />
-    <memoCard memos="{{showMemos}}" pinned="{{false}}" rowStatus="NORMAL" bind:deleteMemoFaker="deleteMemoFaker" bind:deleteMemo="deleteMemo" bind:dialogEdit="dialogEdit" bind:changeMemoPinned="changeMemoPinned" bind:changeMemoVisibility="changeMemoVisibility" bind:shareMemo="canvas_start" />
-    <block wx:if="{{showMemos.length == 0}}">
+    <memoCard memos="{{memos.length > 0 ? memos: storageMemos}}" pinned="{{true}}" rowStatus="NORMAL" bind:deleteMemoFaker="deleteMemoFaker" bind:deleteMemo="deleteMemo" bind:dialogEdit="dialogEdit" bind:changeMemoPinned="changeMemoPinned" bind:changeMemoVisibility="changeMemoVisibility" bind:shareMemo="canvas_start" />
+    <memoCard memos="{{memos.length > 0 ? memos: storageMemos}}" pinned="{{false}}" rowStatus="NORMAL" bind:deleteMemoFaker="deleteMemoFaker" bind:deleteMemo="deleteMemo" bind:dialogEdit="dialogEdit" bind:changeMemoPinned="changeMemoPinned" bind:changeMemoVisibility="changeMemoVisibility" bind:shareMemo="canvas_start" />
+    <block wx:if="{{memos.length == 0}}">
       <view class="none">{{language.home.noMemos}}</view>
     </block>
-    <view class="archivedbtn" style="margin-bottom: {{ showArchived? 20:80 }}rpx; margin-top: {{showArchived? 10:40}}rpx;" catchtap="changeshowArchived">{{language.home.archived}}</view>
+    <!-- <view class="archivedbtn" style="margin-bottom: {{ showArchived? 20:80 }}rpx; margin-top: {{showArchived? 10:40}}rpx;" catchtap="changeshowArchived">{{language.home.archived}}</view>
     <block wx:if="{{showArchived}}">
-      <memoCard memos="{{showMemos}}" pinned="{{true}}" rowStatus="ARCHIVED" bind:deleteMemoFaker="deleteMemoFaker" bind:deleteMemo="deleteMemo" bind:dialogEdit="dialogEdit" bind:changeMemoPinned="changeMemoPinned" bind:changeMemoVisibility="changeMemoVisibility" bind:shareMemo="canvas_start" />
-      <memoCard memos="{{showMemos}}" pinned="{{false}}" rowStatus="ARCHIVED" bind:deleteMemoFaker="deleteMemoFaker" bind:deleteMemo="deleteMemo" bind:dialogEdit="dialogEdit" bind:changeMemoPinned="changeMemoPinned" bind:changeMemoVisibility="changeMemoVisibility" bind:shareMemo="canvas_start" />
-    </block>
-
-
+      <memoCard memos="{{memos.length > 0 ? memos: storageMemos}}" pinned="{{true}}" rowStatus="ARCHIVED" bind:deleteMemoFaker="deleteMemoFaker" bind:deleteMemo="deleteMemo" bind:dialogEdit="dialogEdit" bind:changeMemoPinned="changeMemoPinned" bind:changeMemoVisibility="changeMemoVisibility" bind:shareMemo="canvas_start" />
+      <memoCard memos="{{memos.length > 0 ? memos: storageMemos}}" pinned="{{false}}" rowStatus="ARCHIVED" bind:deleteMemoFaker="deleteMemoFaker" bind:deleteMemo="deleteMemo" bind:dialogEdit="dialogEdit" bind:changeMemoPinned="changeMemoPinned" bind:changeMemoVisibility="changeMemoVisibility" bind:shareMemo="canvas_start" />
+    </block> -->
   </view>
 </view>
 
@@ -93,7 +91,12 @@
         <text class="value">{{userSettingList.value}}</text>
       </view>
     </view>
-    <view class="openWeview" catchtap="goWebview">{{language.home.sideBar.openWebview}}</view>
+    <navigator url="../explore/index" class="openWeview">
+      {{language.home.sideBar.openWebview}}
+    </navigator>
+    <navigator url="../archived/index" class="archived">
+      {{language.home.sideBar.goarchived}}
+    </navigator>
     <view class="date">{{language.home.sideBar.date_1}}<text style="font-weight: bold; font-family: 'Smiley Sans Oblique';">{{me.day}}</text> {{language.home.sideBar.date_2}}</view>
   </view>
   <view class="heatTip" data-time="{{heatTip.time}}" catchtap="goSearch" wx:if="{{showHeatTip}}">{{heatTip.time}} {{heatTip.num}} {{language.home.sideBar.heatTipMemo}} →</view>

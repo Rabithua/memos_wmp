@@ -177,6 +177,10 @@ Page({
   signIn() {
     var that = this
     if (this.check() && !this.data.btnDisable) {
+      wx.showLoading({
+        title: '通信中...',
+        mask: true
+      })
       that.setData({
         btnDisable: true
       })
@@ -213,40 +217,57 @@ Page({
                 that.setData({
                   btnDisable: false
                 })
+                wx.hideLoading()
               }
             })
           } else {
             console.log(res)
             let regresult1 = res.error.match(/User not found with username/)
-            let regresult2 = res.error.match(/Incorrect password/)
+            let regresult2 = res.error.match(/Incorrect login credentials/)
             console.log('regresult:', regresult1, regresult2)
-            if (regresult1) {
+            // if (regresult1) {
+            //   wx.vibrateLong()
+            //   wx.hideLoading()
+            //   wx.showModal({
+            //     confirmText: that.data.language.welcom.signUpTip.confirmText,
+            //     cancelText: that.data.language.welcom.signUpTip.cancelText,
+            //     title: that.data.language.welcom.signUpTip.title,
+            //     content: that.data.language.welcom.signUpTip.content,
+            //     success(res) {
+            //       if (res.confirm) {
+            //         console.log('用户点击确定')
+            //         that.setData({
+            //           btnDisable: false
+            //         })
+            //         wx.showLoading({
+            //           title: '通信中...',
+            //         })
+            //         that.signUp()
+            //       } else if (res.cancel) {
+            //         console.log('用户点击取消')
+            //         that.setData({
+            //           btnDisable: false
+            //         })
+            //       }
+            //     }
+            //   })
+            // } else 
+            if (regresult2) {
               wx.vibrateLong()
-              wx.showModal({
-                confirmText: that.data.language.welcom.signUpTip.confirmText,
-                cancelText: that.data.language.welcom.signUpTip.cancelText,
-                title: that.data.language.welcom.signUpTip.title,
-                content: that.data.language.welcom.signUpTip.content,
-                success(res) {
-                  if (res.confirm) {
-                    console.log('用户点击确定')
-                    that.setData({
-                      btnDisable: false
-                    })
-                    that.signUp()
-                  } else if (res.cancel) {
-                    console.log('用户点击取消')
-                    that.setData({
-                      btnDisable: false
-                    })
-                  }
-                }
-              })
-            } else if (regresult2) {
-              wx.vibrateLong()
+              wx.hideLoading()
               wx.showToast({
                 icon: 'none',
-                title: that.data.language.welcom.passwordErr,
+                title: that.data.language.welcom.loginCreErr,
+              })
+              that.setData({
+                btnDisable: false
+              })
+            } else {
+              wx.vibrateLong()
+              wx.hideLoading()
+              wx.showToast({
+                icon: 'none',
+                title: that.data.language.common.wrong,
               })
               that.setData({
                 btnDisable: false
@@ -308,11 +329,13 @@ Page({
         console.log(res.data)
         if (res.data) {
           // wx.vibrateShort()
+          wx.setStorageSync('language', 'english')
           wx.redirectTo({
             url: '../home/index',
           })
         } else {
           wx.vibrateLong()
+          wx.setStorageSync('language', 'english')
           wx.showToast({
             icon: 'none',
             title: 'something wrong',
@@ -328,7 +351,7 @@ Page({
   goWebview() {
     wx.vibrateShort()
     wx.navigateTo({
-      url: '../webview/webview'
+      url: '../explore/index'
     })
   },
 
