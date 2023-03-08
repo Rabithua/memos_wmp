@@ -96,6 +96,11 @@ page {
   color: #07C160;
 }
 
+.sidebar .archived {
+  padding: 20rpx 0;
+  color: #07C160;
+}
+
 .sidebar .setting .item .value {
   margin-left: auto;
   color: #07C160;

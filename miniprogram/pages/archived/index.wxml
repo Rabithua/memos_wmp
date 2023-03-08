@@ -1,0 +1,13 @@
+<view class="headerContainer" style="top: {{top_btn.top}}px">
+  <view class="header" style="height:{{top_btn.height}}px;">{{language.archived.pageTitle}}
+  </view>
+</view>
+
+<block wx:if="{{memos.length > 0}}">
+  <memoCard memos="{{memos}}" pinned="{{true}}" rowStatus="ARCHIVED" bind:deleteMemoFaker="deleteMemoFaker" bind:deleteMemo="deleteMemo" bind:changeMemoPinned="changeMemoPinned" bind:changeMemoVisibility="changeMemoVisibility" />
+  <memoCard memos="{{memos}}" pinned="{{false}}" rowStatus="ARCHIVED" bind:deleteMemoFaker="deleteMemoFaker" bind:deleteMemo="deleteMemo" bind:changeMemoPinned="changeMemoPinned" bind:changeMemoVisibility="changeMemoVisibility" />
+</block>
+
+<view wx:else style="padding: 100rpx 30rpx; text-align: center;opacity: 0.8;">
+  {{language.archived.nothing}}
+</view>
