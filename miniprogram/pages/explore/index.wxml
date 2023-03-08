@@ -1,0 +1,11 @@
+<view class="headerContainer" style="top: {{top_btn.top}}px">
+  <view class="header" style="height:{{top_btn.height}}px;">{{language.explore.pageTitle}}
+  </view>
+</view>
+
+<memoCard wx:if="{{showMemos.length > 0}}" memos="{{showMemos}}" showCreator="{{true}}" rowStatus="NORMAL" />
+
+
+<view wx:else style="padding: 100rpx 30rpx; text-align: center;opacity: 0.8;">
+  {{language.explore.nothing}}
+</view>

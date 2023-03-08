@@ -1,0 +1,24 @@
+.method {
+  display: none;
+}
+
+.headerContainer {
+  display: flex;
+  position: sticky;
+  margin: 90rpx 60rpx 30rpx 50rpx;
+  z-index: 5;
+  width: calc(100% - 100rpx);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  color: #000000;
+  font-weight: bolder;
+  background: #f5f5f580;
+  backdrop-filter: blur(30px);
+  padding: 5rpx 20rpx;
+  border-radius: 99rpx;
+  opacity: 0;
+  animation: show 300ms 100ms forwards;
+}

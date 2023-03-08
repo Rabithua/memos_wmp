@@ -1,7 +1,0 @@
-
-  <memoCard wx:if="{{showMemos}}" memos="{{showMemos}}" showCreator="{{true}}" rowStatus="NORMAL" />
-
-
-  <view wx:else style="padding: 100rpx 30rpx; text-align: center;opacity: 0.8;">
-    这是一片无人的荒原🪐
-  </view>

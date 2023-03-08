@@ -23,6 +23,30 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
+    let that = this
+    this.setData({
+      top_btn: app.globalData.top_btn
+    })
+    wx.getStorage({
+      key: "language",
+      success(res) {
+        if (res.data == 'chinese') {
+          that.setData({
+            language: app.language.chinese
+          })
+        }else {
+          that.setData({
+            language: app.language.english
+          })
+        }
+      },
+      fail(err) {
+        console.log(err)
+        that.setData({
+          language: app.language.chinese
+        })
+      }
+    })
     this.getExploreMemos()
   },
 
@@ -46,26 +70,7 @@ Page({
             //memos原版解析
             let md = formatMemoContent(memos[i].content)
             memos[i].formatContent = md
-            const fileList_preview: any = []
-            const imgList_preview: any = []
-            for (let l = 0; l < memos[i].resourceList.length; l++) {
-              const rescource = memos[i].resourceList[l];
-              const rescource_name: any = rescource.filename
-              const rescource_url = that.data.url + '/o/r/' + rescource.id + '/' + rescource_name
-              if (rescource.type.match(/image/)) {
-                imgList_preview.push({
-                  url: rescource_url,
-                  name: rescource_name
-                })
-              } else {
-                fileList_preview.push({
-                  url: rescource_url,
-                  name: rescource_name
-                })
-              }
-            }
-            memos[i].fileList_preview = fileList_preview
-            memos[i].imgList_preview = imgList_preview
+            memos[i] = app.memosRescourse(memos[i])
           }
           console.log(memos)
           that.setData({
