@@ -127,7 +127,7 @@ Page({
   showSidebar(e) {
     // console.log(e)
     let that = this
-    if (!this.data.me.email) {
+    if (!this.data.me) {
       this.getMe(this.data.openId)
     }
     if (!this.data.showSidebar) {
@@ -146,15 +146,37 @@ Page({
             url: '../edit/index',
             events: {
               // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
-              acceptDataFromOpenedPage: function (data) {
-                switch (data) {
+              acceptDataFromOpenedPage: function (type, newMemo) {
+                let memos = that.data.memos
+                switch (type) {
                   case 'refresh':
-                    let limit = that.data.memos.length
-                    that.setData({
-                      memos: [],
-                      limit
+                    console.log('refresh')
+                    memos.map((memo, index) => {
+                      if (memo.id == newMemo.id) {
+                        memo.content = newMemo.content
+                        memo.formatContent = formatMemoContent(newMemo.content)
+                        memo.time = app.calTime(memo.createdTs)
+                      }
                     })
-                    that.getMemos(that.data.openId, 'NORMAL')
+                    that.setData({
+                      memos: memos
+                    })
+                    app.globalData.memos = memos
+                    wx.setStorageSync('memos', memos)
+                    break;
+                  case 'add':
+                    console.log('add')
+                    memos.unshift({
+                      ...newMemo,
+                      formatContent: formatMemoContent(newMemo.content),
+                      time: app.calTime(newMemo.createdTs)
+                    })
+                    that.setData({
+                      memos: memos
+                    })
+                    app.globalData.memos = memos
+                    wx.setStorageSync('memos', memos)
+                    break;
                   default:
                     break;
                 }
@@ -168,7 +190,7 @@ Page({
   },
 
   setHeatMap() {
-    let memos = this.data.memos
+    let stats = this.data.stats
     let heatMap = []
     let column = []
     let today = new Date().getTime()
@@ -197,8 +219,8 @@ Page({
       heatMap.push(column)
       column = []
     }
-    for (let k = 0; k < memos.length; k++) {
-      let day = app.fomaDay(memos[k].createdTs * 1000)
+    for (let k = 0; k < stats.length; k++) {
+      let day = app.fomaDay(stats[k] * 1000)
       for (let l = 0; l < heatMap.length; l++) {
         for (let m = 0; m < heatMap[l].length; m++) {
           if (heatMap[l][m].time == day) {
@@ -353,20 +375,27 @@ Page({
     })
   },
 
-  getMemos(openId, rowStatus) {
+  getMemos(openId, rowStatus, type) {
     var that = this
-    app.api.getMemos(app.globalData.url, openId, this.data.limit, this.data.memos.length, rowStatus)
+    let offset = this.data.memos.length
+    if (type == 'refresh') {
+      offset = 0
+    }
+    app.api.getMemos(app.globalData.url, openId, this.data.limit, offset, rowStatus)
       .then(result => {
-        // console.log(result)
+        console.log(result)
         if (!result.data) {
           wx.vibrateLong()
           wx.showToast({
             icon: 'error',
             title: that.data.language.common.wrong,
-          })
-          that.setData({
             state: that.data.language.home.state.offline,
             onlineColor: '#eeeeee',
+          })
+        } else if (result.data.length == 0) {
+          wx.showToast({
+            icon: 'none',
+            title: that.data.language.home.thatIsAll
           })
         } else {
           var memos = result.data
@@ -379,21 +408,16 @@ Page({
             memos[i].formatContent = md
             memos[i] = app.memosRescourse(memos[i])
           }
-          wx.showToast({
-            icon: 'none',
-            title: that.data.language.home.thatIsAll,
-          })
           var arrMemos = app.memosArrenge(memos)
           that.setData({
-            memos: that.data.memos.concat(arrMemos),
+            memos: type == 'refresh' ? arrMemos : that.data.memos.concat(arrMemos),
             state: that.data.language.home.state.online,
             onlineColor: '#07C160'
           })
-          that.setHeatMap()
           app.globalData.memos = arrMemos
           wx.setStorage({
             key: "memos",
-            data: arrMemos
+            data: that.data.memos
           })
         }
       })
@@ -493,6 +517,7 @@ Page({
     app.api.getMe(app.globalData.url, openId)
       .then(result => {
         let me = result.data
+        that.getStats(me.id)
         let defaultUserSettingList = [{
             UserID: result.data.id,
             key: 'locale',
@@ -529,6 +554,18 @@ Page({
         that.setData({
           me: me
         })
+      })
+  },
+
+  getStats(id) {
+    let that = this
+    app.api.getStats(app.globalData.url, this.data.openId, id)
+      .then(result => {
+        console.log(result)
+        this.setData({
+          stats: result.data
+        })
+        that.setHeatMap()
       })
   },
 
@@ -758,11 +795,7 @@ Page({
       state: this.data.language.common.refreshing,
       onlineColor: '#FCA417'
     })
-    this.setData({
-      memos: [],
-      limit: that.data.memos.length
-    })
-    that.getMemos(that.data.openId, 'NORMAL')
+    that.getMemos(that.data.openId, 'NORMAL', 'refresh')
     setTimeout(() => {
       wx.stopPullDownRefresh()
     }, 300);
