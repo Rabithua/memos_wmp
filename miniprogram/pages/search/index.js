@@ -70,29 +70,28 @@ Page({
         } else {
           var memos = result.data
           for (let i = 0; i < memos.length; i++) {
-            const ts = memos[i].createdTs
-            var time = app.calTime(ts)
+            let ts = memos[i].createdTs
+            let time = app.calTime(ts)
             memos[i].time = time
             //memos原版解析
             let md = formatMemoContent(memos[i].content)
             memos[i].formatContent = md
             memos[i] = app.memosRescourse(memos[i])
           }
-          var arrMemos = app.memosArrenge(memos)
+          let arrMemos = app.memosArrenge(memos)
+          app.globalData.memos = arrMemos
           that.setData({
             memos: arrMemos
           })
-          app.globalData.memos = arrMemos
           if (time) {
-            let showMemos = []
-            for (let i = 0; i < arrMemos.length; i++) {
-              let day = app.fomaDay(arrMemos[i].createdTs * 1000)
-              if (day == time) {
-                showMemos.push(arrMemos[i])
+            let timeMemos = []
+            arrMemos.map((memo, index) => {
+              if (app.fomaDay(memo.createdTs * 1000) == time) {
+                timeMemos.push(arrMemos[index])
               }
-            }
+            })
             that.setData({
-              showMemos
+              showMemos: timeMemos
             })
           }
         }
@@ -375,9 +374,9 @@ Page({
       url: '../edit/index?edit=true',
       events: {
         // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
-        acceptDataFromOpenedPage: function (data, newMemo) {
+        acceptDataFromOpenedPage: function (type, newMemo) {
           // console.log(newMemo)
-          switch (data) {
+          switch (type) {
             case 'refresh':
               let showMemos = that.data.showMemos
               let memos = that.data.memos
@@ -385,12 +384,14 @@ Page({
                 if (memo.id == newMemo.id) {
                   memo.content = newMemo.content
                   memo.formatContent = formatMemoContent(newMemo.content)
+                  memo.time = app.calTime(memo.createdTs)
                 }
               })
               showMemos.map((memo, index) => {
                 if (memo.id == newMemo.id) {
                   memo.content = newMemo.content
                   memo.formatContent = formatMemoContent(newMemo.content)
+                  memo.time = app.calTime(memo.createdTs)
                 }
               })
 

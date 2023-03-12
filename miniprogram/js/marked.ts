@@ -78,7 +78,7 @@ const formatMemoContent = (content: string, addtionConfig?: Partial<FormatterCon
   return outputString
     .replace(MEMO_LINK_REG, "<span class='memo-link-text' data-value='$2'>$1</span>")
     .replace(LINK_URL_REG, "<a class='link' data-href='$2' href='$2'>$1</a>")
-    .replace(TAG_REG, "<span class='tag-span'>#$1</span> ");
+    .replace(TAG_REG, "<div class='tag-span'>#$1</div> ");
 };
 
 export { formatMemoContent, parseHtmlToRawText };

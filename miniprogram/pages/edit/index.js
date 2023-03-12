@@ -114,8 +114,7 @@ Page({
     })
   },
 
-  none() {
-  },
+  none() {},
 
   inputUserTag(e) {
     console.log(e.currentTarget.dataset.tag)
@@ -156,7 +155,7 @@ Page({
     })
   },
 
-  memoFocus(){
+  memoFocus() {
     wx.vibrateShort()
     this.setData({
       memoFocus: true
@@ -274,11 +273,10 @@ Page({
         // console.log(res)
         if (res.data) {
           wx.setStorageSync('memoDraft', '')
-          if (getCurrentPages().length > 1) {
-            let eventChannel = that.data.eventChannel
-            eventChannel.emit('acceptDataFromOpenedPage', 'refresh', res.data)
-            wx.navigateBack()
-          }
+          console.log('reff')
+          let eventChannel = that.data.eventChannel
+          eventChannel.emit('acceptDataFromOpenedPage', 'refresh', res.data)
+          wx.navigateBack()
         }
       })
       .catch((err) => console.log(err))
@@ -297,7 +295,7 @@ Page({
           wx.setStorageSync('memoDraft', '')
           if (getCurrentPages().length > 1) {
             let eventChannel = that.data.eventChannel
-            eventChannel.emit('acceptDataFromOpenedPage', 'refresh', res.data)
+            eventChannel.emit('acceptDataFromOpenedPage', 'add', res.data)
             wx.navigateBack()
           }
         } else {

@@ -60,6 +60,34 @@ export const getMe = (url, openId) => {
   })
 }
 
+export const getStats = (url, openId, creatorId) => {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: url + '/api/memo/stats',
+      data: {
+        creatorId
+      },
+      header: {
+        cookie: wx.getStorageSync("cookie")
+      },
+      success(res) {
+        if (res.header["Set-Cookie"]) {
+          wx.setStorageSync('cookie', res.header["Set-Cookie"])
+        }
+        resolve(res.data)
+      },
+      fail(err) {
+        wx.vibrateLong()
+        wx.showToast({
+          icon: 'none',
+          title: '获取失败',
+        })
+        reject(err)
+      }
+    })
+  })
+}
+
 export const sendMemo = (url, openId, content) => {
   return new Promise((resolve, reject) => {
     wx.request({
