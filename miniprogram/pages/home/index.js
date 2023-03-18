@@ -393,6 +393,19 @@ Page({
             onlineColor: '#eeeeee',
           })
         } else if (result.data.length == 0) {
+          if (that.data.memos.length == 0) {
+            that.setData({
+              memos: [],
+              storageMemos: [],
+              state: that.data.language.home.state.online,
+              onlineColor: '#07C160'
+            })
+            app.globalData.memos = arrMemos
+            wx.setStorage({
+              key: "memos",
+              data: []
+            })
+          }
           wx.showToast({
             icon: 'none',
             title: that.data.language.home.thatIsAll

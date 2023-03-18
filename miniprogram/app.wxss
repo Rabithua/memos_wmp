@@ -277,6 +277,7 @@ page {
 
 .memoCard .content {
   /* font-family: "Noto Serif SC"; */
+  white-space: pre-line;
   word-break: break-word;
   max-height: 800rpx;
   margin: 10rpx;
