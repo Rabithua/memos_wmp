@@ -65,7 +65,8 @@ export const getStats = (url, openId, creatorId) => {
     wx.request({
       url: url + '/api/memo/stats',
       data: {
-        creatorId
+        creatorId,
+        openId
       },
       header: {
         cookie: wx.getStorageSync("cookie")
