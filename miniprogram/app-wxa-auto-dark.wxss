@@ -8,115 +8,132 @@
  */
 
 @media (prefers-color-scheme: dark) {
-    page {
-        background: rgb(24, 24, 24);
+
+  .todo-block {
+    filter: invert(1);
+  }
+
+  .method {
+    filter: brightness(0.5);
+  }
+
+  .Tips {
+    filter: brightness(0.8);
+  }
+
+  page {
+    background: rgb(24, 24, 24);
+  }
+
+  .maskHeader {
+    background: linear-gradient(180deg, #222222 0%, #22222258 58.12%, #22222200 100%);
+  }
+
+  .searchIcon {
+    border: rgb(0, 0, 0);
+  }
+
+  .link {
+    color: rgb(48, 134, 247);
+  }
+
+  .quote {
+    color: #ffffff80;
+  }
+
+  .content .code {
+    background-color: rgb(24, 24, 24);
+    color: rgba(255, 255, 255, 0.5019607843137255);
+  }
+
+  .shortCode {
+    background-color: rgb(24, 24, 24);
+    color: rgb(255, 130, 104);
+  }
+
+  .tag-span {
+    color: rgb(48, 134, 247);
+  }
+
+  .img {
+    background-color: rgb(24, 24, 24);
+  }
+
+  .halfDialog {
+    box-shadow: rgb(0, 0, 0);
+    background: rgb(17, 17, 17);
+    box-shadow: rgb(0, 0, 0);
+  }
+
+  .title {
+    color: rgba(255, 255, 255, 0.5019607843137255);
+  }
+
+  .halfDialog textarea {
+    background: rgb(24, 24, 24);
+  }
+
+  .memoCard {
+    background: rgb(31, 31, 31);
+  }
+
+  .memoCard .time {
+    color: rgba(255, 255, 255, 0.18823529411764706);
+  }
+
+  .none {
+    color: rgba(255, 255, 255, 0.3137254901960784);
+  }
+
+  .memoCard .status {
+    color: rgba(255, 255, 255, 0.18823529411764706);
+  }
+
+  .memoCard .content {
+    color: rgb(211, 211, 211);
+  }
+
+  .orderlist-dot {
+    color: rgb(0, 105, 12);
+  }
+
+  @keyframes show {
+    from {
+      opacity: 0;
     }
 
-    .maskHeader {
-        background: linear-gradient(180deg, #222222 0%, #22222258 58.12%, #22222200 100%);
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes cardshow {
+    from {
+      transform: rotate3d(0, 1, 0, 30deg);
     }
 
-    .searchIcon {
-        border: rgb(0, 0, 0);
+    to {
+      transform: rotate3d(1, 0, 0, 0deg);
+    }
+  }
+
+  @keyframes up {
+    from {
+      transform: translateY(20rpx);
     }
 
-    .link {
-        color: rgb(48, 134, 247);
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes halfDialog {
+    from {
+      height: 100rpx;
     }
 
-    .content .code {
-        background-color: rgb(24, 24, 24);
-        color: rgba(255, 255, 255, 0.5019607843137255);
+    to {
+      height: 600rpx;
     }
-
-    .shortCode {
-        background-color: rgb(24, 24, 24);
-        color: rgb(255, 130, 104);
-    }
-
-    .tag-span {
-        color: rgb(48, 134, 247);
-    }
-
-    .img {
-        background-color: rgb(24, 24, 24);
-    }
-
-    .halfDialog {
-        box-shadow: rgb(0, 0, 0);
-        background: rgb(17, 17, 17);
-        box-shadow: rgb(0, 0, 0);
-    }
-
-    .title {
-        color: rgba(255, 255, 255, 0.5019607843137255);
-    }
-
-    .halfDialog textarea {
-        background: rgb(24, 24, 24);
-    }
-
-    .memoCard {
-        background: rgb(31, 31, 31);
-    }
-
-    .memoCard .time {
-        color: rgba(255, 255, 255, 0.18823529411764706);
-    }
-
-    .none {
-        color: rgba(255, 255, 255, 0.3137254901960784);
-    }
-
-    .memoCard .status {
-        color: rgba(255, 255, 255, 0.18823529411764706);
-    }
-
-    .memoCard .content {
-        color: rgb(211, 211, 211);
-    }
-
-    .orderlist-dot {
-        color: rgb(0, 105, 12);
-    }
-
-    @keyframes show {
-        from {
-            opacity: 0;
-        }
-
-        to {
-            opacity: 1;
-        }
-    }
-
-    @keyframes cardshow {
-        from {
-            transform: rotate3d(0, 1, 0, 30deg);
-        }
-
-        to {
-            transform: rotate3d(1, 0, 0, 0deg);
-        }
-    }
-
-    @keyframes up {
-        from {
-            transform: translateY(20rpx);
-        }
-
-        to {
-            transform: translateY(0);
-        }
-    }
-
-    @keyframes halfDialog {
-        from {
-            height: 100rpx;
-        }
-
-        to {
-            height: 600rpx;
-        }
-    }
+  }
 }

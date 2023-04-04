@@ -58,16 +58,33 @@ Page({
             that.setData({
               storageMemos: res.data
             })
-            that.getMemos(openId, 'NORMAL')
-            that.getMe(openId)
-            app.api.getTags(app.globalData.url, that.data.openId)
-              .then(res => {
-                that.setData({
-                  tags: res.data
-                })
-                wx.setStorageSync('tags', res.data)
+            let cookie = wx.getStorageSync('cookir')
+            if (app.isCookieExpired(cookie)) {
+              app.reqCookie().then(() => {
+                that.getMemos(openId, 'NORMAL')
+                that.getMe(openId)
+                app.api.getTags(app.globalData.url, that.data.openId)
+                  .then(res => {
+                    that.setData({
+                      tags: res.data
+                    })
+                    wx.setStorageSync('tags', res.data)
+                  })
+                  .catch((err) => console.log(err))
               })
-              .catch((err) => console.log(err))
+            } else {
+              that.getMemos(openId, 'NORMAL')
+              that.getMe(openId)
+              app.api.getTags(app.globalData.url, that.data.openId)
+                .then(res => {
+                  that.setData({
+                    tags: res.data
+                  })
+                  wx.setStorageSync('tags', res.data)
+                })
+                .catch((err) => console.log(err))
+            }
+
           },
           fail(err) {
             console.log(err)

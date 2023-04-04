@@ -8,13 +8,18 @@
  */
 
 @media (prefers-color-scheme: dark) {
-    .memoEditTextarea {
-        background-color: rgba(30, 30, 30);
-        border: rgb(0, 0, 0);
-        box-shadow: rgb(0, 0, 0);
-    }
 
-    .btns {
-        background-color: rgb(17, 17, 17);
-    }
+  .tagsList {
+    filter: brightness(0.5);
+  }
+
+  .memoEditTextarea {
+    background-color: rgba(30, 30, 30);
+    border: rgb(0, 0, 0);
+    box-shadow: rgb(0, 0, 0);
+  }
+
+  .btns {
+    background-color: rgb(17, 17, 17);
+  }
 }
