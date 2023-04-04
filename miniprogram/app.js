@@ -48,29 +48,48 @@ App({
 
     this.globalData.top_btn = wx.getMenuButtonBoundingClientRect()
 
-    let that = this
-    //请求csrf
-    function reqCookie() {
-      wx.showLoading({
-        title: '',
-      })
-      that.api.status(that.globalData.url).then((res) => {
-        console.log(res.header["Set-Cookie"])
-        wx.setStorageSync('cookie', res.header["Set-Cookie"])
-        wx.hideLoading()
-      })
-    }
+  },
 
-    //检查csrf
-    if (!wx.getStorageSync('cookie')) {
-      reqCookie()
-    } else {
-      let expires = wx.getStorageSync('cookie').match(/Expires=(.+?)($)/g)[0].substring(8)
-      let now = new Date().getTime()
-      if (now > new Date(expires).getTime()) {
-        reqCookie()
-      }
+  //请求csrf
+  reqCookie() {
+    let that = this
+    wx.showLoading({
+      title: '',
+    });
+    return new Promise((resolve, reject) => {
+      that.api.status(that.globalData.url).then((res) => {
+        const cookie = res.header["Set-Cookie"];
+        if (!cookie) {
+          reject(new Error('No cookie was returned')); // 没有设置 cookie
+        } else {
+          wx.setStorageSync('cookie', cookie);
+          wx.hideLoading();
+          resolve(cookie); // 返回设置的 cookie
+        }
+      }).catch((err) => {
+        wx.hideLoading();
+        reject(err); // 返回错误信息
+      });
+    });
+  },
+
+  //检查csrf
+  isCookieExpired(cookieStr) {
+    const cookies = cookieStr.split('; ');
+    const cookieData = {};
+    cookies.forEach(cookie => {
+      const [key, value] = cookie.split('=');
+      cookieData[key] = value;
+    });
+    const expiresStr = cookieData['Expires'];
+    if (!expiresStr) {
+      // 没有过期时间，cookie 没有过期
+      return false;
     }
+    const expires = new Date(expiresStr);
+    const now = new Date();
+    // 比较过期时间和当前时间
+    return expires.getTime() < now.getTime();
   },
 
   loadFont() {
