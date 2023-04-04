@@ -49,10 +49,6 @@
     color: rgb(0, 105, 12);
   }
 
-  .method {
-    filter: brightness(0.5);
-  }
-
   .todo {
     color: rgb(118, 51, 0);
   }

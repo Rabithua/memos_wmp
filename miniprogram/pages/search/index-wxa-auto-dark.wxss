@@ -12,10 +12,6 @@
     background: rgb(24, 24, 24);
   }
 
-  .method {
-    filter: brightness(0.5);
-  }
-
   input {
     background-color: rgb(50, 50, 50)!important;
   }

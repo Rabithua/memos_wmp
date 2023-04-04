@@ -164,7 +164,7 @@ App({
     for (let l = 0; l < memo.resourceList.length; l++) {
       const rescource = memo.resourceList[l];
       const rescource_name = rescource.filename
-      let rescource_url = this.globalData.url + '/o/r/' + rescource.id + '/' + rescource_name
+      let rescource_url = this.globalData.url + '/o/r/' + rescource.id + '/' + rescource.publicId
       if (rescource.externalLink) {
         rescource_url = rescource.externalLink
       }
