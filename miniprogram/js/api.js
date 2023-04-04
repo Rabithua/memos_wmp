@@ -49,11 +49,11 @@ export const getMe = (url, openId) => {
         resolve(res.data)
       },
       fail(err) {
-        // wx.vibrateLong()
-        // wx.showToast({
-        //   icon: 'none',
-        //   title: '获取失败',
-        // })
+        wx.vibrateLong()
+        wx.showToast({
+          icon: 'none',
+          title: '获取失败',
+        })
         reject(err)
       }
     })
@@ -78,11 +78,11 @@ export const getStats = (url, openId, creatorId) => {
         resolve(res.data)
       },
       fail(err) {
-        // wx.vibrateLong()
-        // wx.showToast({
-        //   icon: 'none',
-        //   title: '获取失败',
-        // })
+        wx.vibrateLong()
+        wx.showToast({
+          icon: 'none',
+          title: '获取失败',
+        })
         reject(err)
       }
     })
@@ -296,11 +296,11 @@ export const getTags = (url, openId) => {
         resolve(res.data)
       },
       fail(err) {
-        // wx.vibrateLong()
-        // wx.showToast({
-        //   icon: 'none',
-        //   title: '获取失败',
-        // })
+        wx.vibrateLong()
+        wx.showToast({
+          icon: 'none',
+          title: '获取失败',
+        })
         reject(err)
       }
     })
@@ -321,11 +321,11 @@ export const getTagsSuggestionList = (url, openId) => {
         resolve(res.data)
       },
       fail(err) {
-        // wx.vibrateLong()
-        // wx.showToast({
-        //   icon: 'none',
-        //   title: '获取失败',
-        // })
+        wx.vibrateLong()
+        wx.showToast({
+          icon: 'none',
+          title: '获取失败',
+        })
         reject(err)
       }
     })
@@ -350,11 +350,11 @@ export const upsertTag = (url, openId, TagName) => {
         resolve(res.data)
       },
       fail(err) {
-        // wx.vibrateLong()
-        // wx.showToast({
-        //   icon: 'none',
-        //   title: '获取失败',
-        // })
+        wx.vibrateLong()
+        wx.showToast({
+          icon: 'none',
+          title: '获取失败',
+        })
         reject(err)
       }
     })
@@ -401,11 +401,11 @@ export const status = (url) => {
         resolve(res)
       },
       fail(err) {
-        // wx.vibrateLong()
-        // wx.showToast({
-        //   icon: 'none',
-        //   title: '获取失败',
-        // })
+        wx.vibrateLong()
+        wx.showToast({
+          icon: 'none',
+          title: '获取失败',
+        })
         reject(err)
       }
     })
@@ -420,11 +420,11 @@ export const getExploreMemos = (url, offset, limit) => {
         resolve(res.data)
       },
       fail(err) {
-        // wx.vibrateLong()
-        // wx.showToast({
-        //   icon: 'none',
-        //   title: '获取失败',
-        // })
+        wx.vibrateLong()
+        wx.showToast({
+          icon: 'none',
+          title: '获取失败',
+        })
         reject(err)
       }
     })
