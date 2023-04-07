@@ -1,14 +1,19 @@
 <!--pages/welcom/index.wxml-->
 <view class="maskHeader"></view>
 <view class="changeIcon" style="height:{{top_btn.height}}px;width:{{top_btn.height}}px; margin: {{top_btn.top}}px 60rpx 30rpx 50rpx; right: {{top_btn.width}}px;" catchtap="changeLanguage"></view>
+<view hidden="{{dogDanceNum < 12}}" bindlongtap="hidenDogDance" class="canvas_container">
+  <canvas class="canvas" id="canvas" type="2d"></canvas>
+</view>
 <view class="container">
   <view class="main">
     <view class="piecs"></view>
-    <text class="slogan">{{language.welcom.secondTitle}}</text>
     <view class="welcom">
       <text class="content">{{language.welcom.headTitle}}</text>
+      <image bindtap="dog" wx:if="{{webInfo.host.avatarUrl}}" src="{{webInfo.host.avatarUrl}}" class="avatar" mode="aspectFill"/>
     </view>
+    <text class="slogan">{{language.welcom.secondTitle}}</text>
     <text class="dsc">{{language.welcom.dsc}}</text>
+    <text class="dsc" style="color: #fca417;">{{language.welcom.webVersion}}{{webInfo.profile.version ? webInfo.profile.version : "UNKNOWN"}}</text>
     <view class="form">
       <text class="title">{{language.welcom.username}}</text>
       <input cursor-spacing='100' confirm-type="next" focus type="text" placeholder="{{language.welcom.usernamePlaceholder}}" confirm-type="done" bindinput='nothing' model:value="{{username}}" />

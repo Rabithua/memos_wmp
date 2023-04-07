@@ -14,15 +14,15 @@ export const getMemos = (url, openId, limit, offset, rowStatus) => {
     wx.request({
       url: `${url}/api/memo`,
       data,
-      header: {
-        cookie: wx.getStorageSync("cookie")
-      },
+      // header: {
+      //   cookie: wx.getStorageSync("cookie")
+      // },
       success(res) {
-        // console.log(res.data)
+        console.log(res)
         // console.log('直接api')
-        if (res.header["Set-Cookie"]) {
-          wx.setStorageSync('cookie', res.header["Set-Cookie"])
-        }
+        // if (res.header["Set-Cookie"]) {
+        //   wx.setStorageSync('cookie', res.header["Set-Cookie"])
+        // }
         resolve(res.data)
       },
       fail(err) {
@@ -39,13 +39,13 @@ export const getMe = (url, openId) => {
       data: {
         'openId': openId
       },
-      header: {
-        cookie: wx.getStorageSync("cookie")
-      },
+      // header: {
+      //   cookie: wx.getStorageSync("cookie")
+      // },
       success(res) {
-        if (res.header["Set-Cookie"]) {
-          wx.setStorageSync('cookie', res.header["Set-Cookie"])
-        }
+        // if (res.header["Set-Cookie"]) {
+        //   wx.setStorageSync('cookie', res.header["Set-Cookie"])
+        // }
         resolve(res.data)
       },
       fail(err) {
@@ -68,13 +68,13 @@ export const getStats = (url, openId, creatorId) => {
         creatorId,
         openId
       },
-      header: {
-        cookie: wx.getStorageSync("cookie")
-      },
+      // header: {
+      //   cookie: wx.getStorageSync("cookie")
+      // },
       success(res) {
-        if (res.header["Set-Cookie"]) {
-          wx.setStorageSync('cookie', res.header["Set-Cookie"])
-        }
+        // if (res.header["Set-Cookie"]) {
+        //   wx.setStorageSync('cookie', res.header["Set-Cookie"])
+        // }
         resolve(res.data)
       },
       fail(err) {
@@ -97,14 +97,14 @@ export const sendMemo = (url, openId, content) => {
       data: {
         content: content
       },
-      header: {
-        cookie: wx.getStorageSync("cookie")
-      },
+      // header: {
+      //   cookie: wx.getStorageSync("cookie")
+      // },
       success(res) {
         // console.log(res)
-        if (res.header["Set-Cookie"]) {
-          wx.setStorageSync('cookie', res.header["Set-Cookie"])
-        }
+        // if (res.header["Set-Cookie"]) {
+        //   wx.setStorageSync('cookie', res.header["Set-Cookie"])
+        // }
         resolve(res.data)
       },
       fail(err) {
@@ -126,13 +126,13 @@ export const signUp = (url, data) => {
       url: url + '/api/auth/signup',
       method: "POST",
       data: data,
-      header: {
-        cookie: wx.getStorageSync("cookie")
-      },
+      // header: {
+      //   cookie: wx.getStorageSync("cookie")
+      // },
       success(res) {
-        if (res.header["Set-Cookie"]) {
-          wx.setStorageSync('cookie', res.header["Set-Cookie"])
-        }
+        // if (res.header["Set-Cookie"]) {
+        //   wx.setStorageSync('cookie', res.header["Set-Cookie"])
+        // }
         resolve(res.data)
       },
       fail(err) {
@@ -152,13 +152,13 @@ export const deleteMemo = (url, openId, memoId) => {
     wx.request({
       url: url + '/api/memo/' + memoId + '?openId=' + openId,
       method: "DELETE",
-      header: {
-        cookie: wx.getStorageSync("cookie")
-      },
+      // header: {
+      //   cookie: wx.getStorageSync("cookie")
+      // },
       success(res) {
-        if (res.header["Set-Cookie"]) {
-          wx.setStorageSync('cookie', res.header["Set-Cookie"])
-        }
+        // if (res.header["Set-Cookie"]) {
+        //   wx.setStorageSync('cookie', res.header["Set-Cookie"])
+        // }
         resolve(res.data)
       },
       fail(err) {
@@ -179,13 +179,13 @@ export const editMemo = (url, openId, memoId, data) => {
       url: url + '/api/memo/' + memoId + '?openId=' + openId,
       method: "PATCH",
       data: data,
-      header: {
-        cookie: wx.getStorageSync("cookie")
-      },
+      // header: {
+      //   cookie: wx.getStorageSync("cookie")
+      // },
       success(res) {
-        if (res.header["Set-Cookie"]) {
-          wx.setStorageSync('cookie', res.header["Set-Cookie"])
-        }
+        // if (res.header["Set-Cookie"]) {
+        //   wx.setStorageSync('cookie', res.header["Set-Cookie"])
+        // }
         resolve(res.data)
       },
       fail(err) {
@@ -206,13 +206,13 @@ export const changeUserSetting = (url, openId, data) => {
       url: url + '/api/user/setting?openId=' + openId,
       method: "POST",
       data: data,
-      header: {
-        cookie: wx.getStorageSync("cookie")
-      },
+      // header: {
+      //   cookie: wx.getStorageSync("cookie")
+      // },
       success(res) {
-        if (res.header["Set-Cookie"]) {
-          wx.setStorageSync('cookie', res.header["Set-Cookie"])
-        }
+        // if (res.header["Set-Cookie"]) {
+        //   wx.setStorageSync('cookie', res.header["Set-Cookie"])
+        // }
         resolve(res.data)
       },
       fail(err) {
@@ -233,13 +233,13 @@ export const changeMemoPinned = (url, openId, memoId, data) => {
       url: url + '/api/memo/' + memoId + '/organizer' + '?openId=' + openId,
       method: "POST",
       data: data,
-      header: {
-        cookie: wx.getStorageSync("cookie")
-      },
+      // header: {
+      //   cookie: wx.getStorageSync("cookie")
+      // },
       success(res) {
-        if (res.header["Set-Cookie"]) {
-          wx.setStorageSync('cookie', res.header["Set-Cookie"])
-        }
+        // if (res.header["Set-Cookie"]) {
+        //   wx.setStorageSync('cookie', res.header["Set-Cookie"])
+        // }
         resolve(res.data)
       },
       fail(err) {
@@ -261,13 +261,13 @@ export const signIn = (url, data) => {
       url: url + '/api/auth/signin',
       method: "POST",
       data: data,
-      header: {
-        cookie: wx.getStorageSync("cookie")
-      },
+      // header: {
+      //   cookie: wx.getStorageSync("cookie")
+      // },
       success(res) {
-        if (res.header["Set-Cookie"]) {
-          wx.setStorageSync('cookie', res.header["Set-Cookie"])
-        }
+        // if (res.header["Set-Cookie"]) {
+        //   wx.setStorageSync('cookie', res.header["Set-Cookie"])
+        // }
         resolve(res.data)
       },
       fail(err) {
@@ -286,13 +286,13 @@ export const getTags = (url, openId) => {
   return new Promise((resolve, reject) => {
     wx.request({
       url: url + '/api/tag?openId=' + openId,
-      header: {
-        cookie: wx.getStorageSync("cookie")
-      },
+      // header: {
+      //   cookie: wx.getStorageSync("cookie")
+      // },
       success(res) {
-        if (res.header["Set-Cookie"]) {
-          wx.setStorageSync('cookie', res.header["Set-Cookie"])
-        }
+        // if (res.header["Set-Cookie"]) {
+        //   wx.setStorageSync('cookie', res.header["Set-Cookie"])
+        // }
         resolve(res.data)
       },
       fail(err) {
@@ -311,13 +311,13 @@ export const getTagsSuggestionList = (url, openId) => {
   return new Promise((resolve, reject) => {
     wx.request({
       url: url + '/api/tag/suggestion?openId=' + openId,
-      header: {
-        cookie: wx.getStorageSync("cookie")
-      },
+      // header: {
+      //   cookie: wx.getStorageSync("cookie")
+      // },
       success(res) {
-        if (res.header["Set-Cookie"]) {
-          wx.setStorageSync('cookie', res.header["Set-Cookie"])
-        }
+        // if (res.header["Set-Cookie"]) {
+        //   wx.setStorageSync('cookie', res.header["Set-Cookie"])
+        // }
         resolve(res.data)
       },
       fail(err) {
@@ -337,16 +337,16 @@ export const upsertTag = (url, openId, TagName) => {
     wx.request({
       url: url + '/api/tag?openId=' + openId,
       method: "POST",
-      header: {
-        cookie: wx.getStorageSync("cookie")
-      },
+      // header: {
+      //   cookie: wx.getStorageSync("cookie")
+      // },
       data: {
         name: TagName
       },
       success(res) {
-        if (res.header["Set-Cookie"]) {
-          wx.setStorageSync('cookie', res.header["Set-Cookie"])
-        }
+        // if (res.header["Set-Cookie"]) {
+        //   wx.setStorageSync('cookie', res.header["Set-Cookie"])
+        // }
         resolve(res.data)
       },
       fail(err) {
@@ -366,16 +366,16 @@ export const deleteTag = (url, openId, TagName) => {
     wx.request({
       url: url + '/api/tag/delete?openId=' + openId,
       method: "POST",
-      header: {
-        cookie: wx.getStorageSync("cookie")
-      },
+      // header: {
+      //   cookie: wx.getStorageSync("cookie")
+      // },
       data: {
         name: TagName
       },
       success(res) {
-        if (res.header["Set-Cookie"]) {
-          wx.setStorageSync('cookie', res.header["Set-Cookie"])
-        }
+        // if (res.header["Set-Cookie"]) {
+        //   wx.setStorageSync('cookie', res.header["Set-Cookie"])
+        // }
         resolve(res.data)
       },
       fail(err) {
@@ -395,9 +395,9 @@ export const status = (url) => {
     wx.request({
       url: url + '/api/status',
       success(res) {
-        if (res.header["Set-Cookie"]) {
-          wx.setStorageSync('cookie', res.header["Set-Cookie"])
-        }
+        // if (res.header["Set-Cookie"]) {
+        //   wx.setStorageSync('cookie', res.header["Set-Cookie"])
+        // }
         resolve(res)
       },
       fail(err) {

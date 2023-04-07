@@ -31,8 +31,6 @@
     "enableEngineNative": false,
     "useIsolateContext": true,
     "userConfirmedBundleSwitch": false,
-    "packNpmManually": false,
-    "packNpmRelationList": [],
     "minifyWXSS": true,
     "disableUseStrict": false,
     "showES6CompileOption": false,
@@ -41,7 +39,14 @@
     ],
     "minifyWXML": true,
     "ignoreUploadUnusedFiles": false,
-    "condition": false
+    "condition": false,
+    "packNpmManually": true,
+    "packNpmRelationList": [
+      {
+        "packageJsonPath": "/package.json",
+        "miniprogramNpmDistDir": "./miniprogram"
+      }
+    ]
   },
   "appid": "wx93424d86ffa7d6ac",
   "projectname": "memos",

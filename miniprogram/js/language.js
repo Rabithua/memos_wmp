@@ -24,7 +24,8 @@ export const chinese = {
     nothing: '这是一片无人的荒原🪐'
   },
   welcom: {
-    headTitle: '欢迎来到麦默👋',
+    webVersion: '线上版本：',
+    headTitle: '欢迎来到麦默',
     secondTitle: '把脑袋里的小碎片收集起来✨',
     dsc: '麦默是 Github 开源项目 usememos/memos 的小程序版本，同样的，麦默 Rabithua/memos_wmp 也是开源的！',
     username: '用户名',
@@ -155,7 +156,8 @@ export const english = {
     nothing: "There's nothing here 🪐"
   },
   welcom: {
-    headTitle: 'Welcom Maimo👋',
+    webVersion: 'WebVersion:',
+    headTitle: 'Welcom Maimo',
     secondTitle: 'Collect the small pieces in your head.✨',
     dsc: 'Maimo is a WechatMiniProgram version of Github\'s open source project usememos/memos. Similarly, Maimo Rabithua/memos_wmp is also open source!',
     username: 'Username',
