@@ -3,6 +3,37 @@ page {
   background-color: #ffffff;
 }
 
+#canvas {
+  width: 300px;
+  height: 300px;
+}
+
+.canvas_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 10;
+  animation: change-colors 3s infinite;
+  overflow: hidden;
+  border-radius: 40rpx;
+  left: 0;
+  top: 0;
+}
+
+.avatar {
+  width: 60rpx;
+  height: 60rpx;
+  transition: 500ms;
+  transform: scale(2.5);
+}
+
+.avatar:active {
+  transform: scale(5);
+}
+
 .btn {
   width: 100%;
   padding: 7rpx 14rpx;
@@ -11,7 +42,7 @@ page {
   line-height: 70rpx;
   background: #f5f5f5;
   color: #FCA417;
-  display:block;
+  display: block;
   text-align: center;
 }
 
@@ -82,7 +113,7 @@ page::before {
   width: 80%;
   display: flex;
   align-items: center;
-  gap: 25px;
+  gap: 30rpx;
   font-size: 60rpx;
   margin: 0rpx auto 20rpx auto;
 }
@@ -120,7 +151,6 @@ page::before {
   font-size: 30rpx;
   letter-spacing: 1rpx;
   padding: 10rpx;
-  background-color: #ffffff30;
   border-radius: 30rpx;
   color: #00000050;
   margin: auto;
@@ -167,6 +197,28 @@ input:focus {
 
   to {
     transform: translateY(-10rpx);
+  }
+}
+
+@keyframes change-colors {
+  0% {
+    background-color: red;
+  }
+
+  25% {
+    background-color: green;
+  }
+
+  50% {
+    background-color: blue;
+  }
+
+  75% {
+    background-color: chocolate
+  }
+
+  100% {
+    background-color: purple;
   }
 }
 
