@@ -1,0 +1,23 @@
+{
+  "name": "memos",
+  "version": "1.0.0",
+  "description": "<h1 align='center'>麦默</h1>",
+  "main": "index.js",
+  "dependencies": {
+    "lottie-miniprogram": "^1.0.12"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rabithua/memos_wmp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rabithua/memos_wmp/issues"
+  },
+  "homepage": "https://github.com/Rabithua/memos_wmp#readme"
+}
