@@ -471,18 +471,18 @@ Page({
           }
         }
       }
-    } else if (item.key == "memoVisibility") {
+    } else if (item.key == "memo-visibility") {
       if (item.value == "\"PRIVATE\"") {
         item.value = "\"PUBLIC\""
         for (let i = 0; i < me.userSettingList.length; i++) {
-          if (me.userSettingList[i].key == 'memoVisibility') {
+          if (me.userSettingList[i].key == 'memo-visibility') {
             me.userSettingList[i].value = "\"PUBLIC\""
           }
         }
       } else {
         item.value = "\"PRIVATE\""
         for (let i = 0; i < me.userSettingList.length; i++) {
-          if (me.userSettingList[i].key == 'memoVisibility') {
+          if (me.userSettingList[i].key == 'memo-visibility') {
             me.userSettingList[i].value = "\"PRIVATE\""
           }
         }
@@ -532,13 +532,11 @@ Page({
         let me = result.data
         that.getStats(me.id)
         let defaultUserSettingList = [{
-            UserID: result.data.id,
             key: 'locale',
             value: "\"en\""
           },
           {
-            UserID: result.data.id,
-            key: 'memoVisibility',
+            key: 'memo-visibility',
             value: "\"PRIVATE\""
           }
         ]
