@@ -71,7 +71,7 @@ Page({
           },
           fail(err) {
             console.log(err)
-            that.getMemos(openId, that.data.rowStatus)
+            that.getMemos(openId, 'NORMAL')
             that.getMe(openId)
             app.api.getTags(that.data.url, that.data.openId)
               .then(res => {
