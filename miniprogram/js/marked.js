@@ -18,7 +18,7 @@ const MEMO_LINK_REG = /@\[(.+?)\]\((.+?)\)/g;
 const TITLE_TEXT_REG = /(^|\n)#{1,6}\s(.+)/g;
 const BLOCKQUOTE_REG = /[\n]*> (.+?)(?:\r?\n|$)/g;
 
-const parseMarkedToHtml = (markedStr: string): string => {
+const parseMarkedToHtml = (markedStr) => {
   const htmlText = markedStr
     // 注释自动在英文和中文间添加空格的正则
     // .replace(/([\u4e00-\u9fa5])([A-Za-z0-9?.,;[\]]+)/g, "$1 $2")
@@ -47,7 +47,7 @@ const parseMarkedToHtml = (markedStr: string): string => {
   return htmlText;
 };
 
-const parseHtmlToRawText = (htmlStr: string): string => {
+const parseHtmlToRawText = (htmlStr) => {
   const tempEl = document.createElement("div");
   tempEl.className = "memo-content-text";
   tempEl.innerHTML = htmlStr;
@@ -55,14 +55,11 @@ const parseHtmlToRawText = (htmlStr: string): string => {
   return text;
 };
 
-interface FormatterConfig {
-  inlineImage: boolean;
-}
-const defaultFormatterConfig: FormatterConfig = {
+const defaultFormatterConfig = {
   inlineImage: false,
 };
 
-const formatMemoContent = (content: string, addtionConfig?: Partial<FormatterConfig>) => {
+const formatMemoContent = (content, addtionConfig) => {
   const config = {
     ...defaultFormatterConfig,
     ...addtionConfig,
