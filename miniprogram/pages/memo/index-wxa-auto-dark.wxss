@@ -1,0 +1,14 @@
+/* 
+此文件为开发者工具生成，生成时间: 2023/4/25下午3:28:37
+使用方法：
+在 index.wxss 文件末尾引入样式
+```
+@import "./index-wxa-auto-dark.wxss";
+```
+ */
+
+@media (prefers-color-scheme: dark) {
+    .shareBtn {
+        background: rgb(17, 17, 17);
+    }
+}

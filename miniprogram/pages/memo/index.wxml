@@ -1,0 +1,29 @@
+<!--pages/memo/index.wxml-->
+
+<view wx:if="{{memo}}" class="memoCard" style="margin-bottom: 50rpx;">
+  <text class="time">{{memo.time}}</text>
+  <text class="status">@{{memo.creatorName}}</text>
+  <view class="content" style="max-height: fit-content;">
+    <rich-text data-content="{{memo.content}}" user-select nodes="{{memo.formatContent}}"></rich-text>
+  </view>
+  <view class="imgList">
+    <image class="img" catchtap="preview" data-src="{{image.url}}" data-url="{{memo.imgList_preview}}" lazy-load mode="aspectFill" wx:key="image" wx:for="{{memo.imgList_preview}}" wx:for-item="image" src="{{image.url}}"></image>
+  </view>
+  <view class="fileList">
+    <view class="file" wx:for="{{memo.fileList_preview}}" wx:key="file" wx:for-item="file" data-url="{{file.url}}" catchtap="copy">{{file.name}}</view>
+  </view>
+</view>
+
+<view wx:else class="nothing">
+  <view class="face">
+  </view>
+  <view>
+    Memo未公开
+  </view>
+</view>
+
+<button class="shareBtn" open-type="share">
+  <view class="shareIcon">
+  </view>
+  分享
+</button>
