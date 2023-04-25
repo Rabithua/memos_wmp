@@ -82,6 +82,7 @@ Page({
   },
 
   onShow() {
+    this.hideSidebar()
     this.setData({
       language: app.language[wx.getStorageSync('language') ? wx.getStorageSync('language') : 'chinese']
     })
