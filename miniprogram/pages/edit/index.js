@@ -75,37 +75,21 @@ Page({
       }
     })
 
-    this.setData({
-      language: app.language.english
-    })
-    wx.getStorage({
-      key: "language",
-      success(res) {
-        if (res.data == 'chinese') {
-          that.setData({
-            language: app.language.chinese
-          })
-        }
-        if (o.edit) {
-          wx.setNavigationBarTitle({
-            title: that.data.language.edit.pageTitle_edit
-          })
-          that.setData({
-            memoFocus: true
-          })
-        } else {
-          wx.setNavigationBarTitle({
-            title: that.data.language.edit.pageTitle_add
-          })
-          that.setData({
-            memoFocus: true
-          })
-        }
-      },
-      fail(err) {
-        console.log(err)
-      }
-    })
+    if (o.edit) {
+      wx.setNavigationBarTitle({
+        title: that.data.language.edit.pageTitle_edit
+      })
+      that.setData({
+        memoFocus: true
+      })
+    } else {
+      wx.setNavigationBarTitle({
+        title: that.data.language.edit.pageTitle_add
+      })
+      that.setData({
+        memoFocus: true
+      })
+    }
   },
 
   setTapPoint(e) {
@@ -323,7 +307,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    this.setData({
+      language: app.language[wx.getStorageSync('language') ? wx.getStorageSync('language') : 'chinese']
+    })
   },
 
   /**

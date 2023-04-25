@@ -18,12 +18,12 @@
   <view class="face">
   </view>
   <view>
-    Memo未公开
+    {{language.memo.unSee}}
   </view>
 </view>
 
 <button class="shareBtn" open-type="share">
   <view class="shareIcon">
   </view>
-  分享
+  {{language.memo.share}}
 </button>

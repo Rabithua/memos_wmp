@@ -23,6 +23,10 @@ export const chinese = {
     pageTitle: '探索✨',
     nothing: '这是一片无人的荒原🪐'
   },
+  memo:{
+    share: "分享",
+    unSee: "Memo不可见"
+  },
   welcom: {
     webVersion: '线上版本：',
     headTitle: '欢迎来到麦默',
@@ -154,6 +158,10 @@ export const english = {
   explore:{
     pageTitle: 'Explore✨',
     nothing: "There's nothing here 🪐"
+  },
+  memo:{
+    share: "Share",
+    unSee: "Memo is hidden"
   },
   welcom: {
     webVersion: 'WebVersion:',

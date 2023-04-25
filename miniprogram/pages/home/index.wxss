@@ -49,7 +49,7 @@ page {
 .sidebar .user .name {
   font-size: 50rpx;
   max-width: 300rpx;
-  overflow: scroll;
+  overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }

@@ -70,14 +70,16 @@ Page({
   },
 
   onShow() {
-
+    this.setData({
+      language: app.language[wx.getStorageSync('language') ? wx.getStorageSync('language') : 'chinese']
+    })
   },
 
   onShareAppMessage() {
     return {
       title: this.data.memo.creatorName,
       path: `/pages/memo/index?id=${this.data.id}`,
-      imageUrl:'https://img.rabithua.club/%E9%BA%A6%E9%BB%98/memoShare.png'
+      imageUrl: 'https://img.rabithua.club/%E9%BA%A6%E9%BB%98/memoShare.png'
     }
   }
 })

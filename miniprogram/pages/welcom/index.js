@@ -22,27 +22,11 @@ Page({
       url: app.globalData.url,
       username: '',
       password: '',
-      btnDisable: false,
-      language: app.language.chinese
+      btnDisable: false
     })
 
     //请求csrf
     this.reqCookie()
-
-    wx.getStorage({
-      key: "language",
-      success(res) {
-        if (res.data == 'chinese') {
-          that.setData({
-            language: app.language.chinese
-          })
-        }
-      },
-      fail(err) {
-        console.log(err)
-      }
-    })
-
   },
 
   reqCookie() {
@@ -379,11 +363,10 @@ Page({
     }).exec()
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow() {
-
+    this.setData({
+      language: app.language[wx.getStorageSync('language') ? wx.getStorageSync('language') : 'chinese']
+    })
   },
 
   /**

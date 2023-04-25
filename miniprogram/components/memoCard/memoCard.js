@@ -60,6 +60,12 @@ Component({
         current: e.target.dataset.src, // 当前显示图片的 http 链接
         urls: url // 需要预览的图片 http 链接列表
       })
+    },
+    goMemo(e){
+      console.log(e.target.dataset.memoid)
+      wx.navigateTo({
+        url: `/pages/memo/index?id=${e.target.dataset.memoid}`,
+      })
     }
   }
 })

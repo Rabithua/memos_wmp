@@ -289,6 +289,19 @@ page {
   line-height: 1.5;
 }
 
+.memoCard .file {
+  background-color: #ffca2730;
+  border: 4rpx dashed #ffca27;
+  padding: 10rpx 20rpx;
+  display: inline-flex;
+  border-radius: 10rpx;
+  margin: 10rpx;
+}
+
+.file::before {
+  content: '🔗';
+}
+
 .counter-block {
   display: flex;
   align-content: center;
