@@ -452,15 +452,16 @@ Page({
   changeUserSetting(e) {
     console.log(e.currentTarget.dataset.item)
     let item = e.currentTarget.dataset.item
+    delete item.UserID
     let me = this.data.me
     let that = this
     wx.vibrateShort()
     if (item.key == 'locale') {
       if (item.value == "\"en\"") {
-        item.value = "\"zh\""
+        item.value = "\"zh-Hans\""
         for (let i = 0; i < me.userSettingList.length; i++) {
           if (me.userSettingList[i].key == 'locale') {
-            me.userSettingList[i].value = "\"zh\""
+            me.userSettingList[i].value = "\"zh-Hans\""
           }
         }
       } else {
@@ -501,7 +502,7 @@ Page({
           this.setData({
             me: me
           })
-          if (item.value == "\"zh\"") {
+          if (item.value == "\"zh-Hans\"") {
             wx.setStorageSync('language', 'chinese')
             this.setData({
               language: app.language.chinese,
@@ -545,7 +546,7 @@ Page({
           for (let i = 0; i < me.userSettingList.length; i++) {
             if (me.userSettingList[i].key == defaultUserSettingList[j].key) {
               defaultUserSettingList[j] = me.userSettingList[i]
-              if (me.userSettingList[i].value == '\"zh\"') {
+              if (me.userSettingList[i].value == '\"zh-Hans\"') {
                 wx.setStorageSync('language', 'chinese')
                 that.setData({
                   language: app.language.chinese,
