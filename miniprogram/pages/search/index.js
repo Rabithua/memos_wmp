@@ -14,7 +14,7 @@ Page({
     tagsSuggestionList: [],
     showMemos: [],
     memos: [],
-    limit: 200
+    limit: 200,
   },
 
   onLoad(o) {
@@ -23,7 +23,6 @@ Page({
       top_btn: app.globalData.top_btn,
       url: app.globalData.url,
       openId: app.globalData.openId,
-      language: app.language.english
     })
     // console.log(this)
     app.api.getTags(this.data.url, this.data.openId)
@@ -40,20 +39,6 @@ Page({
     } else {
       that.getMemos()
     }
-
-    wx.getStorage({
-      key: "language",
-      success(res) {
-        if (res.data == 'chinese') {
-          that.setData({
-            language: app.language.chinese
-          })
-        }
-      },
-      fail(err) {
-        console.log(err)
-      }
-    })
   },
 
   getMemos(time) {
@@ -464,11 +449,10 @@ Page({
     }
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow() {
-
+    this.setData({
+      language: app.language[wx.getStorageSync('language') ? wx.getStorageSync('language') : 'chinese']
+    })
   },
 
   /**

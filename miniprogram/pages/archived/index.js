@@ -24,25 +24,6 @@ Page({
       top_btn: app.globalData.top_btn
     })
     wx.getStorage({
-      key: "language",
-      success(res) {
-        if (res.data == 'chinese') {
-          that.setData({
-            language: app.language.chinese
-          })
-        } else {
-          that.setData({
-            language: app.language.english
-          })
-        }
-      },
-      fail(err) {
-        that.setData({
-          language: app.language.chinese
-        })
-      }
-    })
-    wx.getStorage({
       key: "openId",
       // encrypt: true,
       success(res) {
@@ -225,6 +206,12 @@ Page({
 
   onReachBottom() {
 
+  },
+
+  onShow() {
+    this.setData({
+      language: app.language[wx.getStorageSync('language') ? wx.getStorageSync('language') : 'chinese']
+    })
   },
 
   /**

@@ -2,6 +2,12 @@
 App({
   api: require('/js/api'),
   language: require('/js/language'),
+
+  globalData: {
+    url: 'https://memos.wowow.club',
+    top_btn: null,
+    top_btn: wx.getMenuButtonBoundingClientRect()
+  },
   onLaunch: function (options) {
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力');
@@ -40,13 +46,6 @@ App({
       source: 'https://img.rabithua.club/%E9%BA%A6%E9%BB%98/SmileySans-Oblique.ttf',
       scopes: ['webview', 'native'],
     });
-
-    this.globalData = {
-      url: 'https://memos.wowow.club',
-      top_btn: null,
-    }
-
-    this.globalData.top_btn = wx.getMenuButtonBoundingClientRect()
 
   },
 

@@ -27,26 +27,6 @@ Page({
     this.setData({
       top_btn: app.globalData.top_btn
     })
-    wx.getStorage({
-      key: "language",
-      success(res) {
-        if (res.data == 'chinese') {
-          that.setData({
-            language: app.language.chinese
-          })
-        }else {
-          that.setData({
-            language: app.language.english
-          })
-        }
-      },
-      fail(err) {
-        console.log(err)
-        that.setData({
-          language: app.language.chinese
-        })
-      }
-    })
     this.getExploreMemos()
   },
 
@@ -90,11 +70,10 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow() {
-
+    this.setData({
+      language: app.language[wx.getStorageSync('language') ? wx.getStorageSync('language') : 'chinese']
+    })
   },
 
   /**

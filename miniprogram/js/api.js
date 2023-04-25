@@ -18,6 +18,24 @@ export const getMemos = (url, openId, limit, offset, rowStatus) => {
       //   cookie: wx.getStorageSync("cookie")
       // },
       success(res) {
+        resolve(res.data)
+      },
+      fail(err) {
+        reject(err)
+      }
+    })
+  })
+}
+
+export const getMemo = (url, id,openId) => {
+  return new Promise((resolve, reject) => {
+    console.log(wx.getStorageSync("cookie"))
+    wx.request({
+      url: `${url}/api/memo/${id}`,
+      header: {
+        cookie: wx.getStorageSync("cookie"),
+      },
+      success(res) {
         console.log(res)
         // console.log('直接api')
         // if (res.header["Set-Cookie"]) {

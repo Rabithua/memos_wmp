@@ -87,7 +87,7 @@
     </view>
     <view class="setting">
       <view class="item" wx:for="{{me.userSettingList}}" wx:key="userSettingList" data-item="{{userSettingList}}" wx:for-item="userSettingList" catchtap="changeUserSetting">
-        {{userSettingList.key == 'memoVisibility'? language.home.sideBar.memoVisibility:userSettingList.key == 'locale'?language.home.sideBar.locale:userSettingList.key}}
+        {{userSettingList.key == 'memo-visibility'? language.home.sideBar.memoVisibility:userSettingList.key == 'locale'?language.home.sideBar.locale:userSettingList.key}}
         <text class="value">{{userSettingList.value}}</text>
       </view>
     </view>

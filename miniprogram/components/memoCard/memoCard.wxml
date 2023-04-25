@@ -1,7 +1,7 @@
 <!--components/memoCard/memoCard.wxml-->
-<view class="memoCard" wx:for="{{memos}}" wx:if="{{item.pinned == pinned && item.rowStatus == rowStatus }}" wx:key="memo" style="border-left: {{item.rowStatus == 'ARCHIVED' ? '5rpx solid #EF4C4E' : item.pinned ? '5rpx solid #07C160' : 'none'}};">
+<view class="memoCard" wx:for="{{memos}}" wx:if="{{item.pinned == pinned && item.rowStatus == rowStatus }}" wx:key="memo" style="border-left: {{item.rowStatus == 'ARCHIVED' ? '5rpx solid #EF4C4E' : item.pinned ? '5rpx solid #07C160' : 'none'}};" data-memoId="{{item.id}}" >
   <view class="method">
-    <text class="btn top" style="opacity: {{item.pinned ? 1:0.2}};" data-memoId="{{item.id}}" data-pinned="{{item.pinned}}" data-content="{{item.content}}" catchtap="changeMemoPinned" catchlongpress="shareMemo"></text>
+    <text class="btn top" style="opacity: {{item.pinned ? 1:0.2}};" data-memoId="{{item.id}}" data-pinned="{{item.pinned}}" data-content="{{item.content}}" catchtap="changeMemoPinned" catchlongpress="goMemo"></text>
     <text class="btn delete" data-memoId="{{item.id}}" data-rowStatus="{{item.rowStatus}}" catchtap="deleteMemoFaker" catchlongpress="deleteMemo"></text>
     <text class="btn edit" data-memoId="{{item.id}}" data-content="{{item.content}}" catchtap="dialogEdit"></text>
   </view>

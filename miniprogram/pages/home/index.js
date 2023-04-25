@@ -24,22 +24,9 @@ Page({
     // console.log(app.api)
     var that = this
     this.setData({
-      top_btn: app.globalData.top_btn,
-      language: app.language.english
+      top_btn: app.globalData.top_btn
     })
-    wx.getStorage({
-      key: "language",
-      success(res) {
-        if (res.data == 'chinese') {
-          that.setData({
-            language: app.language.chinese
-          })
-        }
-      },
-      fail(err) {
-        console.log(err)
-      }
-    })
+
     wx.getStorage({
       key: "openId",
       // encrypt: true,
@@ -95,7 +82,10 @@ Page({
   },
 
   onShow() {
-
+    this.hideSidebar()
+    this.setData({
+      language: app.language[wx.getStorageSync('language') ? wx.getStorageSync('language') : 'chinese']
+    })
   },
 
   onReachBottom() {
@@ -452,15 +442,16 @@ Page({
   changeUserSetting(e) {
     console.log(e.currentTarget.dataset.item)
     let item = e.currentTarget.dataset.item
+    delete item.UserID
     let me = this.data.me
     let that = this
     wx.vibrateShort()
     if (item.key == 'locale') {
       if (item.value == "\"en\"") {
-        item.value = "\"zh\""
+        item.value = "\"zh-Hans\""
         for (let i = 0; i < me.userSettingList.length; i++) {
           if (me.userSettingList[i].key == 'locale') {
-            me.userSettingList[i].value = "\"zh\""
+            me.userSettingList[i].value = "\"zh-Hans\""
           }
         }
       } else {
@@ -501,7 +492,7 @@ Page({
           this.setData({
             me: me
           })
-          if (item.value == "\"zh\"") {
+          if (item.value == "\"zh-Hans\"") {
             wx.setStorageSync('language', 'chinese')
             this.setData({
               language: app.language.chinese,
@@ -545,7 +536,7 @@ Page({
           for (let i = 0; i < me.userSettingList.length; i++) {
             if (me.userSettingList[i].key == defaultUserSettingList[j].key) {
               defaultUserSettingList[j] = me.userSettingList[i]
-              if (me.userSettingList[i].value == '\"zh\"') {
+              if (me.userSettingList[i].value == '\"zh-Hans\"') {
                 wx.setStorageSync('language', 'chinese')
                 that.setData({
                   language: app.language.chinese,
