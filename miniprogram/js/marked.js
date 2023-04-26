@@ -38,7 +38,7 @@ const parseMarkedToHtml = (markedStr) => {
       if (res) {
         // console.log(res)
         let num = res[0].length - res[1].length - res[2].length - 1
-        return '<h' + num + " style='margin: 10px 0;' >" + res[2] + '</h' + num + '>';
+        return `<span style='font-size: ${30-num}px; font-weight: bold; padding-bottom: 5px; '>${res[2]}</span>`;
       } else {
         return ''
       }
@@ -78,4 +78,7 @@ const formatMemoContent = (content, addtionConfig) => {
     .replace(TAG_REG, "<span class='tag-span'>#$1</span> ");
 };
 
-export { formatMemoContent, parseHtmlToRawText };
+export {
+  formatMemoContent,
+  parseHtmlToRawText
+};

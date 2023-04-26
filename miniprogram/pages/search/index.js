@@ -8,7 +8,6 @@ import {
 Page({
   data: {
     url: '',
-    openId: '',
     top_btn: null,
     tags: [],
     tagsSuggestionList: [],
@@ -22,10 +21,9 @@ Page({
     this.setData({
       top_btn: app.globalData.top_btn,
       url: app.globalData.url,
-      openId: app.globalData.openId,
     })
     // console.log(this)
-    app.api.getTags(this.data.url, this.data.openId)
+    app.api.getTags(this.data.url)
       .then(res => {
         that.setData({
           tags: res.data
@@ -43,7 +41,7 @@ Page({
 
   getMemos(time) {
     let that = this
-    app.api.getMemos(app.globalData.url, app.globalData.openId, '', '')
+    app.api.getMemos(app.globalData.url, '', '')
       .then(result => {
         // console.log(result)
         if (!result.data) {
@@ -93,7 +91,7 @@ Page({
 
   getSuggestionTags() {
     let that = this
-    app.api.getTagsSuggestionList(this.data.url, this.data.openId)
+    app.api.getTagsSuggestionList(this.data.url)
       .then(res => {
         that.setData({
           tagsSuggestionList: res.data
@@ -127,7 +125,7 @@ Page({
     let tagsTemp = that.data.tags
     console.log(tagsSuggestionListTemp, tagsTemp, tagName)
 
-    app.api.upsertTag(this.data.url, this.data.openId, tagName)
+    app.api.upsertTag(this.data.url, tagName)
       .then(res => {
         console.log(res)
         tagsSuggestionListTemp.map((item, index) => {
@@ -156,7 +154,7 @@ Page({
       cancelText: this.data.language.search.tagDeleteModal.cancelText,
       complete: (res) => {
         if (res.confirm) {
-          app.api.deleteTag(this.data.url, this.data.openId, TagName)
+          app.api.deleteTag(this.data.url, TagName)
             .then(res => {
               let tagsS = that.data.tagsSuggestionList
               let tags = that.data.tags
@@ -196,7 +194,7 @@ Page({
       pinned: !e.detail.pinned
     }
     var that = this
-    app.api.changeMemoPinned(this.data.url, this.data.openId, e.detail.memoid, data)
+    app.api.changeMemoPinned(this.data.url, e.detail.memoid, data)
       .then(res => {
         // console.log(res)
         if (res.data) {
@@ -245,14 +243,13 @@ Page({
       rowStatus: e.detail.rowstatus == "NORMAL" ? 'ARCHIVED' : "NORMAL"
     }
     var url = this.data.url
-    var openId = this.data.openId
     var id = e.detail.memoid
-    this.editMemoRowStatus(url, openId, id, data)
+    this.editMemoRowStatus(url, id, data)
   },
 
-  editMemoRowStatus(url, openId, id, data) {
+  editMemoRowStatus(url, id, data) {
     var that = this
-    app.api.editMemo(url, openId, id, data)
+    app.api.editMemo(url, id, data)
       .then(res => {
         // console.log(res)
         if (res.data) {
@@ -304,7 +301,7 @@ Page({
           wx.vibrateShort({
             type: 'light',
           })
-          app.api.deleteMemo(that.data.url, that.data.openId, id)
+          app.api.deleteMemo(that.data.url, id)
             .then(res => {
               if (res) {
                 let showMemos = that.data.showMemos

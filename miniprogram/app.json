@@ -6,7 +6,8 @@
     "pages/explore/index",
     "pages/edit/index",
     "pages/archived/index",
-    "pages/memo/index"
+    "pages/memo/index",
+    "pages/resource/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

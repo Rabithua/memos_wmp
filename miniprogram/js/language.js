@@ -15,15 +15,19 @@ export const chinese = {
       now: '刚刚发布'
     }
   },
-  archived:{
+  archived: {
     pageTitle: '已归档Memos🌒',
     nothing: '这是一片无人的荒原🪐'
   },
-  explore:{
+  resource: {
+    pageTitle: '资源库📂',
+    nothing: '这是一片无人的荒原🪐'
+  },
+  explore: {
     pageTitle: '探索✨',
     nothing: '这是一片无人的荒原🪐'
   },
-  memo:{
+  memo: {
     share: "分享",
     unSee: "Memo不可见"
   },
@@ -93,6 +97,7 @@ export const chinese = {
       sun: '周日',
       memoVisibility: 'Memo 可见性',
       locale: '语言',
+      openResource: '资源库📁 →',
       openWebview: '探索✨ →',
       goarchived: '已归档🌒 →',
       date_1: '注册于 ',
@@ -151,15 +156,19 @@ export const english = {
       now: 'Now'
     }
   },
-  archived:{
+  archived: {
     pageTitle: 'Archived Memos🌒',
     nothing: "There's nothing here 🪐"
   },
-  explore:{
+  resource: {
+    pageTitle: 'Resource📂',
+    nothing: "There's nothing here 🪐"
+  },
+  explore: {
     pageTitle: 'Explore✨',
     nothing: "There's nothing here 🪐"
   },
-  memo:{
+  memo: {
     share: "Share",
     unSee: "Memo is hidden"
   },
@@ -229,6 +238,7 @@ export const english = {
       sun: 'Sun',
       memoVisibility: 'MemoVisibility',
       locale: 'Language',
+      openResource: 'Resource📁 →',
       openWebview: 'Explore✨ →',
       goarchived: 'Archived🌒 →',
       date_1: 'Registered for ',

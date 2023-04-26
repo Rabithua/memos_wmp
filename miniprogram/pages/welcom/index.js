@@ -32,7 +32,7 @@ Page({
   reqCookie() {
     app.api.status(app.globalData.url).then((res) => {
       console.log(res)
-      wx.setStorageSync('cookie', res.cookies)
+      // wx.setStorageSync('cookie', res.cookies)
       this.setData({
         webInfo: res.data.data
       })

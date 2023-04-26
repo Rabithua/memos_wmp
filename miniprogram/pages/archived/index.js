@@ -23,30 +23,22 @@ Page({
     this.setData({
       top_btn: app.globalData.top_btn
     })
-    wx.getStorage({
-      key: "openId",
-      // encrypt: true,
-      success(res) {
-        // console.log(res.data)
-        app.globalData.openId = res.data
-        that.setData({
-          url: app.globalData.url,
-          openId: res.data
-        })
-        that.getMemos(that.data.openId, 'ARCHIVED')
-      },
-      fail(err) {
-        console.log(err)
-        wx.redirectTo({
-          url: '../welcom/index',
-        })
-      }
-    })
+
+    if (wx.getStorageSync('openId')) {
+      that.setData({
+        url: app.globalData.url
+      })
+      that.getMemos('ARCHIVED')
+    } else {
+      wx.redirectTo({
+        url: '../welcom/index',
+      })
+    }
   },
 
-  getMemos(openId, rowStatus) {
+  getMemos(rowStatus) {
     var that = this
-    app.api.getMemos(app.globalData.url, openId, this.data.limit, this.data.memos.length, rowStatus)
+    app.api.getMemos(app.globalData.url, this.data.limit, this.data.memos.length, rowStatus)
       .then(result => {
         // console.log(result)
         if (!result.data) {
@@ -92,7 +84,7 @@ Page({
       pinned: !e.detail.pinned
     }
     var that = this
-    app.api.changeMemoPinned(this.data.url, this.data.openId, e.detail.memoid, data)
+    app.api.changeMemoPinned(this.data.url, e.detail.memoid, data)
       .then(res => {
         if (res.data) {
           wx.vibrateShort()
@@ -128,14 +120,13 @@ Page({
       rowStatus: e.detail.rowstatus == "NORMAL" ? 'ARCHIVED' : "NORMAL"
     }
     var url = this.data.url
-    var openId = this.data.openId
     var id = e.detail.memoid
-    this.editMemoRowStatus(url, openId, id, data)
+    this.editMemoRowStatus(url, id, data)
   },
 
-  editMemoRowStatus(url, openId, id, data) {
+  editMemoRowStatus(url, id, data) {
     var that = this
-    app.api.editMemo(url, openId, id, data)
+    app.api.editMemo(url, id, data)
       .then(res => {
         // console.log(res)
         if (res.data) {
@@ -174,7 +165,7 @@ Page({
           wx.vibrateShort({
             type: 'light',
           })
-          app.api.deleteMemo(that.data.url, that.data.openId, id)
+          app.api.deleteMemo(that.data.url, id)
             .then(res => {
               if (res) {
                 for (let i = 0; i < memos.length; i++) {

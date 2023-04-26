@@ -91,6 +91,9 @@
         <text class="value">{{userSettingList.value}}</text>
       </view>
     </view>
+    <navigator wx:if="{{me.id !== 251}}" url="../resource/index" class="openWeview">
+      {{language.home.sideBar.openResource}}
+    </navigator>
     <navigator wx:if="{{me.id !== 251}}" url="../explore/index" class="openWeview">
       {{language.home.sideBar.openWebview}}
     </navigator>

@@ -1,16 +1,11 @@
-// pages/edit/index.ts
 import {
-  formatMemoContent,
-  parseHtmlToRawText
+  formatMemoContent
 } from '../../js/marked'
 
 var app = getApp()
 
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
     memo: '',
     memoFocus: false,
@@ -20,9 +15,6 @@ Page({
     tags: []
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad(o) {
     let that = this
     const eventChannel = this.getOpenerEventChannel()
@@ -55,25 +47,16 @@ Page({
       })
     }
 
-    //获取url以及openid判断登录态
-    wx.getStorage({
-      key: "openId",
-      // encrypt: true,
-      success(res) {
-        // console.log(res.data)
-        app.globalData.openId = res.data
-        that.setData({
-          url: app.globalData.url,
-          openId: res.data,
-        })
-      },
-      fail(err) {
-        console.log(err)
-        wx.redirectTo({
-          url: '../welcom/index',
-        })
-      }
-    })
+    if (wx.getStorageSync('openId')) {
+      that.setData({
+        url: app.globalData.url,
+        language: app.language[wx.getStorageSync('language') ? wx.getStorageSync('language') : 'chinese']
+      })
+    } else {
+      wx.redirectTo({
+        url: '../welcom/index',
+      })
+    }
 
     if (o.edit) {
       wx.setNavigationBarTitle({
@@ -148,7 +131,6 @@ Page({
 
   memoBlur(e) {
     wx.vibrateShort()
-    // console.log(e)
     this.setData({
       keyBoardHeight: '0',
       cursor: this.data.memo.length,
@@ -157,8 +139,6 @@ Page({
   },
 
   memoInput(e) {
-    // console.log(e.detail.cursor)
-    // console.log(e.detail.value)
     let formatMemo = formatMemoContent(e.detail.value)
     this.setData({
       memo: e.detail.value,
@@ -234,12 +214,11 @@ Page({
         this.sendMemo()
       } else {
         var url = this.data.url
-        var openId = this.data.openId
         var id = this.data.editMemoId
         var data = {
           content: content
         }
-        that.editMemoContent(url, openId, id, data)
+        that.editMemoContent(url, id, data)
       }
     } else {
       wx.vibrateLong()
@@ -250,14 +229,13 @@ Page({
     }
   },
 
-  editMemoContent(url, openId, id, data) {
+  editMemoContent(url, id, data) {
     let that = this
-    app.api.editMemo(url, openId, id, data)
+    app.api.editMemo(url, id, data)
       .then(res => {
         // console.log(res)
         if (res.data) {
           wx.setStorageSync('memoDraft', '')
-          console.log('reff')
           let eventChannel = that.data.eventChannel
           eventChannel.emit('acceptDataFromOpenedPage', 'refresh', res.data)
           wx.navigateBack()
@@ -270,9 +248,8 @@ Page({
   sendMemo() {
     var content = this.data.memo
     var url = this.data.url
-    var openId = this.data.openId
     var that = this
-    app.api.sendMemo(url, openId, content)
+    app.api.sendMemo(url, content)
       .then(res => {
         // console.log(res.data)
         if (res.data) {
@@ -296,54 +273,10 @@ Page({
       .catch((err) => console.log(err))
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow() {
     this.setData({
       language: app.language[wx.getStorageSync('language') ? wx.getStorageSync('language') : 'chinese']
     })
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
   }
+
 })
