@@ -24,6 +24,7 @@
 - [x] 根据用户设置，自动切换语言
 - [x] darkmode
 - [x] 页面分享单条memo
+- [x] 资源库，上传图片，发布带文件的memo
 
 
 ## 开始搭建 可以看看更详细的b站[视频教程](https://www.bilibili.com/video/BV1KX4y1C7vx)
