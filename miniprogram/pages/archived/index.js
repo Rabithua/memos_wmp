@@ -38,6 +38,9 @@ Page({
 
   getMemos(rowStatus) {
     var that = this
+    wx.showLoading({
+      title: '加载中...',
+    })
     app.api.getMemos(app.globalData.url, this.data.limit, this.data.memos.length, rowStatus)
       .then(result => {
         // console.log(result)
@@ -63,6 +66,7 @@ Page({
             title: that.data.language.home.thatIsAll,
           })
           var arrMemos = app.memosArrenge(memos)
+          wx.hideLoading()
           that.setData({
             memos: that.data.memos.concat(arrMemos)
           })

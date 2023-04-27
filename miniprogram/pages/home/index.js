@@ -57,8 +57,11 @@ Page({
 
   },
 
-  onShow() {
+  onHide() {
     this.hideSidebar()
+  },
+
+  onShow() {
     this.setData({
       language: app.language[wx.getStorageSync('language') ? wx.getStorageSync('language') : 'chinese']
     })
@@ -112,29 +115,14 @@ Page({
             events: {
               // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
               acceptDataFromOpenedPage: function (type, newMemo) {
+                newMemo = app.memosRescourse(newMemo)
                 let memos = that.data.memos
                 switch (type) {
-                  case 'refresh':
-                    console.log('refresh')
-                    memos.map((memo, index) => {
-                      if (memo.id == newMemo.id) {
-                        memo.content = newMemo.content
-                        memo.formatContent = formatMemoContent(newMemo.content)
-                        memo.time = app.calTime(memo.createdTs)
-                      }
-                    })
-                    that.setData({
-                      memos: memos
-                    })
-                    app.globalData.memos = memos
-                    wx.setStorageSync('memos', memos)
-                    break;
                   case 'add':
-                    console.log('add')
                     memos.unshift({
                       ...newMemo,
                       formatContent: formatMemoContent(newMemo.content),
-                      time: app.calTime(newMemo.createdTs)
+                      time: app.calTime(newMemo.createdTs),
                     })
                     that.setData({
                       memos: memos
@@ -302,29 +290,37 @@ Page({
   dialogEdit(e) {
     // console.log(e)
     let that = this
+    let memos = this.data.memos
+    let resourceIdList = memos.filter(item => item.id == e.detail.memoid)[0].resourceList.map(item => item.id)
     wx.vibrateShort()
     wx.navigateTo({
       url: '../edit/index?edit=true',
       events: {
         // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
-        acceptDataFromOpenedPage: function (msg, data) {
+        acceptDataFromOpenedPage: function (msg, newMemo) {
           wx.vibrateShort()
-          console.log(msg, data)
+          console.log(msg, newMemo)
           let memos = that.data.memos
+          newMemo = app.memosRescourse(newMemo)
           switch (msg) {
             case 'refresh':
+              console.log(newMemo)
               memos.map((memo, index) => {
-                if (memo.id == data.id) {
-                  memo.content = data.content
-                  memo.formatContent = formatMemoContent(data.content)
+                if (memo.id == newMemo.id) {
+                  memos[index] = {
+                    ...newMemo,
+                    formatContent: formatMemoContent(newMemo.content),
+                    time: app.calTime(newMemo.createdTs)
+                  }
                 }
               })
+              console.log(memos)
               that.setData({
                 memos: memos
               })
-              wx.setStorageSync('memos', memos)
               app.globalData.memos = memos
-              break
+              wx.setStorageSync('memos', memos)
+              break;
             default:
               break;
           }
@@ -334,7 +330,8 @@ Page({
         // 通过 eventChannel 向被打开页面传送数据
         res.eventChannel.emit('acceptDataFromOpenerPage', {
           editMemoId: e.detail.memoid,
-          memo: e.detail.content
+          memo: e.detail.content,
+          resourceIdList
         })
       }
     })

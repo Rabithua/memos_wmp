@@ -19,6 +19,9 @@ Page({
 
   getExploreMemos() {
     let that = this;
+    wx.showLoading({
+      title: "加载中...",
+    });
     app.api
       .getExploreMemos(this.data.url, this.data.offset, this.data.limit)
       .then((result) => {
@@ -41,6 +44,7 @@ Page({
             memos[i] = app.memosRescourse(memos[i]);
           }
           console.log(memos);
+          wx.hideLoading()
           that.setData({
             showMemos: that.data.showMemos.concat(memos),
             offset: that.data.showMemos.concat(memos).length + 1,
