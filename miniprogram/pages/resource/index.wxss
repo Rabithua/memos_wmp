@@ -1,5 +1,18 @@
-page {
-  background-color: #ffffff;
+.backEditBtn {
+  position: fixed;
+  bottom: 100rpx;
+  right: 50rpx;
+  background-color: #09c160;
+  color: #ffffff50;
+  padding: 20rpx 30rpx;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+}
+
+.backEditBtn view {
+  color: #ffffff;
+  font-size: 35rpx;
+  font-weight: bold;
 }
 
 .method {
@@ -39,12 +52,13 @@ page {
 }
 
 .method .btn {
-  width: 50rpx;
-  height: 50rpx;
+  width: 70rpx;
+  height: 70rpx;
 }
 
 .resource {
-  margin: 0rpx 30rpx;
+  border-left: 0rpx solid #09c160;
+  margin: 10rpx 30rpx;
   padding: 20rpx;
   min-height: 100rpx;
   display: flex;
@@ -52,6 +66,8 @@ page {
   transition: 500ms;
   overflow: hidden;
   position: relative;
+  background-color: #ffffff;
+  border-radius: 20rpx;
 }
 
 .fileId {
@@ -63,7 +79,6 @@ page {
 }
 
 .info {
-  border-bottom: 1rpx solid #00000010;
   width: 100%;
 }
 
@@ -85,6 +100,7 @@ page {
 }
 
 .headerContainer {
+  align-items: center;
   display: flex;
   position: sticky;
   margin: 90rpx 60rpx 30rpx 50rpx;
@@ -104,3 +120,15 @@ page {
   opacity: 0;
   animation: show 300ms 100ms forwards;
 }
+
+.headerContainer .uploadBtn {
+  padding: 0 30rpx;
+  border-radius: 999px;
+  background-color: #ffffff;
+  margin-left: 20rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@import 'index-wxa-auto-dark.wxss'

@@ -4,12 +4,15 @@ Page({
   data: {
     url: getApp().globalData.url,
     limit: 20,
-    resources: []
+    resources: [],
+    selectFileId: []
   },
 
-  onLoad() {
+  onLoad(o) {
+    let that = this
     this.setData({
       top_btn: app.globalData.top_btn,
+      selectMode: o.selectMode ? true : false
     });
     if (wx.getStorageSync('openId')) {
       this.getResource()
@@ -18,22 +21,137 @@ Page({
         url: '../welcom/index',
       })
     }
+    const eventChannel = this.getOpenerEventChannel()
+    if (eventChannel.listener) {
+      eventChannel.once('passResourceIdList', function (data) {
+        console.log(data)
+        that.setData({
+          selectFileId: data.resourceIdList,
+          memoId: data.memoId
+        })
+      })
+    }
+  },
+
+  selectSet() {
+    let resources = this.data.resources
+    let selectFileId = this.data.selectFileId
+    console.log(resources, selectFileId)
+    const newArray = resources.map(item => {
+      if (selectFileId.includes(item.id)) {
+        return {
+          ...item,
+          select: true
+        };
+      }
+      return item;
+    });
+    this.setData({
+      resources: newArray
+    })
+  },
+
+  deleteMemoFile(resourceId) {
+    app.api.deleteMemoResource(this.data.url, this.data.memoId, resourceId)
+      .then((res) => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  },
+
+  pickImg() {
+    let that = this
+    let resources = this.data.resources
+    wx.chooseMedia({
+      count: 1,
+      mediaType: ['image', 'video'],
+      sourceType: ['album', 'camera'],
+      maxDuration: 30,
+      camera: 'back',
+      success(res) {
+        console.log(res.tempFiles)
+        wx.showLoading({
+          title: '上传中...',
+        })
+        wx.uploadFile({
+          url: `${that.data.url}/api/resource/blob?openId=${wx.getStorageSync('openId')}`,
+          filePath: res.tempFiles[0].tempFilePath,
+          name: 'file',
+          formData: {},
+          success(res) {
+            console.log(res)
+            let newFile = JSON.parse(res.data).data
+            newFile.time = app.fomaDay(newFile.createdTs * 1000)
+            newFile.sizeFomate = app.formatFileSize(newFile.size)
+            resources.unshift(newFile)
+            wx.hideLoading()
+            that.setData({
+              resources
+            })
+            //do something
+          }
+        })
+      }
+    })
   },
 
   getResource() {
+    wx.showLoading({
+      title: '加载中',
+    })
     app.api.getResource(this.data.url, this.data.limit, this.data.resources.length).then(res => {
       let newResources = res.data
+      newResources.forEach(function (item) {
+        item.time = app.fomaDay(item.createdTs * 1000);
+        item.sizeFomate = app.formatFileSize(item.size)
+      });
       if (newResources.length == 0) {
         wx.showToast({
           icon: 'none',
           title: '就这么多了',
         })
       }
+      wx.hideLoading()
       wx.vibrateShort()
       this.setData({
         resources: this.data.resources.concat(newResources)
       })
+      this.selectSet()
     })
+  },
+
+  selectFile(e) {
+    let idx = e.currentTarget.dataset.index
+    let resources = app.deepCopy(this.data.resources)
+    resources[idx].select = !resources[idx].select
+    if (this.data.selectMode) {
+      this.calcSelectNum(resources)
+      if (!resources[idx].select) {
+        this.deleteMemoFile(resources[idx].id)
+      }
+      wx.vibrateShort()
+      this.setData({
+        resources
+      })
+    }
+  },
+
+  calcSelectNum(resources) {
+    const selectedIds = resources
+      .filter(item => item.select)
+      .map(item => item.id);
+    this.setData({
+      selectFileId: selectedIds
+    })
+  },
+
+  backEdit() {
+    const eventChannel = this.getOpenerEventChannel()
+    eventChannel.emit('addFiles', this.data.selectFileId)
+    wx.vibrateShort()
+    wx.navigateBack()
   },
 
   onReady() {},
@@ -161,6 +279,7 @@ Page({
     } else {
       url = `${this.data.url}/o/r/${res[idx].id}/${res[idx].publicId}`
     }
+    wx.vibrateShort()
     wx.previewImage({
       urls: [url],
     })

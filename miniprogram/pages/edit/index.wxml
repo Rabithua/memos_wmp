@@ -28,6 +28,10 @@
     </view>
     <view class="typeBtn codeBtn" bindtap="inputTodo"></view>
     <view class="typeBtn todoBtn" bindtap="inputCode"></view>
+    <view class="typeBtn fileBtn" bindtap="fileUpload"></view>
+    <view class="fileNum">
+      {{resourceIdList.length}}
+    </view>
   </view>
   <view class="flex" style="margin-right: 50rpx;margin-left: auto;">
     <view wx:if="{{keyBoardHeight != 0}}" class="typeBtn keyBoardDownBtn" bindtap="memoBlur"></view>

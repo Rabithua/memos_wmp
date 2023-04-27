@@ -20,7 +20,7 @@ export const chinese = {
     nothing: '这是一片无人的荒原🪐'
   },
   resource: {
-    pageTitle: '资源库📂',
+    pageTitle: '资源库 📂',
     nothing: '这是一片无人的荒原🪐'
   },
   explore: {

@@ -64,6 +64,49 @@ export const deleteResource = (url, id) => {
   })
 }
 
+export const deleteMemoResource = (url, memoId, resourceId) => {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: `${url}/api/memo/${memoId}/resource/${resourceId}?openId=${wx.getStorageSync('openId')}`,
+      method: "DELETE",
+      success(res) {
+        resolve(res.data)
+      },
+      fail(err) {
+        wx.vibrateLong()
+        wx.showToast({
+          icon: 'none',
+          title: '删除失败',
+        })
+        reject(err)
+      }
+    })
+  })
+}
+
+export const createResource = (url, file) => {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: `${url}/api/resource/blob?openId=${wx.getStorageSync('openId')}`,
+      method: "POST",
+      data: {
+        file
+      },
+      success(res) {
+        resolve(res.data)
+      },
+      fail(err) {
+        wx.vibrateLong()
+        wx.showToast({
+          icon: 'none',
+          title: '删除失败',
+        })
+        reject(err)
+      }
+    })
+  })
+}
+
 export const getMemo = (url, id) => {
   return new Promise((resolve, reject) => {
     wx.request({
@@ -127,13 +170,14 @@ export const getStats = (url, creatorId) => {
   })
 }
 
-export const sendMemo = (url, content) => {
+export const sendMemo = (url, content, resourceIdList) => {
   return new Promise((resolve, reject) => {
     wx.request({
       url: `${url}/api/memo?openId=${wx.getStorageSync('openId')}`,
       method: "POST",
       data: {
-        content: content
+        content,
+        resourceIdList
       },
       success(res) {
         resolve(res.data)
@@ -196,7 +240,7 @@ export const editMemo = (url, memoId, data) => {
     wx.request({
       url: `${url}/api/memo/${memoId}?openId=${wx.getStorageSync('openId')}`,
       method: "PATCH",
-      data: data,
+      data,
       success(res) {
         resolve(res.data)
       },

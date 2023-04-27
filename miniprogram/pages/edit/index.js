@@ -12,7 +12,8 @@ Page({
     keyBoardHeight: '0',
     sendLoading: false,
     eventChannel: null,
-    tags: []
+    tags: [],
+    resourceIdList: []
   },
 
   onLoad(o) {
@@ -38,11 +39,13 @@ Page({
     //页面监听器
     if (eventChannel.listener) {
       eventChannel.once('acceptDataFromOpenerPage', function (data) {
+        console.log(data)
         let formatMemo = formatMemoContent(data.memo)
         that.setData({
           ...data,
           formatContent: formatMemo,
-          cursor: data.memo.length
+          cursor: data.memo.length,
+          resourceIdList: data.resourceIdList
         })
       })
     }
@@ -73,6 +76,28 @@ Page({
         memoFocus: true
       })
     }
+  },
+
+  fileUpload() {
+    let that = this
+    wx.navigateTo({
+      url: '../resource/index?selectMode=true',
+      events: {
+        addFiles: function (data) {
+          console.log(data)
+          that.setData({
+            resourceIdList: data
+          })
+        }
+      },
+      success: function (res) {
+        // 通过 eventChannel 向被打开页面传送数据
+        res.eventChannel.emit('passResourceIdList', {
+          resourceIdList: that.data.resourceIdList,
+          memoId: that.data.editMemoId
+        })
+      }
+    })
   },
 
   setTapPoint(e) {
@@ -206,7 +231,7 @@ Page({
     wx.vibrateShort()
     var that = this
     var content = this.data.memo
-    if (content !== '') {
+    if (content !== '' || this.data.resourceIdList.length > 0) {
       this.setData({
         sendLoading: true
       })
@@ -216,7 +241,9 @@ Page({
         var url = this.data.url
         var id = this.data.editMemoId
         var data = {
-          content: content
+          id: this.data.editMemoId,
+          content: content,
+          resourceIdList: this.data.resourceIdList
         }
         that.editMemoContent(url, id, data)
       }
@@ -246,10 +273,11 @@ Page({
 
 
   sendMemo() {
+    var resourceIdList = this.data.resourceIdList
     var content = this.data.memo
     var url = this.data.url
     var that = this
-    app.api.sendMemo(url, content)
+    app.api.sendMemo(url, content, resourceIdList)
       .then(res => {
         // console.log(res.data)
         if (res.data) {
