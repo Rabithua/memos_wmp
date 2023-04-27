@@ -34,7 +34,7 @@ const parseMarkedToHtml = (markedStr) => {
     .replace(EM_TEXT_REG, "<em>$1</em>")
     .replace(TITLE_TEXT_REG, (match, offset) => {
       let res = TITLE_TEXT_REG.exec(match)
-      // console.log(TITLE_TEXT_REG.exec(match))
+      console.log(TITLE_TEXT_REG.exec(match))
       if (res) {
         // console.log(res)
         let num = res[0].length - res[1].length - res[2].length - 1
