@@ -157,6 +157,27 @@ App({
     return (Y + M + D)
   },
 
+  formatFileSize(bytes) {
+    if (bytes === 0) return '0 B';
+    const k = 1024;
+    const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    const size = parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    return size;
+  },
+
+  deepCopy(obj) {
+    let newObj = Array.isArray(obj) ? [] : {};  // 判断是数组还是对象，选择初始化方式
+    for (let key in obj) {
+      if (typeof obj[key] === "object" && obj[key] !== null) {  // 如果属性值是对象，递归调用deepCopy函数
+        newObj[key] = this.deepCopy(obj[key]);
+      } else {
+        newObj[key] = obj[key];  // 否则直接复制
+      }
+    }
+    return newObj;  // 返回新的拷贝对象
+  },
+
   memosRescourse(memo) {
     let fileList_preview = []
     let imgList_preview = []
