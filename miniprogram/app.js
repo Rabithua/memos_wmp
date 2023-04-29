@@ -181,27 +181,35 @@ App({
   memosRescourse(memo) {
     let fileList_preview = []
     let imgList_preview = []
+    let video_preview = []
     for (let l = 0; l < memo.resourceList.length; l++) {
       const rescource = memo.resourceList[l];
-      const rescource_name = rescource.filename
+      const rescource_id = rescource.publicId
       let rescource_url = this.globalData.url + '/o/r/' + rescource.id + '/' + rescource.publicId
       if (rescource.externalLink) {
         rescource_url = rescource.externalLink
       }
+      
       if (rescource.type.match(/image/)) {
         imgList_preview.push({
           url: rescource_url,
-          name: rescource_name
+          id: rescource_id
         })
-      } else {
+      } else if (rescource.type.match(/video/)) {
+        video_preview.push({
+          url: rescource_url,
+          id: rescource_id
+        })
+      } else  {
         fileList_preview.push({
           url: rescource_url,
-          name: rescource_name
+          id: rescource_id
         })
       }
     }
     memo.fileList_preview = fileList_preview
     memo.imgList_preview = imgList_preview
+    memo.video_preview = video_preview
     return memo
   }
 
