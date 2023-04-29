@@ -120,6 +120,8 @@ page {
   border-radius: 10rpx;
   font-size: 30rpx;
   background-color: #f5f5f5;
+  font-weight: bold;
+  font-family: 'Smiley Sans Oblique';
 }
 
 .sidebar .heatMap {

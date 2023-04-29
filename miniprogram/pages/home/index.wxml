@@ -62,7 +62,7 @@
   <view class="container">
     <view class="user">
       <view class="name">{{me.username?me.username:me.email}}</view>
-      <view class="badge">{{me.role}}</view>
+      <view class="badge" style="{{me.role == 'HOST' ? 'color: #ffffff; background: #07C160' : ''}}">{{me.role}}</view>
     </view>
     <view class="count">
       <view class="item" style="border-right: 1rpx solid #00000010;">
