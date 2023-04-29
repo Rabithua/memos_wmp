@@ -1,0 +1,43 @@
+<view class="headerContainer" style="top: {{top_btn.top}}px">
+  <view class="header" style="height:{{top_btn.height}}px;">{{language.resource.pageTitle}}
+  </view>
+  <view class="uploadBtn" style="height:{{top_btn.height}}px;" bindtap="pickImg">{{language.resource.upload}}</view>
+</view>
+
+
+<view class="resource" wx:key="resources" wx:for="{{resources}}" wx:for-item="resource" bindtap="selectFile" bindtouchstart="setTouchStart" bindtouchmove="showMethod" data-index="{{index}}" style=" border-width: {{resource.select ? '10rpx' : '0rpx'}};">
+  <image wx:if="{{resource.type[0] + resource.type[1] == 'im'}}" mode="aspectFill" class="imgPreview" src="{{resource.externalLink ? resource.externalLink : url + '/o/r/' + resource.id + '/' + resource.publicId}}"></image>
+  <view wx:else class="icon fileIcon"></view>
+  <view class="info">
+    <view class="fileName" style="text-transform: uppercase;">
+      ID: {{resource.publicId}}
+    </view>
+    <view class="other">
+      <view>
+        {{resource.time}}
+      </view>
+      <view style="text-transform: uppercase;">
+        {{resource.type}}
+      </view>
+      <view>
+        {{resource.sizeFomate === "0 B" ? '' : resource.sizeFomate}}
+      </view>
+    </view>
+  </view>
+  <view class="method" style="transform: translateX({{resource.showMethod ? '0' : '300rpx'}});">
+    <text wx:if="{{resource.type[0] + resource.type[1] == 'im'}}" class="btn preview" data-index="{{index}}" catchtap="previewImg"></text>
+    <text class="btn delete" data-id="{{resource.id}}" data-linkedMemoAmount="{{resource.linkedMemoAmount}}" catchtap="deleteResource"></text>
+    <text class="btn link" data-index="{{index}}" catchtap="copyLink"></text>
+  </view>
+</view>
+
+<view class="total">
+  {{language.resource.load_1 + resources.length + language.resource.load_2}}
+</view>
+
+<view wx:if="{{selectMode}}" class="backEditBtn" bindtap="backEdit">
+  <view>
+    {{language.resource.confirm}}
+  </view>
+  {{language.resource.choosed_1 + selectFileId.length + language.resource.choosed_2}}
+</view>

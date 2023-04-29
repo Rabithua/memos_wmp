@@ -16,14 +16,17 @@ Page({
     let id = o.id
     if (id) {
       this.setData({
-        id
+        id,
+        language: app.language[wx.getStorageSync('language') ? wx.getStorageSync('language') : 'chinese']
       })
       this.getMemo(this.data.url, id)
     }
   },
 
   getMemo(url, id) {
-    let that = this
+    wx.showLoading({
+      title: this.data.language.memo.getting,
+    })
     app.api.getMemo(url, id)
       .then(res => {
         console.log(res)
@@ -35,14 +38,18 @@ Page({
           wx.setNavigationBarTitle({
             title: memo.creatorName,
           })
+          wx.hideLoading()
+          wx.vibrateShort()
           this.setData({
             memo
           })
+        } else {
+          wx.hideLoading()
         }
-
       })
       .catch(err => {
         console.log(err)
+        wx.hideLoading()
       })
   },
 
@@ -59,10 +66,8 @@ Page({
     })
   },
 
-  share() {
-    wx.showShareMenu({
-      withShareTicket: true
-    })
+  vibShort(){
+    wx.vibrateShort()
   },
 
   onReady() {

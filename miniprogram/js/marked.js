@@ -33,15 +33,13 @@ const parseMarkedToHtml = (markedStr) => {
     .replace(BOLD_TEXT_REG, "<strong>$1</strong>")
     .replace(EM_TEXT_REG, "<em>$1</em>")
     .replace(TITLE_TEXT_REG, (match, offset) => {
-      let res = TITLE_TEXT_REG.exec(match)
-      // console.log(TITLE_TEXT_REG.exec(match))
-      if (res) {
-        // console.log(res)
-        let num = res[0].length - res[1].length - res[2].length - 1
-        return '<h' + num + " style='margin: 10px 0;' >" + res[2] + '</h' + num + '>';
-      } else {
-        return ''
+      let iterator = match.matchAll(TITLE_TEXT_REG);
+      for (let res of iterator) {
+        // console.log(res);
+        let num = res[0].length - res[1].length - res[2].length - 1;
+        return `<span style='font-size: ${30-num}px; font-weight: bold; padding-bottom: 5px; '>${res[2]}</span>`;
       }
+      return '';
     })
     .replace(HORIZONTAL_RULES_REG, "<hr class='line'>");
   return htmlText;
@@ -78,4 +76,7 @@ const formatMemoContent = (content, addtionConfig) => {
     .replace(TAG_REG, "<span class='tag-span'>#$1</span> ");
 };
 
-export { formatMemoContent, parseHtmlToRawText };
+export {
+  formatMemoContent,
+  parseHtmlToRawText
+};

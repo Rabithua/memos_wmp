@@ -26,7 +26,8 @@
   flex-wrap: wrap;
   opacity: 0;
   animation: show forwards 500ms;
-  /* line-height: 80rpx; */
+  max-height: 300rpx;
+  overflow-y: scroll;
 }
 
 .flex {
@@ -38,6 +39,7 @@
   margin: 0rpx 80rpx;
   margin-top: 10px;
   color: #00000030;
+  display: flex;
 }
 
 .sugTag {

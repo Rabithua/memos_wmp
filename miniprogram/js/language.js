@@ -8,6 +8,7 @@ export const chinese = {
     wrong: '未知错误!',
     changeLanguage: '语言',
     languageList: ['中文', 'English'],
+    thatIsAll: '就这么多了',
     memoCard: {
       d: '天前',
       h: '小时前',
@@ -15,17 +16,38 @@ export const chinese = {
       now: '刚刚发布'
     }
   },
-  archived:{
+  archived: {
     pageTitle: '已归档Memos🌒',
     nothing: '这是一片无人的荒原🪐'
   },
-  explore:{
+  resource: {
+    pageTitle: '资源库 📂',
+    nothing: '这是一片无人的荒原🪐',
+    upload: '上传',
+    load_1: '已加载',
+    load_2: '个～',
+    confirm: '确认',
+    choosed_1: '已选择',
+    choosed_2: '个',
+    deleted: '已删除',
+    deleteModal: {
+      title: '警告',
+      content_1: '当前资源已被',
+      content_2: '个MEMO引用，删除会导致MEMO文件丢失！',
+      cancel: '取消',
+      confirm: '删除'
+    }
+  },
+  explore: {
     pageTitle: '探索✨',
     nothing: '这是一片无人的荒原🪐'
   },
-  memo:{
+  memo: {
     share: "分享",
-    unSee: "Memo不可见"
+    unSee: "Memo不可见",
+    visibility_1: '可见性为：',
+    visibility_2: '（仅自己可见）',
+    getting: '拉取数据'
   },
   welcom: {
     webVersion: '线上版本：',
@@ -93,6 +115,7 @@ export const chinese = {
       sun: '周日',
       memoVisibility: 'Memo 可见性',
       locale: '语言',
+      openResource: '资源库📁 →',
       openWebview: '探索✨ →',
       goarchived: '已归档🌒 →',
       date_1: '注册于 ',
@@ -144,6 +167,7 @@ export const english = {
     wrong: 'something wrong!',
     changeLanguage: 'Language',
     languageList: ['中文', 'English'],
+    thatIsAll: 'That\'s all',
     memoCard: {
       d: ' days ago',
       h: ' hours ago',
@@ -151,17 +175,38 @@ export const english = {
       now: 'Now'
     }
   },
-  archived:{
+  archived: {
     pageTitle: 'Archived Memos🌒',
     nothing: "There's nothing here 🪐"
   },
-  explore:{
+  resource: {
+    pageTitle: 'Resource📂',
+    nothing: "There's nothing here 🪐",
+    upload: 'Upload',
+    load_1: 'Loaded ',
+    load_2: ' files~',
+    confirm: 'Confirm',
+    choosed_1: 'Selected ',
+    choosed_2: '',
+    deleted: 'Deleted!',
+    deleteModal: {
+      title: 'Warning',
+      content_1: 'The current resource has been referenced by ',
+      content_2: ' MEMOs. Deleting it will cause the loss of the MEMO files!',
+      cancel: 'Cancel',
+      confirm: 'Delete'
+    }
+  },
+  explore: {
     pageTitle: 'Explore✨',
     nothing: "There's nothing here 🪐"
   },
-  memo:{
+  memo: {
     share: "Share",
-    unSee: "Memo is hidden"
+    unSee: "Memo is hidden",
+    visibility_1: 'Visibility: ',
+    visibility_2: '(Only visible to yourself)',
+    getting: 'Getting'
   },
   welcom: {
     webVersion: 'WebVersion:',
@@ -229,6 +274,7 @@ export const english = {
       sun: 'Sun',
       memoVisibility: 'MemoVisibility',
       locale: 'Language',
+      openResource: 'Resource📁 →',
       openWebview: 'Explore✨ →',
       goarchived: 'Archived🌒 →',
       date_1: 'Registered for ',

@@ -1,0 +1,45 @@
+/* 
+此文件为开发者工具生成，生成时间: 2023/4/26下午7:34:36
+使用方法：
+在 index.wxss 文件末尾引入样式
+```
+@import "./index-wxa-auto-dark.wxss";
+```
+ */
+
+@media (prefers-color-scheme: dark) {
+
+    .method {
+      filter: brightness(0.8);
+    }
+
+    .resource .icon {
+      filter: invert(1);
+    }
+
+    .fileId {
+        border-right: rgb(0, 0, 0);
+        color: rgb(0, 105, 12);
+    }
+
+    .resource {
+      background-color: rgb(31, 31, 31);
+    }
+
+    .info {
+        border-bottom: rgb(0, 0, 0);
+    }
+
+    .info .other {
+        color: rgba(255, 255, 255, 0.3137254901960784);
+    }
+
+    .headerContainer .uploadBtn {
+      background-color: rgb(31, 31, 31);
+    }
+
+    .header {
+        color: rgb(255, 255, 255);
+        background: rgba(24, 24, 24, 0.5019607843137255);
+    }
+}

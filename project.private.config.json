@@ -68,6 +68,13 @@
           "query": "id=1779",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/resource/index",
+          "query": "selectMode=true",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

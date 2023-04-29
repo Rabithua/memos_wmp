@@ -157,30 +157,59 @@ App({
     return (Y + M + D)
   },
 
+  formatFileSize(bytes) {
+    if (bytes === 0) return '0 B';
+    const k = 1024;
+    const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    const size = parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    return size;
+  },
+
+  deepCopy(obj) {
+    let newObj = Array.isArray(obj) ? [] : {};  // 判断是数组还是对象，选择初始化方式
+    for (let key in obj) {
+      if (typeof obj[key] === "object" && obj[key] !== null) {  // 如果属性值是对象，递归调用deepCopy函数
+        newObj[key] = this.deepCopy(obj[key]);
+      } else {
+        newObj[key] = obj[key];  // 否则直接复制
+      }
+    }
+    return newObj;  // 返回新的拷贝对象
+  },
+
   memosRescourse(memo) {
     let fileList_preview = []
     let imgList_preview = []
+    let video_preview = []
     for (let l = 0; l < memo.resourceList.length; l++) {
       const rescource = memo.resourceList[l];
-      const rescource_name = rescource.filename
+      const rescource_id = rescource.publicId
       let rescource_url = this.globalData.url + '/o/r/' + rescource.id + '/' + rescource.publicId
       if (rescource.externalLink) {
         rescource_url = rescource.externalLink
       }
+      
       if (rescource.type.match(/image/)) {
         imgList_preview.push({
           url: rescource_url,
-          name: rescource_name
+          id: rescource_id
         })
-      } else {
+      } else if (rescource.type.match(/video/)) {
+        video_preview.push({
+          url: rescource_url,
+          id: rescource_id
+        })
+      } else  {
         fileList_preview.push({
           url: rescource_url,
-          name: rescource_name
+          id: rescource_id
         })
       }
     }
     memo.fileList_preview = fileList_preview
     memo.imgList_preview = imgList_preview
+    memo.video_preview = video_preview
     return memo
   }
 
