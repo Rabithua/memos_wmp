@@ -426,16 +426,33 @@ Page({
         title: this.data.language.search.cantEmpty,
       })
     } else {
-      for (let i = 0; i < memos.length; i++) {
-        const content = memos[i].content;
-        var regs = content.search(keyword.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
-        if (regs != -1) {
-          showMemos.push(memos[i])
+      if (this.data.memos.length > 0) {
+        for (let i = 0; i < memos.length; i++) {
+          const content = memos[i].content;
+          var regs = content.search(keyword.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+          if (regs != -1) {
+            showMemos.push(memos[i])
+          }
         }
+        that.setData({
+          showMemos: showMemos
+        })
+      } else {
+        this.getMemos(null)
+          .then(() => {
+            for (let i = 0; i < memos.length; i++) {
+              const content = memos[i].content;
+              var regs = content.search(keyword.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+              if (regs != -1) {
+                showMemos.push(memos[i])
+              }
+            }
+            that.setData({
+              showMemos: showMemos
+            })
+          })
       }
-      that.setData({
-        showMemos: showMemos
-      })
+
     }
   },
 
