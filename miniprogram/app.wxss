@@ -4,10 +4,7 @@ page {
   flex-direction: column;
   justify-content: flex-start;
   font-family: -apple-system, BlinkMacSystemFont, PingFang SC, Noto Sans, Noto Sans CJK SC, Microsoft YaHei UI, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif, Segoe UI, Roboto, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
-}
-
-.hTitle {
-  /* margin-bottom: -30rpx; */
+  overflow-x: hidden;
 }
 
 .quote {
@@ -166,7 +163,6 @@ page {
   background-color: #f5f5f5;
   max-height: 200rpx;
   max-width: 200rpx;
-  margin: 5rpx;
   border-radius: 10rpx;
 }
 
@@ -303,17 +299,53 @@ page {
   line-height: 1.5;
 }
 
-.memoCard .file {
-  background-color: #ffca2730;
-  border: 4rpx dashed #ffca27;
-  padding: 10rpx 20rpx;
-  display: inline-flex;
+.memoCard .fileList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+  margin-top: 20rpx;
+}
+
+.memoCard .imgList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10rpx;
+  margin-top: 20rpx;
+}
+
+.memoCard .videoList {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+  margin-top: 20rpx;
+}
+
+.memoCard video {
   border-radius: 10rpx;
-  margin: 10rpx;
+  width: 100%;
+}
+
+.memoCard .file {
+  border: 1px solid #cccccc;
+  background-color: #f5f5f5;
+  padding: 20rpx;
+  border-radius: 10rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .file::before {
-  content: '🔗';
+  content: '';
+  display: inline-block;
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 10rpx;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzYiIGhlaWdodD0iMzYiIHZpZXdCb3g9IjAgMCAzNiAzNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMjguNzM5IDUuMzM1Yy0zLjc4NS0zLjc4NS05Ljk0OC0zLjc4NS0xMy43MyAwTDQuNTI0IDE1LjgxM2EuMzYxLjM2MSAwIDAgMC0uMTA0LjI1N2MwIC4wOTcuMDM2LjE5LjEwNC4yNThsMS40ODMgMS40ODJhLjM2Mi4zNjIgMCAwIDAgLjUxIDBMMTcuMDAzIDcuMzMyYTYuODQ3IDYuODQ3IDAgMCAxIDQuODczLTIuMDE3YzEuODQgMCAzLjU3Mi43MTUgNC44NyAyLjAxN2E2Ljg0NSA2Ljg0NSAwIDAgMSAyLjAxNyA0Ljg3YzAgMS44NC0uNzE1IDMuNTY3LTIuMDE3IDQuODY5TDE2LjA1OCAyNy43NTRsLTEuNzMxIDEuNzMyYTQuMTU0IDQuMTU0IDAgMCAxLTUuODcgMCA0LjExOCA0LjExOCAwIDAgMS0xLjIxNC0yLjkzM2MwLTEuMTA5LjQzLTIuMTUgMS4yMTQtMi45MzNsMTAuNjAzLTEwLjZjLjI2OS0uMjY0LjYyMy0uNDEzIDEtLjQxM2guMDA0Yy4zNzggMCAuNzI3LjE0OS45OTMuNDE0LjI2OS4yNy40MTQuNjIzLjQxNCAxIDAgLjM3NC0uMTUuNzI3LS40MTQuOTkzbC04LjY2NyA4LjY1OGEuMzYyLjM2MiAwIDAgMC0uMTA0LjI1N2MwIC4wOTcuMDM2LjE5LjEwNC4yNThsMS40ODMgMS40ODJhLjM2MS4zNjEgMCAwIDAgLjUxIDBsOC42NjMtOC42NjJjLjgtLjggMS4yMzctMS44NiAxLjIzNy0yLjk5YTQuMjA3IDQuMjA3IDAgMCAwLTEuMjM3LTIuOTg5IDQuMjQgNC4yNCAwIDAgMC01Ljk4NyAwbC0xLjAyOSAxLjAzMy05LjU3IDkuNTY2YTYuOTIgNi45MiAwIDAgMC0yLjA0MSA0LjkzYzAgMS44Ni43MjcgMy42MDggMi4wNCA0LjkyMmE2Ljk2IDYuOTYgMCAwIDAgNC45MyAyLjAzN2MxLjc4NSAwIDMuNTY5LS42OCA0LjkyNy0yLjAzN2wxMi40MjMtMTIuNDE1YTkuNjYgOS42NiAwIDAgMCAyLjg0LTYuODYzIDkuNjMgOS42MyAwIDAgMC0yLjg0LTYuODY2eiIgZmlsbD0iIzAwMCIgZmlsbC1vcGFjaXR5PSIuODUiLz48L3N2Zz4=);
 }
 
 .counter-block {

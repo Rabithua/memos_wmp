@@ -34,59 +34,65 @@ Page({
 
     if (o.time) {
       that.getMemos(o.time)
-    } else {
-      that.getMemos()
     }
   },
 
-  getMemos(time) {
+  getMemos(time, func) {
     let that = this
-    app.api.getMemos(app.globalData.url, '', '')
-      .then(result => {
-        // console.log(result)
-        if (!result.data) {
+    wx.showLoading({
+      title: '拉取数据...',
+    })
+    return new Promise((resolve, reject) => {
+      app.api.getMemos(app.globalData.url, '', '')
+        .then(result => {
+          // console.log(result)
+          if (!result.data) {
+            wx.vibrateLong()
+            wx.showToast({
+              icon: 'error',
+              title: that.data.language.common.wrong,
+            })
+          } else {
+            var memos = result.data
+            for (let i = 0; i < memos.length; i++) {
+              let ts = memos[i].createdTs
+              let time = app.calTime(ts)
+              memos[i].time = time
+              //memos原版解析
+              let md = formatMemoContent(memos[i].content)
+              memos[i].formatContent = md
+              memos[i] = app.memosRescourse(memos[i])
+            }
+            let arrMemos = app.memosArrenge(memos)
+            app.globalData.memos = arrMemos
+            wx.hideLoading()
+            that.setData({
+              memos: arrMemos
+            })
+            if (time) {
+              let timeMemos = []
+              arrMemos.map((memo, index) => {
+                if (app.fomaDay(memo.createdTs * 1000) == time) {
+                  timeMemos.push(arrMemos[index])
+                }
+              })
+              that.setData({
+                showMemos: timeMemos
+              })
+            }
+            resolve()
+          }
+        })
+        .catch((err) => {
+          console.log(err)
           wx.vibrateLong()
           wx.showToast({
             icon: 'error',
             title: that.data.language.common.wrong,
           })
-        } else {
-          var memos = result.data
-          for (let i = 0; i < memos.length; i++) {
-            let ts = memos[i].createdTs
-            let time = app.calTime(ts)
-            memos[i].time = time
-            //memos原版解析
-            let md = formatMemoContent(memos[i].content)
-            memos[i].formatContent = md
-            memos[i] = app.memosRescourse(memos[i])
-          }
-          let arrMemos = app.memosArrenge(memos)
-          app.globalData.memos = arrMemos
-          that.setData({
-            memos: arrMemos
-          })
-          if (time) {
-            let timeMemos = []
-            arrMemos.map((memo, index) => {
-              if (app.fomaDay(memo.createdTs * 1000) == time) {
-                timeMemos.push(arrMemos[index])
-              }
-            })
-            that.setData({
-              showMemos: timeMemos
-            })
-          }
-        }
-      })
-      .catch((err) => {
-        console.log(err)
-        wx.vibrateLong()
-        wx.showToast({
-          icon: 'error',
-          title: that.data.language.common.wrong,
+          reject()
         })
-      })
+    })
   },
 
   getSuggestionTags() {
@@ -184,7 +190,15 @@ Page({
         value: '#' + e.currentTarget.dataset.keyword
       }
     }
-    this.search(key)
+    if (this.data.memos.length > 0) {
+      this.search(key)
+    } else {
+      this.getMemos(null)
+        .then(() => {
+          this.search(key)
+        })
+    }
+
   },
 
 
@@ -403,7 +417,7 @@ Page({
     var keyword = e.detail.value
     console.log(keyword)
     var that = this
-    var memos = app.globalData.memos
+    var memos = this.data.memos
     var showMemos = []
     if (keyword == '') {
       wx.vibrateShort()
@@ -412,32 +426,11 @@ Page({
         title: this.data.language.search.cantEmpty,
       })
     } else {
-      if (app.globalData.memos === undefined) {
-        wx.getStorage({
-          key: 'memos',
-          success(res) {
-            that.setData({
-              memos: res.data
-            })
-            app.globalData.memos = res.data
-            memos = res.data
-            console.log(memos)
-            for (let i = 0; i < memos.length; i++) {
-              const content = memos[i].content;
-              var regs = content.search(keyword.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
-              if (regs != -1) {
-                showMemos.push(memos[i])
-              }
-            }
-          }
-        })
-      } else {
-        for (let i = 0; i < memos.length; i++) {
-          const content = memos[i].content;
-          var regs = content.search(keyword.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
-          if (regs != -1) {
-            showMemos.push(memos[i])
-          }
+      for (let i = 0; i < memos.length; i++) {
+        const content = memos[i].content;
+        var regs = content.search(keyword.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+        if (regs != -1) {
+          showMemos.push(memos[i])
         }
       }
       that.setData({
