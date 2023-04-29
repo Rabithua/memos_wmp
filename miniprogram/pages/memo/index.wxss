@@ -31,8 +31,8 @@
   position: fixed;
   bottom: 150rpx;
   right: 50rpx;
-  background-color: #ffffff50;
-  backdrop-filter: blur(30px);
+  background-color: #ffffff;
+  border: 1rpx solid #cccccc;
   display: flex;
   width: fit-content!important;
   font-size: 30rpx;

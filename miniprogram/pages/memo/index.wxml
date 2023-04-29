@@ -1,7 +1,7 @@
 <!--pages/memo/index.wxml-->
 
 <view class="tip" wx:if="{{memo.visibility === 'PRIVATE'}}">
-  可见性为： {{memo.visibility}} （仅自己可见）
+  {{language.memo.visibility_1 + memo.visibility + language.memo.visibility_2}}
 </view>
 <view wx:if="{{memo}}" class="memoCard" style="margin-bottom: 50rpx;">
   <text class="time">{{memo.time}}</text>

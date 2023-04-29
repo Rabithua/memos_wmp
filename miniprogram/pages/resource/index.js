@@ -14,6 +14,13 @@ Page({
       top_btn: app.globalData.top_btn,
       selectMode: o.selectMode ? true : false
     });
+    this.setData({
+      language: app.language[
+        wx.getStorageSync("language") ?
+        wx.getStorageSync("language") :
+        "chinese"
+      ],
+    });
     if (wx.getStorageSync('openId')) {
       this.getResource()
     } else {
@@ -64,6 +71,7 @@ Page({
   pickImg() {
     let that = this
     let resources = this.data.resources
+    wx.vibrateShort()
     wx.chooseMedia({
       count: 1,
       mediaType: ['image', 'video'],
@@ -99,7 +107,7 @@ Page({
 
   getResource() {
     wx.showLoading({
-      title: '加载中',
+      title: this.data.language.common.loading,
     })
     app.api.getResource(this.data.url, this.data.limit, this.data.resources.length).then(res => {
       let newResources = res.data
@@ -110,7 +118,7 @@ Page({
       if (newResources.length == 0) {
         wx.showToast({
           icon: 'none',
-          title: '就这么多了',
+          title: this.data.language.common.thatIsAll,
         })
       }
       wx.hideLoading()
@@ -218,10 +226,11 @@ Page({
     console.log(id, linkedmemoamount)
     if (linkedmemoamount > 0) {
       wx.showModal({
-        title: '警告',
-        content: `当前资源已被${linkedmemoamount}个Memo引用，删除会导致Memo文件丢失`,
-        confirmText: '删除',
+        title: this.data.language.resource.deleteModal.title,
+        content: `${this.data.language.resource.deleteModal.content_1}${linkedmemoamount}${this.data.language.resource.deleteModal.content_2}`,
+        confirmText: this.data.language.resource.deleteModal.confirm,
         confirmColor: '#FF5A5A',
+        cancelText: this.data.language.resource.deleteModal.cancel,
         complete: (res) => {
           if (res.cancel) {
             return
@@ -233,7 +242,7 @@ Page({
                 if (res == true) {
                   wx.vibrateShort()
                   wx.showToast({
-                    title: '已删除',
+                    title: this.data.language.resource.deleted,
                   })
                   this.setData({
                     resources: this.data.resources.filter(function (obj) {
@@ -255,7 +264,7 @@ Page({
           if (res == true) {
             wx.vibrateShort()
             wx.showToast({
-              title: '已删除',
+              title: this.data.language.resource.deleted,
             })
             this.setData({
               resources: this.data.resources.filter(function (obj) {
