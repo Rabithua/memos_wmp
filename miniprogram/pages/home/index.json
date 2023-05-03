@@ -1,7 +1,5 @@
 {
   "usingComponents": {
-    "memoCard": "../../components/memoCard/memoCard",
-    "painter":"/components/painter/painter"
   },
   "navigationStyle": "custom",
   "enablePullDownRefresh": true,

@@ -11,7 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    limit: 100,
+    limit: 20,
     memos: []
   },
 
@@ -35,20 +35,56 @@ Page({
       })
     }
   },
+      
+  copy(e) {
+    console.log(e)
+    wx.vibrateShort()
+    wx.setClipboardData({
+      data: e.target.dataset.url
+    })
+  },
+
+  preview(e) {
+    console.log(e)
+    const url = []
+    for (let i = 0; i < e.target.dataset.url.length; i++) {
+      const src = e.target.dataset.url[i].url;
+      url.push(src)
+    }
+    wx.previewImage({
+      current: e.target.dataset.src, // 当前显示图片的 http 链接
+      urls: url // 需要预览的图片 http 链接列表
+    })
+  },
+  goMemo(e){
+    console.log(e.target.dataset.memoid)
+    wx.navigateTo({
+      url: `/pages/memo/index?id=${e.target.dataset.memoid}`,
+    })
+  },
 
   getMemos(rowStatus) {
     var that = this
-    wx.showLoading({
-      title: '加载中...',
-    })
-    app.api.getMemos(app.globalData.url, this.data.limit, this.data.memos.length, rowStatus)
+    let offset = this.data.memos.length
+    app.api.getMemos(app.globalData.url, this.data.limit, offset, rowStatus)
       .then(result => {
-        // console.log(result)
         if (!result.data) {
           wx.vibrateLong()
           wx.showToast({
             icon: 'error',
             title: that.data.language.common.wrong,
+            state: that.data.language.home.state.offline,
+            onlineColor: '#eeeeee',
+          })
+        } else if (result.data.length == 0) {
+          if (that.data.memos.length == 0) {
+            that.setData({
+              memos: []
+            })
+          }
+          wx.showToast({
+            icon: 'none',
+            title: that.data.language.home.thatIsAll
           })
         } else {
           var memos = result.data
@@ -61,14 +97,8 @@ Page({
             memos[i].formatContent = md
             memos[i] = app.memosRescourse(memos[i])
           }
-          wx.showToast({
-            icon: 'none',
-            title: that.data.language.home.thatIsAll,
-          })
-          var arrMemos = app.memosArrenge(memos)
-          wx.hideLoading()
           that.setData({
-            memos: that.data.memos.concat(arrMemos)
+            memos: that.data.memos.concat(memos)
           })
         }
       })
@@ -84,15 +114,17 @@ Page({
 
   changeMemoPinned(e) {
     wx.vibrateShort()
+    let memoid = e.currentTarget.dataset.memoid
+    let pinned = e.currentTarget.dataset.pinned
     var data = {
-      pinned: !e.detail.pinned
+      pinned: !pinned
     }
     var that = this
-    app.api.changeMemoPinned(this.data.url, e.detail.memoid, data)
+    app.api.changeMemoPinned(this.data.url, memoid, data)
       .then(res => {
         if (res.data) {
           wx.vibrateShort()
-          if (!e.detail.pinned) {
+          if (!pinned) {
             wx.showToast({
               icon: 'none',
               title: that.data.language.home.pinned,
@@ -105,8 +137,8 @@ Page({
           }
           var memos = that.data.memos
           for (let i = 0; i < memos.length; i++) {
-            if (memos[i].id == e.detail.memoid) {
-              memos[i].pinned = !e.detail.pinned
+            if (memos[i].id == memoid) {
+              memos[i].pinned = !pinned
             }
           }
           that.setData({
@@ -117,15 +149,44 @@ Page({
       .catch((err) => console.log(err))
   },
 
-
   deleteMemoFaker(e) {
-    // console.log(e.detail.rowstatus)
+    let memoid = e.currentTarget.dataset.memoid
+    let rowstatus = e.currentTarget.dataset.rowstatus
     var data = {
-      rowStatus: e.detail.rowstatus == "NORMAL" ? 'ARCHIVED' : "NORMAL"
+      rowStatus: rowstatus == "NORMAL" ? 'ARCHIVED' : "NORMAL"
     }
     var url = this.data.url
-    var id = e.detail.memoid
+    var id = memoid
     this.editMemoRowStatus(url, id, data)
+  },
+
+  changeMemoVisibility(e) {
+    let visibility = e.currentTarget.dataset.visibility
+    let memoid = e.currentTarget.dataset.memoid
+    let id = memoid
+    let that = this
+    let memos = app.deepCopy(this.data.memos)
+    app.api.editMemo(this.data.url, id, {
+        visibility: (visibility == 'PRIVATE' ? 'PUBLIC' : 'PRIVATE')
+      })
+      .then(res => {
+        if (res.data) {
+          for (let i = 0; i < memos.length; i++) {
+            if (memos[i].id == id) {
+              memos[i].visibility = (memos[i].visibility == 'PRIVATE' ? 'PUBLIC' : 'PRIVATE')
+            }
+          }
+          that.setData({
+            memos
+          })
+          wx.vibrateShort()
+          wx.showToast({
+            icon: 'none',
+            title: that.data.language.home.visibilityChange,
+          })
+        }
+      })
+      .catch((err) => console.log(err))
   },
 
   editMemoRowStatus(url, id, data) {
@@ -156,8 +217,7 @@ Page({
   deleteMemo(e) {
     var that = this
     var memos = this.data.memos
-    var id = e.detail.memoid
-    // console.log(e.detail.memoid)
+    let memoid = e.currentTarget.dataset.memoid
     wx.showModal({
       confirmText: that.data.language.home.DeleteMemoModal.confirmText,
       cancelText: that.data.language.home.DeleteMemoModal.cancelText,
@@ -169,11 +229,11 @@ Page({
           wx.vibrateShort({
             type: 'light',
           })
-          app.api.deleteMemo(that.data.url, id)
+          app.api.deleteMemo(that.data.url, memoid)
             .then(res => {
               if (res) {
                 for (let i = 0; i < memos.length; i++) {
-                  if (memos[i].id == id) {
+                  if (memos[i].id == memoid) {
                     memos.splice(i, 1)
                   }
                   that.setData({
@@ -197,10 +257,8 @@ Page({
     })
   },
 
-
-
   onReachBottom() {
-
+    this.getMemos('ARCHIVED')
   },
 
   onShow() {

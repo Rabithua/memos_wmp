@@ -98,26 +98,7 @@ App({
       success: console.log
     })
   },
-
-  memosArrenge(memos) {
-    var pinnedNormalMemo = []
-    var nopinnerNormalMemo = []
-    var pinnedArchivedMemo = []
-    var nopinnedArchivedMemo = []
-    for (let i = 0; i < memos.length; i++) {
-      if (memos[i].rowStatus == "NORMAL" && memos[i].pinned) {
-        pinnedNormalMemo.push(memos[i])
-      } else if (memos[i].rowStatus == "NORMAL" && !memos[i].pinned) {
-        nopinnerNormalMemo.push(memos[i])
-      } else if (memos[i].rowStatus == "ARCHIVED" && memos[i].pinned) {
-        pinnedArchivedMemo.push(memos[i])
-      } else {
-        nopinnedArchivedMemo.push(memos[i])
-      }
-    }
-    return pinnedNormalMemo.concat(nopinnerNormalMemo.concat(pinnedArchivedMemo.concat(nopinnedArchivedMemo)))
-  },
-
+  
   calTime(timestamp) {
     var now = new Date().getTime()
     // console.log(now)
