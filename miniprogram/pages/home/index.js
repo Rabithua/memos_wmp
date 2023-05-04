@@ -1,4 +1,3 @@
-// pages/home/index.js
 import {
   formatMemoContent
 } from '../../js/marked'
@@ -16,7 +15,7 @@ Page({
     showShareImg: false,
     shareImgUrl: '',
     showTips: false,
-    limit: 20
+    limit: 20,
   },
 
   onLoad() {
@@ -68,8 +67,38 @@ Page({
   },
 
   onReachBottom() {
+    
+  },
+
+  loadMore(){
     wx.vibrateShort()
     this.getMemos('NORMAL')
+  },
+
+  copy(e) {
+    console.log(e)
+    wx.vibrateShort()
+    wx.setClipboardData({
+      data: e.target.dataset.url
+    })
+  },
+  preview(e) {
+    console.log(e)
+    const url = []
+    for (let i = 0; i < e.target.dataset.url.length; i++) {
+      const src = e.target.dataset.url[i].url;
+      url.push(src)
+    }
+    wx.previewImage({
+      current: e.target.dataset.src, // 当前显示图片的 http 链接
+      urls: url // 需要预览的图片 http 链接列表
+    })
+  },
+  goMemo(e) {
+    console.log(e.target.dataset.memoid)
+    wx.navigateTo({
+      url: `/pages/memo/index?id=${e.target.dataset.memoid}`,
+    })
   },
 
   checkTips() {
@@ -125,7 +154,8 @@ Page({
                       time: app.calTime(newMemo.createdTs),
                     })
                     that.setData({
-                      memos: memos
+                      memos: memos,
+                      scrollMemoId: `memo${newMemo.id}`
                     })
                     app.globalData.memos = memos
                     wx.setStorageSync('memos', memos)
@@ -194,35 +224,20 @@ Page({
     })
   },
 
-  onPainterOK(e) {
-    console.log('生成成功', e)
-    this.setData({
-      imgDraw: null,
-      showShareImg: true,
-      shareImgUrl: e.detail.path
-    })
-    // wx.previewImage({
-    //   current: e.detail.path, // 当前显示图片的 http 链接
-    //   urls: [e.detail.path] // 需要预览的图片 http 链接列表
-    // })
-  },
-
-  onPainterErr(e) {
-    console.log('生成失败', e)
-  },
-
   changeMemoPinned(e) {
     wx.vibrateShort()
+    let pinned = e.currentTarget.dataset.pinned
+    let memoid = e.currentTarget.dataset.memoid
     var data = {
-      pinned: !e.detail.pinned
+      pinned: !pinned
     }
     var that = this
-    app.api.changeMemoPinned(this.data.url, e.detail.memoid, data)
+    app.api.changeMemoPinned(this.data.url, memoid, data)
       .then(res => {
         console.log(res)
         if (res.data) {
           wx.vibrateShort()
-          if (!e.detail.pinned) {
+          if (!pinned) {
             wx.showToast({
               icon: 'none',
               title: that.data.language.home.pinned,
@@ -235,19 +250,17 @@ Page({
           }
           var memos = that.data.memos
           for (let i = 0; i < memos.length; i++) {
-            if (memos[i].id == e.detail.memoid) {
-              memos[i].pinned = !e.detail.pinned
+            if (memos[i].id == memoid) {
+              memos[i].pinned = !pinned
             }
           }
-          var arrMemos = app.memosArrenge(memos)
-          console.log(arrMemos)
           that.setData({
-            memos: arrMemos
+            memos
           })
-          app.globalData.memos = arrMemos
+          app.globalData.memos = memos
           wx.setStorage({
             key: 'memos',
-            data: arrMemos
+            data: memos
           })
         }
       })
@@ -255,11 +268,12 @@ Page({
   },
 
   changeMemoVisibility(e) {
-    console.log(e.detail.memoid)
-    let id = e.detail.memoid
+    let visibility = e.currentTarget.dataset.visibility
+    let memoid = e.currentTarget.dataset.memoid
+    let id = memoid
     var that = this
     app.api.editMemo(this.data.url, id, {
-        visibility: (e.detail.visibility == 'PRIVATE' ? 'PUBLIC' : 'PRIVATE')
+        visibility: (visibility == 'PRIVATE' ? 'PUBLIC' : 'PRIVATE')
       })
       .then(res => {
         if (res.data) {
@@ -288,10 +302,11 @@ Page({
   },
 
   dialogEdit(e) {
-    // console.log(e)
+    let memoid = e.currentTarget.dataset.memoid
+    let content = e.currentTarget.dataset.content
     let that = this
     let memos = this.data.memos
-    let resourceIdList = memos.filter(item => item.id == e.detail.memoid)[0].resourceList.map(item => item.id)
+    let resourceIdList = memos.filter(item => item.id == memoid)[0].resourceList.map(item => item.id)
     wx.vibrateShort()
     wx.navigateTo({
       url: '../edit/index?edit=true',
@@ -316,7 +331,8 @@ Page({
               })
               console.log(memos)
               that.setData({
-                memos: memos
+                memos: memos,
+                scrollMemoId: `memo${newMemo.id}`
               })
               app.globalData.memos = memos
               wx.setStorageSync('memos', memos)
@@ -329,8 +345,8 @@ Page({
       success: function (res) {
         // 通过 eventChannel 向被打开页面传送数据
         res.eventChannel.emit('acceptDataFromOpenerPage', {
-          editMemoId: e.detail.memoid,
-          memo: e.detail.content,
+          editMemoId: memoid,
+          memo: content,
           resourceIdList
         })
       }
@@ -361,7 +377,7 @@ Page({
               state: that.data.language.home.state.online,
               onlineColor: '#07C160'
             })
-            app.globalData.memos = arrMemos
+            app.globalData.memos = memos
             wx.setStorage({
               key: "memos",
               data: []
@@ -382,13 +398,12 @@ Page({
             memos[i].formatContent = md
             memos[i] = app.memosRescourse(memos[i])
           }
-          var arrMemos = app.memosArrenge(memos)
           that.setData({
-            memos: type == 'refresh' ? arrMemos : that.data.memos.concat(arrMemos),
+            memos: type == 'refresh' ? memos : that.data.memos.concat(memos),
             state: that.data.language.home.state.online,
             onlineColor: '#07C160'
           })
-          app.globalData.memos = arrMemos
+          app.globalData.memos = memos
           wx.setStorage({
             key: "memos",
             data: that.data.memos
@@ -405,6 +420,7 @@ Page({
         that.setData({
           state: that.data.language.home.state.offline,
           onlineColor: '#eeeeee',
+          memos: wx.getStorageSync('memos')
         })
         wx.stopPullDownRefresh()
       })
@@ -545,7 +561,6 @@ Page({
     var that = this
     app.api.editMemo(url, id, data)
       .then(res => {
-        console.log(res)
         if (res.data) {
           var memos = that.data.memos
           for (let i = 0; i < memos.length; i++) {
@@ -598,20 +613,19 @@ Page({
   },
 
   deleteMemoFaker(e) {
-    console.log(e.detail.rowstatus)
+    let rowstatus = e.currentTarget.dataset.rowstatus
     var data = {
-      rowStatus: e.detail.rowstatus == "NORMAL" ? 'ARCHIVED' : "NORMAL"
+      rowStatus: rowstatus == "NORMAL" ? 'ARCHIVED' : "NORMAL"
     }
     var url = this.data.url
-    var id = e.detail.memoid
+    var id = e.currentTarget.dataset.memoid
     this.editMemoRowStatus(url, id, data)
   },
 
   deleteMemo(e) {
     var that = this
     var memos = this.data.memos
-    var id = e.detail.memoid
-    console.log(e.detail.memoid)
+    var id = e.currentTarget.dataset.memoid
     wx.showModal({
       confirmText: that.data.language.home.DeleteMemoModal.confirmText,
       cancelText: that.data.language.home.DeleteMemoModal.cancelText,
@@ -630,14 +644,13 @@ Page({
                   if (memos[i].id == id) {
                     memos.splice(i, 1)
                   }
-                  var arrMemos = app.memosArrenge(memos)
                   that.setData({
-                    memos: arrMemos
+                    memos
                   })
-                  app.globalData.memos = arrMemos
+                  app.globalData.memos = memos
                   wx.setStorage({
                     key: "memos",
-                    data: arrMemos
+                    data: memos
                   })
                 }
                 wx.showToast({
@@ -691,58 +704,6 @@ Page({
 
   },
 
-  canvas_start(e) {
-    console.log(e.detail.content)
-    wx.showToast({
-      icon: 'loading',
-      title: this.data.language.common.loading,
-    })
-    this.setData({
-      imgDraw: {
-        "width": "900px",
-        "height": "1200px",
-        "borderRadius": "30px",
-        "background": "#f5f5f5",
-        "views": [{
-            "type": "image",
-            "url": "https://img.rabithua.club/others/sharecard.png",
-            "css": {
-              "width": "900px",
-              "height": "1200px",
-              "top": "0px",
-              "left": "0px",
-              "borderColor": "#ffffff",
-              "mode": "scaleToFill"
-            }
-          },
-          {
-            "type": "text",
-            "text": e.detail.content,
-            "css": {
-              "fontSize": "70px",
-              "color": "#07C160",
-              "width": "620px",
-              "height": "400px",
-              "top": "274px",
-              "left": "132px",
-              "fontWeight": "bolder",
-              "maxLines": "6",
-              "lineHeight": "80px",
-              "textAlign": "left",
-            }
-          }
-        ]
-      }
-    })
-  },
-
-  hideShreImg() {
-    this.setData({
-      showShareImg: false,
-      shareImgUrl: ''
-    })
-  },
-
   hideTips() {
     this.setData({
       showTips: false
@@ -760,6 +721,17 @@ Page({
     // console.log(e)
   },
 
+  refreshMemo() {
+    let that = this
+    that.setData({
+      state: this.data.language.common.refreshing,
+      onlineColor: '#FCA417'
+    })
+    that.getMemos('NORMAL', 'refresh')
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 300);
+  },
   onPullDownRefresh() {
     let that = this
     that.setData({

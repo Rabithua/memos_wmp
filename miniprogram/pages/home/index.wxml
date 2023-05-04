@@ -1,16 +1,12 @@
 <!--pages/home/index.wxml-->
-<painter style="position: absolute; top: -9999rpx;" use2D="true" palette="{{imgDraw}}" bind:imgOK="onPainterOK" bind:imgErr="onPainterErr" />
 <view class="maskHeader"></view>
 <view class="headerContainer" style="margin-top: {{top_btn.top}}px">
   <view bindtap="goWelcom" class="header" style="height:{{top_btn.height}}px;">
     <image src="../../images/icon.png" class="icon"></image>
     <view>{{state}}</view>
-    <view style="width: 20rpx; height: 20rpx; border-radius: 20rpx; background-color: {{onlineColor}}; margin-left: 20rpx;"></view>
+    <view style="width: 10rpx; height: 10rpx; border-radius: 20rpx; background-color: {{onlineColor}}; box-shadow: 0 0 20rpx {{onlineColor}}; margin-left: 20rpx;"></view>
   </view>
   <view class="searchIcon" style="height:{{top_btn.height}}px;width:{{top_btn.height}}px; margin-left: auto; margin-right: {{top_btn.width}}px;" catchtap="goSearch"></view>
-</view>
-<view catchtap="hideShreImg" catchtouchmove="none" wx:if="{{showShareImg}}" class="shareImg_block">
-  <image class="shareImg" catchtap="none" show-menu-by-longpress src="{{shareImgUrl}}"></image>
 </view>
 <view catchtap="hideTips" wx:if="{{showTips}}" class="shareImg_block">
   <view class="Tips" catchlongpress="closeTips">
@@ -43,18 +39,36 @@
   </view>
 </view>
 <view class="container" style="transform: scale({{showSidebar?'0.95':'1'}});" bindtouchstart="setSidebar" bindtouchmove="showSidebar">
-  <view style="margin-top: {{top_btn.top + top_btn.height + 20}}px;">
-    <memoCard memos="{{memos.length > 0 ? memos: storageMemos}}" pinned="{{true}}" rowStatus="NORMAL" bind:deleteMemoFaker="deleteMemoFaker" bind:deleteMemo="deleteMemo" bind:dialogEdit="dialogEdit" bind:changeMemoPinned="changeMemoPinned" bind:changeMemoVisibility="changeMemoVisibility" bind:shareMemo="canvas_start" />
-    <memoCard memos="{{memos.length > 0 ? memos: storageMemos}}" pinned="{{false}}" rowStatus="NORMAL" bind:deleteMemoFaker="deleteMemoFaker" bind:deleteMemo="deleteMemo" bind:dialogEdit="dialogEdit" bind:changeMemoPinned="changeMemoPinned" bind:changeMemoVisibility="changeMemoVisibility" bind:shareMemo="canvas_start" />
-    <block wx:if="{{memos.length == 0}}">
-      <view class="none">{{language.home.noMemos}}</view>
-    </block>
-    <!-- <view class="archivedbtn" style="margin-bottom: {{ showArchived? 20:80 }}rpx; margin-top: {{showArchived? 10:40}}rpx;" catchtap="changeshowArchived">{{language.home.archived}}</view>
-    <block wx:if="{{showArchived}}">
-      <memoCard memos="{{memos.length > 0 ? memos: storageMemos}}" pinned="{{true}}" rowStatus="ARCHIVED" bind:deleteMemoFaker="deleteMemoFaker" bind:deleteMemo="deleteMemo" bind:dialogEdit="dialogEdit" bind:changeMemoPinned="changeMemoPinned" bind:changeMemoVisibility="changeMemoVisibility" bind:shareMemo="canvas_start" />
-      <memoCard memos="{{memos.length > 0 ? memos: storageMemos}}" pinned="{{false}}" rowStatus="ARCHIVED" bind:deleteMemoFaker="deleteMemoFaker" bind:deleteMemo="deleteMemo" bind:dialogEdit="dialogEdit" bind:changeMemoPinned="changeMemoPinned" bind:changeMemoVisibility="changeMemoVisibility" bind:shareMemo="canvas_start" />
-    </block> -->
-  </view>
+  <scroll-view wx:if="{{memos.length > 0}}" class="memosScroll" style="height: calc(100vh - {{top_btn.top + top_btn.height + 10}}px); padding-top: {{top_btn.top + top_btn.height + 10}}px;" scroll-y scroll-with-animation scroll-into-view="{{scrollMemoId}}" scroll-with-animation="true" enhanced bounces bindscrolltolower="loadMore" bindscrolltoupper="refreshMemo">
+    <view class="memoCard" wx:for="{{memos}}" wx:key="memo" style="border-left: {{item.rowStatus == 'ARCHIVED' ? '5rpx solid #EF4C4E' : 'none'}};" data-memoId="{{item.id}}" id="memo{{item.id}}">
+      <view class="method">
+        <text class="btn top" style="opacity: {{item.pinned ? 1:0.2}};" data-memoId="{{item.id}}" data-pinned="{{item.pinned}}" data-content="{{item.content}}" catchtap="changeMemoPinned" catchlongpress="goMemo"></text>
+        <text class="btn delete" data-memoId="{{item.id}}" data-rowStatus="{{item.rowStatus}}" catchtap="deleteMemoFaker" catchlongpress="deleteMemo"></text>
+        <text class="btn edit" data-memoId="{{item.id}}" data-content="{{item.content}}" catchtap="dialogEdit"></text>
+      </view>
+      <text class="time" style="color: {{item.time == '刚刚发布' || item.time=='Now' ? '#07C160' : '' }};">{{item.time}}</text>
+      <text class="status" wx:if="{{showCreator}}">{{item.creatorName}}</text>
+      <text class="status" wx:else data-memoId="{{item.id}}" data-visibility="{{item.visibility}}" catchtap="changeMemoVisibility">{{item.visibility}}</text>
+
+      <view class="content">
+        <rich-text data-content="{{item.content}}" user-select nodes="{{item.formatContent}}"></rich-text>
+      </view>
+      <view class="imgList">
+        <image class="img" catchtap="preview" data-src="{{image.url}}" data-url="{{item.imgList_preview}}" lazy-load mode="aspectFill" wx:key="image" wx:for="{{item.imgList_preview}}" wx:for-item="image" src="{{image.url}}"></image>
+      </view>
+      <view class="videoList">
+        <video class="video" data-src="{{video.url}}" data-url="{{item.video_preview}}" lazy-load mode="aspectFill" wx:key="video" wx:for="{{item.video_preview}}" wx:for-item="video" src="{{video.url}}"></video>
+      </view>
+      <view class="fileList">
+        <view class="file" wx:for="{{item.fileList_preview}}" wx:key="file" wx:for-item="file" data-url="{{file.url}}" catchtap="copy">{{file.id}}</view>
+      </view>
+
+    </view>
+    <view style="height: 100rpx;"> </view>
+  </scroll-view>
+  <block wx:else>
+    <view class="none" style="margin-top: 300rpx;">{{language.home.noMemos}}</view>
+  </block>
 </view>
 
 <view class="sidebar" catchtouchmove="none" style="transform: translateX({{showSidebar?'0rpx':'-750rpx'}});">

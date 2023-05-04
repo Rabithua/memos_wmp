@@ -88,7 +88,7 @@ export const chinese = {
     editErr: '内容不能为空',
     editChanged: '已更改',
     send: '发送',
-    noMemos: '一条 Memo 也没有发现，尝试侧滑打开编辑发送一个新的吧~',
+    noMemos: '采菊东篱下，悠然现南山',
     reachBottom: '到底了~',
     pinned: '已置顶',
     unpinned: '已取消置顶',

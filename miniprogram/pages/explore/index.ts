@@ -17,6 +17,32 @@ Page({
     this.getExploreMemos();
   },
 
+  copy(e:any) {
+    console.log(e)
+    wx.vibrateShort()
+    wx.setClipboardData({
+      data: e.target.dataset.url
+    })
+  },
+  preview(e:any) {
+    console.log(e)
+    const url = []
+    for (let i = 0; i < e.target.dataset.url.length; i++) {
+      const src:never = e.target.dataset.url[i].url as never;
+      url.push(src)
+    }
+    wx.previewImage({
+      current: e.target.dataset.src, // 当前显示图片的 http 链接
+      urls: url // 需要预览的图片 http 链接列表
+    })
+  },
+  goMemo(e:any){
+    console.log(e.target.dataset.memoid)
+    wx.navigateTo({
+      url: `/pages/memo/index?id=${e.target.dataset.memoid}`,
+    })
+  },
+
   getExploreMemos() {
     let that = this;
     wx.showLoading({
@@ -67,7 +93,6 @@ Page({
   },
 
   onReachBottom() {
-    console.log("chudi");
     this.getExploreMemos();
   },
 

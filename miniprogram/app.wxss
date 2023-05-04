@@ -309,7 +309,7 @@ page {
 .memoCard .imgList {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   gap: 10rpx;
   margin-top: 20rpx;
 }
