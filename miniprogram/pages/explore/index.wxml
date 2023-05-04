@@ -11,9 +11,7 @@
       <text class="btn edit" data-memoId="{{item.id}}" data-content="{{item.content}}" catchtap="dialogEdit"></text>
     </view>
     <text class="time">{{item.time}}</text>
-    <text class="status" wx:if="{{showCreator}}">{{item.creatorName}}</text>
-    <text class="status" wx:else data-memoId="{{item.id}}" data-visibility="{{item.visibility}}" catchtap="changeMemoVisibility">{{item.visibility}}</text>
-
+    <text class="time">{{item.creatorName}}</text>
     <view class="content">
       <rich-text data-content="{{item.content}}" user-select nodes="{{item.formatContent}}"></rich-text>
     </view>

@@ -16,7 +16,6 @@ Page({
     shareImgUrl: '',
     showTips: false,
     limit: 20,
-    scrollMemoId: 'chat1839'
   },
 
   onLoad() {
@@ -68,6 +67,10 @@ Page({
   },
 
   onReachBottom() {
+    
+  },
+
+  loadMore(){
     wx.vibrateShort()
     this.getMemos('NORMAL')
   },
@@ -91,7 +94,7 @@ Page({
       urls: url // 需要预览的图片 http 链接列表
     })
   },
-  goMemo(e){
+  goMemo(e) {
     console.log(e.target.dataset.memoid)
     wx.navigateTo({
       url: `/pages/memo/index?id=${e.target.dataset.memoid}`,
@@ -151,7 +154,8 @@ Page({
                       time: app.calTime(newMemo.createdTs),
                     })
                     that.setData({
-                      memos: memos
+                      memos: memos,
+                      scrollMemoId: `memo${newMemo.id}`
                     })
                     app.globalData.memos = memos
                     wx.setStorageSync('memos', memos)
@@ -327,7 +331,8 @@ Page({
               })
               console.log(memos)
               that.setData({
-                memos: memos
+                memos: memos,
+                scrollMemoId: `memo${newMemo.id}`
               })
               app.globalData.memos = memos
               wx.setStorageSync('memos', memos)
@@ -415,6 +420,7 @@ Page({
         that.setData({
           state: that.data.language.home.state.offline,
           onlineColor: '#eeeeee',
+          memos: wx.getStorageSync('memos')
         })
         wx.stopPullDownRefresh()
       })
@@ -715,6 +721,17 @@ Page({
     // console.log(e)
   },
 
+  refreshMemo() {
+    let that = this
+    that.setData({
+      state: this.data.language.common.refreshing,
+      onlineColor: '#FCA417'
+    })
+    that.getMemos('NORMAL', 'refresh')
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 300);
+  },
   onPullDownRefresh() {
     let that = this
     that.setData({

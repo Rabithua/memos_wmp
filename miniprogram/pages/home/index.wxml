@@ -39,14 +39,14 @@
   </view>
 </view>
 <view class="container" style="transform: scale({{showSidebar?'0.95':'1'}});" bindtouchstart="setSidebar" bindtouchmove="showSidebar">
-  <scroll-view style="margin-top: {{top_btn.top + top_btn.height + 20}}px;" scroll-y scroll-with-animation scroll-into-view="{{scrollMemoId}}">
+  <scroll-view wx:if="{{memos.length > 0}}" class="memosScroll" style="height: calc(100vh - {{top_btn.top + top_btn.height + 10}}px); padding-top: {{top_btn.top + top_btn.height + 10}}px;" scroll-y scroll-with-animation scroll-into-view="{{scrollMemoId}}" scroll-with-animation="true" enhanced bounces bindscrolltolower="loadMore" bindscrolltoupper="refreshMemo">
     <view class="memoCard" wx:for="{{memos}}" wx:key="memo" style="border-left: {{item.rowStatus == 'ARCHIVED' ? '5rpx solid #EF4C4E' : 'none'}};" data-memoId="{{item.id}}" id="memo{{item.id}}">
       <view class="method">
         <text class="btn top" style="opacity: {{item.pinned ? 1:0.2}};" data-memoId="{{item.id}}" data-pinned="{{item.pinned}}" data-content="{{item.content}}" catchtap="changeMemoPinned" catchlongpress="goMemo"></text>
         <text class="btn delete" data-memoId="{{item.id}}" data-rowStatus="{{item.rowStatus}}" catchtap="deleteMemoFaker" catchlongpress="deleteMemo"></text>
         <text class="btn edit" data-memoId="{{item.id}}" data-content="{{item.content}}" catchtap="dialogEdit"></text>
       </view>
-      <text class="time">{{item.time}}</text>
+      <text class="time" style="color: {{item.time == '刚刚发布' || item.time=='Now' ? '#07C160' : '' }};">{{item.time}}</text>
       <text class="status" wx:if="{{showCreator}}">{{item.creatorName}}</text>
       <text class="status" wx:else data-memoId="{{item.id}}" data-visibility="{{item.visibility}}" catchtap="changeMemoVisibility">{{item.visibility}}</text>
 
@@ -64,9 +64,10 @@
       </view>
 
     </view>
+    <view style="height: 100rpx;"> </view>
   </scroll-view>
-  <block wx:if="{{memos.length == 0}}">
-    <view class="none">{{language.home.noMemos}}</view>
+  <block wx:else>
+    <view class="none" style="margin-top: 300rpx;">{{language.home.noMemos}}</view>
   </block>
 </view>
 
