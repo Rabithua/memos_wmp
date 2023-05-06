@@ -52,7 +52,7 @@ Page({
         icon: 'none',
         title: '🕺🐕💃',
       })
-      let dogTimer= setInterval(() => {
+      let dogTimer = setInterval(() => {
         wx.vibrateShort({
           type: 'heavy'
         })
@@ -307,7 +307,7 @@ Page({
     var content = newMemoContent
     var url = this.data.url
     var that = this
-    app.api.sendMemo(url, openId, content)
+    app.api.sendMemo(url, content, [])
       .then(res => {
         console.log(res.data)
         if (res.data) {
@@ -369,37 +369,6 @@ Page({
     })
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
   onShareAppMessage() {
     return {
       title: this.data.language.welcom.shareMsg.title,

@@ -1,5 +1,4 @@
 <!--pages/home/index.wxml-->
-<view class="maskHeader"></view>
 <view class="headerContainer" style="margin-top: {{top_btn.top}}px">
   <view bindtap="goWelcom" class="header" style="height:{{top_btn.height}}px;">
     <image src="../../images/icon.png" class="icon"></image>
@@ -10,6 +9,9 @@
 </view>
 <view catchtap="hideTips" wx:if="{{showTips}}" class="shareImg_block">
   <view class="Tips" catchlongpress="closeTips">
+    <view class="Tip_p" style="text-align: right; color: #00000060; animation: show infinite alternate-reverse 2s; font-size: 14px;">
+      {{language.home.Tips.p_close}}
+    </view>
     <view class="Tip_title">
       {{language.home.Tips.title_1}}
     </view>
@@ -33,8 +35,14 @@
     <view class="Tip_p">
       {{language.home.Tips.p_5}}
     </view>
-    <view class="Tip_p" style="text-align: right; color: #00000060; animation: show infinite alternate-reverse 2s; font-size: 14px;">
-      {{language.home.Tips.p_close}}
+    <view class="Tip_p">
+      {{language.home.Tips.p_6}}
+    </view>
+    <view class="Tip_p">
+      {{language.home.Tips.p_7}}
+    </view>
+    <view class="Tip_p">
+      {{language.home.Tips.p_8}}
     </view>
   </view>
 </view>

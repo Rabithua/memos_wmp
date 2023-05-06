@@ -1,5 +1,5 @@
 <!--pages/edit/index.wxml-->
-<textarea class="memoEditTextarea" hold-keyboard maxlength="3000" placeholder="{{language.edit.placeHolder}}" value="{{memo}}" catchinput="memoInput" focus="{{memoFocus}}" cursor-spacing="30" bindfocus="setKeyBoard" bindblur="memoBlur" adjust-position="{{false}}" show-confirm-bar="{{false}}" cursor="{{cursor}}">
+<textarea class="memoEditTextarea" hold-keyboard maxlength="10000" placeholder="{{language.edit.placeHolder}}" value="{{memo}}" catchinput="memoInput" focus="{{memoFocus}}" cursor-spacing="30" bindfocus="setKeyBoard" bindblur="memoBlur" adjust-position="{{false}}" show-confirm-bar="{{false}}" cursor="{{cursor}}">
 </textarea>
 
 <view class="title" style="margin-bottom: 0rpx; margin-left: 60rpx; font-size: 26rpx;">
