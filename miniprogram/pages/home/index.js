@@ -15,7 +15,7 @@ Page({
     showShareImg: false,
     shareImgUrl: '',
     showTips: false,
-    limit: 20,
+    limit: 20
   },
 
   onLoad() {

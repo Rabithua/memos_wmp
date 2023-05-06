@@ -130,7 +130,10 @@ export const chinese = {
       title_2: '功能更新',
       p_2: 'Search 页面新增 Tag 建议，支持从建议创建 Tag✨',
       p_3: '新建或编辑 memo 时自动缓存，妈妈再也不会担心我写了一半的小作文丢失了✌',
-      p_5: 'Search 页面memo卡片完整操作支持🎉'
+      p_5: 'Search 页面memo卡片完整操作支持🎉',
+      p_6: '归档页面，资源库页面可以上传图片或视频了🧩',
+      p_7: '可以通过左侧的侧滑栏中的热点图直接跳转到搜索页面，检索对应日期的Memo🔎',
+      p_8: '以及数不清的细节，懒得写了☺️'
     }
   },
   search: {
@@ -289,7 +292,10 @@ export const english = {
       title_2: 'Feature update',
       p_2: 'Added Tag suggestions on the Search page, which supports creating Tags from suggestions✨',
       p_3: 'Automatic caching when creating or editing a memo, my mother will never worry about losing my half-written essay✌',
-      p_5: 'Search page memo card complete operation support🎉'
+      p_5: 'Search page memo card complete operation support🎉',
+      p_6: 'Archived page and Resources page can now upload pictures or videos 🧩',
+      p_7: 'You can directly jump to the search page through the hotspot image in the left sliding menu to search for the corresponding date\'s Memo 🔎',
+      p_8: 'And countless details that I\'m too lazy to write about ☺️'
     }
   },
   search: {
