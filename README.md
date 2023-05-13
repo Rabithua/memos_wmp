@@ -44,4 +44,4 @@ git clone https://github.com/Rabithua/memos_wmp
 
 ### 取消自动发送memos教程
 
-每次重新登陆会自动发布一条memosWMP使用教程的memos，觉得麻烦的可以在 `pages/welcom/index.js` 中搜索 `that.sendMemo(openId)` 并注释。
+每次重新登陆会自动发布一条memosWMP使用教程的memos，觉得麻烦的可以在 `pages/welcom/index.js` 中搜索 `that.sendMemo` 并注释。
