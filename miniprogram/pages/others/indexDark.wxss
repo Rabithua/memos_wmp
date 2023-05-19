@@ -1,0 +1,18 @@
+@media (prefers-color-scheme: dark) {
+  page {
+    background-color: #282828 !important;
+  }
+  .others {
+    color: #ffffff50 !important;
+  }
+  .me {
+    filter: invert(1);
+  }
+  .app {
+    background-color: #00000010 !important;
+    color: #ffffff;
+  }
+  .desc {
+    color: #ffffff50 !important;
+  }
+}

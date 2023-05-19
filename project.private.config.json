@@ -75,6 +75,13 @@
           "query": "selectMode=true",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/others/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

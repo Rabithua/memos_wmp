@@ -7,7 +7,8 @@
     "pages/edit/index",
     "pages/archived/index",
     "pages/memo/index",
-    "pages/resource/index"
+    "pages/resource/index",
+    "pages/others/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

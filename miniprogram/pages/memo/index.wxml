@@ -16,7 +16,7 @@
     <video class="video" data-src="{{video.url}}" data-url="{{memo.video_preview}}" lazy-load mode="aspectFill" wx:key="video" wx:for="{{memo.video_preview}}" wx:for-item="video" src="{{video.url}}"></video>
   </view>
   <view class="fileList">
-    <view class="file" wx:for="{{memo.fileList_preview}}" wx:key="file" wx:for-item="file" data-url="{{file.url}}" catchtap="copy">{{file.name}}</view>
+    <view class="file" wx:for="{{memo.fileList_preview}}" wx:key="file" wx:for-item="file" data-url="{{file.url}}" catchtap="copy">{{file.id}}</view>
   </view>
 </view>
 

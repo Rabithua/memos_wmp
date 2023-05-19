@@ -118,6 +118,7 @@ export const chinese = {
       openResource: '资源库📁 →',
       openWebview: '探索✨ →',
       goarchived: '已归档🌒 →',
+      goOthers: '更多小玩具💫 →',
       date_1: '注册于 ',
       date_2: '天前。',
       heatTipMemo: '条记录'
@@ -280,6 +281,7 @@ export const english = {
       openResource: 'Resource📁 →',
       openWebview: 'Explore✨ →',
       goarchived: 'Archived🌒 →',
+      goOthers: 'More interesting💫 →',
       date_1: 'Registered for ',
       date_2: 'Days.',
       heatTipMemo: 'Memos'
