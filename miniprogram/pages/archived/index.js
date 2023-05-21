@@ -11,7 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    limit: 20,
+    limit: 10,
     memos: []
   },
 
@@ -258,6 +258,7 @@ Page({
   },
 
   onReachBottom() {
+    wx.vibrateShort()
     this.getMemos('ARCHIVED')
   },
 

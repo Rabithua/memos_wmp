@@ -1,19 +1,22 @@
+<view class="spacer" style="height: {{top_btn.top + top_btn.height + 10}}px;"></view>
+
 <view class="headerContainer" style="top: {{top_btn.top}}px">
   <view class="header" style="height:{{top_btn.height}}px;">{{language.archived.pageTitle}}
   </view>
 </view>
 
-<scroll-view wx:if="{{memos.length > 0}}" scroll-y scroll-with-animation scroll-into-view="{{scrollMemoId}}">
+<view class="memos">
   <view class="memoCard" wx:for="{{memos}}" wx:key="memo" style="border-left: {{item.rowStatus == 'ARCHIVED' ? '5rpx solid #EF4C4E' : 'none'}};" data-memoId="{{item.id}}" id="memo{{item.id}}">
     <view class="method">
       <text class="btn top" style="opacity: {{item.pinned ? 1:0.2}};" data-memoId="{{item.id}}" data-pinned="{{item.pinned}}" data-content="{{item.content}}" catchtap="changeMemoPinned" catchlongpress="goMemo"></text>
       <text class="btn delete" data-memoId="{{item.id}}" data-rowStatus="{{item.rowStatus}}" catchtap="deleteMemoFaker" catchlongpress="deleteMemo"></text>
       <text class="btn edit" data-memoId="{{item.id}}" data-content="{{item.content}}" catchtap="dialogEdit"></text>
     </view>
-    <text class="time">{{item.time}}</text>
-    <text class="status" wx:if="{{showCreator}}">{{item.creatorName}}</text>
-    <text class="status" wx:else data-memoId="{{item.id}}" data-visibility="{{item.visibility}}" catchtap="changeMemoVisibility">{{item.visibility}}</text>
-
+    <view class="part_top">
+      <view class="time" style="color: {{item.time == '刚刚发布' || item.time=='Now' ? '#07C160' : '' }};">{{item.time}}</view>
+      <view class="{{'vis_icon ' + item.visibility}}"></view>
+      <view class="status" data-memoId="{{item.id}}" data-visibility="{{item.visibility}}" catchtap="changeMemoVisibility">{{item.visibility}}</view>
+    </view>
     <view class="content">
       <rich-text data-content="{{item.content}}" user-select nodes="{{item.formatContent}}"></rich-text>
     </view>
@@ -28,8 +31,7 @@
     </view>
 
   </view>
-</scroll-view>
-
-<view wx:else style="padding: 100rpx 30rpx; text-align: center;opacity: 0.8;">
-  {{language.archived.nothing}}
+  <view wx:if="{{memos.length == 0}}" style="padding: 100rpx 30rpx; text-align: center;opacity: 0.8;">
+    {{language.archived.nothing}}
+  </view>
 </view>

@@ -15,7 +15,9 @@ Page({
     showShareImg: false,
     shareImgUrl: '',
     showTips: false,
-    limit: 20
+    limit: 20,
+    showExplore: false,
+    x: 0
   },
 
   onLoad() {
@@ -23,7 +25,7 @@ Page({
     this.setData({
       top_btn: app.globalData.top_btn
     })
-
+    this.ifHideExplore()
     if (wx.getStorageSync('openId')) {
       that.setData({
         url: app.globalData.url,
@@ -56,8 +58,44 @@ Page({
 
   },
 
+  scorllRef(id) {
+    clearTimeout(this.data.scorllTimer)
+    let scorllTimer = setTimeout(() => {
+      let that = this
+      wx.createSelectorQuery().select(id).boundingClientRect(function (res) {
+        let x = res.top + that.data.x - that.data.top_btn.top - that.data.top_btn.height - 20
+        console.log(res, x)
+        wx.pageScrollTo({
+          scrollTop: x,
+          duration: 300
+        })
+        that.setData({
+          x
+        })
+      }).exec()
+    }, 500);
+    this.setData({
+      scorllTimer
+    })
+  },
+
+  ifHideExplore() {
+    const env = __wxConfig.envVersion;
+    if (env == "release") {
+      this.setData({
+        showExplore: true,
+      });
+    }
+  },
+
   onHide() {
     this.hideSidebar()
+  },
+
+  onPageScroll(e) {
+    this.setData({
+      x: e.scrollTop
+    })
   },
 
   onShow() {
@@ -67,10 +105,11 @@ Page({
   },
 
   onReachBottom() {
-    
+    wx.vibrateShort()
+    this.loadMore()
   },
 
-  loadMore(){
+  loadMore() {
     wx.vibrateShort()
     this.getMemos('NORMAL')
   },
@@ -154,9 +193,9 @@ Page({
                       time: app.calTime(newMemo.createdTs),
                     })
                     that.setData({
-                      memos: memos,
-                      scrollMemoId: `memo${newMemo.id}`
+                      memos: memos
                     })
+                    that.scorllRef(`#memo${newMemo.id}`)
                     app.globalData.memos = memos
                     wx.setStorageSync('memos', memos)
                     break;
@@ -329,11 +368,10 @@ Page({
                   }
                 }
               })
-              console.log(memos)
               that.setData({
-                memos: memos,
-                scrollMemoId: `memo${newMemo.id}`
+                memos: memos
               })
+              that.scorllRef(`#memo${newMemo.id}`)
               app.globalData.memos = memos
               wx.setStorageSync('memos', memos)
               break;

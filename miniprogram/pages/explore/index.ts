@@ -8,6 +8,7 @@ Page({
     showMemos: [],
     offset: 0,
     limit: 20,
+    showCreator:true
   },
 
   onLoad() {
@@ -93,8 +94,15 @@ Page({
   },
 
   onReachBottom() {
+    wx.vibrateShort()
     this.getExploreMemos();
   },
 
-  onShareAppMessage(options) {},
+  
+  onShareAppMessage() {
+    return {
+      title: this.data.language.explore.pageTitle,
+      path: '/pages/explore/index'
+    }
+  }
 });

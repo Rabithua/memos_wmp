@@ -30,6 +30,8 @@ export const chinese = {
     choosed_1: '已选择',
     choosed_2: '个',
     deleted: '已删除',
+    tooLarge: '文件超过32M',
+    uploadFailed: '上传失败',
     deleteModal: {
       title: '警告',
       content_1: '当前资源已被',
@@ -193,6 +195,8 @@ export const english = {
     choosed_1: 'Selected ',
     choosed_2: '',
     deleted: 'Deleted!',
+    tooLarge: 'The file is too large (over 32MB).',
+    uploadFailed: 'Upload failed.',
     deleteModal: {
       title: 'Warning',
       content_1: 'The current resource has been referenced by ',

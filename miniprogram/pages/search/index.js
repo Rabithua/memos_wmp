@@ -14,6 +14,7 @@ Page({
     showMemos: [],
     memos: [],
     limit: 200,
+    x:0
   },
 
   onLoad(o) {
@@ -393,14 +394,22 @@ Page({
     })
   },
 
+  onPageScroll(e) {
+    this.setData({
+      x: e.scrollTop
+    })
+  },
+
   dialogEdit(e) {
     // console.log(e)
     let that = this
     let memoId = e.currentTarget.dataset.memoid
     let content = e.currentTarget.dataset.content
     let resourceIdList = this.data.memos.find(obj => obj.id === memoId).resourceList.map(item => item.id)
+    const query = wx.createSelectorQuery()
     this.setData({
-      editId: memoId
+      editId: memoId,
+      query
     })
     wx.vibrateShort()
     wx.navigateTo({
@@ -431,11 +440,11 @@ Page({
                 }
                 memo = app.memosRescourse(memo)
               })
-
               that.setData({
                 showMemos: showMemos,
                 memos: memos
               })
+              that.scorllRef(`#memo${newMemo.id}`)
               app.globalData.memos = memos
               wx.setStorageSync('memos', memos)
               break;
@@ -452,6 +461,27 @@ Page({
           resourceIdList
         })
       }
+    })
+  },
+
+  scorllRef(id) {
+    clearTimeout(this.data.scorllTimer)
+    let scorllTimer = setTimeout(() => {
+      let that = this
+      wx.createSelectorQuery().select(id).boundingClientRect(function (res) {
+        let x = res.top + that.data.x - that.data.top_btn.top - that.data.top_btn.height - 20
+        console.log(res, x)
+        wx.pageScrollTo({
+          scrollTop: x,
+          duration: 300
+        })
+        that.setData({
+          x
+        })
+      }).exec()
+    }, 500);
+    this.setData({
+      scorllTimer
     })
   },
 

@@ -80,27 +80,46 @@ Page({
       camera: 'back',
       success(res) {
         console.log(res.tempFiles)
-        wx.showLoading({
-          title: '上传中...',
-        })
-        wx.uploadFile({
-          url: `${that.data.url}/api/resource/blob?openId=${wx.getStorageSync('openId')}`,
-          filePath: res.tempFiles[0].tempFilePath,
-          name: 'file',
-          formData: {},
-          success(res) {
+        if (res.tempFiles[0].size > 32 * 1024 * 1024) {
+          wx.vibrateLong()
+          wx.showToast({
+            icon: 'error',
+            title: that.data.language.resource.tooLarge,
+          })
+        } else {
+          wx.showLoading({
+            title: '上传中...',
+          })
+          wx.uploadFile({
+            url: `${that.data.url}/api/resource/blob?openId=${wx.getStorageSync('openId')}`,
+            filePath: res.tempFiles[0].tempFilePath,
+            name: 'file',
+            timeout: 180 * 1000,
+            formData: {},
+            success(res) {
+              console.log(res)
+              if (res.statusCode == 200) {
+                let newFile = JSON.parse(res.data).data
+                newFile.time = app.fomaDay(newFile.createdTs * 1000)
+                newFile.sizeFomate = app.formatFileSize(newFile.size)
+                resources.unshift(newFile)
+                wx.hideLoading()
+                that.setData({
+                  resources
+                })
+              } else {
+                wx.hideLoading()
+                wx.showToast({
+                  icon: 'error',
+                  title: that.data.language.resource.uploadFailed,
+                })
+              }
+            }
+          }).onProgressUpdate((res) => {
             console.log(res)
-            let newFile = JSON.parse(res.data).data
-            newFile.time = app.fomaDay(newFile.createdTs * 1000)
-            newFile.sizeFomate = app.formatFileSize(newFile.size)
-            resources.unshift(newFile)
-            wx.hideLoading()
-            that.setData({
-              resources
-            })
-            //do something
-          }
-        })
+          })
+        }
+
       }
     })
   },
@@ -205,6 +224,15 @@ Page({
     }
   },
 
+  changeMethodD(e) {
+    let resources = this.data.resources
+    let index = e.currentTarget.dataset.index
+    resources[index].showMethod = !resources[index].showMethod
+    this.setData({
+      resources
+    })
+  },
+
   copyLink(e) {
     let res = this.data.resources
     let idx = e.target.dataset.index
@@ -295,6 +323,7 @@ Page({
   },
 
   onReachBottom() {
+    wx.vibrateShort()
     this.getResource()
   }
 
