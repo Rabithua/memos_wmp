@@ -16,6 +16,11 @@ export const chinese = {
       now: '刚刚发布'
     }
   },
+  openApi: {
+    pageTitle: '重要信息',
+    openAPI: 'openAPI',
+    method: '接口使用方法'
+  },
   archived: {
     pageTitle: '已归档Memos🌒',
     nothing: '这是一片无人的荒原🪐'
@@ -118,9 +123,11 @@ export const chinese = {
       memoVisibility: 'Memo 可见性',
       locale: '语言',
       openResource: '资源库📁 →',
-      openWebview: '探索✨ →',
+      openExplore: '探索✨ →',
+      openWebview: '网页版✨ →',
       goarchived: '已归档🌒 →',
       goOthers: '更多小玩具💫 →',
+      goOpenAPI: 'OpenAPI🔑 →',
       date_1: '注册于 ',
       date_2: '天前。',
       heatTipMemo: '条记录'
@@ -180,6 +187,11 @@ export const english = {
       m: ' minutes ago',
       now: 'Now'
     }
+  },
+  openApi: {
+    pageTitle: 'Important information',
+    openAPI: 'openAPI',
+    method: 'Usage of API interface.'
   },
   archived: {
     pageTitle: 'Archived Memos🌒',
@@ -283,9 +295,11 @@ export const english = {
       memoVisibility: 'MemoVisibility',
       locale: 'Language',
       openResource: 'Resource📁 →',
-      openWebview: 'Explore✨ →',
+      openExplore: 'Explore✨ →',
+      openWebview: 'Web✨ →',
       goarchived: 'Archived🌒 →',
       goOthers: 'More interesting💫 →',
+      goOpenAPI: 'OpenAPI🔑 →',
       date_1: 'Registered for ',
       date_2: 'Days.',
       heatTipMemo: 'Memos'

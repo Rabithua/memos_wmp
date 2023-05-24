@@ -399,15 +399,7 @@ Page({
     }
     app.api.getMemos(app.globalData.url, this.data.limit, offset, rowStatus)
       .then(result => {
-        if (!result.data) {
-          wx.vibrateLong()
-          wx.showToast({
-            icon: 'error',
-            title: that.data.language.common.wrong,
-            state: that.data.language.home.state.offline,
-            onlineColor: '#eeeeee',
-          })
-        } else if (result.data.length == 0) {
+        if (!result.data) {} else if (result.data.length == 0) {
           if (that.data.memos.length == 0) {
             that.setData({
               memos: [],
@@ -452,7 +444,7 @@ Page({
         console.log(err)
         wx.vibrateLong()
         wx.showToast({
-          icon: 'error',
+          icon: 'none',
           title: that.data.language.common.wrong,
         })
         that.setData({

@@ -1,0 +1,11 @@
+/* pages/openapi/index.wxss */
+.content {
+  padding: 20rpx 30rpx;
+  border-radius: 10rpx;
+  background-color: #ffffff;
+  border: 1rpx solid #00000010;
+  word-break: break-all;
+  letter-spacing: 3rpx;
+  color: #a50404;
+  font-family: source-code-pro, Monaco, Consolas, "Courier New", -apple-system, BlinkMacSystemFont, PingFang SC, Noto Sans, Noto Sans CJK SC, Microsoft YaHei UI, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif, Segoe UI, Roboto, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+}

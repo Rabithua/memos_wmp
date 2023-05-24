@@ -27,11 +27,11 @@ page {
   width: 60rpx;
   height: 60rpx;
   transition: 500ms;
-  transform: scale(2.5);
+  transform: scale(1);
 }
 
 .avatar:active {
-  transform: scale(5);
+  transform: scale(2);
 }
 
 .btn {

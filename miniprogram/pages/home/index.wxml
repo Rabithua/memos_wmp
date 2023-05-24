@@ -123,10 +123,13 @@
       {{language.home.sideBar.openResource}}
     </navigator>
     <navigator wx:if="{{showExplore}}" url="../explore/index" class="openWeview">
-      {{language.home.sideBar.openWebview}}
+      {{language.home.sideBar.openExplore}}
     </navigator>
     <navigator url="../archived/index" class="archived">
       {{language.home.sideBar.goarchived}}
+    </navigator>
+    <navigator url="../openapi/index" class="openWeview">
+      {{language.home.sideBar.goOpenAPI}}
     </navigator>
     <navigator url="../others/index" class="archived">
       {{language.home.sideBar.goOthers}}

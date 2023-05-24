@@ -66,7 +66,7 @@ Page({
     })
   },
 
-  vibShort(){
+  vibShort() {
     wx.vibrateShort()
   },
 
@@ -82,7 +82,7 @@ Page({
 
   onShareAppMessage() {
     return {
-      title: this.data.memo.creatorName,
+      title: `${this.data.memo.creatorName}的笔记`,
       path: `/pages/memo/index?id=${this.data.id}`,
     }
   }
