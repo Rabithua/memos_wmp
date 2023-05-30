@@ -175,12 +175,13 @@ page {
 }
 
 .tag-span {
-  color: #0077e6;
-  /* line-height: 80rpx; */
-  font-weight: 500;
-  font-family: Noto Sans;
+  color: rgb(16 185 129);
+  background-color: rgb(236 253 245);
+  padding: 5rpx 15rpx;
+  border-radius: 10rpx;
+  font-size: 27rpx;
+  line-height: 2.5;
 }
-
 
 .spacer {
   width: 100vw;
@@ -325,7 +326,7 @@ page {
   margin-top: 20rpx;
   font-size: 30rpx;
   overflow: scroll;
-  color: #313131;
+  color: #1f1f1f;
   font-weight: 400;
   line-height: 1.5;
 }

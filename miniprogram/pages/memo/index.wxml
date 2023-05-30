@@ -9,13 +9,13 @@
   <view class="content" style="max-height: fit-content;">
     <rich-text data-content="{{memo.content}}" user-select nodes="{{memo.formatContent}}"></rich-text>
   </view>
-  <view class="imgList">
+  <view wx:if="{{memo.imgList_preview.length > 0}}" class="imgList">
     <image class="img" catchtap="preview" data-src="{{image.url}}" data-url="{{memo.imgList_preview}}" lazy-load mode="aspectFill" wx:key="image" wx:for="{{memo.imgList_preview}}" wx:for-item="image" src="{{image.url}}"></image>
   </view>
-  <view class="videoList">
+  <view wx:if="{{memo.video_preview.length > 0}}" class="videoList">
     <video class="video" data-src="{{video.url}}" data-url="{{memo.video_preview}}" lazy-load mode="aspectFill" wx:key="video" wx:for="{{memo.video_preview}}" wx:for-item="video" src="{{video.url}}"></video>
   </view>
-  <view class="fileList">
+  <view wx:if="{{memo.fileList_preview.length > 0}}" class="fileList">
     <view class="file" wx:for="{{memo.fileList_preview}}" wx:key="file" wx:for-item="file" data-url="{{file.url}}" catchtap="copy">{{file.id}}</view>
   </view>
 </view>

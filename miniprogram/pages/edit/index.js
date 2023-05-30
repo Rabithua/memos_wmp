@@ -21,7 +21,7 @@ Page({
     const eventChannel = this.getOpenerEventChannel()
     this.setData({
       eventChannel: eventChannel,
-      tags: wx.getStorageSync('tags')
+      // tags: wx.getStorageSync('tags')
     })
 
     try {

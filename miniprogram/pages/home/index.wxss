@@ -17,6 +17,7 @@ page {
   margin: 90rpx 60rpx 30rpx 50rpx;
   z-index: 5;
   width: calc(100% - 100rpx);
+  overflow-y: scroll;
 }
 
 .sidebar {
@@ -52,6 +53,14 @@ page {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.sidebar .user .avatar {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 999px;
+  flex-shrink: 0;
+  margin-right: 20rpx;
 }
 
 .btns {
