@@ -27,35 +27,44 @@ Page({
     })
     this.ifHideExplore()
     if (wx.getStorageSync('openId')) {
-      that.setData({
-        url: app.globalData.url,
-        onlineColor: '#FCA417'
-      })
-      that.getMemos('NORMAL')
-      that.getMe()
-      app.api.getTags(app.globalData.url)
-        .then(res => {
-          that.setData({
-            tags: res.data
-          })
-          wx.setStorageSync('tags', res.data)
-        })
-        .catch((err) => console.log(err))
-      wx.getStorage({
-        key: "memos",
-        success(res) {
-          that.setData({
-            storageMemos: res.data
-          })
-        }
-      })
-      that.checkTips()
+      this.getAll()
     } else {
-      wx.redirectTo({
-        url: '../welcom/index',
+      app.getUnionId().then((r) => {
+        wx.setStorageSync('openId', r)
+        that.getAll()
+      }).catch((err) => {
+        console.log(err)
+        that.getAll()
       })
     }
 
+  },
+
+  getAll() {
+    let that = this
+    that.setData({
+      url: app.globalData.url,
+      onlineColor: '#FCA417'
+    })
+    that.getMemos('NORMAL')
+    that.getMe()
+    app.api.getTags(app.globalData.url)
+      .then(res => {
+        that.setData({
+          tags: res.data
+        })
+        wx.setStorageSync('tags', res.data)
+      })
+      .catch((err) => console.log(err))
+    wx.getStorage({
+      key: "memos",
+      success(res) {
+        that.setData({
+          storageMemos: res.data
+        })
+      }
+    })
+    that.checkTips()
   },
 
   scorllRef(id) {

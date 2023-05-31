@@ -9,7 +9,7 @@
     <view class="piecs"></view>
     <view class="welcom">
       <text class="content">{{language.welcom.headTitle}}</text>
-      <image bindtap="dog" wx:if="{{webInfo.host.avatarUrl}}" src="{{webInfo.host.avatarUrl}}" class="avatar" mode="aspectFill"/>
+      <image bindtap="dog" wx:if="{{webInfo.customizedProfile.logoUrl}}" src="{{webInfo.customizedProfile.logoUrl}}" class="avatar" mode="aspectFill"/>
     </view>
     <text class="slogan">{{language.welcom.secondTitle}}</text>
     <text class="dsc">{{language.welcom.dsc}}</text>

@@ -3,6 +3,9 @@
 <view style="height:{{top_btn.height}}px; margin: {{top_btn.top}}px 60rpx 30rpx 50rpx;">
   <input class="searchInput" style="width: calc(100% - {{top_btn.width + 90}}px); height: {{top_btn.height}}px;" type="text" placeholder="{{language.search.inputPlaceHolder}}" placeholder-style="color: #cccccc;" bindinput="search" />
 </view>
+<view class="tip" style="margin: 0 50rpx;">
+  {{language.search.tip}}
+</view>
 <block wx:if="{{tags.length > 0}}">
   <view class="tagtitle">
     {{language.search.tagTitle}}

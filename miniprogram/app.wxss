@@ -7,6 +7,14 @@ page {
   overflow-x: hidden;
 }
 
+.tip {
+  padding: 20rpx 20rpx;
+  margin: 0rpx 30rpx;
+  border-radius: 10rpx;
+  color: #07c160;
+  background-color: #07c16010;
+  font-size: 30rpx;
+}
 
 .part_top {
   display: flex;

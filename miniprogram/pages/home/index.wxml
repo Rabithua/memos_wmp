@@ -4,49 +4,22 @@
 </view>
 <view class="headerContainer" style="margin-top: {{top_btn.top}}px">
   <view bindtap="goWelcom" class="header" style="height:{{top_btn.height}}px;">
-    <image src="../../images/icon.png" class="icon"></image>
+    <image src="{{me.avatarUrl ? me.avatarUrl: '../../images/icon.png'}}" class="icon"></image>
     <view>{{state}}</view>
     <view style="width: 10rpx; height: 10rpx; border-radius: 20rpx; background-color: {{onlineColor}}; box-shadow: 0 0 20rpx {{onlineColor}}; margin-left: 20rpx;"></view>
   </view>
   <view class="searchIcon" style="height:{{top_btn.height}}px;width:{{top_btn.height}}px; margin-left: auto; margin-right: {{top_btn.width}}px;" catchtap="goSearch"></view>
 </view>
 <view catchtap="hideTips" wx:if="{{showTips}}" class="shareImg_block">
-  <view class="Tips" catchlongpress="closeTips">
-    <view class="Tip_p" style="text-align: right; color: #00000060; animation: show infinite alternate-reverse 2s; font-size: 14px;">
+  <view class="Tips" catchtap="none">
+    <view catchtap="closeTips" style="text-align: right; color: #00000060; animation: show infinite alternate-reverse 2s; font-size: 14px; position: absolute; right: 40rpx; top: 30rpx;">
       {{language.home.Tips.p_close}}
     </view>
-    <view class="Tip_title">
-      {{language.home.Tips.title_1}}
-    </view>
-    <view class="Tip_p">
-      {{language.home.Tips.p_1}}
-    </view>
-    <view class="Tip_pic_1"></view>
-    <view class="Tip_p">
-      {{language.home.Tips.p_4}}
-    </view>
+    <view class="Tip_title">{{language.home.Tips.title_1}}</view>
+    <view class="Tip_p">{{language.home.Tips.p_1}}</view>
     <view class="line"></view>
-    <view class="Tip_title">
-      {{language.home.Tips.title_2}}
-    </view>
-    <view class="Tip_p">
-      {{language.home.Tips.p_2}}
-    </view>
-    <view class="Tip_p">
-      {{language.home.Tips.p_3}}
-    </view>
-    <view class="Tip_p">
-      {{language.home.Tips.p_5}}
-    </view>
-    <view class="Tip_p">
-      {{language.home.Tips.p_6}}
-    </view>
-    <view class="Tip_p">
-      {{language.home.Tips.p_7}}
-    </view>
-    <view class="Tip_p">
-      {{language.home.Tips.p_8}}
-    </view>
+    <view class="Tip_title">{{language.home.Tips.title_2}}</view>
+    <view class="Tip_p">{{language.home.Tips.p_2}}</view>
   </view>
 </view>
 <view class="container" style="transform: scale({{showSidebar?'0.95':'1'}});" bindtouchstart="setSidebar" bindtouchmove="showSidebar">
@@ -89,7 +62,7 @@
   <view class="mask" style="animation: {{showSidebar? 'show 300ms 500ms forwards': 'none'}};" catchtouchstart="hideSidebar"></view>
   <view class="container">
     <view class="user">
-    <image wx:if="{{me.avatarUrl}}" class="avatar" src="{{me.avatarUrl}}" mode="aspectFill"/>
+      <image wx:if="{{me.avatarUrl}}" class="avatar" src="{{me.avatarUrl}}" mode="aspectFill" />
       <view class="name">{{me.username?me.username:me.email}}</view>
       <view class="badge" style="{{me.role == 'HOST' ? 'color: #ffffff; background: #07C160' : ''}}">{{me.role}}</view>
     </view>

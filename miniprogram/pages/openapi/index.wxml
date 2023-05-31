@@ -1,5 +1,8 @@
 <!--pages/openapi/index.wxml-->
 <official-account></official-account>
+<view class="tip">
+  {{language.openApi.tips}}
+</view>
 <view class="title">
   {{language.openApi.openAPI}}
 </view>

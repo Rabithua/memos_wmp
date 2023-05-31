@@ -19,7 +19,8 @@ export const chinese = {
   openApi: {
     pageTitle: '重要信息',
     openAPI: 'openAPI',
-    method: '接口使用方法'
+    method: '接口使用方法',
+    tips: 'openAPI基本包含了账号的所有权限！务必保管好openAPI，避免泄漏。'
   },
   archived: {
     pageTitle: '已归档Memos🌒',
@@ -113,7 +114,7 @@ export const chinese = {
       title: '提示',
       confirmText: '切换',
       cancelText: '取消',
-      content: '切换账号?',
+      content: '切换旧版账号密码登陆，新版已支持自动创建账号并登录，如需要访问旧版数据，依然可以用旧账号密码登陆。',
     },
     sideBar: {
       memos: '记录',
@@ -133,20 +134,25 @@ export const chinese = {
       heatTipMemo: '条记录'
     },
     Tips: {
-      p_close: '(长按不再显示)',
-      title_1: '操作改版',
-      p_1: '新建 Memos ，现在通过侧滑手势触发👇',
-      p_4: 'Search 页面可以长按 Tag 删除（删除后会出现在 Tag 建议中）🤸‍♂️',
+      p_close: '不再显示',
+      title_1: '操作指南',
+      p_1: `💫 「新建 Memo」，向左侧滑
+      💫 「打开用户中心」，向右侧滑
+      💫 「用户中心 - 点击时间图」，可以快速查看当日 Memo
+      💫 「切换账号密码登陆」，点击顶部左侧胶囊
+      💫 「标签删除」搜索页面可以长按标签(删除后会出现在标签建议中)
+      💫 「打开单独 Memo 页面」，长按置顶按钮`,
       title_2: '功能更新',
-      p_2: 'Search 页面新增 Tag 建议，支持从建议创建 Tag✨',
-      p_3: '新建或编辑 memo 时自动缓存，妈妈再也不会担心我写了一半的小作文丢失了✌',
-      p_5: 'Search 页面memo卡片完整操作支持🎉',
-      p_6: '归档页面，资源库页面可以上传图片或视频了🧩',
-      p_7: '可以通过左侧的侧滑栏中的热点图直接跳转到搜索页面，检索对应日期的Memo🔎',
-      p_8: '以及数不清的细节，懒得写了☺️'
+      p_2: `✨ Search 页面新增 Tag 建议，支持从建议创建 Tag
+      ✨ 新建或编辑 memo 时自动缓存，妈妈再也不会担心我写了一半的小作文丢失了
+      ✨ Search 页面memo卡片完整操作支持🎉
+      ✨ 归档页面，资源库页面可以上传图片或视频了🧩
+      ✨ 可以通过左侧的侧滑栏中的热点图直接跳转到搜索页面，检索对应日期的Memo🔎
+      ✨ 以及数不清的细节，懒得写了`,
     }
   },
   search: {
+    tip: '目前仅支持检索最近200条memo，更多数据检索可以在web端使用。',
     inputPlaceHolder: '根据内容搜索…',
     cantEmpty: '搜索内容不能为空',
     nothing: '这里什么也没有 🕸',
@@ -191,7 +197,8 @@ export const english = {
   openApi: {
     pageTitle: 'Important information',
     openAPI: 'openAPI',
-    method: 'Usage of API interface.'
+    method: 'Usage of API interface.',
+    tips: 'OpenAPI contains all the permissions associated with the account. It is essential to keep the OpenAPI secure to prevent any leaks.'
   },
   archived: {
     pageTitle: 'Archived Memos🌒',
@@ -305,20 +312,25 @@ export const english = {
       heatTipMemo: 'Memos'
     },
     Tips: {
-      p_close: '(Long press no longer display)',
-      title_1: 'Operation revision',
-      p_1: 'New Memos are now triggered by side swipe gestures👇',
-      p_4: 'On the Search page, you can long press to delete the Tag (it will appear in the Tag suggestion after deletion)🤸‍♂️',
-      title_2: 'Feature update',
-      p_2: 'Added Tag suggestions on the Search page, which supports creating Tags from suggestions✨',
-      p_3: 'Automatic caching when creating or editing a memo, my mother will never worry about losing my half-written essay✌',
-      p_5: 'Search page memo card complete operation support🎉',
-      p_6: 'Archived page and Resources page can now upload pictures or videos 🧩',
-      p_7: 'You can directly jump to the search page through the hotspot image in the left sliding menu to search for the corresponding date\'s Memo 🔎',
-      p_8: 'And countless details that I\'m too lazy to write about ☺️'
+      p_close: 'Close',
+      title_1: 'User Guide',
+      p_1: `💫 To create a new Memo, swipe left
+      💫 To access the user center, swipe right
+      💫 In the user center, click on the time chart to quickly view the memos for that day
+      💫 To switch to a different account, click on the top left capsule
+      💫 On the search page, long press a tag to delete it (the tag will be added to the suggested tags)
+      💫 To open a Memo page, long press the pin button`,
+      title_2: 'Feature Updates',
+      p_2: `✨ The search page now includes tag suggestions and allows users to create tags from suggestions
+      ✨ Memos are now automatically cached while being created or edited, preventing loss of data
+      ✨ Full memo card operations are now available on the search page 🎉
+      ✨ It is now possible to upload images or videos on the archive and resource pages 🧩
+      ✨ The hotspots on the side bar enable direct access to the search page, where memos for specific dates can be retrieved 🔎
+      ✨ Plus many other small updates and improvements.`
     }
   },
   search: {
+    tip: 'Currently, only the latest 200 memos can be retrieved. For more data retrieval, please use the web version.',
     inputPlaceHolder: 'Search by content...',
     cantEmpty: 'Cannot be empty.',
     nothing: 'There is nothing 🕸',

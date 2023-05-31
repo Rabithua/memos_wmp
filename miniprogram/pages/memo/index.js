@@ -19,7 +19,18 @@ Page({
         id,
         language: app.language[wx.getStorageSync('language') ? wx.getStorageSync('language') : 'chinese']
       })
-      this.getMemo(this.data.url, id)
+      if (wx.getStorageSync('openId')) {
+        this.getMemo(this.data.url, id)
+      } else {
+        app.getUnionId().then((r) => {
+          wx.setStorageSync('openId', r)
+          this.getMemo(this.data.url, id)
+        }).catch((err) => {
+          console.log(err)
+          this.getMemo(this.data.url, id)
+        })
+      }
+
     }
   },
 
