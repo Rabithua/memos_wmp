@@ -139,9 +139,9 @@ page {
 }
 
 .memoCard .link {
-  color: #0077e6;
+  color: #07C160;
   /* line-height: 80rpx; */
-  font-weight: 900;
+  /* font-weight: 900; */
   font-family: Noto Sans;
   word-break: break-all;
   display: block;
@@ -151,6 +151,7 @@ page {
   content: '🔗';
   opacity: 0.3;
   font-size: 27rpx;
+  margin-right: 10rpx;
 }
 
 .memoCard .link::after {

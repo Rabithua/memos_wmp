@@ -94,7 +94,7 @@ const formatMemoContent = (content, addtionConfig) => {
 
   return outputString
     .replace(MEMO_LINK_REG, "<span class='memo-link-text' data-value='$2'>$1</span>")
-    .replace(LINK_URL_REG, "<a class='link' data-href='$2' href='$2'>$1</a>")
+    .replace(LINK_URL_REG, "<a class='link' data-href='$1' href='$2'>$2</a>")
     .replace(TAG_REG, "<span class='tag-span'>#$1</span> ")
     .replace(/(330917e8-c0c2-4d64-b25c-3b6a6a165ce5)/g, "#")
 };
