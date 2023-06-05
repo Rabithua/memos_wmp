@@ -7,6 +7,10 @@ page {
   overflow-x: hidden;
 }
 
+.xieti {
+  font-weight: 400;
+}
+
 .tip {
   padding: 20rpx 20rpx;
   margin: 0rpx 30rpx;
@@ -47,7 +51,7 @@ page {
 .method {
   display: flex;
   position: absolute;
-  right: 30rpx;
+  right: 50rpx;
 }
 
 .method .btn {
@@ -86,7 +90,7 @@ page {
 
 .listDiv {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .maskHeader {
@@ -109,13 +113,10 @@ page {
 }
 
 .todo-block {
-  /* display: inline-block;
-  vertical-align: middle; */
   padding-right: 20rpx;
-  /* margin-top: -10rpx; */
   height: 37rpx;
-  width: 45rpx;
-  background-size: cover;
+  width: 37rpx;
+  background-size: contain;
   flex-shrink: 0;
 }
 
@@ -185,7 +186,7 @@ page {
 
 .tag-span {
   color: rgb(16 185 129);
-  background-color: rgb(236 253 245);
+  background-color: rgb(16, 185, 129, 0.05);
   padding: 5rpx 15rpx;
   border-radius: 10rpx;
   font-size: 27rpx;
@@ -268,13 +269,12 @@ page {
   transform: translateY(20rpx);
   animation: up forwards 500ms 500ms ease-in-out;
   /* white-space: pre-wrap; */
-  margin: 20rpx 30rpx;
-  padding: 20rpx 30rpx;
+  padding: 20rpx 50rpx;
   background: #ffffff;
   font-size: 35rpx;
-  /* border: 1rpx solid #e5e7eb; */
-  border-radius: 20rpx;
   font-weight: 400;
+  padding-bottom: 50rpx;
+  border-bottom: rgb(66, 65, 63, 0.2) 1rpx solid;
 }
 
 .memoCard:last-child {
@@ -333,10 +333,10 @@ page {
   max-height: 800rpx;
   margin: 10rpx;
   margin-top: 20rpx;
-  font-size: 30rpx;
+  font-size: 32rpx;
   overflow: scroll;
-  color: #1f1f1f;
-  font-weight: 400;
+  color: rgb(66, 65, 63);
+  /* font-weight: 450; */
   line-height: 1.5;
 }
 

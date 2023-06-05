@@ -4,6 +4,29 @@ page {
   animation: show 500ms 500ms forwards;
 }
 
+.colorDot {
+  position: absolute;
+  background: #07C160;
+  /* z-index: 1; */
+  filter: blur(80px);
+  top: 80rpx;
+}
+
+
+.colorDot1 {
+  width: 150rpx;
+  height: 50rpx;
+  background: #07C160;
+  left: 200rpx;
+}
+
+.colorDot2 {
+  width: 150rpx;
+  height: 50rpx;
+  background: #ffca27;
+  left: 400rpx;
+}
+
 .container {
   min-height: 100vh;
   transition: 500ms ease-in-out;

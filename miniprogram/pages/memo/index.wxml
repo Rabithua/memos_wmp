@@ -3,7 +3,7 @@
 <view class="tip" wx:if="{{memo.visibility === 'PRIVATE'}}">
   {{language.memo.visibility_1 + memo.visibility + language.memo.visibility_2}}
 </view>
-<view wx:if="{{memo}}" class="memoCard" style="margin-bottom: 50rpx;">
+<view wx:if="{{memo}}" class="memoCard" style="padding-bottom: 50rpx;">
   <text class="time">{{memo.time}}</text>
   <text class="status">@{{memo.creatorName}}</text>
   <view class="content" style="max-height: fit-content;">

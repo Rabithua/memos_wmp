@@ -1,5 +1,14 @@
 /* pages/memo/index.wxss */
 
+.tip {
+  margin: 0;
+  border-radius: 30rpx 30rpx 0 0;
+}
+
+.memoCard {
+  border-bottom: none;
+}
+
 .nothing {
   display: flex;
   flex-direction: column;

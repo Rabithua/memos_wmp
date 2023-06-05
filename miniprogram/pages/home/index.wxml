@@ -1,6 +1,9 @@
 <!--pages/home/index.wxml-->
 <view class="spacer" style="height: {{top_btn.top + top_btn.height + 10}}px;">
-
+</view>
+<view class="colorDot colorDot1">
+</view>
+<view class="colorDot colorDot2">
 </view>
 <view class="headerContainer" style="margin-top: {{top_btn.top}}px">
   <view bindtap="goWelcom" class="header" style="height:{{top_btn.height}}px;">

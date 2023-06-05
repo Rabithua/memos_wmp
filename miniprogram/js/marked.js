@@ -53,7 +53,7 @@ const parseMarkedToHtml = (markedStr) => {
     .replace(DOT_LI_REG, "<div class='counter-block'><div class='dotlist-dot'>$1•</div><div class='dotlist-content'>$2</div></div>")
     .replace(NUM_LI_REG, "<div class='counter-block'><div class='orderlist-dot'>$1.</div><div class='orderlist-content'>$2</div></div>")
     .replace(BOLD_TEXT_REG, "<strong>$1</strong>")
-    .replace(EM_TEXT_REG, "<em>$1</em>")
+    .replace(EM_TEXT_REG, "<em class='xieti'>$1</em>")
     .replace(TITLE_TEXT_REG, (match, offset) => {
       let iterator = match.matchAll(TITLE_TEXT_REG);
       for (let res of iterator) {

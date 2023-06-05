@@ -32,23 +32,20 @@ page {
 }
 
 .memoEditTextarea {
-  margin: 40rpx;
   padding: 20rpx;
   height: 230px;
-  width: calc(100% - 120rpx);
+  width: 100%;
   font-size: 16px;
-  padding-bottom: 5rpx;
   background-color: #ffffff30;
-  border: 5rpx solid #00000010;
-  box-shadow: 0 0 20rpx #07C16000;
-  border-radius: 20rpx;
+  border-top: 1rpx solid #00000010;
+  border-bottom: 1rpx solid #00000010;
   animation-duration: 500ms;
 }
 
 .btns {
   transition: 200ms;
   background-color: #ffffff;
-  /* backdrop-filter: blur(60px); */
+  border-top: 1rpx solid #00000010;
   padding-top: 30rpx;
   border-radius: 30rpx 30rpx 0 0;
   width: 100%;

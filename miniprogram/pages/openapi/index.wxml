@@ -1,6 +1,6 @@
 <!--pages/openapi/index.wxml-->
 <official-account></official-account>
-<view class="tip">
+<view class="tip" style="border-radius: 0; margin: 0;">
   {{language.openApi.tips}}
 </view>
 <view class="title">
