@@ -72,7 +72,9 @@ Page({
   },
 
   changeLanguage() {
-    wx.vibrateShort()
+    wx.vibrateShort({
+      type: 'light'
+    })
     if (this.data.language.language == 'zh') {
       wx.setStorageSync('language', 'english')
       this.setData({
@@ -113,7 +115,9 @@ Page({
           console.log(res)
           if (res.data) {
             //创建成功
-            wx.vibrateShort()
+            wx.vibrateShort({
+              type: 'light'
+            })
             wx.showLoading({
               title: that.data.language.welcom.signUpSuc,
             })
@@ -214,7 +218,9 @@ Page({
         .then(res => {
           if (res.data) {
             console.log(res.data.openId)
-            wx.vibrateShort()
+            wx.vibrateShort({
+              type: 'light'
+            })
             wx.showLoading({
               title: that.data.language.welcom.signInSuc,
             })
@@ -248,33 +254,6 @@ Page({
             let regresult1 = res.error.match(/User not found with username/)
             let regresult2 = res.error.match(/Incorrect login credentials/)
             console.log('regresult:', regresult1, regresult2)
-            // if (regresult1) {
-            //   wx.vibrateLong()
-            //   wx.hideLoading()
-            //   wx.showModal({
-            //     confirmText: that.data.language.welcom.signUpTip.confirmText,
-            //     cancelText: that.data.language.welcom.signUpTip.cancelText,
-            //     title: that.data.language.welcom.signUpTip.title,
-            //     content: that.data.language.welcom.signUpTip.content,
-            //     success(res) {
-            //       if (res.confirm) {
-            //         console.log('用户点击确定')
-            //         that.setData({
-            //           btnDisable: false
-            //         })
-            //         wx.showLoading({
-            //           title: '通信中...',
-            //         })
-            //         that.signUp()
-            //       } else if (res.cancel) {
-            //         console.log('用户点击取消')
-            //         that.setData({
-            //           btnDisable: false
-            //         })
-            //       }
-            //     }
-            //   })
-            // } else 
             if (regresult2) {
               wx.vibrateLong()
               wx.hideLoading()
@@ -303,15 +282,13 @@ Page({
     }
   },
 
-  sendMemo(openId) {
+  sendMemo() {
     var content = newMemoContent
     var url = this.data.url
-    var that = this
     app.api.sendMemo(url, content, [])
       .then(res => {
         console.log(res.data)
         if (res.data) {
-          // wx.vibrateShort()
           wx.setStorageSync('language', 'english')
           wx.redirectTo({
             url: '../home/index',
@@ -331,8 +308,31 @@ Page({
       .catch((err) => console.log(err))
   },
 
+  useWechatLogin() {
+    wx.showLoading()
+    app.getUnionId().then((r) => {
+      wx.setStorageSync('openId', r)
+      this.sendMemo()
+      wx.vibrateShort({
+        type: 'light'
+      })
+      wx.hideLoading()
+      wx.redirectTo({
+        url: '../home/index',
+      })
+    }).catch((err) => {
+      console.log(err)
+      wx.hideLoading()
+      wx.showToast({
+        title: 'something wrong',
+      })
+    })
+  },
+
   goWebview() {
-    wx.vibrateShort()
+    wx.vibrateShort({
+      type: 'light'
+    })
     wx.navigateTo({
       url: '../explore/index'
     })

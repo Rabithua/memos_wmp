@@ -114,7 +114,9 @@ Page({
     this.setData({
       memoFocus: false
     })
-    wx.vibrateShort()
+    wx.vibrateShort({
+        type: 'light'
+      })
     setTimeout(() => {
       let memo = this.data.memo
       let cursor = this.data.cursor
@@ -132,7 +134,9 @@ Page({
   slideFocus(e) {
     if (this.data.keyBoardHeight == 0) {
       if (e.touches[0].clientY - this.data.bottomTapPoint.clientY < -50 && Math.abs(e.touches[0].clientX - this.data.bottomTapPoint.clientX) < 20) {
-        wx.vibrateShort()
+        wx.vibrateShort({
+        type: 'light'
+      })
         this.setData({
           memoFocus: true
         })
@@ -141,21 +145,27 @@ Page({
   },
 
   setKeyBoard(e) {
-    wx.vibrateShort()
+    wx.vibrateShort({
+        type: 'light'
+      })
     this.setData({
       keyBoardHeight: (e.detail.height - 30).toString()
     })
   },
 
   memoFocus() {
-    wx.vibrateShort()
+    wx.vibrateShort({
+        type: 'light'
+      })
     this.setData({
       memoFocus: true
     })
   },
 
   memoBlur(e) {
-    wx.vibrateShort()
+    wx.vibrateShort({
+        type: 'light'
+      })
     this.setData({
       keyBoardHeight: '0',
       cursor: this.data.memo.length,
@@ -174,7 +184,9 @@ Page({
   },
 
   inputTag(e) {
-    wx.vibrateShort()
+    wx.vibrateShort({
+        type: 'light'
+      })
     setTimeout(() => {
       let memo = this.data.memo
       let cursor = this.data.cursor
@@ -190,7 +202,9 @@ Page({
   },
 
   inputTodo() {
-    wx.vibrateShort()
+    wx.vibrateShort({
+        type: 'light'
+      })
     this.setData({
       memoFocus: false
     })
@@ -209,7 +223,9 @@ Page({
   },
 
   inputCode() {
-    wx.vibrateShort()
+    wx.vibrateShort({
+        type: 'light'
+      })
     this.setData({
       memoFocus: false
     })
@@ -228,7 +244,9 @@ Page({
   },
 
   send() {
-    wx.vibrateShort()
+    wx.vibrateShort({
+        type: 'light'
+      })
     var that = this
     var content = this.data.memo
     if (content !== '' || this.data.resourceIdList.length > 0) {

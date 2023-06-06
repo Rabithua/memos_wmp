@@ -29,7 +29,9 @@ Page({
 
   go(e:any) {
     console.log(e.target.dataset.appid)
-    wx.vibrateShort()
+    wx.vibrateShort({
+        type: 'light'
+      })
     wx.navigateToMiniProgram({
       appId: e.target.dataset.appid
     })

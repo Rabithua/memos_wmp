@@ -138,10 +138,27 @@ page {
   color: #07C160;
 }
 
+.createMemoBtn {
+  position: fixed;
+  bottom: 100rpx;
+  right: 0rpx;
+  padding: 20rpx 50rpx;
+  background-color: rgb(16, 185, 129, 0.1);
+  backdrop-filter: blur(30rpx);
+  border-radius: 20rpx 0 0 20rpx;
+  font-weight: bolder;
+  color: #ffffff;
+  transition-duration: 300ms;
+}
+
+.createMemoBtn:active {
+  transform: scale(0.9);
+}
+
 .sidebar .user {
   display: flex;
   padding-bottom: 30rpx;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   border-bottom: 1rpx solid #00000010;
 }

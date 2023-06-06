@@ -38,7 +38,9 @@ Page({
       
   copy(e) {
     console.log(e)
-    wx.vibrateShort()
+    wx.vibrateShort({
+        type: 'light'
+      })
     wx.setClipboardData({
       data: e.target.dataset.url
     })
@@ -113,7 +115,9 @@ Page({
   },
 
   changeMemoPinned(e) {
-    wx.vibrateShort()
+    wx.vibrateShort({
+        type: 'light'
+      })
     let memoid = e.currentTarget.dataset.memoid
     let pinned = e.currentTarget.dataset.pinned
     var data = {
@@ -123,7 +127,9 @@ Page({
     app.api.changeMemoPinned(this.data.url, memoid, data)
       .then(res => {
         if (res.data) {
-          wx.vibrateShort()
+          wx.vibrateShort({
+        type: 'light'
+      })
           if (!pinned) {
             wx.showToast({
               icon: 'none',
@@ -179,7 +185,9 @@ Page({
           that.setData({
             memos
           })
-          wx.vibrateShort()
+          wx.vibrateShort({
+        type: 'light'
+      })
           wx.showToast({
             icon: 'none',
             title: that.data.language.home.visibilityChange,
@@ -204,7 +212,9 @@ Page({
           that.setData({
             memos: memos
           })
-          wx.vibrateShort()
+          wx.vibrateShort({
+        type: 'light'
+      })
           wx.showToast({
             icon: 'none',
             title: that.data.language.home.rowStatusChange,
@@ -258,7 +268,9 @@ Page({
   },
 
   onReachBottom() {
-    wx.vibrateShort()
+    wx.vibrateShort({
+        type: 'light'
+      })
     this.getMemos('ARCHIVED')
   },
 

@@ -59,7 +59,7 @@ export const chinese = {
   },
   welcom: {
     webVersion: '线上版本：',
-    headTitle: '欢迎来到麦默',
+    headTitle: '麦默笔记',
     secondTitle: '把脑袋里的小碎片收集起来✨',
     dsc: '麦默是 Github 开源项目 usememos/memos 的小程序版本，同样的，麦默 Rabithua/memos_wmp 也是开源的！',
     username: '用户名',
@@ -68,7 +68,7 @@ export const chinese = {
     passwordAgain: '确认密码',
     passwordPlaceholder: 'password',
     btnLog: '登录',
-    btnReg: '注册',
+    btnWechatLogIn: '直接登陆（微信绑定）',
     explore: '探索 ✨',
     signUpSuc: '注册成功!',
     usernameErr: '用户名错误',
@@ -128,6 +128,7 @@ export const chinese = {
       openWebview: '网页版✨ →',
       goarchived: '已归档🌒 →',
       goOthers: '更多小玩具💫 →',
+      goWelcom: '账号密码登陆🗝️ →',
       goOpenAPI: 'OpenAPI🔑 →',
       date_1: '注册于 ',
       date_2: '天前。',
@@ -141,7 +142,7 @@ export const chinese = {
       💫 「用户中心 - 点击时间图」，可以快速查看当日 Memo
       💫 「切换账号密码登陆」，点击顶部左侧胶囊
       💫 「标签删除」搜索页面可以长按标签(删除后会出现在标签建议中)
-      💫 「打开单独 Memo 页面」，长按置顶按钮`,
+      💫 「编辑资源库文件」，长按或者向左侧滑资源卡片`,
       title_2: '功能更新',
       p_2: `✨ Search 页面新增 Tag 建议，支持从建议创建 Tag
       ✨ 新建或编辑 memo 时自动缓存，妈妈再也不会担心我写了一半的小作文丢失了
@@ -246,7 +247,7 @@ export const english = {
     passwordAgain: 'password again',
     passwordPlaceholder: 'password',
     btnLog: 'logIn',
-    btnReg: 'signUp',
+    btnWechatLogIn: 'Direct login (WeChat binding)',
     explore: 'Explore ✨',
     signUpSuc: 'Sign up success!',
     usernameErr: 'Username error',
@@ -306,6 +307,7 @@ export const english = {
       openWebview: 'Web✨ →',
       goarchived: 'Archived🌒 →',
       goOthers: 'More interesting💫 →',
+      goWelcom: 'Account password login🗝️ →',
       goOpenAPI: 'OpenAPI🔑 →',
       date_1: 'Registered for ',
       date_2: 'Days.',
@@ -319,7 +321,8 @@ export const english = {
       💫 In the user center, click on the time chart to quickly view the memos for that day
       💫 To switch to a different account, click on the top left capsule
       💫 On the search page, long press a tag to delete it (the tag will be added to the suggested tags)
-      💫 To open a Memo page, long press the pin button`,
+      💫 To open a Memo page, long press the pin button
+      💫 "Edit resource library file", long press or swipe left on the resource card.`,
       title_2: 'Feature Updates',
       p_2: `✨ The search page now includes tag suggestions and allows users to create tags from suggestions
       ✨ Memos are now automatically cached while being created or edited, preventing loss of data

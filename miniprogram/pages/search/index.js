@@ -121,7 +121,9 @@ Page({
   },
 
   upsertTag(e) {
-    wx.vibrateShort()
+    wx.vibrateShort({
+        type: 'light'
+      })
     wx.showLoading({
       title: '创建中...',
     })
@@ -152,7 +154,9 @@ Page({
   deleteTag(e) {
     let TagName = e.currentTarget.dataset.keyword
     let that = this
-    wx.vibrateShort()
+    wx.vibrateShort({
+        type: 'light'
+      })
     wx.showModal({
       title: this.data.language.search.tagDeleteModal.title,
       content: this.data.language.search.tagDeleteModal.content,
@@ -184,7 +188,9 @@ Page({
 
   searchTag(e) {
     // console.log(e.currentTarget.dataset.keyword)
-    wx.vibrateShort()
+    wx.vibrateShort({
+        type: 'light'
+      })
     var key = {
       detail: {
         value: '#' + e.currentTarget.dataset.keyword
@@ -203,7 +209,9 @@ Page({
 
 
   changeMemoPinned(e) {
-    wx.vibrateShort()
+    wx.vibrateShort({
+        type: 'light'
+      })
     let memoid = e.currentTarget.dataset.memoid
     let pinned = e.currentTarget.dataset.pinned
     var data = {
@@ -214,7 +222,9 @@ Page({
       .then(res => {
         // console.log(res)
         if (res.data) {
-          wx.vibrateShort()
+          wx.vibrateShort({
+        type: 'light'
+      })
           if (!pinned) {
             wx.showToast({
               icon: 'none',
@@ -279,7 +289,9 @@ Page({
             memos,
             showMemos
           })
-          wx.vibrateShort()
+          wx.vibrateShort({
+        type: 'light'
+      })
           wx.showToast({
             icon: 'none',
             title: that.data.language.home.visibilityChange,
@@ -323,7 +335,9 @@ Page({
             showMemos,
             memos
           })
-          wx.vibrateShort()
+          wx.vibrateShort({
+        type: 'light'
+      })
           wx.showToast({
             icon: 'none',
             title: that.data.language.home.rowStatusChange,
@@ -411,7 +425,9 @@ Page({
       editId: memoId,
       query
     })
-    wx.vibrateShort()
+    wx.vibrateShort({
+        type: 'light'
+      })
     wx.navigateTo({
       url: '../edit/index?edit=true',
       events: {
@@ -487,7 +503,9 @@ Page({
 
   copy(e) {
     console.log(e)
-    wx.vibrateShort()
+    wx.vibrateShort({
+        type: 'light'
+      })
     wx.setClipboardData({
       data: e.target.dataset.url
     })
@@ -518,7 +536,9 @@ Page({
     var memos = this.data.memos
     var showMemos = []
     if (keyword == '') {
-      wx.vibrateShort()
+      wx.vibrateShort({
+        type: 'light'
+      })
       wx.showToast({
         icon: 'none',
         title: this.data.language.search.cantEmpty,

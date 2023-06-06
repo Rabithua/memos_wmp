@@ -51,7 +51,7 @@ page {
 .method {
   display: flex;
   position: absolute;
-  right: 50rpx;
+  right: 30rpx;
 }
 
 .method .btn {
@@ -269,12 +269,17 @@ page {
   transform: translateY(20rpx);
   animation: up forwards 500ms 500ms ease-in-out;
   /* white-space: pre-wrap; */
-  padding: 20rpx 50rpx;
+  padding: 20rpx 30rpx;
   background: #ffffff;
   font-size: 35rpx;
   font-weight: 400;
   padding-bottom: 50rpx;
   border-bottom: rgb(66, 65, 63, 0.2) 1rpx solid;
+}
+
+.memoCard:active {
+  opacity: 0.8;
+  animation-duration: 200ms;
 }
 
 .memoCard:last-child {
@@ -334,7 +339,7 @@ page {
   margin: 10rpx;
   margin-top: 20rpx;
   font-size: 32rpx;
-  overflow: scroll;
+  overflow-y: scroll;
   color: rgb(66, 65, 63);
   /* font-weight: 450; */
   line-height: 1.5;

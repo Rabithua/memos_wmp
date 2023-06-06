@@ -71,7 +71,9 @@ Page({
   pickImg() {
     let that = this
     let resources = this.data.resources
-    wx.vibrateShort()
+    wx.vibrateShort({
+      type: 'light'
+    })
     wx.chooseMedia({
       count: 1,
       mediaType: ['image', 'video'],
@@ -141,7 +143,9 @@ Page({
         })
       }
       wx.hideLoading()
-      wx.vibrateShort()
+      wx.vibrateShort({
+        type: 'light'
+      })
       this.setData({
         resources: this.data.resources.concat(newResources)
       })
@@ -158,7 +162,9 @@ Page({
       if (!resources[idx].select) {
         this.deleteMemoFile(resources[idx].id)
       }
-      wx.vibrateShort()
+      wx.vibrateShort({
+        type: 'light'
+      })
       this.setData({
         resources
       })
@@ -177,7 +183,9 @@ Page({
   backEdit() {
     const eventChannel = this.getOpenerEventChannel()
     eventChannel.emit('addFiles', this.data.selectFileId)
-    wx.vibrateShort()
+    wx.vibrateShort({
+      type: 'light'
+    })
     wx.navigateBack()
   },
 
@@ -206,14 +214,12 @@ Page({
     let touchStart = this.data.touchStart
     if (touchStart.clientX) {
       if (e.touches[0].clientX - touchStart.clientX > 50 && Math.abs(e.touches[0].clientY - touchStart.clientY) < 20) {
-        // wx.vibrateShort()
         resources[index].showMethod = false
         // hide
         that.setData({
           resources
         })
       } else if (e.touches[0].clientX - touchStart.clientX < -50 && Math.abs(e.touches[0].clientY - touchStart.clientY) < 20) {
-        // wx.vibrateShort()
         resources[index].showMethod = true
         // hide
         that.setData({
@@ -242,7 +248,9 @@ Page({
     } else {
       url = `${this.data.url}/o/r/${res[idx].id}/${res[idx].publicId}`
     }
-    wx.vibrateShort()
+    wx.vibrateShort({
+      type: 'light'
+    })
     wx.setClipboardData({
       data: url,
     })
@@ -268,7 +276,9 @@ Page({
               .then((res) => {
                 console.log(res)
                 if (res == true) {
-                  wx.vibrateShort()
+                  wx.vibrateShort({
+                    type: 'light'
+                  })
                   wx.showToast({
                     title: this.data.language.resource.deleted,
                   })
@@ -290,7 +300,9 @@ Page({
         .then((res) => {
           console.log(res)
           if (res == true) {
-            wx.vibrateShort()
+            wx.vibrateShort({
+              type: 'light'
+            })
             wx.showToast({
               title: this.data.language.resource.deleted,
             })
@@ -316,14 +328,18 @@ Page({
     } else {
       url = `${this.data.url}/o/r/${res[idx].id}/${res[idx].publicId}`
     }
-    wx.vibrateShort()
+    wx.vibrateShort({
+      type: 'light'
+    })
     wx.previewImage({
       urls: [url],
     })
   },
 
   onReachBottom() {
-    wx.vibrateShort()
+    wx.vibrateShort({
+      type: 'light'
+    })
     this.getResource()
   }
 

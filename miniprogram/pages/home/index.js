@@ -114,18 +114,24 @@ Page({
   },
 
   onReachBottom() {
-    wx.vibrateShort()
+    wx.vibrateShort({
+      type: 'light'
+    })
     this.loadMore()
   },
 
   loadMore() {
-    wx.vibrateShort()
+    wx.vibrateShort({
+      type: 'light'
+    })
     this.getMemos('NORMAL')
   },
 
   copy(e) {
     console.log(e)
-    wx.vibrateShort()
+    wx.vibrateShort({
+      type: 'light'
+    })
     wx.setClipboardData({
       data: e.target.dataset.url
     })
@@ -143,9 +149,9 @@ Page({
     })
   },
   goMemo(e) {
-    console.log(e.target.dataset.memoid)
+    // console.log(e.currentTarget.dataset.memoid)
     wx.navigateTo({
-      url: `/pages/memo/index?id=${e.target.dataset.memoid}`,
+      url: `/pages/memo/index?id=${e.currentTarget.dataset.memoid}`,
     })
   },
 
@@ -169,7 +175,16 @@ Page({
     })
   },
 
-  showSidebar(e) {
+  showSideBar() {
+    wx.vibrateShort({
+      type: 'light'
+    })
+    this.setData({
+      showSidebar: true
+    })
+  },
+
+  touchMove(e) {
     // console.log(e)
     let that = this
     if (!this.data.me) {
@@ -178,12 +193,16 @@ Page({
     if (!this.data.showSidebar) {
       if (this.data.sidebarStart.clientX) {
         if (e.touches[0].clientX - this.data.sidebarStart.clientX > 50 && Math.abs(e.touches[0].clientY - this.data.sidebarStart.clientY) < 20) {
-          wx.vibrateShort()
+          wx.vibrateShort({
+            type: 'light'
+          })
           this.setData({
             showSidebar: true
           })
         } else if (e.touches[0].clientX - this.data.sidebarStart.clientX < -50 && Math.abs(e.touches[0].clientY - this.data.sidebarStart.clientY) < 20) {
-          wx.vibrateShort()
+          wx.vibrateShort({
+            type: 'light'
+          })
           that.setData({
             sidebarStart: {}
           })
@@ -266,14 +285,18 @@ Page({
   },
 
   hideSidebar() {
-    wx.vibrateShort()
+    wx.vibrateShort({
+      type: 'light'
+    })
     this.setData({
       showSidebar: false
     })
   },
 
   changeMemoPinned(e) {
-    wx.vibrateShort()
+    wx.vibrateShort({
+      type: 'light'
+    })
     let pinned = e.currentTarget.dataset.pinned
     let memoid = e.currentTarget.dataset.memoid
     var data = {
@@ -284,7 +307,9 @@ Page({
       .then(res => {
         console.log(res)
         if (res.data) {
-          wx.vibrateShort()
+          wx.vibrateShort({
+            type: 'light'
+          })
           if (!pinned) {
             wx.showToast({
               icon: 'none',
@@ -334,7 +359,9 @@ Page({
           that.setData({
             memos: memos
           })
-          wx.vibrateShort()
+          wx.vibrateShort({
+            type: 'light'
+          })
           wx.showToast({
             icon: 'none',
             title: that.data.language.home.visibilityChange,
@@ -355,13 +382,17 @@ Page({
     let that = this
     let memos = this.data.memos
     let resourceIdList = memos.filter(item => item.id == memoid)[0].resourceList.map(item => item.id)
-    wx.vibrateShort()
+    wx.vibrateShort({
+      type: 'light'
+    })
     wx.navigateTo({
       url: '../edit/index?edit=true',
       events: {
         // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
         acceptDataFromOpenedPage: function (msg, newMemo) {
-          wx.vibrateShort()
+          wx.vibrateShort({
+            type: 'light'
+          })
           console.log(msg, newMemo)
           let memos = that.data.memos
           newMemo = app.memosRescourse(newMemo)
@@ -471,7 +502,9 @@ Page({
     delete item.UserID
     let me = this.data.me
     let that = this
-    wx.vibrateShort()
+    wx.vibrateShort({
+      type: 'light'
+    })
     if (item.key == 'locale') {
       if (item.value == "\"en\"") {
         item.value = "\"zh-Hans\""
@@ -610,7 +643,9 @@ Page({
           that.setData({
             memos: memos
           })
-          wx.vibrateShort()
+          wx.vibrateShort({
+            type: 'light'
+          })
           wx.showToast({
             icon: 'none',
             title: that.data.language.home.rowStatusChange,
@@ -627,7 +662,9 @@ Page({
 
   showHeatTip(e) {
     console.log(e)
-    wx.vibrateShort()
+    wx.vibrateShort({
+      type: 'light'
+    })
     let num = e.currentTarget.dataset.num
     let time = e.currentTarget.dataset.time
     let that = this
@@ -710,7 +747,9 @@ Page({
   },
 
   goWelcom() {
-    wx.vibrateShort()
+    wx.vibrateShort({
+      type: 'light'
+    })
     wx.showModal({
       confirmColor: '#07C160',
       title: this.data.language.home.goWelcomModal.title,
@@ -730,7 +769,9 @@ Page({
   },
 
   goSearch(e) {
-    wx.vibrateShort()
+    wx.vibrateShort({
+      type: 'light'
+    })
     if (e.currentTarget.dataset.time) {
       wx.navigateTo({
         url: '../search/index?time=' + e.currentTarget.dataset.time,
@@ -740,7 +781,15 @@ Page({
         url: '../search/index',
       })
     }
+  },
 
+  goEdit() {
+    wx.vibrateShort({
+      type: 'light',
+    })
+    wx.navigateTo({
+      url: '../edit/index',
+    })
   },
 
   hideTips() {

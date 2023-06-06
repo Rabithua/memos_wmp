@@ -20,7 +20,9 @@ Page({
 
   copy(e:any) {
     console.log(e)
-    wx.vibrateShort()
+    wx.vibrateShort({
+        type: 'light'
+      })
     wx.setClipboardData({
       data: e.target.dataset.url
     })
@@ -76,7 +78,9 @@ Page({
             showMemos: that.data.showMemos.concat(memos),
             offset: that.data.showMemos.concat(memos).length + 1,
           });
-          wx.vibrateShort();
+          wx.vibrateShort({
+        type: 'light'
+      });
         }
       })
       .catch((err) => console.log(err));
@@ -94,7 +98,9 @@ Page({
   },
 
   onReachBottom() {
-    wx.vibrateShort()
+    wx.vibrateShort({
+        type: 'light'
+      })
     this.getExploreMemos();
   },
 

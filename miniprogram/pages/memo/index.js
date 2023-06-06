@@ -50,7 +50,9 @@ Page({
             title: memo.creatorName,
           })
           wx.hideLoading()
-          wx.vibrateShort()
+          wx.vibrateShort({
+        type: 'light'
+      })
           this.setData({
             memo
           })
@@ -78,7 +80,9 @@ Page({
   },
 
   vibShort() {
-    wx.vibrateShort()
+    wx.vibrateShort({
+        type: 'light'
+      })
   },
 
   onReady() {

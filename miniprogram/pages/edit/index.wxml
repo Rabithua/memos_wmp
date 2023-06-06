@@ -7,7 +7,7 @@
 </view>
 
 <view class="memoCard" style="margin-bottom: 220rpx;">
-  <view class="content">
+  <view class="content" style="max-height: fit-content;">
     <block wx:if="{{!formatContent}}">
       <view class="loading">{{language.edit.rendering}}</view>
     </block>

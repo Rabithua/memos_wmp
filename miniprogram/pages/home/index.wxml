@@ -6,7 +6,7 @@
 <view class="colorDot colorDot2">
 </view>
 <view class="headerContainer" style="margin-top: {{top_btn.top}}px">
-  <view bindtap="goWelcom" class="header" style="height:{{top_btn.height}}px;">
+  <view bindtap="showSideBar" class="header" style="height:{{top_btn.height}}px;">
     <image src="{{me.avatarUrl ? me.avatarUrl: '../../images/icon.png'}}" class="icon"></image>
     <view>{{state}}</view>
     <view style="width: 10rpx; height: 10rpx; border-radius: 20rpx; background-color: {{onlineColor}}; box-shadow: 0 0 20rpx {{onlineColor}}; margin-left: 20rpx;"></view>
@@ -25,35 +25,38 @@
     <view class="Tip_p">{{language.home.Tips.p_2}}</view>
   </view>
 </view>
-<view class="container" style="transform: scale({{showSidebar?'0.95':'1'}});" bindtouchstart="setSidebar" bindtouchmove="showSidebar">
+<view class="container" style="transform: scale({{showSidebar?'0.95':'1'}});" bindtouchstart="setSidebar" bindtouchmove="touchMove">
   <view style="height: {{top_btn.top + top_btn.height + 10}}px;">
   </view>
-  <view class="memoCard" wx:for="{{memos}}" wx:key="memo" style="border-left: {{item.rowStatus == 'ARCHIVED' ? '5rpx solid #EF4C4E' : 'none'}};" data-memoId="{{item.id}}" id="memo{{item.id}}">
-    <view class="method">
-      <text class="btn top" style="opacity: {{item.pinned ? 1:0.2}};" data-memoId="{{item.id}}" data-pinned="{{item.pinned}}" data-content="{{item.content}}" catchtap="changeMemoPinned" catchlongpress="goMemo"></text>
-      <text class="btn delete" data-memoId="{{item.id}}" data-rowStatus="{{item.rowStatus}}" catchtap="deleteMemoFaker" catchlongpress="deleteMemo"></text>
-      <text class="btn edit" data-memoId="{{item.id}}" data-content="{{item.content}}" catchtap="dialogEdit"></text>
-    </view>
-    <view class="part_top">
-      <view class="time" style="color: {{item.time == '刚刚发布' || item.time=='Now' ? '#07C160' : '' }};">{{item.time}}</view>
-      <!-- <view class="status" wx:if="{{showCreator}}">{{item.creatorName}}</view> -->
-      <view class="{{'vis_icon ' + item.visibility}}"></view>
-      <view class="status" data-memoId="{{item.id}}" data-visibility="{{item.visibility}}" catchtap="changeMemoVisibility">{{item.visibility}}</view>
-    </view>
-    <view class="content">
-      <rich-text data-content="{{item.content}}" user-select nodes="{{item.formatContent}}"></rich-text>
-    </view>
-    <view wx:if="{{item.imgList_preview.length > 0}}" class="imgList">
-      <image class="img" catchtap="preview" data-src="{{image.url}}" data-url="{{item.imgList_preview}}" lazy-load mode="aspectFill" wx:key="image" wx:for="{{item.imgList_preview}}" wx:for-item="image" src="{{image.url}}"></image>
-    </view>
-    <view wx:if="{{item.video_preview.length > 0}}" class="videoList">
-      <video class="video" data-src="{{video.url}}" data-url="{{item.video_preview}}" lazy-load mode="aspectFill" wx:key="video" wx:for="{{item.video_preview}}" wx:for-item="video" src="{{video.url}}"></video>
-    </view>
-    <view wx:if="{{item.fileList_preview.length > 0}}" class="fileList">
-      <view class="file" wx:for="{{item.fileList_preview}}" wx:key="file" wx:for-item="file" data-url="{{file.url}}" catchtap="copy">{{file.id}}</view>
-    </view>
+  <view class="memoList">
+    <view class="memoCard" wx:for="{{memos}}" wx:key="memo" style="border-left: {{item.rowStatus == 'ARCHIVED' ? '5rpx solid #EF4C4E' : 'none'}};" data-memoId="{{item.id}}" id="memo{{item.id}}" catchtap="goMemo">
+      <view class="method">
+        <text class="btn top" style="opacity: {{item.pinned ? 1:0.2}};" data-memoId="{{item.id}}" data-pinned="{{item.pinned}}" data-content="{{item.content}}" catchtap="changeMemoPinned"></text>
+        <text class="btn delete" data-memoId="{{item.id}}" data-rowStatus="{{item.rowStatus}}" catchtap="deleteMemoFaker" catchlongpress="deleteMemo"></text>
+        <text class="btn edit" data-memoId="{{item.id}}" data-content="{{item.content}}" catchtap="dialogEdit"></text>
+      </view>
+      <view class="part_top">
+        <view class="time" style="color: {{item.time == '刚刚发布' || item.time=='Now' ? '#07C160' : '' }};">{{item.time}}</view>
+        <!-- <view class="status" wx:if="{{showCreator}}">{{item.creatorName}}</view> -->
+        <view class="{{'vis_icon ' + item.visibility}}"></view>
+        <view class="status" data-memoId="{{item.id}}" data-visibility="{{item.visibility}}" catchtap="changeMemoVisibility">{{item.visibility}}</view>
+      </view>
+      <view class="content">
+        <rich-text data-content="{{item.content}}" nodes="{{item.formatContent}}"></rich-text>
+      </view>
+      <view wx:if="{{item.imgList_preview.length > 0}}" class="imgList">
+        <image class="img" catchtap="preview" data-src="{{image.url}}" data-url="{{item.imgList_preview}}" lazy-load mode="aspectFill" wx:key="image" wx:for="{{item.imgList_preview}}" wx:for-item="image" src="{{image.url}}"></image>
+      </view>
+      <view wx:if="{{item.video_preview.length > 0}}" class="videoList">
+        <video class="video" data-src="{{video.url}}" data-url="{{item.video_preview}}" lazy-load mode="aspectFill" wx:key="video" wx:for="{{item.video_preview}}" wx:for-item="video" src="{{video.url}}"></video>
+      </view>
+      <view wx:if="{{item.fileList_preview.length > 0}}" class="fileList">
+        <view class="file" wx:for="{{item.fileList_preview}}" wx:key="file" wx:for-item="file" data-url="{{file.url}}" catchtap="copy">{{file.id}}</view>
+      </view>
 
+    </view>
   </view>
+
   <view style="height: 100rpx;"> </view>
   <block wx:if="{{memos.length == 0}}">
     <view class="none" style="margin-top: 300rpx;">{{language.home.noMemos}}</view>
@@ -61,12 +64,16 @@
 
 </view>
 
+<view class="createMemoBtn" bindtap="goEdit">
+  ✍️
+</view>
+
 <view class="sidebar" catchtouchmove="none" style="transform: translateX({{showSidebar?'0rpx':'-750rpx'}});">
-  <view class="mask" style="animation: {{showSidebar? 'show 300ms 500ms forwards': 'none'}};" catchtouchstart="hideSidebar"></view>
+  <view class="mask" style="animation: {{showSidebar? 'show 300ms 400ms forwards': 'none'}};" catchtouchstart="hideSidebar"></view>
   <view class="container">
     <view class="user">
       <image wx:if="{{me.avatarUrl}}" class="avatar" src="{{me.avatarUrl}}" mode="aspectFill" />
-      <view class="name">{{me.username?me.username:me.email}}</view>
+      <view class="name">{{me.nickname ? me.nickname : me.username}}</view>
       <view class="badge" style="{{me.role == 'HOST' ? 'color: #ffffff; background: #07C160' : ''}}">{{me.role}}</view>
     </view>
     <view class="count">
@@ -111,6 +118,9 @@
     <navigator url="../others/index" class="archived">
       {{language.home.sideBar.goOthers}}
     </navigator>
+    <view class="archived" bindtap="goWelcom">
+      {{language.home.sideBar.goWelcom}}
+    </view>
     <view class="date">{{language.home.sideBar.date_1}}<text style="font-weight: bold; font-family: 'Smiley Sans Oblique';">{{me.day}}</text> {{language.home.sideBar.date_2}}</view>
   </view>
   <view class="heatTip" data-time="{{heatTip.time}}" catchtap="goSearch" wx:if="{{showHeatTip}}">{{heatTip.time}} {{heatTip.num}} {{language.home.sideBar.heatTipMemo}} →</view>
