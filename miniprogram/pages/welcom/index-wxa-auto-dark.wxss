@@ -8,12 +8,16 @@
  */
 
 @media (prefers-color-scheme: dark) {
+
+  .changeIcon {
+    filter: invert(1);
+  }
   page {
     background: rgb(30, 30, 30);
   }
   
   button {
-    filter: brightness(0.6);
+    filter: brightness(0.8);
   }
 
   page::before {
@@ -21,11 +25,7 @@
   }
 
   .btn {
-    filter: brightness(0.6);
-  }
-
-  .welcom .content {
-    color: #ffffff80;
+    filter: brightness(0.8);
   }
 
   .tips .content {
@@ -42,11 +42,11 @@
   }
 
   .slogan {
-    color: rgb(118, 51, 0);
+    color: rgba(255, 255, 255, 0.4);
   }
 
   .dsc {
-    color: rgba(255, 255, 255, 0.3137254901960784);
+    color: rgba(255, 255, 255, 0.4);
   }
 
   input {

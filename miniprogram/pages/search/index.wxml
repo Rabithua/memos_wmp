@@ -45,7 +45,7 @@
     </view>
 
     <view class="content">
-      <rich-text data-content="{{item.content}}" user-select nodes="{{item.formatContent}}"></rich-text>
+      <rich-text data-content="{{item.content}}" nodes="{{item.formatContent}}"></rich-text>
     </view>
     <view wx:if="{{item.imgList_preview.length > 0}}" class="imgList">
       <image class="img" catchtap="preview" data-src="{{image.url}}" data-url="{{item.imgList_preview}}" lazy-load mode="aspectFill" wx:key="image" wx:for="{{item.imgList_preview}}" wx:for-item="image" src="{{image.url}}"></image>
