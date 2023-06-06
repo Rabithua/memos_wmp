@@ -8,6 +8,7 @@ Page({
     showMemos: [],
     offset: 0,
     limit: 20,
+    showCreator:true
   },
 
   onLoad() {
@@ -19,7 +20,9 @@ Page({
 
   copy(e:any) {
     console.log(e)
-    wx.vibrateShort()
+    wx.vibrateShort({
+        type: 'light'
+      })
     wx.setClipboardData({
       data: e.target.dataset.url
     })
@@ -34,12 +37,6 @@ Page({
     wx.previewImage({
       current: e.target.dataset.src, // 当前显示图片的 http 链接
       urls: url // 需要预览的图片 http 链接列表
-    })
-  },
-  goMemo(e:any){
-    console.log(e.target.dataset.memoid)
-    wx.navigateTo({
-      url: `/pages/memo/index?id=${e.target.dataset.memoid}`,
     })
   },
 
@@ -75,10 +72,19 @@ Page({
             showMemos: that.data.showMemos.concat(memos),
             offset: that.data.showMemos.concat(memos).length + 1,
           });
-          wx.vibrateShort();
+          wx.vibrateShort({
+        type: 'light'
+      });
         }
       })
       .catch((err) => console.log(err));
+  },
+
+  goMemo(e) {
+    // console.log(e.currentTarget.dataset.memoid)
+    wx.navigateTo({
+      url: `/pages/memo/index?id=${e.currentTarget.dataset.memoid}`,
+    })
   },
 
   onShow() {
@@ -93,8 +99,17 @@ Page({
   },
 
   onReachBottom() {
+    wx.vibrateShort({
+        type: 'light'
+      })
     this.getExploreMemos();
   },
 
-  onShareAppMessage(options) {},
+  
+  onShareAppMessage() {
+    return {
+      title: this.data.language.explore.pageTitle,
+      path: '/pages/explore/index'
+    }
+  }
 });

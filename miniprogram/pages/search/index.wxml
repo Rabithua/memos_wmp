@@ -1,7 +1,10 @@
 <!--pages/search/index.wxml-->
 <view class="maskHeader"></view>
 <view style="height:{{top_btn.height}}px; margin: {{top_btn.top}}px 60rpx 30rpx 50rpx;">
-  <input class="searchInput" style="width: calc(100% - {{top_btn.width + 90}}px); height: {{top_btn.height}}px;" type="text" placeholder="{{language.search.inputPlaceHolder}}" placeholder-style="color: #00000010;" bindinput="search" />
+  <input class="searchInput" style="width: calc(100% - {{top_btn.width + 90}}px); height: {{top_btn.height}}px;" type="text" placeholder="{{language.search.inputPlaceHolder}}" placeholder-style="color: #cccccc;" bindinput="search" />
+</view>
+<view class="tip" style="margin: 0 50rpx;">
+  {{language.search.tip}}
 </view>
 <block wx:if="{{tags.length > 0}}">
   <view class="tagtitle">
@@ -26,33 +29,35 @@
 <view wx:if="{{tagsSuggestionList.length > 0 || tags.length > 0}}" class="line">
 
 </view>
+
 <view class="memos" style="margin-top: 0rpx;">
-  <scroll-view scroll-y scroll-with-animation scroll-into-view="{{scrollMemoId}}">
-    <view class="memoCard" wx:for="{{showMemos}}" wx:key="memo" style="border-left: {{item.rowStatus == 'ARCHIVED' ? '5rpx solid #EF4C4E' : 'none'}};" data-memoId="{{item.id}}" id="memo{{item.id}}">
-      <view class="method">
-        <text class="btn top" style="opacity: {{item.pinned ? 1:0.2}};" data-memoId="{{item.id}}" data-pinned="{{item.pinned}}" data-content="{{item.content}}" catchtap="changeMemoPinned" catchlongpress="goMemo"></text>
-        <text class="btn delete" data-memoId="{{item.id}}" data-rowStatus="{{item.rowStatus}}" catchtap="deleteMemoFaker" catchlongpress="deleteMemo"></text>
-        <text class="btn edit" data-memoId="{{item.id}}" data-content="{{item.content}}" catchtap="dialogEdit"></text>
-      </view>
-      <text class="time">{{item.time}}</text>
-      <text class="status" wx:if="{{showCreator}}">{{item.creatorName}}</text>
-      <text class="status" wx:else data-memoId="{{item.id}}" data-visibility="{{item.visibility}}" catchtap="changeMemoVisibility">{{item.visibility}}</text>
-
-      <view class="content">
-        <rich-text data-content="{{item.content}}" user-select nodes="{{item.formatContent}}"></rich-text>
-      </view>
-      <view class="imgList">
-        <image class="img" catchtap="preview" data-src="{{image.url}}" data-url="{{item.imgList_preview}}" lazy-load mode="aspectFill" wx:key="image" wx:for="{{item.imgList_preview}}" wx:for-item="image" src="{{image.url}}"></image>
-      </view>
-      <view class="videoList">
-        <video class="video" data-src="{{video.url}}" data-url="{{item.video_preview}}" lazy-load mode="aspectFill" wx:key="video" wx:for="{{item.video_preview}}" wx:for-item="video" src="{{video.url}}"></video>
-      </view>
-      <view class="fileList">
-        <view class="file" wx:for="{{item.fileList_preview}}" wx:key="file" wx:for-item="file" data-url="{{file.url}}" catchtap="copy">{{file.id}}</view>
-      </view>
-
+  <view class="memoCard" wx:for="{{showMemos}}" wx:key="memo" style="border-left: {{item.rowStatus == 'ARCHIVED' ? '5rpx solid #EF4C4E' : 'none'}};" data-memoId="{{item.id}}" id="memo{{item.id}}" catchtap="goMemo">
+    <view class="method">
+      <text class="btn top" style="opacity: {{item.pinned ? 1:0.2}};" data-memoId="{{item.id}}" data-pinned="{{item.pinned}}" data-content="{{item.content}}" catchtap="changeMemoPinned"></text>
+      <text class="btn delete" data-memoId="{{item.id}}" data-rowStatus="{{item.rowStatus}}" catchtap="deleteMemoFaker" catchlongpress="deleteMemo"></text>
+      <text class="btn edit" data-memoId="{{item.id}}" data-content="{{item.content}}" catchtap="dialogEdit"></text>
     </view>
-  </scroll-view>
+    <view class="part_top">
+      <view class="time" style="color: {{item.time == '刚刚发布' || item.time=='Now' ? '#07C160' : '' }};">{{item.time}}</view>
+      <!-- <view class="status" wx:if="{{showCreator}}">{{item.creatorName}}</view> -->
+      <view class="{{'vis_icon ' + item.visibility}}"></view>
+      <view class="status" data-memoId="{{item.id}}" data-visibility="{{item.visibility}}" catchtap="changeMemoVisibility">{{item.visibility}}</view>
+    </view>
+
+    <view class="content">
+      <rich-text data-content="{{item.content}}" nodes="{{item.formatContent}}"></rich-text>
+    </view>
+    <view wx:if="{{item.imgList_preview.length > 0}}" class="imgList">
+      <image class="img" catchtap="preview" data-src="{{image.url}}" data-url="{{item.imgList_preview}}" lazy-load mode="aspectFill" wx:key="image" wx:for="{{item.imgList_preview}}" wx:for-item="image" src="{{image.url}}"></image>
+    </view>
+    <view wx:if="{{item.video_preview.length > 0}}" class="videoList">
+      <video class="video" data-src="{{video.url}}" data-url="{{item.video_preview}}" lazy-load mode="aspectFill" wx:key="video" wx:for="{{item.video_preview}}" wx:for-item="video" src="{{video.url}}"></video>
+    </view>
+    <view wx:if="{{item.fileList_preview.length > 0}}" class="fileList">
+      <view class="file" wx:for="{{item.fileList_preview}}" wx:key="file" wx:for-item="file" data-url="{{file.url}}" catchtap="copy">{{file.id}}</view>
+    </view>
+
+  </view>
   <block wx:if="{{showMemos.length == 0}}">
     <view class="none">{{language.search.searchResultPlaceholder}}</view>
   </block>

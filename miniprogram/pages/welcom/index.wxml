@@ -6,14 +6,14 @@
 </view>
 <view class="container">
   <view class="main">
-    <view class="piecs"></view>
+    <!-- <view class="piecs"></view> -->
     <view class="welcom">
-      <text class="content">{{language.welcom.headTitle}}</text>
-      <image bindtap="dog" wx:if="{{webInfo.host.avatarUrl}}" src="{{webInfo.host.avatarUrl}}" class="avatar" mode="aspectFill"/>
+      <text class="content">{{webInfo.customizedProfile.name ? webInfo.customizedProfile.name : language.welcom.headTitle}}</text>
+      <image bindtap="dog" wx:if="{{webInfo.customizedProfile.logoUrl}}" src="{{webInfo.customizedProfile.logoUrl}}" class="avatar" mode="aspectFill" />
     </view>
-    <text class="slogan">{{language.welcom.secondTitle}}</text>
+    <text class="slogan">{{webInfo.customizedProfile.description ? webInfo.customizedProfile.description : language.welcom.secondTitle}}</text>
     <text class="dsc">{{language.welcom.dsc}}</text>
-    <text class="dsc" style="color: #fca417;">{{language.welcom.webVersion}}{{webInfo.profile.version ? webInfo.profile.version : "UNKNOWN"}}</text>
+    <text class="dsc" style="opacity: 0.2;">{{webInfo.profile.mode ? webInfo.profile.mode : language.welcom.webVersion}} {{webInfo.profile.version ? webInfo.profile.version : "UNKNOWN"}}</text>
     <view class="form">
       <text class="title">{{language.welcom.username}}</text>
       <input cursor-spacing='100' confirm-type="next" focus type="text" placeholder="{{language.welcom.usernamePlaceholder}}" confirm-type="done" bindinput='nothing' model:value="{{username}}" />
@@ -21,7 +21,9 @@
       <input type="text" placeholder="{{language.welcom.passwordPlaceholder}}" confirm-type="done" model:value="{{password}}" bindinput='nothing' bindconfirm="signIn" />
       <div class="btn primaryBtn" style="margin-top: 60rpx;" bindtap="signIn">{{language.welcom.btnLog}}</div>
 
-      <div class="btn defaultBtn" style="margin-top: 20rpx;" bindtap="signUp">{{language.welcom.btnReg}}</div>
+      <div class="btn defaultBtn" wx:if="{{ifWechatLogin}}" style="margin-top: 40rpx;" bindtap="useWechatLogin">{{language.welcom.btnWechatLogIn}}</div>
+
+      <div class="btn defaultBtn" wx:if="{{!ifWechatLogin && webInfo.allowSignUp}}" style="margin-top: 40rpx;" bindtap="signUp">{{language.welcom.btnSignUp}}</div>
       <!-- 审核不通过，暂时注释了 -->
       <!-- <view style="color: #66666630; text-align: center; padding-top: 30rpx; font-size: 30rpx; text-decoration: underline;" bindtap="goWebview">{{language.welcom.explore}}</view> -->
     </view>

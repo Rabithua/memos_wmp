@@ -1,12 +1,12 @@
 /* pages/memo/index.wxss */
 
 .tip {
-  padding: 20rpx 20rpx;
-  margin: 0rpx 30rpx;
-  border-radius: 10rpx;
-  color: #07c160;
-  background-color: #07c16010;
-  font-size: 30rpx;
+  margin: 0;
+  border-radius: 30rpx 30rpx 0 0;
+}
+
+.memoCard {
+  border-bottom: none;
 }
 
 .nothing {
@@ -32,7 +32,7 @@
   bottom: 150rpx;
   right: 50rpx;
   background-color: #ffffff;
-  border: 1rpx solid #cccccc;
+  border: 1rpx solid #00000015;
   display: flex;
   width: fit-content!important;
   font-size: 30rpx;

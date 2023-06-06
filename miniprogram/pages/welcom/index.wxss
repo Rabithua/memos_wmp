@@ -27,11 +27,11 @@ page {
   width: 60rpx;
   height: 60rpx;
   transition: 500ms;
-  transform: scale(2.5);
+  transform: scale(1);
 }
 
 .avatar:active {
-  transform: scale(5);
+  transform: scale(2);
 }
 
 .btn {
@@ -41,7 +41,7 @@ page {
   border-radius: 10rpx;
   line-height: 70rpx;
   background: #f5f5f5;
-  color: #FCA417;
+  color: rgb(119,197,157);
   display: block;
   text-align: center;
 }
@@ -52,7 +52,7 @@ page {
 
 .primaryBtn {
   color: #ffffff;
-  background-color: #FCA417;
+  background-color: rgb(119,197,157);
 }
 
 .changeIcon {
@@ -94,6 +94,7 @@ page::before {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 10rpx;
 }
 
 .piecs {
@@ -115,7 +116,8 @@ page::before {
   align-items: center;
   gap: 30rpx;
   font-size: 60rpx;
-  margin: 0rpx auto 20rpx auto;
+  margin: 0rpx auto;
+  color: rgb(119,197,157);
 }
 
 .tips .content {
@@ -128,21 +130,21 @@ page::before {
   pointer-events: auto;
   height: 400rpx;
   width: 100%;
-  background-color: #07C160;
+  background-color: rgb(119,197,157);
   border-radius: 30rpx 30rpx 0 0;
 }
 
 .slogan {
-  font-weight: bolder;
+  font-weight: 400;
   font-family: sans-serif;
   width: 80%;
   font-size: 40rpx;
   letter-spacing: 1rpx;
   padding: 20rpx;
   border-radius: 30rpx;
-  color: #FCA417;
   margin: auto;
   margin-top: -20rpx;
+  color: rgb(66, 65, 63, 0.7);
 }
 
 .dsc {
@@ -152,7 +154,7 @@ page::before {
   letter-spacing: 1rpx;
   padding: 10rpx;
   border-radius: 30rpx;
-  color: #00000050;
+  color: rgb(66, 65, 63, 0.6);
   margin: auto;
   margin-top: -20rpx;
 }
@@ -171,11 +173,7 @@ input {
   padding: 10rpx 30rpx;
   margin-top: 10rpx;
   margin-bottom: 20rpx;
-  border: 5rpx solid #00000010;
-}
-
-input:focus {
-  border: 2rpx solid #FCA41750;
+  /* border: 5rpx solid #00000010; */
 }
 
 .form .title {

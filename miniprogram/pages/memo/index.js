@@ -19,7 +19,18 @@ Page({
         id,
         language: app.language[wx.getStorageSync('language') ? wx.getStorageSync('language') : 'chinese']
       })
-      this.getMemo(this.data.url, id)
+      if (wx.getStorageSync('openId')) {
+        this.getMemo(this.data.url, id)
+      } else {
+        app.getUnionId().then((r) => {
+          wx.setStorageSync('openId', r)
+          this.getMemo(this.data.url, id)
+        }).catch((err) => {
+          console.log(err)
+          this.getMemo(this.data.url, id)
+        })
+      }
+
     }
   },
 
@@ -39,7 +50,9 @@ Page({
             title: memo.creatorName,
           })
           wx.hideLoading()
-          wx.vibrateShort()
+          wx.vibrateShort({
+        type: 'light'
+      })
           this.setData({
             memo
           })
@@ -66,8 +79,10 @@ Page({
     })
   },
 
-  vibShort(){
-    wx.vibrateShort()
+  vibShort() {
+    wx.vibrateShort({
+        type: 'light'
+      })
   },
 
   onReady() {
@@ -82,9 +97,8 @@ Page({
 
   onShareAppMessage() {
     return {
-      title: this.data.memo.creatorName,
+      title: `${this.data.memo.creatorName}的笔记`,
       path: `/pages/memo/index?id=${this.data.id}`,
-      imageUrl: 'https://img.rabithua.club/%E9%BA%A6%E9%BB%98/memoShare.png'
     }
   }
 })

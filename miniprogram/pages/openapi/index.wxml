@@ -1,0 +1,25 @@
+<!--pages/openapi/index.wxml-->
+<official-account></official-account>
+<view class="tip" style="border-radius: 0; margin: 0;">
+  {{language.openApi.tips}}
+</view>
+<view class="title">
+  {{language.openApi.openAPI}}
+</view>
+
+<view class="content">
+  <text user-select>{{url + "/api/memo?openId=" + me.openId}}</text>
+</view>
+
+<view class="title">
+  {{language.openApi.method}}
+</view>
+
+<view class="content">
+  <text user-select>{{"POST " + url + "/api/memo?openId=" + me.openId}}
+    Content-type: application/json
+    {
+    "content": "Hello #memos"
+    }
+  </text>
+</view>

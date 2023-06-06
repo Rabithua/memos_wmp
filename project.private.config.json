@@ -65,7 +65,7 @@
         {
           "name": "",
           "pathName": "pages/memo/index",
-          "query": "id=1779",
+          "query": "id=2118",
           "launchMode": "default",
           "scene": null
         },
@@ -73,6 +73,20 @@
           "name": "",
           "pathName": "pages/resource/index",
           "query": "selectMode=true",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/others/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/openapi/index",
+          "query": "",
           "launchMode": "default",
           "scene": null
         }

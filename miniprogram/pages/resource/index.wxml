@@ -1,3 +1,5 @@
+<view class="spacer" style="height: {{top_btn.top + top_btn.height + 10}}px;"></view>
+
 <view class="headerContainer" style="top: {{top_btn.top}}px">
   <view class="header" style="height:{{top_btn.height}}px;">{{language.resource.pageTitle}}
   </view>
@@ -5,7 +7,7 @@
 </view>
 
 
-<view class="resource" wx:key="resources" wx:for="{{resources}}" wx:for-item="resource" bindtap="selectFile" bindtouchstart="setTouchStart" bindtouchmove="showMethod" data-index="{{index}}" style=" border-width: {{resource.select ? '10rpx' : '0rpx'}};">
+<view class="resource" wx:key="resources" wx:for="{{resources}}" wx:for-item="resource" bindtap="selectFile" bindtouchstart="setTouchStart" bindlongtap="changeMethodD" bindtouchmove="showMethod" data-index="{{index}}" style=" border-width: {{resource.select ? '10rpx' : '0rpx'}};">
   <image wx:if="{{resource.type[0] + resource.type[1] == 'im'}}" mode="aspectFill" class="imgPreview" src="{{resource.externalLink ? resource.externalLink : url + '/o/r/' + resource.id + '/' + resource.publicId}}"></image>
   <view wx:else class="icon fileIcon"></view>
   <view class="info">
@@ -24,7 +26,7 @@
       </view>
     </view>
   </view>
-  <view class="method" style="transform: translateX({{resource.showMethod ? '0' : '300rpx'}});">
+  <view class="method" style="transform: translateX({{resource.showMethod ? '0' : '320rpx'}});">
     <text wx:if="{{resource.type[0] + resource.type[1] == 'im'}}" class="btn preview" data-index="{{index}}" catchtap="previewImg"></text>
     <text class="btn delete" data-id="{{resource.id}}" data-linkedMemoAmount="{{resource.linkedMemoAmount}}" catchtap="deleteResource"></text>
     <text class="btn link" data-index="{{index}}" catchtap="copyLink"></text>

@@ -1,33 +1,34 @@
+<view class="spacer" style="height: {{top_btn.top + top_btn.height + 10}}px;"></view>
+
 <view class="headerContainer" style="top: {{top_btn.top}}px">
   <view class="header" style="height:{{top_btn.height}}px;">{{language.explore.pageTitle}}
   </view>
 </view>
-
-<scroll-view wx:if="{{showMemos.length > 0}}" scroll-y scroll-with-animation scroll-into-view="{{scrollMemoId}}">
-  <view class="memoCard" wx:for="{{showMemos}}" wx:key="memo" style="border-left: {{item.rowStatus == 'ARCHIVED' ? '5rpx solid #EF4C4E' : 'none'}};" data-memoId="{{item.id}}" id="memo{{item.id}}">
-    <view class="method">
-      <text class="btn top" style="opacity: {{item.pinned ? 1:0.2}};" data-memoId="{{item.id}}" data-pinned="{{item.pinned}}" data-content="{{item.content}}" catchtap="changeMemoPinned" catchlongpress="goMemo"></text>
-      <text class="btn delete" data-memoId="{{item.id}}" data-rowStatus="{{item.rowStatus}}" catchtap="deleteMemoFaker" catchlongpress="deleteMemo"></text>
-      <text class="btn edit" data-memoId="{{item.id}}" data-content="{{item.content}}" catchtap="dialogEdit"></text>
+<view class="memos">
+  <view class="memoCard" wx:for="{{showMemos}}" wx:key="memo" style="border-left: {{item.rowStatus == 'ARCHIVED' ? '5rpx solid #EF4C4E' : 'none'}};" data-memoId="{{item.id}}" id="memo{{item.id}}"  catchtap="goMemo">
+    <view class="part_top">
+      <view class="time" style="color: {{item.time == '刚刚发布' || item.time=='Now' ? '#07C160' : '' }};">{{item.time}}</view>
+      <view class="status" wx:if="{{showCreator}}">{{item.creatorName}}</view>
+      <view class="{{'vis_icon ' + item.visibility}}"></view>
+      <!-- <view class="status" data-memoId="{{item.id}}" data-visibility="{{item.visibility}}" catchtap="changeMemoVisibility">{{item.visibility}}</view> -->
     </view>
-    <text class="time">{{item.time}}</text>
-    <text class="time">{{item.creatorName}}</text>
     <view class="content">
-      <rich-text data-content="{{item.content}}" user-select nodes="{{item.formatContent}}"></rich-text>
+      <rich-text data-content="{{item.content}}" nodes="{{item.formatContent}}"></rich-text>
     </view>
-    <view class="imgList">
+    <view wx:if="{{item.imgList_preview.length > 0}}" class="imgList">
       <image class="img" catchtap="preview" data-src="{{image.url}}" data-url="{{item.imgList_preview}}" lazy-load mode="aspectFill" wx:key="image" wx:for="{{item.imgList_preview}}" wx:for-item="image" src="{{image.url}}"></image>
     </view>
-    <view class="videoList">
+    <view wx:if="{{item.video_preview.length > 0}}" class="videoList">
       <video class="video" data-src="{{video.url}}" data-url="{{item.video_preview}}" lazy-load mode="aspectFill" wx:key="video" wx:for="{{item.video_preview}}" wx:for-item="video" src="{{video.url}}"></video>
     </view>
-    <view class="fileList">
+    <view wx:if="{{item.fileList_preview.length > 0}}" class="fileList">
       <view class="file" wx:for="{{item.fileList_preview}}" wx:key="file" wx:for-item="file" data-url="{{file.url}}" catchtap="copy">{{file.id}}</view>
     </view>
 
   </view>
-</scroll-view>
+  <view style="height: 100rpx;"> </view>
+</view>
 
-<view wx:else style="padding: 100rpx 30rpx; text-align: center;opacity: 0.8;">
+<view wx:if="{{showMemos.length == 0}}" style="padding: 100rpx 30rpx; text-align: center;opacity: 0.8;">
   {{language.explore.nothing}}
 </view>

@@ -14,6 +14,7 @@ Page({
     showMemos: [],
     memos: [],
     limit: 200,
+    x:0
   },
 
   onLoad(o) {
@@ -120,7 +121,9 @@ Page({
   },
 
   upsertTag(e) {
-    wx.vibrateShort()
+    wx.vibrateShort({
+        type: 'light'
+      })
     wx.showLoading({
       title: '创建中...',
     })
@@ -151,7 +154,9 @@ Page({
   deleteTag(e) {
     let TagName = e.currentTarget.dataset.keyword
     let that = this
-    wx.vibrateShort()
+    wx.vibrateShort({
+        type: 'light'
+      })
     wx.showModal({
       title: this.data.language.search.tagDeleteModal.title,
       content: this.data.language.search.tagDeleteModal.content,
@@ -183,7 +188,9 @@ Page({
 
   searchTag(e) {
     // console.log(e.currentTarget.dataset.keyword)
-    wx.vibrateShort()
+    wx.vibrateShort({
+        type: 'light'
+      })
     var key = {
       detail: {
         value: '#' + e.currentTarget.dataset.keyword
@@ -202,7 +209,9 @@ Page({
 
 
   changeMemoPinned(e) {
-    wx.vibrateShort()
+    wx.vibrateShort({
+        type: 'light'
+      })
     let memoid = e.currentTarget.dataset.memoid
     let pinned = e.currentTarget.dataset.pinned
     var data = {
@@ -213,7 +222,9 @@ Page({
       .then(res => {
         // console.log(res)
         if (res.data) {
-          wx.vibrateShort()
+          wx.vibrateShort({
+        type: 'light'
+      })
           if (!pinned) {
             wx.showToast({
               icon: 'none',
@@ -278,7 +289,9 @@ Page({
             memos,
             showMemos
           })
-          wx.vibrateShort()
+          wx.vibrateShort({
+        type: 'light'
+      })
           wx.showToast({
             icon: 'none',
             title: that.data.language.home.visibilityChange,
@@ -322,7 +335,9 @@ Page({
             showMemos,
             memos
           })
-          wx.vibrateShort()
+          wx.vibrateShort({
+        type: 'light'
+      })
           wx.showToast({
             icon: 'none',
             title: that.data.language.home.rowStatusChange,
@@ -393,16 +408,26 @@ Page({
     })
   },
 
+  onPageScroll(e) {
+    this.setData({
+      x: e.scrollTop
+    })
+  },
+
   dialogEdit(e) {
     // console.log(e)
     let that = this
     let memoId = e.currentTarget.dataset.memoid
     let content = e.currentTarget.dataset.content
     let resourceIdList = this.data.memos.find(obj => obj.id === memoId).resourceList.map(item => item.id)
+    const query = wx.createSelectorQuery()
     this.setData({
-      editId: memoId
+      editId: memoId,
+      query
     })
-    wx.vibrateShort()
+    wx.vibrateShort({
+        type: 'light'
+      })
     wx.navigateTo({
       url: '../edit/index?edit=true',
       events: {
@@ -431,11 +456,11 @@ Page({
                 }
                 memo = app.memosRescourse(memo)
               })
-
               that.setData({
                 showMemos: showMemos,
                 memos: memos
               })
+              that.scorllRef(`#memo${newMemo.id}`)
               app.globalData.memos = memos
               wx.setStorageSync('memos', memos)
               break;
@@ -455,9 +480,32 @@ Page({
     })
   },
 
+  scorllRef(id) {
+    clearTimeout(this.data.scorllTimer)
+    let scorllTimer = setTimeout(() => {
+      let that = this
+      wx.createSelectorQuery().select(id).boundingClientRect(function (res) {
+        let x = res.top + that.data.x - that.data.top_btn.top - that.data.top_btn.height - 20
+        console.log(res, x)
+        wx.pageScrollTo({
+          scrollTop: x,
+          duration: 300
+        })
+        that.setData({
+          x
+        })
+      }).exec()
+    }, 500);
+    this.setData({
+      scorllTimer
+    })
+  },
+
   copy(e) {
     console.log(e)
-    wx.vibrateShort()
+    wx.vibrateShort({
+        type: 'light'
+      })
     wx.setClipboardData({
       data: e.target.dataset.url
     })
@@ -474,10 +522,10 @@ Page({
       urls: url // 需要预览的图片 http 链接列表
     })
   },
-  goMemo(e){
-    console.log(e.target.dataset.memoid)
+  goMemo(e) {
+    // console.log(e.currentTarget.dataset.memoid)
     wx.navigateTo({
-      url: `/pages/memo/index?id=${e.target.dataset.memoid}`,
+      url: `/pages/memo/index?id=${e.currentTarget.dataset.memoid}`,
     })
   },
 
@@ -488,7 +536,9 @@ Page({
     var memos = this.data.memos
     var showMemos = []
     if (keyword == '') {
-      wx.vibrateShort()
+      wx.vibrateShort({
+        type: 'light'
+      })
       wx.showToast({
         icon: 'none',
         title: this.data.language.search.cantEmpty,

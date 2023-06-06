@@ -1,89 +1,80 @@
 <!--pages/home/index.wxml-->
+<view class="spacer" style="height: {{top_btn.top + top_btn.height + 10}}px;">
+</view>
+<view class="colorDot colorDot1">
+</view>
+<view class="colorDot colorDot2">
+</view>
 <view class="headerContainer" style="margin-top: {{top_btn.top}}px">
-  <view bindtap="goWelcom" class="header" style="height:{{top_btn.height}}px;">
-    <image src="../../images/icon.png" class="icon"></image>
+  <view bindtap="showSideBar" class="header" style="height:{{top_btn.height}}px;">
+    <image src="{{me.avatarUrl ? me.avatarUrl: '../../images/icon.png'}}" class="icon"></image>
     <view>{{state}}</view>
     <view style="width: 10rpx; height: 10rpx; border-radius: 20rpx; background-color: {{onlineColor}}; box-shadow: 0 0 20rpx {{onlineColor}}; margin-left: 20rpx;"></view>
   </view>
   <view class="searchIcon" style="height:{{top_btn.height}}px;width:{{top_btn.height}}px; margin-left: auto; margin-right: {{top_btn.width}}px;" catchtap="goSearch"></view>
 </view>
 <view catchtap="hideTips" wx:if="{{showTips}}" class="shareImg_block">
-  <view class="Tips" catchlongpress="closeTips">
-    <view class="Tip_p" style="text-align: right; color: #00000060; animation: show infinite alternate-reverse 2s; font-size: 14px;">
+  <view class="Tips" catchtap="none">
+    <view catchtap="closeTips" style="text-align: right; color: #cccccc; animation: show infinite alternate-reverse 2s; font-size: 14px; position: absolute; right: 40rpx; top: 30rpx;">
       {{language.home.Tips.p_close}}
     </view>
-    <view class="Tip_title">
-      {{language.home.Tips.title_1}}
-    </view>
-    <view class="Tip_p">
-      {{language.home.Tips.p_1}}
-    </view>
-    <view class="Tip_pic_1"></view>
-    <view class="Tip_p">
-      {{language.home.Tips.p_4}}
-    </view>
+    <view class="Tip_title">{{language.home.Tips.title_1}}</view>
+    <view class="Tip_p">{{language.home.Tips.p_1}}</view>
     <view class="line"></view>
-    <view class="Tip_title">
-      {{language.home.Tips.title_2}}
-    </view>
-    <view class="Tip_p">
-      {{language.home.Tips.p_2}}
-    </view>
-    <view class="Tip_p">
-      {{language.home.Tips.p_3}}
-    </view>
-    <view class="Tip_p">
-      {{language.home.Tips.p_5}}
-    </view>
-    <view class="Tip_p">
-      {{language.home.Tips.p_6}}
-    </view>
-    <view class="Tip_p">
-      {{language.home.Tips.p_7}}
-    </view>
-    <view class="Tip_p">
-      {{language.home.Tips.p_8}}
-    </view>
+    <view class="Tip_title">{{language.home.Tips.title_2}}</view>
+    <view class="Tip_p">{{language.home.Tips.p_2}}</view>
   </view>
 </view>
-<view class="container" style="transform: scale({{showSidebar?'0.95':'1'}});" bindtouchstart="setSidebar" bindtouchmove="showSidebar">
-  <scroll-view wx:if="{{memos.length > 0}}" class="memosScroll" style="height: calc(100vh - {{top_btn.top + top_btn.height + 10}}px); padding-top: {{top_btn.top + top_btn.height + 10}}px;" scroll-y scroll-with-animation scroll-into-view="{{scrollMemoId}}" scroll-with-animation="true" enhanced bounces bindscrolltolower="loadMore" bindscrolltoupper="refreshMemo">
-    <view class="memoCard" wx:for="{{memos}}" wx:key="memo" style="border-left: {{item.rowStatus == 'ARCHIVED' ? '5rpx solid #EF4C4E' : 'none'}};" data-memoId="{{item.id}}" id="memo{{item.id}}">
+
+<view class="container" style="transform: scale({{showSidebar?'0.95':'1'}});" bindtouchstart="setSidebar" bindtouchmove="touchMove">
+  <view style="height: {{top_btn.top + top_btn.height + 10}}px;">
+  </view>
+  <view class="memoList">
+    <view class="memoCard" wx:for="{{memos}}" wx:key="memo" style="border-left: {{item.rowStatus == 'ARCHIVED' ? '5rpx solid #EF4C4E' : 'none'}};" data-memoId="{{item.id}}" id="memo{{item.id}}" catchtap="goMemo">
       <view class="method">
-        <text class="btn top" style="opacity: {{item.pinned ? 1:0.2}};" data-memoId="{{item.id}}" data-pinned="{{item.pinned}}" data-content="{{item.content}}" catchtap="changeMemoPinned" catchlongpress="goMemo"></text>
+        <text class="btn top" style="opacity: {{item.pinned ? 1:0.2}};" data-memoId="{{item.id}}" data-pinned="{{item.pinned}}" data-content="{{item.content}}" catchtap="changeMemoPinned"></text>
         <text class="btn delete" data-memoId="{{item.id}}" data-rowStatus="{{item.rowStatus}}" catchtap="deleteMemoFaker" catchlongpress="deleteMemo"></text>
         <text class="btn edit" data-memoId="{{item.id}}" data-content="{{item.content}}" catchtap="dialogEdit"></text>
       </view>
-      <text class="time" style="color: {{item.time == '刚刚发布' || item.time=='Now' ? '#07C160' : '' }};">{{item.time}}</text>
-      <text class="status" wx:if="{{showCreator}}">{{item.creatorName}}</text>
-      <text class="status" wx:else data-memoId="{{item.id}}" data-visibility="{{item.visibility}}" catchtap="changeMemoVisibility">{{item.visibility}}</text>
-
-      <view class="content">
-        <rich-text data-content="{{item.content}}" user-select nodes="{{item.formatContent}}"></rich-text>
+      <view class="part_top">
+        <view class="time" style="color: {{item.time == '刚刚发布' || item.time=='Now' ? '#07C160' : '' }};">{{item.time}}</view>
+        <!-- <view class="status" wx:if="{{showCreator}}">{{item.creatorName}}</view> -->
+        <view class="{{'vis_icon ' + item.visibility}}"></view>
+        <view class="status" data-memoId="{{item.id}}" data-visibility="{{item.visibility}}" catchtap="changeMemoVisibility">{{item.visibility}}</view>
       </view>
-      <view class="imgList">
+      <view class="content">
+        <rich-text data-content="{{item.content}}" nodes="{{item.formatContent}}"></rich-text>
+      </view>
+      <view wx:if="{{item.imgList_preview.length > 0}}" class="imgList">
         <image class="img" catchtap="preview" data-src="{{image.url}}" data-url="{{item.imgList_preview}}" lazy-load mode="aspectFill" wx:key="image" wx:for="{{item.imgList_preview}}" wx:for-item="image" src="{{image.url}}"></image>
       </view>
-      <view class="videoList">
+      <view wx:if="{{item.video_preview.length > 0}}" class="videoList">
         <video class="video" data-src="{{video.url}}" data-url="{{item.video_preview}}" lazy-load mode="aspectFill" wx:key="video" wx:for="{{item.video_preview}}" wx:for-item="video" src="{{video.url}}"></video>
       </view>
-      <view class="fileList">
+      <view wx:if="{{item.fileList_preview.length > 0}}" class="fileList">
         <view class="file" wx:for="{{item.fileList_preview}}" wx:key="file" wx:for-item="file" data-url="{{file.url}}" catchtap="copy">{{file.id}}</view>
       </view>
 
     </view>
-    <view style="height: 100rpx;"> </view>
-  </scroll-view>
-  <block wx:else>
+  </view>
+
+  <view style="height: 100rpx;"> </view>
+  <block wx:if="{{memos.length == 0}}">
     <view class="none" style="margin-top: 300rpx;">{{language.home.noMemos}}</view>
   </block>
+
+</view>
+
+<view class="createMemoBtn" bindtap="goEdit">
+  ✍️
 </view>
 
 <view class="sidebar" catchtouchmove="none" style="transform: translateX({{showSidebar?'0rpx':'-750rpx'}});">
-  <view class="mask" style="animation: {{showSidebar? 'show 300ms 500ms forwards': 'none'}};" catchtouchstart="hideSidebar"></view>
+  <view class="mask" style="animation: {{showSidebar? 'show 300ms 400ms forwards': 'none'}};" catchtouchstart="hideSidebar"></view>
   <view class="container">
     <view class="user">
-      <view class="name">{{me.username?me.username:me.email}}</view>
+      <image wx:if="{{me.avatarUrl}}" class="avatar" src="{{me.avatarUrl}}" mode="aspectFill" />
+      <view class="name">{{me.nickname ? me.nickname : me.username}}</view>
       <view class="badge" style="{{me.role == 'HOST' ? 'color: #ffffff; background: #07C160' : ''}}">{{me.role}}</view>
     </view>
     <view class="count">
@@ -113,15 +104,24 @@
         <text class="value">{{userSettingList.value}}</text>
       </view>
     </view>
-    <navigator wx:if="{{me.id !== 251}}" url="../resource/index" class="openWeview">
+    <navigator url="../resource/index" class="openWeview">
       {{language.home.sideBar.openResource}}
     </navigator>
-    <navigator wx:if="{{me.id !== 251}}" url="../explore/index" class="openWeview">
-      {{language.home.sideBar.openWebview}}
+    <navigator wx:if="{{showExplore}}" url="../explore/index" class="openWeview">
+      {{language.home.sideBar.openExplore}}
     </navigator>
     <navigator url="../archived/index" class="archived">
       {{language.home.sideBar.goarchived}}
     </navigator>
+    <navigator url="../openapi/index" class="openWeview">
+      {{language.home.sideBar.goOpenAPI}}
+    </navigator>
+    <navigator url="../others/index" class="archived">
+      {{language.home.sideBar.goOthers}}
+    </navigator>
+    <view class="archived" bindtap="goWelcom">
+      {{language.home.sideBar.goWelcom}}
+    </view>
     <view class="date">{{language.home.sideBar.date_1}}<text style="font-weight: bold; font-family: 'Smiley Sans Oblique';">{{me.day}}</text> {{language.home.sideBar.date_2}}</view>
   </view>
   <view class="heatTip" data-time="{{heatTip.time}}" catchtap="goSearch" wx:if="{{showHeatTip}}">{{heatTip.time}} {{heatTip.num}} {{language.home.sideBar.heatTipMemo}} →</view>

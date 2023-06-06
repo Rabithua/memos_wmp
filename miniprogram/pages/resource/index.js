@@ -71,7 +71,9 @@ Page({
   pickImg() {
     let that = this
     let resources = this.data.resources
-    wx.vibrateShort()
+    wx.vibrateShort({
+      type: 'light'
+    })
     wx.chooseMedia({
       count: 1,
       mediaType: ['image', 'video'],
@@ -80,27 +82,46 @@ Page({
       camera: 'back',
       success(res) {
         console.log(res.tempFiles)
-        wx.showLoading({
-          title: '上传中...',
-        })
-        wx.uploadFile({
-          url: `${that.data.url}/api/resource/blob?openId=${wx.getStorageSync('openId')}`,
-          filePath: res.tempFiles[0].tempFilePath,
-          name: 'file',
-          formData: {},
-          success(res) {
+        if (res.tempFiles[0].size > 32 * 1024 * 1024) {
+          wx.vibrateLong()
+          wx.showToast({
+            icon: 'error',
+            title: that.data.language.resource.tooLarge,
+          })
+        } else {
+          wx.showLoading({
+            title: '上传中...',
+          })
+          wx.uploadFile({
+            url: `${that.data.url}/api/resource/blob?openId=${wx.getStorageSync('openId')}`,
+            filePath: res.tempFiles[0].tempFilePath,
+            name: 'file',
+            timeout: 180 * 1000,
+            formData: {},
+            success(res) {
+              console.log(res)
+              if (res.statusCode == 200) {
+                let newFile = JSON.parse(res.data).data
+                newFile.time = app.fomaDay(newFile.createdTs * 1000)
+                newFile.sizeFomate = app.formatFileSize(newFile.size)
+                resources.unshift(newFile)
+                wx.hideLoading()
+                that.setData({
+                  resources
+                })
+              } else {
+                wx.hideLoading()
+                wx.showToast({
+                  icon: 'error',
+                  title: that.data.language.resource.uploadFailed,
+                })
+              }
+            }
+          }).onProgressUpdate((res) => {
             console.log(res)
-            let newFile = JSON.parse(res.data).data
-            newFile.time = app.fomaDay(newFile.createdTs * 1000)
-            newFile.sizeFomate = app.formatFileSize(newFile.size)
-            resources.unshift(newFile)
-            wx.hideLoading()
-            that.setData({
-              resources
-            })
-            //do something
-          }
-        })
+          })
+        }
+
       }
     })
   },
@@ -122,7 +143,9 @@ Page({
         })
       }
       wx.hideLoading()
-      wx.vibrateShort()
+      wx.vibrateShort({
+        type: 'light'
+      })
       this.setData({
         resources: this.data.resources.concat(newResources)
       })
@@ -139,7 +162,9 @@ Page({
       if (!resources[idx].select) {
         this.deleteMemoFile(resources[idx].id)
       }
-      wx.vibrateShort()
+      wx.vibrateShort({
+        type: 'light'
+      })
       this.setData({
         resources
       })
@@ -158,7 +183,9 @@ Page({
   backEdit() {
     const eventChannel = this.getOpenerEventChannel()
     eventChannel.emit('addFiles', this.data.selectFileId)
-    wx.vibrateShort()
+    wx.vibrateShort({
+      type: 'light'
+    })
     wx.navigateBack()
   },
 
@@ -187,14 +214,12 @@ Page({
     let touchStart = this.data.touchStart
     if (touchStart.clientX) {
       if (e.touches[0].clientX - touchStart.clientX > 50 && Math.abs(e.touches[0].clientY - touchStart.clientY) < 20) {
-        // wx.vibrateShort()
         resources[index].showMethod = false
         // hide
         that.setData({
           resources
         })
       } else if (e.touches[0].clientX - touchStart.clientX < -50 && Math.abs(e.touches[0].clientY - touchStart.clientY) < 20) {
-        // wx.vibrateShort()
         resources[index].showMethod = true
         // hide
         that.setData({
@@ -203,6 +228,15 @@ Page({
 
       }
     }
+  },
+
+  changeMethodD(e) {
+    let resources = this.data.resources
+    let index = e.currentTarget.dataset.index
+    resources[index].showMethod = !resources[index].showMethod
+    this.setData({
+      resources
+    })
   },
 
   copyLink(e) {
@@ -214,7 +248,9 @@ Page({
     } else {
       url = `${this.data.url}/o/r/${res[idx].id}/${res[idx].publicId}`
     }
-    wx.vibrateShort()
+    wx.vibrateShort({
+      type: 'light'
+    })
     wx.setClipboardData({
       data: url,
     })
@@ -240,7 +276,9 @@ Page({
               .then((res) => {
                 console.log(res)
                 if (res == true) {
-                  wx.vibrateShort()
+                  wx.vibrateShort({
+                    type: 'light'
+                  })
                   wx.showToast({
                     title: this.data.language.resource.deleted,
                   })
@@ -262,7 +300,9 @@ Page({
         .then((res) => {
           console.log(res)
           if (res == true) {
-            wx.vibrateShort()
+            wx.vibrateShort({
+              type: 'light'
+            })
             wx.showToast({
               title: this.data.language.resource.deleted,
             })
@@ -288,13 +328,18 @@ Page({
     } else {
       url = `${this.data.url}/o/r/${res[idx].id}/${res[idx].publicId}`
     }
-    wx.vibrateShort()
+    wx.vibrateShort({
+      type: 'light'
+    })
     wx.previewImage({
       urls: [url],
     })
   },
 
   onReachBottom() {
+    wx.vibrateShort({
+      type: 'light'
+    })
     this.getResource()
   }
 

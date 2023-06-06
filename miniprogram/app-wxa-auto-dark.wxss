@@ -9,6 +9,10 @@
 
 @media (prefers-color-scheme: dark) {
 
+  .vis_icon {
+    filter:invert(0.7)
+  }
+
   .todo-block {
     filter: invert(1);
   }
@@ -52,7 +56,7 @@
   }
 
   .tag-span {
-    color: rgb(48, 134, 247);
+    filter: brightness(0.6);
   }
 
   .img {
@@ -96,6 +100,10 @@
   .memoCard .file {
     background-color: rgb(42, 42, 42);
     border: #22222200;
+  }
+
+  .spacer {
+    background-image: linear-gradient(180deg, rgb(24, 24, 24) 0%, rgb(24, 24, 24, 0.6) 68.12%, rgb(24, 24, 24, 0) 100%);
   }
 
   .memoCard .file::before {

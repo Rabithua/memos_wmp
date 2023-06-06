@@ -7,11 +7,13 @@
     "pages/edit/index",
     "pages/archived/index",
     "pages/memo/index",
-    "pages/resource/index"
+    "pages/resource/index",
+    "pages/others/index",
+    "pages/openapi/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarTitleText": "memos",
+    "navigationBarTitleText": "",
     "navigationBarBackgroundColor": "@navBgColor",
     "navigationBarTextStyle": "@navTxtStyle"
   },

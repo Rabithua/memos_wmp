@@ -38,7 +38,7 @@
       "typescript"
     ],
     "minifyWXML": true,
-    "ignoreUploadUnusedFiles": false,
+    "ignoreUploadUnusedFiles": true,
     "condition": false,
     "packNpmManually": true,
     "packNpmRelationList": [

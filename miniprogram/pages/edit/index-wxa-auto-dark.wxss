@@ -20,6 +20,6 @@
   }
 
   .btns {
-    background-color: rgb(17, 17, 17);
+    background-color: rgb(41, 41, 41);
   }
 }

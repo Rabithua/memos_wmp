@@ -4,7 +4,11 @@ App({
   language: require('/js/language'),
 
   globalData: {
+    // 【一般需要修改为 false】是否开启微信自动登录，需要手动配置后端接口以及开启小程序认证权限才能生效，否则会报错。
+    ifWechatLogin: true,
     url: 'https://memos.wowow.club',
+    // 搭配ifWechatLogin使用
+    backendUrl: 'https://maimoapi.wowow.club/mpunionid',
     top_btn: null,
     top_btn: wx.getMenuButtonBoundingClientRect()
   },
@@ -46,6 +50,36 @@ App({
       source: 'https://img.rabithua.club/%E9%BA%A6%E9%BB%98/SmileySans-Oblique.ttf',
       scopes: ['webview', 'native'],
     });
+
+  },
+
+  getUnionId() {
+    let that = this
+    return new Promise((resolve, reject) => {
+      wx.login({
+        success(res) {
+          if (res.code) {
+            //发起网络请求
+            wx.request({
+              url: that.globalData.backendUrl,
+              data: {
+                code: res.code
+              },
+              success(r) {
+                let unionid = r.data
+                resolve(unionid)
+              },
+              fail(r) {
+                reject(r)
+              }
+            })
+          } else {
+            console.log('登录失败！' + res.errMsg)
+            reject(res.errMsg)
+          }
+        }
+      })
+    })
 
   },
 
@@ -91,14 +125,6 @@ App({
     return expires.getTime() < now.getTime();
   },
 
-  loadFont() {
-    wx.loadFontFace({
-      family: 'Noto Serif SC',
-      source: 'url("https://img.rabithua.club/others/NotoSerifSC-SemiBold.otf")',
-      success: console.log
-    })
-  },
-  
   calTime(timestamp) {
     var now = new Date().getTime()
     // console.log(now)
@@ -148,15 +174,15 @@ App({
   },
 
   deepCopy(obj) {
-    let newObj = Array.isArray(obj) ? [] : {};  // 判断是数组还是对象，选择初始化方式
+    let newObj = Array.isArray(obj) ? [] : {}; // 判断是数组还是对象，选择初始化方式
     for (let key in obj) {
-      if (typeof obj[key] === "object" && obj[key] !== null) {  // 如果属性值是对象，递归调用deepCopy函数
+      if (typeof obj[key] === "object" && obj[key] !== null) { // 如果属性值是对象，递归调用deepCopy函数
         newObj[key] = this.deepCopy(obj[key]);
       } else {
-        newObj[key] = obj[key];  // 否则直接复制
+        newObj[key] = obj[key]; // 否则直接复制
       }
     }
-    return newObj;  // 返回新的拷贝对象
+    return newObj; // 返回新的拷贝对象
   },
 
   memosRescourse(memo) {
@@ -170,7 +196,7 @@ App({
       if (rescource.externalLink) {
         rescource_url = rescource.externalLink
       }
-      
+
       if (rescource.type.match(/image/)) {
         imgList_preview.push({
           url: rescource_url,
@@ -181,7 +207,7 @@ App({
           url: rescource_url,
           id: rescource_id
         })
-      } else  {
+      } else {
         fileList_preview.push({
           url: rescource_url,
           id: rescource_id

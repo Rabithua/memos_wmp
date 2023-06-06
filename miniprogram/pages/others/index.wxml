@@ -1,0 +1,24 @@
+<!--pages/others/index.wxml-->
+<view class="container">
+  <image class="me" src="../../assets/me.svg" mode="aspectFit" />
+  <view class="others">
+    除了这些，还有...
+  </view>
+  <view class="apps">
+    <view class="app" wx:for="{{apps}}" wx:key="apps">
+      <view class="icon {{item.id}}">
+      </view>
+      <view class="info">
+        <view class="name">
+          {{item.name}}
+        </view>
+        <view class="desc">
+          {{item.desc}}
+        </view>
+      </view>
+      <view class="go" data-appid="{{item.appid}}" bindtap="go">
+        探索
+      </view>
+    </view>
+  </view>
+</view>
