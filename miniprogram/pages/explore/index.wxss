@@ -1,6 +1,3 @@
-.method {
-  display: none;
-}
 
 .headerContainer {
   display: flex;

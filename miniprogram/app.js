@@ -4,6 +4,8 @@ App({
   language: require('/js/language'),
 
   globalData: {
+    // 是否开启微信自动登录，需要手动配置后端接口以及开启小程序认证权限才能生效，否则会报错。
+    ifWechatLogin: true,
     url: 'https://memos.wowow.club',
     top_btn: null,
     top_btn: wx.getMenuButtonBoundingClientRect()

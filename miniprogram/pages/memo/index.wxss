@@ -32,7 +32,7 @@
   bottom: 150rpx;
   right: 50rpx;
   background-color: #ffffff;
-  border: 1rpx solid #cccccc;
+  border: 1rpx solid #00000015;
   display: flex;
   width: fit-content!important;
   font-size: 30rpx;

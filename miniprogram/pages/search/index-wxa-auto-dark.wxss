@@ -33,7 +33,11 @@
 
   .tags .tag {
     background: rgb(0, 105, 12);
-    color: #ffffff;
+    color: #ffffff95;
+  }
+
+  .sugTag {
+    color: #ffffff80!important;
   }
 
 }

@@ -29,13 +29,20 @@ Page({
     if (wx.getStorageSync('openId')) {
       this.getAll()
     } else {
-      app.getUnionId().then((r) => {
-        wx.setStorageSync('openId', r)
-        that.getAll()
-      }).catch((err) => {
-        console.log(err)
-        that.getAll()
-      })
+      if (app.globalData.ifWechatLogin) {
+        app.getUnionId().then((r) => {
+          wx.setStorageSync('openId', r)
+          that.getAll()
+        }).catch((err) => {
+          console.log(err)
+          that.getAll()
+        })
+      } else {
+        wx.redirectTo({
+          url: '../welcom/index',
+        })
+      }
+
     }
 
   },
@@ -750,22 +757,29 @@ Page({
     wx.vibrateShort({
       type: 'light'
     })
-    wx.showModal({
-      confirmColor: '#07C160',
-      title: this.data.language.home.goWelcomModal.title,
-      content: this.data.language.home.goWelcomModal.content,
-      confirmText: this.data.language.home.goWelcomModal.confirmText,
-      cancelText: this.data.language.home.goWelcomModal.cancelText,
-      success(res) {
-        if (res.confirm) {
-          wx.redirectTo({
-            url: '../welcom/index',
-          })
-        } else if (res.cancel) {
-          console.log('用户点击取消')
+    if (app.globalData.ifWechatLogin) {
+      wx.showModal({
+        confirmColor: '#07C160',
+        title: this.data.language.home.goWelcomModal.title,
+        content: this.data.language.home.goWelcomModal.content,
+        confirmText: this.data.language.home.goWelcomModal.confirmText,
+        cancelText: this.data.language.home.goWelcomModal.cancelText,
+        success(res) {
+          if (res.confirm) {
+            wx.redirectTo({
+              url: '../welcom/index',
+            })
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
         }
-      }
-    })
+      })
+    } else {
+      wx.redirectTo({
+        url: '../welcom/index',
+      })
+    }
+
   },
 
   goSearch(e) {
@@ -799,6 +813,9 @@ Page({
   },
 
   closeTips() {
+    wx.vibrateShort({
+      type: 'light',
+    })
     wx.setStorageSync('showTips', 'false')
     this.setData({
       showTips: false

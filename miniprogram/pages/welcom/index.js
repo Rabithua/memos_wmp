@@ -9,7 +9,8 @@ Page({
   data: {
     dogDanceNum: 0,
     webInfo: {},
-    dogTimer: null
+    dogTimer: null,
+    ifWechatLogin: app.globalData.ifWechatLogin
   },
 
   /**

@@ -8,6 +8,11 @@
  */
 
 @media (prefers-color-scheme: dark) {
+  .Tips {
+    background-color: rgb(41, 41, 41);
+    color: #ffffff90;
+  }
+
   .vis_icon {
     filter:invert(0.7)
   }

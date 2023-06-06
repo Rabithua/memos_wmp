@@ -94,6 +94,7 @@ page::before {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 10rpx;
 }
 
 .piecs {
@@ -115,7 +116,7 @@ page::before {
   align-items: center;
   gap: 30rpx;
   font-size: 60rpx;
-  margin: 0rpx auto 20rpx auto;
+  margin: 0rpx auto;
   color: rgb(119,197,157);
 }
 
@@ -143,7 +144,7 @@ page::before {
   border-radius: 30rpx;
   margin: auto;
   margin-top: -20rpx;
-  color: rgb(66, 65, 63);
+  color: rgb(66, 65, 63, 0.7);
 }
 
 .dsc {
@@ -172,11 +173,7 @@ input {
   padding: 10rpx 30rpx;
   margin-top: 10rpx;
   margin-bottom: 20rpx;
-  border: 5rpx solid #00000010;
-}
-
-input:focus {
-  border: 2rpx solid rgb(119,197,157)50;
+  /* border: 5rpx solid #00000010; */
 }
 
 .form .title {

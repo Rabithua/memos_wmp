@@ -9,6 +9,7 @@
 
 @media (prefers-color-scheme: dark) {
     .shareBtn {
-        background: rgb(17, 17, 17);
+        background: rgb(41, 41, 41);
+        border: none;
     }
 }

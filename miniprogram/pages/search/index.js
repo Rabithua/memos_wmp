@@ -522,10 +522,10 @@ Page({
       urls: url // 需要预览的图片 http 链接列表
     })
   },
-  goMemo(e){
-    console.log(e.target.dataset.memoid)
+  goMemo(e) {
+    // console.log(e.currentTarget.dataset.memoid)
     wx.navigateTo({
-      url: `/pages/memo/index?id=${e.target.dataset.memoid}`,
+      url: `/pages/memo/index?id=${e.currentTarget.dataset.memoid}`,
     })
   },
 

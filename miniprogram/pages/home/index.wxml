@@ -15,7 +15,7 @@
 </view>
 <view catchtap="hideTips" wx:if="{{showTips}}" class="shareImg_block">
   <view class="Tips" catchtap="none">
-    <view catchtap="closeTips" style="text-align: right; color: #00000060; animation: show infinite alternate-reverse 2s; font-size: 14px; position: absolute; right: 40rpx; top: 30rpx;">
+    <view catchtap="closeTips" style="text-align: right; color: #cccccc; animation: show infinite alternate-reverse 2s; font-size: 14px; position: absolute; right: 40rpx; top: 30rpx;">
       {{language.home.Tips.p_close}}
     </view>
     <view class="Tip_title">{{language.home.Tips.title_1}}</view>
@@ -25,6 +25,7 @@
     <view class="Tip_p">{{language.home.Tips.p_2}}</view>
   </view>
 </view>
+
 <view class="container" style="transform: scale({{showSidebar?'0.95':'1'}});" bindtouchstart="setSidebar" bindtouchmove="touchMove">
   <view style="height: {{top_btn.top + top_btn.height + 10}}px;">
   </view>

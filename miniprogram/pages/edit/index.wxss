@@ -34,6 +34,7 @@ page {
 .memoEditTextarea {
   padding: 20rpx;
   height: 230px;
+  width: calc(100% - 40rpx);
   font-size: 16px;
   background-color: #ffffff30;
   border-top: 1rpx solid #00000010;

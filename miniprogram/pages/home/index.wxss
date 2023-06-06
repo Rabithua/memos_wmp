@@ -57,6 +57,7 @@ page {
   height: 100vh;
   background: #00000030;
   opacity: 0;
+  backdrop-filter: blur(5px);
 }
 
 .sidebar .container {
@@ -286,7 +287,6 @@ page {
 
 .Tip_p {
   white-space: pre-line;
-  color: #000000;
   line-height: 2;
   font-size: 28rpx;
 }

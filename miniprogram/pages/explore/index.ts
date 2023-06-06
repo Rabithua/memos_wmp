@@ -39,12 +39,6 @@ Page({
       urls: url // 需要预览的图片 http 链接列表
     })
   },
-  goMemo(e:any){
-    console.log(e.target.dataset.memoid)
-    wx.navigateTo({
-      url: `/pages/memo/index?id=${e.target.dataset.memoid}`,
-    })
-  },
 
   getExploreMemos() {
     let that = this;
@@ -84,6 +78,13 @@ Page({
         }
       })
       .catch((err) => console.log(err));
+  },
+
+  goMemo(e) {
+    // console.log(e.currentTarget.dataset.memoid)
+    wx.navigateTo({
+      url: `/pages/memo/index?id=${e.currentTarget.dataset.memoid}`,
+    })
   },
 
   onShow() {

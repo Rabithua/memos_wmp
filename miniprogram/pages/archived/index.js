@@ -35,12 +35,12 @@ Page({
       })
     }
   },
-      
+
   copy(e) {
     console.log(e)
     wx.vibrateShort({
-        type: 'light'
-      })
+      type: 'light'
+    })
     wx.setClipboardData({
       data: e.target.dataset.url
     })
@@ -58,10 +58,10 @@ Page({
       urls: url // 需要预览的图片 http 链接列表
     })
   },
-  goMemo(e){
-    console.log(e.target.dataset.memoid)
+  goMemo(e) {
+    // console.log(e.currentTarget.dataset.memoid)
     wx.navigateTo({
-      url: `/pages/memo/index?id=${e.target.dataset.memoid}`,
+      url: `/pages/memo/index?id=${e.currentTarget.dataset.memoid}`,
     })
   },
 
@@ -116,8 +116,8 @@ Page({
 
   changeMemoPinned(e) {
     wx.vibrateShort({
-        type: 'light'
-      })
+      type: 'light'
+    })
     let memoid = e.currentTarget.dataset.memoid
     let pinned = e.currentTarget.dataset.pinned
     var data = {
@@ -128,8 +128,8 @@ Page({
       .then(res => {
         if (res.data) {
           wx.vibrateShort({
-        type: 'light'
-      })
+            type: 'light'
+          })
           if (!pinned) {
             wx.showToast({
               icon: 'none',
@@ -186,8 +186,8 @@ Page({
             memos
           })
           wx.vibrateShort({
-        type: 'light'
-      })
+            type: 'light'
+          })
           wx.showToast({
             icon: 'none',
             title: that.data.language.home.visibilityChange,
@@ -213,8 +213,8 @@ Page({
             memos: memos
           })
           wx.vibrateShort({
-        type: 'light'
-      })
+            type: 'light'
+          })
           wx.showToast({
             icon: 'none',
             title: that.data.language.home.rowStatusChange,
@@ -269,8 +269,8 @@ Page({
 
   onReachBottom() {
     wx.vibrateShort({
-        type: 'light'
-      })
+      type: 'light'
+    })
     this.getMemos('ARCHIVED')
   },
 
