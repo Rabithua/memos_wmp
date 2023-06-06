@@ -4,9 +4,11 @@ App({
   language: require('/js/language'),
 
   globalData: {
-    // 是否开启微信自动登录，需要手动配置后端接口以及开启小程序认证权限才能生效，否则会报错。
+    // 【一般需要修改为 false】是否开启微信自动登录，需要手动配置后端接口以及开启小程序认证权限才能生效，否则会报错。
     ifWechatLogin: true,
     url: 'https://memos.wowow.club',
+    // 搭配ifWechatLogin使用
+    backendUrl: 'https://maimoapi.wowow.club/mpunionid',
     top_btn: null,
     top_btn: wx.getMenuButtonBoundingClientRect()
   },
@@ -52,14 +54,14 @@ App({
   },
 
   getUnionId() {
+    let that = this
     return new Promise((resolve, reject) => {
       wx.login({
         success(res) {
-          console.log(res)
           if (res.code) {
             //发起网络请求
             wx.request({
-              url: `https://maimoapi.wowow.club/mpunionid`,
+              url: that.globalData.backendUrl,
               data: {
                 code: res.code
               },
