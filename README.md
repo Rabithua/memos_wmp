@@ -41,6 +41,6 @@ git clone https://github.com/Rabithua/memos_wmp
 ```
 3. 下载微信小程序[开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)
 4. 导入当前文件夹，选择测试号或者使用你注册好的微信小程序的 appid ，不使用云开发。
-5. 在 `app.js` 中修改 `globalData.url` 为你自己的域名，globalData.ifWechatLogin 修改为false。
+5. 在 `app.js` 中修改 `globalData.url` 为你自己的域名，`globalData.ifWechatLogin` 修改为false。
 6. 不出意外的话编译完毕你就可以看到麦默的欢迎界面了🎉
 7. 尝试输入用户名和密码，看是否登陆成功，如果没有注册按钮是因为没有开启公共注册，遇到问题请提交 issue 反馈给我。
