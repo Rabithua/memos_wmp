@@ -8,7 +8,8 @@ Page({
   data: {
     memo: null,
     id: null,
-    url: app.globalData.url
+    url: app.globalData.url,
+    me: wx.getStorageSync('me')
   },
 
   onLoad(o) {
@@ -77,6 +78,26 @@ Page({
       current: e.target.dataset.src, // 当前显示图片的 http 链接
       urls: url // 需要预览的图片 http 链接列表
     })
+  },
+
+  changeMemoVisibility() {
+    let visibility = this.data.memo.visibility
+    let memoid = this.data.memo.id
+    var that = this
+    wx.vibrateShort({
+      type: 'light'
+    })
+    app.api.editMemo(this.data.url, memoid, {
+        visibility: (visibility == 'PRIVATE' ? 'PUBLIC' : 'PRIVATE')
+      })
+      .then(res => {
+        if (res.data) {
+          that.setData({
+            ['memo.visibility']: visibility == 'PRIVATE' ? 'PUBLIC' : 'PRIVATE'
+          })
+        }
+      })
+      .catch((err) => console.log(err))
   },
 
   vibShort() {

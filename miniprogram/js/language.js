@@ -13,7 +13,7 @@ export const chinese = {
       d: '天前',
       h: '小时前',
       m: '分钟前',
-      now: '刚刚发布'
+      now: '刚刚'
     }
   },
   openApi: {
@@ -55,6 +55,7 @@ export const chinese = {
     unSee: "Memo不可见",
     visibility_1: '可见性为：',
     visibility_2: '（仅自己可见）',
+    visibility_3: '（任何人可见）',
     getting: '拉取数据'
   },
   welcom: {
@@ -235,6 +236,7 @@ export const english = {
     unSee: "Memo is hidden",
     visibility_1: 'Visibility: ',
     visibility_2: '(Only visible to yourself)',
+    visibility_3: '(visible to everyone)',
     getting: 'Getting'
   },
   welcom: {
