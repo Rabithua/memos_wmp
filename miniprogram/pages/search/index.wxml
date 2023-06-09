@@ -38,7 +38,7 @@
       <text class="btn edit" data-memoId="{{item.id}}" data-content="{{item.content}}" catchtap="dialogEdit"></text>
     </view>
     <view class="part_top">
-      <view class="time" style="color: {{item.time == '刚刚发布' || item.time=='Now' ? '#07C160' : '' }};">{{item.time}}</view>
+      <view class="time" style="color: {{item.time == '刚刚' || item.time=='Now' ? '#07C160' : '' }};">{{item.time}}</view>
       <!-- <view class="status" wx:if="{{showCreator}}">{{item.creatorName}}</view> -->
       <view class="{{'vis_icon ' + item.visibility}}"></view>
       <view class="status" data-memoId="{{item.id}}" data-visibility="{{item.visibility}}" catchtap="changeMemoVisibility">{{item.visibility}}</view>
