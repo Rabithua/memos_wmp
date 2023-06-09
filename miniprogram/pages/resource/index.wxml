@@ -35,6 +35,9 @@
 
 <view class="total">
   {{language.resource.load_1 + resources.length + language.resource.load_2}}
+  <view>
+  {{totalSize}}
+  </view>
 </view>
 
 <view wx:if="{{selectMode}}" class="backEditBtn" bindtap="backEdit">

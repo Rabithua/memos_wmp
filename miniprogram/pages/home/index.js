@@ -225,7 +225,7 @@ Page({
                     memos.unshift({
                       ...newMemo,
                       formatContent: formatMemoContent(newMemo.content),
-                      time: app.calTime(newMemo.createdTs),
+                      time: app.calTime(newMemo.displayTs),
                     })
                     that.setData({
                       memos: memos
@@ -411,7 +411,7 @@ Page({
                   memos[index] = {
                     ...newMemo,
                     formatContent: formatMemoContent(newMemo.content),
-                    time: app.calTime(newMemo.createdTs)
+                    time: app.calTime(newMemo.displayTs)
                   }
                 }
               })
@@ -467,7 +467,7 @@ Page({
         } else {
           var memos = result.data
           for (let i = 0; i < memos.length; i++) {
-            const ts = memos[i].createdTs
+            const ts = memos[i].displayTs
             var time = app.calTime(ts)
             memos[i].time = time
             //memos原版解析
