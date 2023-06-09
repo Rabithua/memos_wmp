@@ -149,6 +149,7 @@ Page({
       this.setData({
         resources: this.data.resources.concat(newResources)
       })
+      this.calcTotalSize()
       this.selectSet()
     })
   },
@@ -228,6 +229,17 @@ Page({
 
       }
     }
+  },
+
+  calcTotalSize(){
+    let totalSize = 0
+    this.data.resources.forEach(res => {
+      totalSize = totalSize + res.size
+    });
+    console.log(totalSize)
+    this.setData({
+      totalSize: app.formatFileSize(totalSize)
+    })
   },
 
   changeMethodD(e) {

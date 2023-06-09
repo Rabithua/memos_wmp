@@ -39,6 +39,8 @@
   text-align: center;
   padding: 50rpx;
   margin-bottom: 50rpx;
+  font-size: 30rpx;
+  color: #cccccc;
 }
 
 .resource .icon {

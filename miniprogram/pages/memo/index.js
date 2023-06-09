@@ -51,8 +51,8 @@ Page({
           })
           wx.hideLoading()
           wx.vibrateShort({
-        type: 'light'
-      })
+            type: 'light'
+          })
           this.setData({
             memo
           })
@@ -81,8 +81,8 @@ Page({
 
   vibShort() {
     wx.vibrateShort({
-        type: 'light'
-      })
+      type: 'light'
+    })
   },
 
   onReady() {
@@ -96,8 +96,10 @@ Page({
   },
 
   onShareAppMessage() {
+    let imageUrl = this.data.memo.imgList_preview.length > 0 ? this.data.memo.imgList_preview[0].url : ''
     return {
       title: `${this.data.memo.creatorName}的笔记`,
+      imageUrl,
       path: `/pages/memo/index?id=${this.data.id}`,
     }
   }
