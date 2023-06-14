@@ -44,7 +44,8 @@ page {
 
 .btns {
   transition: 200ms;
-  background-color: #ffffff;
+  backdrop-filter: blur(100rpx);
+  background-color: #ffffff80;
   border-top: 1rpx solid #00000010;
   padding-top: 30rpx;
   border-radius: 30rpx 30rpx 0 0;
@@ -89,7 +90,11 @@ page {
 }
 
 .fileNum {
-  color: #cccccc;
+  padding: 8rpx 40rpx;
+  background: #07c16030;
+  border: 1rpx solid #07c160;
+  color: #07c160;
+  border-radius: 99px;
 }
 
 .fullScrBtn {

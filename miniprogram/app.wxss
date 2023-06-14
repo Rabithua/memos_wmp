@@ -217,8 +217,8 @@ page {
 
 .img {
   background-color: #f5f5f5;
-  max-height: 200rpx;
-  max-width: 200rpx;
+  max-height: 220rpx;
+  max-width: 220rpx;
   border-radius: 10rpx;
 }
 
