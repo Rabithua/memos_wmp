@@ -3,6 +3,21 @@
 .tip {
   margin: 0;
   border-radius: 30rpx 30rpx 0 0;
+  display: flex;
+  align-items: center;
+}
+
+.tip .tipBtn {
+  margin-left: auto;
+  background-color: #07c160;
+  color: #ffffff;
+  padding: 5rpx 20rpx;
+  border-radius: 10rpx;
+  transition: 300ms;
+}
+
+.tip .tipBtn:active {
+  transform: scale(0.9);
 }
 
 .memoCard {

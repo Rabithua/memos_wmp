@@ -589,6 +589,7 @@ Page({
     app.api.getMe(app.globalData.url)
       .then(result => {
         let me = result.data
+        wx.setStorageSync('me', me)
         that.getStats(me.id)
         let defaultUserSettingList = [{
             key: 'locale',

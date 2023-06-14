@@ -1,7 +1,18 @@
 <!--pages/memo/index.wxml-->
 
-<view class="tip" wx:if="{{memo.visibility === 'PRIVATE'}}">
-  {{language.memo.visibility_1 + memo.visibility + language.memo.visibility_2}}
+<view class="tip" wx:if="{{me && me.id == memo.creatorId}}">
+  <view>
+    {{language.memo.visibility_1 + memo.visibility}}
+  </view>
+  <view  wx:if="{{memo.visibility === 'PRIVATE'}}">
+    {{language.memo.visibility_2}}
+  </view>
+  <view  wx:else>
+    {{language.memo.visibility_3}}
+  </view>
+  <view class="tipBtn" catchtap="changeMemoVisibility">
+    切换
+  </view>
 </view>
 <view wx:if="{{memo}}" class="memoCard" style="padding-bottom: 50rpx;">
   <text class="time">{{memo.time}}</text>
