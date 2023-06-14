@@ -132,7 +132,8 @@ page {
 
 .headerIcons {
   display: flex;
-  gap: 20rpx;
+  gap: 10rpx;
+  padding: 0 20rpx;
   background-color: #f5f5f580;
   backdrop-filter: blur(30rpx);
   border-radius: 999px;
@@ -188,6 +189,7 @@ page {
 .shortCode {
   margin: 10rpx;
   display: inline;
+  word-break: break-all;
   white-space: pre-wrap;
   background-color: #f5f5f5;
   color: #9c1111;

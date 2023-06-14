@@ -18,3 +18,5 @@
   margin-left: auto;
   scale: 0.8;
 }
+
+@import 'index-wxa-auto-dark.wxss'

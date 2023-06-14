@@ -9,9 +9,13 @@ Page({
   },
   onShow() {
     let language = app.language[wx.getStorageSync('language') ? wx.getStorageSync('language') : 'chinese']
+    let settings = wx.getStorageSync('settings') ? wx.getStorageSync('settings') : language.setting.settings
+    settings.map((setting, index) => {
+      setting.title = language.setting.settings[index].title
+    })
     this.setData({
       language,
-      settings: wx.getStorageSync('settings') ? wx.getStorageSync('settings') : language.setting.settings,
+      settings
     })
     wx.setNavigationBarTitle({
       title: language.setting.pageTitle,
