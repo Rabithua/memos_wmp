@@ -3,7 +3,10 @@
 <view class="headerContainer" style="top: {{top_btn.top}}px">
   <view class="header" style="height:{{top_btn.height}}px;">{{language.resource.pageTitle}}
   </view>
-  <view class="uploadBtn" style="height:{{top_btn.height}}px;" bindtap="pickImg">{{language.resource.upload}}</view>
+  <view class="uploadBtn" style="height:{{top_btn.height}}px;" bindtap="pickImg">
+    {{ uploading == 0 ? language.resource.upload : language.resource.uploading + ' · ' + uploading}}
+    <view wx:if="{{uploading !== 0}}" class="uploadingDot"></view>
+  </view>
 </view>
 
 
@@ -36,7 +39,7 @@
 <view class="total">
   {{language.resource.load_1 + resources.length + language.resource.load_2}}
   <view>
-  {{totalSize}}
+    {{totalSize}}
   </view>
 </view>
 

@@ -5,7 +5,8 @@ Page({
     url: getApp().globalData.url,
     limit: 20,
     resources: [],
-    selectFileId: []
+    selectFileId: [],
+    uploading: 0
   },
 
   onLoad(o) {
@@ -70,60 +71,85 @@ Page({
 
   pickImg() {
     let that = this
-    let resources = this.data.resources
     wx.vibrateShort({
       type: 'light'
     })
     wx.chooseMedia({
-      count: 1,
+      count: 9,
       mediaType: ['image', 'video'],
       sourceType: ['album', 'camera'],
       maxDuration: 30,
       camera: 'back',
       success(res) {
         console.log(res.tempFiles)
-        if (res.tempFiles[0].size > 32 * 1024 * 1024) {
-          wx.vibrateLong()
-          wx.showToast({
-            icon: 'error',
-            title: that.data.language.resource.tooLarge,
-          })
-        } else {
-          wx.showLoading({
-            title: '上传中...',
-          })
-          wx.uploadFile({
-            url: `${that.data.url}/api/resource/blob?openId=${wx.getStorageSync('openId')}`,
-            filePath: res.tempFiles[0].tempFilePath,
-            name: 'file',
-            timeout: 180 * 1000,
-            formData: {},
-            success(res) {
-              console.log(res)
-              if (res.statusCode == 200) {
-                let newFile = JSON.parse(res.data).data
-                newFile.time = app.fomaDay(newFile.createdTs * 1000)
-                newFile.sizeFomate = app.formatFileSize(newFile.size)
-                resources.unshift(newFile)
-                wx.hideLoading()
-                that.setData({
-                  resources
-                })
-              } else {
-                wx.hideLoading()
-                wx.showToast({
-                  icon: 'error',
-                  title: that.data.language.resource.uploadFailed,
-                })
-              }
-            }
-          }).onProgressUpdate((res) => {
-            console.log(res)
-          })
-        }
-
+        that.setData({
+          uploading: that.data.uploading + res.tempFiles.length
+        })
+        res.tempFiles.forEach((file) => {
+          that.uploadFile(file)
+        })
       }
     })
+  },
+
+  uploadFile(file) {
+    let that = this
+    let resources = this.data.resources
+    if (file.size > 32 * 1024 * 1024) {
+      wx.vibrateLong()
+      wx.showToast({
+        icon: 'error',
+        title: that.data.language.resource.tooLarge,
+      })
+    } else {
+      wx.uploadFile({
+        url: `${that.data.url}/api/resource/blob?openId=${wx.getStorageSync('openId')}`,
+        filePath: file.tempFilePath,
+        name: 'file',
+        timeout: 180 * 1000,
+        formData: {},
+        success(res) {
+          console.log(res)
+          wx.vibrateShort({
+            type: 'light',
+          })
+          if (res.statusCode == 200) {
+            let newFile = JSON.parse(res.data).data
+            newFile.time = app.fomaDay(newFile.createdTs * 1000)
+            newFile.sizeFomate = app.formatFileSize(newFile.size)
+            resources.unshift(newFile)
+            wx.hideLoading()
+            that.setData({
+              resources
+            })
+            that.setData({
+              uploading: that.data.uploading - 1
+            })
+            return
+          } else {
+            wx.showToast({
+              icon: 'error',
+              title: that.data.language.resource.uploadFailed,
+            })
+            that.setData({
+              uploading: that.data.uploading - 1
+            })
+            return
+          }
+        },
+        fail() {
+          wx.vibrateShort({
+            type: 'light',
+          })
+          that.setData({
+            uploading: that.data.uploading - 1
+          })
+          return
+        }
+      }).onProgressUpdate((res) => {
+        console.log(res)
+      })
+    }
   },
 
   getResource() {
@@ -231,7 +257,7 @@ Page({
     }
   },
 
-  calcTotalSize(){
+  calcTotalSize() {
     let totalSize = 0
     this.data.resources.forEach(res => {
       totalSize = totalSize + res.size
