@@ -6,7 +6,7 @@
 <view wx:if="{{memo}}" class="memoCard" style="padding-bottom: 50rpx;">
   <text class="time">{{memo.time}}</text>
   <text class="status">@{{memo.creatorName}}</text>
-  <view class="content" style="max-height: fit-content;">
+  <view class="content" >
     <rich-text data-content="{{memo.content}}" user-select nodes="{{memo.formatContent}}"></rich-text>
   </view>
   <view wx:if="{{memo.imgList_preview.length > 0}}" class="imgList">

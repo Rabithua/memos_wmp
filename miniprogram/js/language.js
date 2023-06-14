@@ -26,6 +26,18 @@ export const chinese = {
     pageTitle: '已归档Memos🌒',
     nothing: '这是一片无人的荒原🪐'
   },
+  setting: {
+    pageTitle: '本地设置',
+    settings: [{
+        title: "自动折叠",
+        checked: true,
+      },
+      {
+        title: "标签建议",
+        checked: true,
+      },
+    ]
+  },
   resource: {
     pageTitle: '资源库 📂',
     nothing: '这是一片无人的荒原🪐',
@@ -145,7 +157,8 @@ export const chinese = {
       💫 「标签删除」搜索页面可以长按标签(删除后会出现在标签建议中)
       💫 「编辑资源库文件」，长按或者向左侧滑资源卡片`,
       title_2: '功能更新',
-      p_2: `✨ Search 页面新增 Tag 建议，支持从建议创建 Tag
+      p_2: `✨ 新增本地设置页面，可以设置 memo 是否折叠显示以及是否显示标签建议
+      ✨ Search 页面新增 Tag 建议，支持从建议创建 Tag
       ✨ 新建或编辑 memo 时自动缓存，妈妈再也不会担心我写了一半的小作文丢失了
       ✨ Search 页面memo卡片完整操作支持🎉
       ✨ 归档页面，资源库页面可以上传图片或视频了🧩
@@ -206,6 +219,18 @@ export const english = {
     pageTitle: 'Archived Memos🌒',
     nothing: "There's nothing here 🪐"
   },
+  setting: {
+    pageTitle: 'Local Settings',
+    settings: [{
+    title: "Auto Fold",
+    checked: true,
+    },
+    {
+    title: "Tag Suggestions",
+    checked: true,
+    },
+    ]
+    },
   resource: {
     pageTitle: 'Resource📂',
     nothing: "There's nothing here 🪐",
@@ -326,7 +351,8 @@ export const english = {
       💫 To open a Memo page, long press the pin button
       💫 "Edit resource library file", long press or swipe left on the resource card.`,
       title_2: 'Feature Updates',
-      p_2: `✨ The search page now includes tag suggestions and allows users to create tags from suggestions
+      p_2: `✨ Add local settings page, which allows users to toggle memo folding and tag suggestion display.
+      ✨ The search page now includes tag suggestions and allows users to create tags from suggestions
       ✨ Memos are now automatically cached while being created or edited, preventing loss of data
       ✨ Full memo card operations are now available on the search page 🎉
       ✨ It is now possible to upload images or videos on the archive and resource pages 🧩

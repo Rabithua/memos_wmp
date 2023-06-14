@@ -275,8 +275,10 @@ Page({
   },
 
   onShow() {
+    let language = app.language[wx.getStorageSync('language') ? wx.getStorageSync('language') : 'chinese']
     this.setData({
-      language: app.language[wx.getStorageSync('language') ? wx.getStorageSync('language') : 'chinese']
+      language,
+      settings: wx.getStorageSync('settings') ? wx.getStorageSync('settings') : language.setting.settings,
     })
   },
 

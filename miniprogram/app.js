@@ -22,16 +22,14 @@ App({
     }
 
     //小程序更新提醒
-    if (options.scene == 1154) {
-
-    } else {
+    if (options.scene !== 1154){
       if (wx.canIUse('getUpdateManager')) {
         const updateManager = wx.getUpdateManager()
         updateManager.onCheckForUpdate(function (res) {
           if (res.hasUpdate) {
             updateManager.onUpdateReady(function () {
-              updateManager.applyUpdate()
               wx.clearStorageSync()
+              updateManager.applyUpdate()
             })
           }
         })

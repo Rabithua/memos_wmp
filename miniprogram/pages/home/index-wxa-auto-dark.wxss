@@ -71,6 +71,14 @@
     background: rgba(24, 24, 24, 0.5019607843137255);
   }
 
+  .headerIcons {
+    background: rgba(24, 24, 24, 0.5019607843137255);
+  }
+
+  .headerIcons .headerIcon {
+    filter: invert(1);
+  }
+
   .icon {
     border: rgb(0, 0, 0);
   }

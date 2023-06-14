@@ -15,7 +15,7 @@
   </view>
 </block>
 
-<block wx:if="{{tagsSuggestionList.length > 0}}">
+<block wx:if="{{tagsSuggestionList.length > 0 && settings[1].checked}}">
   <view class="tagtitle">
     {{language.search.tagSuggestionTitle}}
   </view>
@@ -44,7 +44,7 @@
       <view class="status" data-memoId="{{item.id}}" data-visibility="{{item.visibility}}" catchtap="changeMemoVisibility">{{item.visibility}}</view>
     </view>
 
-    <view class="content">
+    <view class="content" style="{{settings[0].checked ? 'max-height: 800rpx' : ''}}">
       <rich-text data-content="{{item.content}}" nodes="{{item.formatContent}}"></rich-text>
     </view>
     <view wx:if="{{item.imgList_preview.length > 0}}" class="imgList">
