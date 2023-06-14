@@ -1,0 +1,20 @@
+/* pages/setting/index.wxss */
+.settings {
+  display: flex;
+  gap: 20rpx;
+  flex-direction: column;
+  margin: 20rpx;
+}
+
+.settings .setting {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  background-color: #ffffff;
+  border-radius: 10rpx;
+}
+
+.settings .setting switch {
+  margin-left: auto;
+  scale: 0.8;
+}

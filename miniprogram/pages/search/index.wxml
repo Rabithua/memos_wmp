@@ -15,7 +15,7 @@
   </view>
 </block>
 
-<block wx:if="{{tagsSuggestionList.length > 0}}">
+<block wx:if="{{tagsSuggestionList.length > 0 && settings[1].checked}}">
   <view class="tagtitle">
     {{language.search.tagSuggestionTitle}}
   </view>

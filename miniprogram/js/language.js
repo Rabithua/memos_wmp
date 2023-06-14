@@ -26,6 +26,18 @@ export const chinese = {
     pageTitle: '已归档Memos🌒',
     nothing: '这是一片无人的荒原🪐'
   },
+  setting: {
+    pageTitle: '本地设置',
+    settings: [{
+        title: "自动折叠",
+        checked: true,
+      },
+      {
+        title: "标签建议",
+        checked: true,
+      },
+    ]
+  },
   resource: {
     pageTitle: '资源库 📂',
     nothing: '这是一片无人的荒原🪐',
@@ -206,6 +218,18 @@ export const english = {
     pageTitle: 'Archived Memos🌒',
     nothing: "There's nothing here 🪐"
   },
+  setting: {
+    pageTitle: 'Local Settings',
+    settings: [{
+    title: "Auto Fold",
+    checked: true,
+    },
+    {
+    title: "Tag Suggestions",
+    checked: true,
+    },
+    ]
+    },
   resource: {
     pageTitle: 'Resource📂',
     nothing: "There's nothing here 🪐",

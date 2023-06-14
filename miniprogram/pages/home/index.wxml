@@ -8,10 +8,13 @@
 <view class="headerContainer" style="margin-top: {{top_btn.top}}px">
   <view bindtap="showSideBar" class="header" style="height:{{top_btn.height}}px;">
     <image src="{{me.avatarUrl ? me.avatarUrl: '../../images/icon.png'}}" class="icon"></image>
-    <view>{{state}}</view>
+    <view>{{state == language.home.state.online ? memos.length + " MEMOS" : state}}</view>
     <view style="width: 10rpx; height: 10rpx; border-radius: 20rpx; background-color: {{onlineColor}}; box-shadow: 0 0 20rpx {{onlineColor}}; margin-left: 20rpx;"></view>
   </view>
-  <view class="searchIcon" style="height:{{top_btn.height}}px;width:{{top_btn.height}}px; margin-left: auto; margin-right: {{top_btn.width}}px;" catchtap="goSearch"></view>
+  <view class="headerIcons" style="height:{{top_btn.height}}px; margin-left: auto; margin-right: {{top_btn.width}}px;">
+    <view class="headerIcon settingIcon" style="width:{{top_btn.height}}px;" catchtap="goSetting"></view>
+    <view class="headerIcon searchIcon" style="width:{{top_btn.height}}px;" catchtap="goSearch"></view>
+  </view>
 </view>
 <view catchtap="hideTips" wx:if="{{showTips}}" class="shareImg_block">
   <view class="Tips" catchtap="none">
@@ -42,7 +45,7 @@
         <view class="{{'vis_icon ' + item.visibility}}"></view>
         <view class="status" data-memoId="{{item.id}}" data-visibility="{{item.visibility}}" catchtap="changeMemoVisibility">{{item.visibility}}</view>
       </view>
-      <view class="content">
+      <view class="content" style="{{settings[0].checked ? 'max-height: 800rpx' : ''}}">
         <rich-text data-content="{{item.content}}" nodes="{{item.formatContent}}"></rich-text>
       </view>
       <view wx:if="{{item.imgList_preview.length > 0}}" class="imgList">

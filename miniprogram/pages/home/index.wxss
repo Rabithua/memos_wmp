@@ -37,9 +37,9 @@ page {
 .headerContainer {
   display: flex;
   position: fixed;
-  margin: 90rpx 60rpx 30rpx 50rpx;
+  margin: 90rpx 30rpx 30rpx 30rpx;
   z-index: 5;
-  width: calc(100% - 100rpx);
+  width: calc(100% - 60rpx);
   overflow-y: scroll;
 }
 
@@ -306,6 +306,7 @@ page {
 }
 
 .header {
+  font-family: 'Smiley Sans Oblique';
   display: flex;
   align-items: center;
   color: #cccccc;

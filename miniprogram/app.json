@@ -9,7 +9,8 @@
     "pages/memo/index",
     "pages/resource/index",
     "pages/others/index",
-    "pages/openapi/index"
+    "pages/openapi/index",
+    "pages/setting/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
