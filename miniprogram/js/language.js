@@ -36,7 +36,8 @@ export const chinese = {
         title: "标签建议",
         checked: true,
       },
-    ]
+    ],
+    clearStorage: '清理缓存'
   },
   resource: {
     pageTitle: '资源库 📂',
@@ -75,6 +76,8 @@ export const chinese = {
     headTitle: '麦默笔记',
     secondTitle: '把脑袋里的小碎片收集起来✨',
     dsc: '麦默是 Github 开源项目 usememos/memos 的小程序版本，同样的，麦默 Rabithua/memos_wmp 也是开源的！',
+    domain: '域名',
+    domainPlaceholder: 'https://xxx.xxx',
     username: '用户名',
     usernamePlaceholder: 'username',
     password: '密码',
@@ -230,7 +233,8 @@ export const english = {
     title: "Tag Suggestions",
     checked: true,
     },
-    ]
+    ],
+    clearStorage: 'ClearStorage'
     },
   resource: {
     pageTitle: 'Resource📂',
@@ -269,6 +273,8 @@ export const english = {
     headTitle: 'Welcom Maimo',
     secondTitle: 'Collect the small pieces in your head.✨',
     dsc: 'Maimo is a WechatMiniProgram version of Github\'s open source project usememos/memos. Similarly, Maimo Rabithua/memos_wmp is also open source!',
+    domain: 'Domain',
+    domainPlaceholder: 'https://xxx.xxx',
     username: 'Username',
     usernamePlaceholder: 'username',
     password: 'Password',

@@ -144,8 +144,8 @@ page {
   bottom: 100rpx;
   right: 0rpx;
   padding: 20rpx 50rpx;
-  background-color: rgb(16, 185, 129, 0.1);
-  backdrop-filter: blur(30rpx);
+  background-color: #ffffff;
+  border: 1rpx solid #00000010;
   border-radius: 20rpx 0 0 20rpx;
   font-weight: bolder;
   color: #ffffff;

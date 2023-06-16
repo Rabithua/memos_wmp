@@ -52,7 +52,7 @@ Page({
 
     if (wx.getStorageSync('openId')) {
       that.setData({
-        url: app.globalData.url,
+        url: wx.getStorageSync('url'),
         language: app.language[wx.getStorageSync('language') ? wx.getStorageSync('language') : 'chinese']
       })
     } else {

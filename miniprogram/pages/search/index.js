@@ -21,7 +21,7 @@ Page({
     var that = this
     this.setData({
       top_btn: app.globalData.top_btn,
-      url: app.globalData.url,
+      url: wx.getStorageSync('url'),
     })
     // console.log(this)
     app.api.getTags(this.data.url)
@@ -44,7 +44,7 @@ Page({
       title: '拉取数据...',
     })
     return new Promise((resolve, reject) => {
-      app.api.getMemos(app.globalData.url, '', '')
+      app.api.getMemos(wx.getStorageSync('url'), '', '')
         .then(result => {
           // console.log(result)
           if (!result.data) {

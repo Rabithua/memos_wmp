@@ -8,7 +8,7 @@ Page({
   data: {
     memo: null,
     id: null,
-    url: app.globalData.url,
+    url: wx.getStorageSync('url'),
     me: wx.getStorageSync('me')
   },
 

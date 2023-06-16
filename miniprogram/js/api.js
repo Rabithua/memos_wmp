@@ -421,11 +421,11 @@ export const status = (url) => {
         resolve(res)
       },
       fail(err) {
-        wx.vibrateLong()
-        wx.showToast({
-          icon: 'none',
-          title: '获取失败',
-        })
+        // wx.vibrateLong()
+        // wx.showToast({
+        //   icon: 'none',
+        //   title: '获取失败',
+        // })
         reject(err)
       }
     })

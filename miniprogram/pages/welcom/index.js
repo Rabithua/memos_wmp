@@ -8,6 +8,7 @@ import {
 Page({
   data: {
     dogDanceNum: 0,
+    url: app.globalData.url,
     webInfo: {},
     dogTimer: null,
     ifWechatLogin: app.globalData.ifWechatLogin
@@ -20,7 +21,6 @@ Page({
     let that = this
     this.setData({
       top_btn: app.globalData.top_btn,
-      url: app.globalData.url,
       username: '',
       password: '',
       btnDisable: false
@@ -30,12 +30,32 @@ Page({
     this.reqCookie()
   },
 
+  inputUrl(e){
+    console.log(e.detail.value)
+    let url = e.detail.value
+    this.setData({
+      url,
+    })
+    const urlRegex = /^(http|https):\/\/([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$/i;
+    if (urlRegex.test(url)) {
+      this.reqCookie()
+    } else {
+      this.setData({
+        webInfo: {}
+      })
+    }
+  },
+
   reqCookie() {
-    app.api.status(app.globalData.url).then((res) => {
+    app.api.status(this.data.url).then((res) => {
       console.log(res)
       // wx.setStorageSync('cookie', res.cookies)
       this.setData({
         webInfo: res.data.data
+      })
+    }).catch((err) => {
+      this.setData({
+        webInfo: {}
       })
     })
   },
@@ -92,7 +112,7 @@ Page({
 
   copy() {
     wx.setClipboardData({
-      data: app.globalData.url_back,
+      data: this.data.url,
     })
   },
 
@@ -111,7 +131,7 @@ Page({
       wx.showLoading({
         title: that.data.language.common.loading,
       })
-      app.api.signUp(app.globalData.url, data)
+      app.api.signUp(this.data.url, data)
         .then(res => {
           console.log(res)
           if (res.data) {
@@ -212,7 +232,7 @@ Page({
       that.setData({
         btnDisable: true
       })
-      app.api.signIn(app.globalData.url, {
+      app.api.signIn(this.data.url, {
           "username": that.data.username,
           "password": that.data.password,
         })
@@ -311,6 +331,7 @@ Page({
 
   useWechatLogin() {
     wx.showLoading()
+    // #if MP
     app.getUnionId().then((r) => {
       wx.setStorageSync('openId', r)
       this.sendMemo()
@@ -328,6 +349,9 @@ Page({
         title: 'something wrong',
       })
     })
+    // #elif NATIVE
+    this.onTapWeixinMiniProgramLogin()
+    // #endif
   },
 
   goWebview() {
@@ -368,6 +392,38 @@ Page({
     this.setData({
       language: app.language[wx.getStorageSync('language') ? wx.getStorageSync('language') : 'chinese']
     })
+  },
+
+  /**
+   * 触发小程序登录，登录成功后自动退出页面
+   */
+  onTapWeixinMiniProgramLogin() {
+    wx.weixinMiniProgramLogin({
+      success: () => {
+        this.setData({
+          loginSuccess: true
+        });
+        wx.navigateBack();
+      },
+      fail: () => {
+        wx.showToast({
+          title: '小程序登录失败',
+          icon: 'none'
+        });
+      }
+    })
+  },
+
+  /**
+   * 退出页面时触发基础库回调，由基础库内部处理系统登录态。
+   */
+  onUnload() {
+    const eventChannel = this.getOpenerEventChannel();
+    if (eventChannel) {
+      eventChannel.emit('__donutLogin__', {
+        success: this.data.loginSuccess
+      });
+    }
   },
 
   onShareAppMessage() {
