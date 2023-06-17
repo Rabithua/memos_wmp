@@ -22,6 +22,13 @@ Page({
     })
   },
 
+  clearStorage() {
+    wx.clearStorageSync()
+    wx.redirectTo({
+      url: '../welcom/index',
+    })
+  },
+
   methods(e) {
     let index = e.currentTarget.dataset.index;
     let value = e.detail.value
@@ -32,5 +39,8 @@ Page({
       [`settings[${index}].checked`]: value
     })
     wx.setStorageSync('settings', this.data.settings)
+    if (index == 2) {
+      wx.setStorageSync('showTips', value)
+    }
   },
 });
