@@ -36,6 +36,10 @@ export const chinese = {
         title: "标签建议",
         checked: true,
       },
+      {
+        title: "首页提示",
+        checked: wx.getStorageSync('showTips') ? wx.getStorageSync('showTips') : true,
+      },
     ],
     clearStorage: '清理缓存'
   },
@@ -226,16 +230,20 @@ export const english = {
   setting: {
     pageTitle: 'Local Settings',
     settings: [{
-    title: "Auto Fold",
-    checked: true,
-    },
-    {
-    title: "Tag Suggestions",
-    checked: true,
-    },
+        title: "Auto Fold",
+        checked: true,
+      },
+      {
+        title: "Tag Suggestions",
+        checked: true,
+      },
+      {
+        title: "HomeTips",
+        checked: wx.getStorageSync('showTips') ? wx.getStorageSync('showTips') : true,
+      },
     ],
     clearStorage: 'ClearStorage'
-    },
+  },
   resource: {
     pageTitle: 'Resource📂',
     nothing: "There's nothing here 🪐",

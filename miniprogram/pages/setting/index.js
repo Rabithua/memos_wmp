@@ -23,6 +23,7 @@ Page({
     })
   },
 
+
   clearStorage(){
     wx.clearStorageSync()
     wx.redirectTo({
@@ -40,5 +41,8 @@ Page({
       [`settings[${index}].checked`]: value
     })
     wx.setStorageSync('settings', this.data.settings)
+    if (index == 2) {
+      wx.setStorageSync('showTips', value)
+    }
   },
 });
