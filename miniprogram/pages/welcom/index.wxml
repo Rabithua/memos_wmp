@@ -15,15 +15,21 @@
     <text class="dsc">{{language.welcom.dsc}}</text>
     <text class="dsc" style="opacity: 0.2;">{{webInfo.profile.mode ? webInfo.profile.mode : language.welcom.webVersion}} {{webInfo.profile.version ? webInfo.profile.version : "UNKNOWN"}}</text>
     <view class="form">
+      <!-- #if NATIVE -->
+      <text class="title">{{language.welcom.domain}}</text>
+      <input cursor-spacing='100' confirm-type="next" focus type="text" placeholder="{{language.welcom.domainPlaceholder}}" confirm-type="done" bindinput='nothing' value="{{url}}" bindinput="inputUrl" />
+      <!-- #endif -->
       <text class="title">{{language.welcom.username}}</text>
       <input cursor-spacing='100' confirm-type="next" focus type="text" placeholder="{{language.welcom.usernamePlaceholder}}" confirm-type="done" bindinput='nothing' model:value="{{username}}" />
       <text class="title">{{language.welcom.password}}</text>
-      <input type="text" placeholder="{{language.welcom.passwordPlaceholder}}" confirm-type="done" model:value="{{password}}" bindinput='nothing' bindconfirm="signIn" />
+      <input type="text" password placeholder="{{language.welcom.passwordPlaceholder}}" confirm-type="done" model:value="{{password}}" bindinput='nothing' bindconfirm="signIn" />
       <div class="btn primaryBtn" style="margin-top: 60rpx;" bindtap="signIn">{{language.welcom.btnLog}}</div>
-
+      <!-- #if MP -->
       <div class="btn defaultBtn" wx:if="{{ifWechatLogin}}" style="margin-top: 40rpx;" bindtap="useWechatLogin">{{language.welcom.btnWechatLogIn}}</div>
-
-      <div class="btn defaultBtn" wx:if="{{!ifWechatLogin && webInfo.allowSignUp}}" style="margin-top: 40rpx;" bindtap="signUp">{{language.welcom.btnSignUp}}</div>
+      <!-- #endif -->
+      <!-- #if NATIVE -->
+      <div class="btn defaultBtn" wx:if="{{webInfo.allowSignUp}}" style="margin-top: 40rpx;" bindtap="signUp">{{language.welcom.btnSignUp}}</div>
+      <!-- #endif -->
       <!-- 审核不通过，暂时注释了 -->
       <!-- <view style="color: #66666630; text-align: center; padding-top: 30rpx; font-size: 30rpx; text-decoration: underline;" bindtap="goWebview">{{language.welcom.explore}}</view> -->
     </view>

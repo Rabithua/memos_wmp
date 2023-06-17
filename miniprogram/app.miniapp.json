@@ -1,0 +1,9 @@
+{
+	"adapteByMiniprogram": {
+		"userName": "gh_cc069ab0c8ae"
+	},
+	"identityServiceConfig": {
+		"authorizeMiniprogramType": 1,
+		"miniprogramLoginPath": "pages/welcom/index"
+	}
+}

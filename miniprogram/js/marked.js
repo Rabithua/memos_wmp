@@ -86,7 +86,7 @@ const formatMemoContent = (content, addtionConfig) => {
   };
   const tempElement = parseMarkedToHtml(content);
   let outputString = tempElement;
-  var url = app.globalData.url;
+  var url = wx.getStorageSync('url');
 
   outputString = outputString
     .replace(IMAGE_URL_REG, "<img lazy-load class='img' src='http" + "$1'/>")

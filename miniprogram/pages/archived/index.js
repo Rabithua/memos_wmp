@@ -26,7 +26,7 @@ Page({
 
     if (wx.getStorageSync('openId')) {
       that.setData({
-        url: app.globalData.url
+        url: wx.getStorageSync('url')
       })
       that.getMemos('ARCHIVED')
     } else {
@@ -68,7 +68,7 @@ Page({
   getMemos(rowStatus) {
     var that = this
     let offset = this.data.memos.length
-    app.api.getMemos(app.globalData.url, this.data.limit, offset, rowStatus)
+    app.api.getMemos(wx.getStorageSync('url'), this.data.limit, offset, rowStatus)
       .then(result => {
         if (!result.data) {
           wx.vibrateLong()

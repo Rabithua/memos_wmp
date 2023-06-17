@@ -26,6 +26,9 @@ Page({
       top_btn: app.globalData.top_btn
     })
     this.ifHideExplore()
+    if (!wx.getStorageSync('url')) {
+      wx.setStorageSync('url', app.globalData.url)
+    }
     if (wx.getStorageSync('openId')) {
       this.getAll()
     } else {
@@ -42,7 +45,6 @@ Page({
           url: '../welcom/index',
         })
       }
-
     }
 
   },
@@ -50,12 +52,12 @@ Page({
   getAll() {
     let that = this
     that.setData({
-      url: app.globalData.url,
+      url: wx.getStorageSync('url'),
       onlineColor: '#FCA417'
     })
     that.getMemos('NORMAL')
     that.getMe()
-    app.api.getTags(app.globalData.url)
+    app.api.getTags(wx.getStorageSync('url'))
       .then(res => {
         that.setData({
           tags: res.data
@@ -446,7 +448,7 @@ Page({
     if (type == 'refresh') {
       offset = 0
     }
-    app.api.getMemos(app.globalData.url, this.data.limit, offset, rowStatus)
+    app.api.getMemos(wx.getStorageSync('url'), this.data.limit, offset, rowStatus)
       .then(result => {
         if (!result.data) {} else if (result.data.length == 0) {
           if (that.data.memos.length == 0) {
@@ -586,7 +588,7 @@ Page({
 
   getMe() {
     var that = this
-    app.api.getMe(app.globalData.url)
+    app.api.getMe(wx.getStorageSync('url'))
       .then(result => {
         let me = result.data
         wx.setStorageSync('me', me)
@@ -630,7 +632,7 @@ Page({
 
   getStats(id) {
     let that = this
-    app.api.getStats(app.globalData.url, id)
+    app.api.getStats(wx.getStorageSync('url'), id)
       .then(result => {
         this.setData({
           stats: result.data

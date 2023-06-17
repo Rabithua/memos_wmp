@@ -26,6 +26,10 @@
     border-bottom: 1rpx solid #ffffff10;
   }
 
+  .createMemoBtn {
+    background-color: rgb(41, 41, 41);
+  }
+
   .sidebar .count {
     border-bottom: 1rpx solid #ffffff10;
   }

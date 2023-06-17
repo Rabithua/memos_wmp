@@ -3,7 +3,7 @@ import { formatMemoContent } from "../../js/marked";
 
 Page({
   data: {
-    url: getApp().globalData.url,
+    url: wx.getStorageSync('url'),
     memos: [],
     showMemos: [],
     offset: 0,

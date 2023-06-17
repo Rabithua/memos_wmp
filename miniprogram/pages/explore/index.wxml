@@ -9,8 +9,8 @@
     <view class="part_top">
       <view class="time" style="color: {{item.time == '刚刚' || item.time=='Now' ? '#07C160' : '' }};">{{item.time}}</view>
       <view class="status" wx:if="{{showCreator}}">{{item.creatorName}}</view>
+      <view class="status">ID:{{item.creatorId}}</view>
       <view class="{{'vis_icon ' + item.visibility}}"></view>
-      <!-- <view class="status" data-memoId="{{item.id}}" data-visibility="{{item.visibility}}" catchtap="changeMemoVisibility">{{item.visibility}}</view> -->
     </view>
     <view class="content" style="{{settings[0].checked ? 'max-height: 800rpx' : ''}}">
       <rich-text data-content="{{item.content}}" nodes="{{item.formatContent}}"></rich-text>
@@ -19,7 +19,7 @@
       <image class="img" catchtap="preview" data-src="{{image.url}}" data-url="{{item.imgList_preview}}" lazy-load mode="aspectFill" wx:key="image" wx:for="{{item.imgList_preview}}" wx:for-item="image" src="{{image.url}}"></image>
     </view>
     <view wx:if="{{item.video_preview.length > 0}}" class="videoList">
-      <video class="video" data-src="{{video.url}}" data-url="{{item.video_preview}}" lazy-load mode="aspectFill" wx:key="video" wx:for="{{item.video_preview}}" wx:for-item="video" src="{{video.url}}"></video>
+      <video class="video" catchtap="none" data-src="{{video.url}}" data-url="{{item.video_preview}}" lazy-load mode="aspectFill" wx:key="video" wx:for="{{item.video_preview}}" wx:for-item="video" src="{{video.url}}"></video>
     </view>
     <view wx:if="{{item.fileList_preview.length > 0}}" class="fileList">
       <view class="file" wx:for="{{item.fileList_preview}}" wx:key="file" wx:for-item="file" data-url="{{file.url}}" catchtap="copy">{{file.id}}</view>

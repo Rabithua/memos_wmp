@@ -2,7 +2,7 @@ var app = getApp();
 
 Page({
   data: {
-    url: getApp().globalData.url,
+    url: wx.getStorageSync('url'),
     limit: 20,
     resources: [],
     selectFileId: []

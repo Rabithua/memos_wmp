@@ -7,6 +7,7 @@ Page({
   data: {
 
   },
+  
   onShow() {
     let language = app.language[wx.getStorageSync('language') ? wx.getStorageSync('language') : 'chinese']
     let settings = wx.getStorageSync('settings') ? wx.getStorageSync('settings') : language.setting.settings
@@ -22,7 +23,8 @@ Page({
     })
   },
 
-  clearStorage() {
+
+  clearStorage(){
     wx.clearStorageSync()
     wx.redirectTo({
       url: '../welcom/index',
