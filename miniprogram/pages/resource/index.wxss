@@ -135,6 +135,16 @@
   animation: show 300ms 100ms forwards;
 }
 
+.uploadingDot {
+  width: 10rpx;
+  height: 10rpx;
+  background: #ffca27;
+  border-radius: 50%;
+  margin-left: 20rpx;
+  box-shadow: 0 0 20rpx #ffca27;
+  animation: show alternate-reverse infinite 1000ms ease-in-out;
+}
+
 .headerContainer .uploadBtn {
   padding: 0 30rpx;
   border-radius: 999px;
@@ -143,6 +153,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 @import 'index-wxa-auto-dark.wxss'

@@ -72,7 +72,7 @@
         {
           "name": "",
           "pathName": "pages/resource/index",
-          "query": "selectMode=true",
+          "query": "",
           "launchMode": "default",
           "scene": null
         },
