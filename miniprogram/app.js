@@ -9,7 +9,6 @@ App({
     url: 'https://memos.wowow.club',
     // 搭配ifWechatLogin使用
     backendUrl: 'https://maimoapi.wowow.club/mpunionid',
-    top_btn: null,
     top_btn: wx.getMenuButtonBoundingClientRect()
   },
   onLaunch: function (options) {

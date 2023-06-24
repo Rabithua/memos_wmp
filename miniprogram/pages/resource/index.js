@@ -74,14 +74,14 @@ Page({
     wx.vibrateShort({
       type: 'light'
     })
-    wx.chooseMedia({
+    wx.chooseImage({
       count: 9,
-      mediaType: ['image', 'video'],
+      mediaType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       maxDuration: 30,
       camera: 'back',
       success(res) {
-        console.log(res.tempFiles)
+        // console.log(res.tempFiles)
         that.setData({
           uploading: that.data.uploading + res.tempFiles.length
         })
@@ -93,6 +93,7 @@ Page({
   },
 
   uploadFile(file) {
+    // console.log(file)
     let that = this
     let resources = this.data.resources
     if (file.size > 32 * 1024 * 1024) {
@@ -104,12 +105,12 @@ Page({
     } else {
       wx.uploadFile({
         url: `${that.data.url}/api/resource/blob?openId=${wx.getStorageSync('openId')}`,
-        filePath: file.tempFilePath,
+        filePath: file.path,
         name: 'file',
         timeout: 180 * 1000,
         formData: {},
         success(res) {
-          console.log(res)
+          // console.log(res)
           wx.vibrateShort({
             type: 'light',
           })
@@ -146,8 +147,6 @@ Page({
           })
           return
         }
-      }).onProgressUpdate((res) => {
-        console.log(res)
       })
     }
   },
