@@ -67,6 +67,16 @@ Page({
       })
   },
 
+  share(){
+    wx.vibrateShort({
+      type: 'light',
+    })
+    wx.setClipboardData({
+      data: `${this.data.url}/m/${this.data.id}`,
+    })
+    
+  },
+
   preview(e) {
     console.log(e)
     const url = []

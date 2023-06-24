@@ -93,6 +93,7 @@ page::before {
 }
 
 .main {
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -119,6 +120,7 @@ page::before {
   gap: 30rpx;
   font-size: 60rpx;
   margin: 0rpx auto;
+  margin-top: 100rpx;
   color: rgb(119,197,157);
 }
 

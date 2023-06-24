@@ -36,8 +36,8 @@
       "WeAppNetwork": true,
       "WeAppBluetooth": false,
       "WeAppMedia": true,
-      "WeAppLBS": false,
-      "WeAppOthers": false,
+      "WeAppLBS": true,
+      "WeAppOthers": true,
       "WeAppIdaas": true
     },
     "enableVConsole": "open",

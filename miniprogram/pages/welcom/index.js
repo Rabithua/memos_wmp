@@ -331,7 +331,6 @@ Page({
 
   useWechatLogin() {
     wx.showLoading()
-    // #if MP
     app.getUnionId().then((r) => {
       wx.setStorageSync('openId', r)
       this.sendMemo()
@@ -349,9 +348,7 @@ Page({
         title: 'something wrong',
       })
     })
-    // #elif NATIVE
-    this.onTapWeixinMiniProgramLogin()
-    // #endif
+
   },
 
   goWebview() {
@@ -391,26 +388,6 @@ Page({
   onShow() {
     this.setData({
       language: app.language[wx.getStorageSync('language') ? wx.getStorageSync('language') : 'chinese']
-    })
-  },
-
-  /**
-   * 触发小程序登录，登录成功后自动退出页面
-   */
-  onTapWeixinMiniProgramLogin() {
-    wx.weixinMiniProgramLogin({
-      success: () => {
-        this.setData({
-          loginSuccess: true
-        });
-        wx.navigateBack();
-      },
-      fail: () => {
-        wx.showToast({
-          title: '小程序登录失败',
-          icon: 'none'
-        });
-      }
     })
   },
 

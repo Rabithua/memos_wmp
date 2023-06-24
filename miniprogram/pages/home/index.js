@@ -8,7 +8,7 @@ Page({
     halfDialog: 'closeHalfDialog',
     showSidebar: false,
     state: app.language.english.common.loading,
-    memos: [],
+    memos: wx.getStorageSync('memos') ? wx.getStorageSync('memos') : [],
     onlineColor: '#eeeeee',
     sendLoading: false,
     imgDraw: null,
@@ -33,6 +33,7 @@ Page({
       this.getAll()
     } else {
       if (app.globalData.ifWechatLogin) {
+        // #if MP
         app.getUnionId().then((r) => {
           wx.setStorageSync('openId', r)
           that.getAll()
@@ -40,6 +41,11 @@ Page({
           console.log(err)
           that.getAll()
         })
+        // #elif NATIVE
+        wx.redirectTo({
+          url: '../welcom/index',
+        })
+        // #endif
       } else {
         wx.redirectTo({
           url: '../welcom/index',
@@ -55,7 +61,7 @@ Page({
       url: wx.getStorageSync('url'),
       onlineColor: '#FCA417'
     })
-    that.getMemos('NORMAL')
+    that.getMemos('NORMAL', 'refresh')
     that.getMe()
     app.api.getTags(wx.getStorageSync('url'))
       .then(res => {
@@ -501,7 +507,6 @@ Page({
         that.setData({
           state: that.data.language.home.state.offline,
           onlineColor: '#eeeeee',
-          memos: wx.getStorageSync('memos')
         })
         wx.stopPullDownRefresh()
       })

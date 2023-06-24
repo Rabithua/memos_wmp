@@ -4,10 +4,10 @@
   <view>
     {{language.memo.visibility_1 + memo.visibility}}
   </view>
-  <view  wx:if="{{memo.visibility === 'PRIVATE'}}">
+  <view wx:if="{{memo.visibility === 'PRIVATE'}}">
     {{language.memo.visibility_2}}
   </view>
-  <view  wx:else>
+  <view wx:else>
     {{language.memo.visibility_3}}
   </view>
   <view class="tipBtn" catchtap="changeMemoVisibility">
@@ -17,7 +17,7 @@
 <view wx:if="{{memo}}" class="memoCard" style="padding-bottom: 50rpx;">
   <text class="time">{{memo.time}}</text>
   <text class="status">@{{memo.creatorName}}</text>
-  <view class="content" >
+  <view class="content">
     <rich-text data-content="{{memo.content}}" user-select nodes="{{memo.formatContent}}"></rich-text>
   </view>
   <view wx:if="{{memo.imgList_preview.length > 0}}" class="imgList">
@@ -39,8 +39,13 @@
   </view>
 </view>
 
+<button style="transform: translateY(-100rpx);" class="shareBtn" bind:tap="share">
+  <view class="sIcon copyLinkIcon"></view>
+  复制链接
+</button>
+
 <button class="shareBtn" open-type="share">
-  <view class="shareIcon">
+  <view class="sIcon shareIcon">
   </view>
   {{language.memo.share}}
 </button>
