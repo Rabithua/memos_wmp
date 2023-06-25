@@ -13,9 +13,9 @@
       "xweb": false
     },
     "icons": {
-      "hdpi": "",
-      "xhdpi": "",
-      "xxhdpi": "",
+      "hdpi": "miniapp/android/icons/icon@80w.png",
+      "xhdpi": "miniapp/android/icons/icon@120w-1.png",
+      "xxhdpi": "miniapp/android/icons/icon@180w.png",
       "xxxhdpi": "miniapp/android/icons/icon.png"
     },
     "splashscreen": {
@@ -23,7 +23,7 @@
       "xhdpi": "miniapp/android/splashscreen/splashscreen-1.png",
       "xxhdpi": "miniapp/android/splashscreen/splashscreen.png"
     },
-    "enableVConsole": "open",
+    "enableVConsole": "close",
     "privacy": {
       "enable": false
     }
