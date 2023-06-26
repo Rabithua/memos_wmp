@@ -1,5 +1,35 @@
 /* pages/memo/index.wxss */
 
+.aiTags {
+  border-top: 1rpx solid #00000015;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: scroll;
+  gap: 10rpx;
+  align-items: center;
+  position: relative;
+  font-size: 30rpx;
+  padding: 20rpx 0 0 0;
+}
+
+.aiTags .title {
+  flex-shrink: 0;
+  margin: 0 20rpx;
+}
+
+.aiTags .tag {
+  flex-shrink: 0;
+  padding: 10rpx 20rpx;
+  border-radius: 10rpx;
+  color: #07c160;
+  background-color: #07c16015;
+  transition: 300ms;
+}
+
+.aiTags .tag:active {
+  transform: scale(0.9);
+}
+
 .tip {
   margin: 0;
   border-radius: 30rpx 30rpx 0 0;
@@ -26,6 +56,7 @@
 
 .memoCard {
   border-bottom: none;
+  margin-bottom: 400rpx;
 }
 
 .nothing {
@@ -53,7 +84,7 @@
   background-color: #ffffff;
   border: 1rpx solid #00000015;
   display: flex;
-  width: fit-content!important;
+  width: fit-content !important;
   font-size: 30rpx;
   justify-content: center;
   align-items: center;

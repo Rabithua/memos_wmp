@@ -29,6 +29,10 @@
   <view wx:if="{{memo.fileList_preview.length > 0}}" class="fileList">
     <view class="file" wx:for="{{memo.fileList_preview}}" wx:key="file" wx:for-item="file" data-url="{{file.url}}" catchtap="copy">{{file.id}}</view>
   </view>
+  <view wx:if="{{memo.aiTags.length > 0}}" class="aiTags">
+    <view class="title">{{language.memo.aiTags}}</view>
+    <view class="tag" bind:tap="tagTap" data-tag="{{tag}}" wx:for="{{memo.aiTags}}" wx:for-item="tag" wx:key="aitags">{{tag}}</view>
+  </view>
 </view>
 
 <view wx:else class="nothing">

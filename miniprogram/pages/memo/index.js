@@ -35,6 +35,13 @@ Page({
     }
   },
 
+  tagTap(e){
+    console.log(e.target.dataset.tag)
+    wx.vibrateShort({
+      type: 'light',
+    })
+  },
+
   getMemo(url, id) {
     wx.showLoading({
       title: this.data.language.memo.getting,
@@ -47,6 +54,11 @@ Page({
           memo.formatContent = formatMemoContent(memo.content)
           memo.time = app.calTime(memo.createdTs)
           memo = app.memosRescourse(memo)
+          try {
+            memo.aiTags = JSON.parse(memo.aiTags)
+          } catch (error) {
+            memo.aiTags = []
+          }
           wx.setNavigationBarTitle({
             title: memo.creatorName,
           })
@@ -67,14 +79,14 @@ Page({
       })
   },
 
-  share(){
+  share() {
     wx.vibrateShort({
       type: 'light',
     })
     wx.setClipboardData({
       data: `${this.data.url}/m/${this.data.id}`,
     })
-    
+
   },
 
   preview(e) {

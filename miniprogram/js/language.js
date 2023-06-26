@@ -69,6 +69,7 @@ export const chinese = {
     nothing: '这是一片无人的荒原🪐'
   },
   memo: {
+    aiTags: '相关标签:',
     share: "分享",
     unSee: "Memo不可见",
     visibility_1: '可见性为：',
@@ -271,6 +272,7 @@ export const english = {
     nothing: "There's nothing here 🪐"
   },
   memo: {
+    aiTags: 'AiTags:',
     share: "Share",
     unSee: "Memo is hidden",
     visibility_1: 'Visibility: ',
