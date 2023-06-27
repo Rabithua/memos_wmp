@@ -186,6 +186,9 @@ Page({
     if (this.data.selectMode) {
       this.calcSelectNum(resources)
       if (!resources[idx].select) {
+        this.setData({
+          selectFileId: this.data.selectFileId.filter(item => item !== resources[idx].id)
+        })
         this.deleteMemoFile(resources[idx].id)
       }
       wx.vibrateShort({
@@ -202,7 +205,9 @@ Page({
       .filter(item => item.select)
       .map(item => item.id);
     this.setData({
-      selectFileId: selectedIds
+      selectFileId: this.data.selectFileId.concat(selectedIds).filter((value, index, self) => {
+        return self.indexOf(value) === index;
+      })
     })
   },
 

@@ -332,7 +332,7 @@ Page({
   useWechatLogin() {
     wx.showLoading()
     app.getUnionId().then((r) => {
-      wx.setStorageSync('openId', r)
+      wx.setStorageSync('openId', r.openapi)
       this.sendMemo()
       wx.vibrateShort({
         type: 'light'

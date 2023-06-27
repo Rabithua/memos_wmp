@@ -8,7 +8,7 @@ App({
     ifWechatLogin: true,
     url: 'https://memos.wowow.club',
     // 搭配ifWechatLogin使用
-    backendUrl: 'https://maimoapi.wowow.club/mpunionid',
+    backendUrl: 'https://maimoapi.wowow.club',
     top_btn: wx.getMenuButtonBoundingClientRect()
   },
   onLaunch: function (options) {
@@ -51,13 +51,13 @@ App({
           if (res.code) {
             //发起网络请求
             wx.request({
-              url: that.globalData.backendUrl,
+              url: that.globalData.backendUrl + '/mpunionid',
               data: {
                 code: res.code
               },
               success(r) {
-                let unionid = r.data
-                resolve(unionid)
+                console.log(r.data)
+                resolve(r.data)
               },
               fail(r) {
                 reject(r)
@@ -70,29 +70,29 @@ App({
         }
       })
       // #elif NATIVE
-      wx.getMiniProgramCode({
-        success(res) {
-          if (res.code) {
-            //发起网络请求
-            wx.request({
-              url: that.globalData.backendUrl,
-              data: {
-                code: res.code
-              },
-              success(r) {
-                let unionid = r.data
-                resolve(unionid)
-              },
-              fail(r) {
-                reject(r)
-              }
-            })
-          } else {
-            console.log('登录失败！' + res.errMsg)
-            reject(res.errMsg)
-          }
-        }
-      })
+      // wx.getMiniProgramCode({
+      //   success(res) {
+      //     if (res.code) {
+      //       //发起网络请求
+      //       wx.request({
+      //         url: that.globalData.backendUrl + '/mpunionid',
+      //         data: {
+      //           code: res.code
+      //         },
+      //         success(r) {
+      //           let unionid = r.data
+      //           resolve(unionid)
+      //         },
+      //         fail(r) {
+      //           reject(r)
+      //         }
+      //       })
+      //     } else {
+      //       console.log('登录失败！' + res.errMsg)
+      //       reject(res.errMsg)
+      //     }
+      //   }
+      // })
       // #endif
     })
 

@@ -30,12 +30,13 @@ Page({
       wx.setStorageSync('url', app.globalData.url)
     }
     if (wx.getStorageSync('openId')) {
+      this.ifShowWeChatIcon()
       this.getAll()
     } else {
       if (app.globalData.ifWechatLogin) {
         // #if MP
         app.getUnionId().then((r) => {
-          wx.setStorageSync('openId', r)
+          wx.setStorageSync('openId', r.openapi)
           that.getAll()
         }).catch((err) => {
           console.log(err)
@@ -53,6 +54,17 @@ Page({
       }
     }
 
+  },
+
+  ifShowWeChatIcon() {
+    app.getUnionId().then((r) => {
+      console.log(r)
+      if (r.openapi == wx.getStorageSync('openId')) {
+        this.setData({
+          wechatLogin: true
+        })
+      }
+    })
   },
 
   getAll() {

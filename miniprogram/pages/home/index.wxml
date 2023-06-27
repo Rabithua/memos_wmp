@@ -33,10 +33,10 @@
   <view style="height: {{top_btn.top + top_btn.height + 10}}px;">
   </view>
   <view class="memoList">
-    <view class="memoCard" wx:for="{{memos}}" wx:key="memo" style="border-left: {{item.rowStatus == 'ARCHIVED' ? '5rpx solid #EF4C4E' : 'none'}};" data-memoId="{{item.id}}" id="memo{{item.id}}" catchtap="goMemo">
+    <view class="memoCard" wx:for="{{memos}}" wx:key="memo" style="border-left: {{item.rowStatus == 'ARCHIVED' ? '5rpx solid #EF4C4E' : 'none'}};" data-memoId="{{item.id}}" id="memo{{item.id}}" catch:longtap="goMemo">
       <view class="method">
         <text class="btn top" style="opacity: {{item.pinned ? 1:0.2}};" data-memoId="{{item.id}}" data-pinned="{{item.pinned}}" data-content="{{item.content}}" catchtap="changeMemoPinned"></text>
-        <text class="btn delete" data-memoId="{{item.id}}" data-rowStatus="{{item.rowStatus}}" catchtap="deleteMemoFaker" catchlongpress="deleteMemo"></text>
+        <text class="btn delete" data-memoId="{{item.id}}" data-rowStatus="{{item.rowStatus}}" catchtap="deleteMemoFaker" catch:longtap="deleteMemo"></text>
         <text class="btn edit" data-memoId="{{item.id}}" data-content="{{item.content}}" catchtap="dialogEdit"></text>
       </view>
       <view class="part_top">
@@ -78,7 +78,8 @@
     <view class="user">
       <image wx:if="{{me.avatarUrl}}" class="avatar" src="{{me.avatarUrl}}" mode="aspectFill" />
       <view class="name">{{me.nickname ? me.nickname : me.username}}</view>
-      <view class="badge" style="{{me.role == 'HOST' ? 'color: #ffffff; background: #07C160' : ''}}">{{me.role}}</view>
+      <view wx:if="{{wechatLogin}}" class="wechatIcon"></view>
+      <!-- <view class="badge" style="{{me.role == 'HOST' ? 'color: #ffffff; background: #07C160' : ''}}">{{me.role}}</view> -->
     </view>
     <view class="count">
       <view class="item" style="border-right: 1rpx solid #00000010;">

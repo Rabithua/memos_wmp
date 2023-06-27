@@ -24,7 +24,7 @@ Page({
         this.getMemo(this.data.url, id)
       } else {
         app.getUnionId().then((r) => {
-          wx.setStorageSync('openId', r)
+          wx.setStorageSync('openId', r.openapi)
           this.getMemo(this.data.url, id)
         }).catch((err) => {
           console.log(err)
