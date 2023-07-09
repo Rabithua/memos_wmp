@@ -105,7 +105,7 @@ export const createResource = (url, file) => {
 export const getMemo = (url, id) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/memo/${id}`,
+      url: `${url}/api/v1/memo/${id}`,
       data: {
         openId: wx.getStorageSync('openId')
       },
@@ -277,12 +277,13 @@ export const changeUserSetting = (url, data) => {
 export const changeMemoPinned = (url, memoId, data) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/memo/${memoId}/organizer?openId=${wx.getStorageSync('openId')}`,
+      url: `${url}/api/v1/memo/${memoId}/organizer?openId=${wx.getStorageSync('openId')}`,
       method: "POST",
       data: {
         ...data
       },
       success(res) {
+        console.log(res)
         resolve(res.data)
       },
       fail(err) {
@@ -430,7 +431,7 @@ export const status = (url) => {
 export const getExploreMemos = (url, offset, limit) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/memo/all?offset=${offset}&limit=${limit}`,
+      url: `${url}/api/v1/memo/all?offset=${offset}&limit=${limit}`,
       success(res) {
         resolve(res.data)
       },

@@ -336,8 +336,7 @@ Page({
     var that = this
     app.api.changeMemoPinned(this.data.url, memoid, data)
       .then(res => {
-        console.log(res)
-        if (res.data) {
+        if (res) {
           wx.vibrateShort({
             type: 'light'
           })
@@ -380,7 +379,7 @@ Page({
         visibility: (visibility == 'PRIVATE' ? 'PUBLIC' : 'PRIVATE')
       })
       .then(res => {
-        if (res.data) {
+        if (res) {
           var memos = that.data.memos
           for (let i = 0; i < memos.length; i++) {
             if (memos[i].id == id) {
