@@ -30,7 +30,9 @@ Page({
       wx.setStorageSync('url', app.globalData.url)
     }
     if (wx.getStorageSync('openId')) {
-      this.ifShowWeChatIcon()
+      if (app.globalData.ifWechatLogin) {
+        this.ifShowWeChatIcon()
+      }
       this.getAll()
     } else {
       if (app.globalData.ifWechatLogin) {
@@ -78,7 +80,7 @@ Page({
     app.api.getTags(wx.getStorageSync('url'))
       .then(res => {
         that.setData({
-          tags: res.data
+          tags: res
         })
         wx.setStorageSync('tags', res.data)
       })
@@ -574,8 +576,8 @@ Page({
     }
     app.api.changeUserSetting(this.data.url, item)
       .then(res => {
-        console.log(res.data)
-        if (res.data) {
+        console.log(res)
+        if (res.userId) {
           this.setData({
             me: me
           })
@@ -607,7 +609,8 @@ Page({
     var that = this
     app.api.getMe(wx.getStorageSync('url'))
       .then(result => {
-        let me = result.data
+        // console.log(result)
+        let me = result
         wx.setStorageSync('me', me)
         that.getStats(me.id)
         let defaultUserSettingList = [{

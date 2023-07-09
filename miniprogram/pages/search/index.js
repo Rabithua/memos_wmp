@@ -27,7 +27,7 @@ Page({
     app.api.getTags(this.data.url)
       .then(res => {
         that.setData({
-          tags: res.data
+          tags: res
         })
         that.getSuggestionTags()
       })

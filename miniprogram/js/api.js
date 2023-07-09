@@ -128,7 +128,7 @@ export const getMemo = (url, id) => {
 export const getMe = (url) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/user/me`,
+      url: `${url}/api/v1/user/me`,
       data: {
         openId: wx.getStorageSync('openId')
       },
@@ -197,7 +197,7 @@ export const sendMemo = (url, content, resourceIdList) => {
 export const signUp = (url, data) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/auth/signup`,
+      url: `${url}/api/v1/auth/signup`,
       method: "POST",
       data: data,
       success(res) {
@@ -259,7 +259,7 @@ export const editMemo = (url, memoId, data) => {
 export const changeUserSetting = (url, data) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/user/setting?openId=${wx.getStorageSync('openId')}`,
+      url: `${url}/api/v1/user/setting?openId=${wx.getStorageSync('openId')}`,
       method: "POST",
       data: {
         ...data
@@ -305,7 +305,7 @@ export const changeMemoPinned = (url, memoId, data) => {
 export const signIn = (url, data) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/auth/signin`,
+      url: `${url}/api/v1/auth/signin`,
       method: "POST",
       data: data,
       success(res) {
@@ -326,7 +326,7 @@ export const signIn = (url, data) => {
 export const getTags = (url) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/tag`,
+      url: `${url}/api/v1/tag?`,
       data: {
         openId: wx.getStorageSync('openId')
       },
@@ -348,7 +348,7 @@ export const getTags = (url) => {
 export const getTagsSuggestionList = (url) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/tag/suggestion`,
+      url: `${url}/api/v1/tag/suggestion`,
       data: {
         openId: wx.getStorageSync('openId')
       },
@@ -370,7 +370,7 @@ export const getTagsSuggestionList = (url) => {
 export const upsertTag = (url, TagName) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/tag?openId=${wx.getStorageSync('openId')}`,
+      url: `${url}/api/v1/tag?openId=${wx.getStorageSync('openId')}`,
       method: "POST",
       data: {
         name: TagName
@@ -393,7 +393,7 @@ export const upsertTag = (url, TagName) => {
 export const deleteTag = (url, TagName) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/tag/delete?openId=${wx.getStorageSync('openId')}`,
+      url: `${url}/api/v1/tag/delete?openId=${wx.getStorageSync('openId')}`,
       method: "POST",
       data: {
         name: TagName
@@ -416,7 +416,7 @@ export const deleteTag = (url, TagName) => {
 export const status = (url) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/status`,
+      url: `${url}/api/v1/status`,
       success(res) {
         resolve(res)
       },

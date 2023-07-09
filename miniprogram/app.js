@@ -34,12 +34,12 @@ App({
     }
 
     //加载字体
-    wx.loadFontFace({
-      global: true,
-      family: 'Smiley Sans Oblique',
-      source: 'https://img.rabithua.club/%E9%BA%A6%E9%BB%98/SmileySans-Oblique.ttf',
-      scopes: ['webview', 'native'],
-    });
+    // wx.loadFontFace({
+    //   global: true,
+    //   family: 'Smiley Sans Oblique',
+    //   source: 'https://img.rabithua.club/%E9%BA%A6%E9%BB%98/SmileySans-Oblique.ttf',
+    //   scopes: ['webview', 'native'],
+    // });
   },
 
   getUnionId() {
