@@ -8,6 +8,7 @@ import {
 Page({
   data: {
     dogDanceNum: 0,
+    url: app.globalData.url,
     webInfo: {},
     dogTimer: null,
     ifWechatLogin: app.globalData.ifWechatLogin
@@ -20,7 +21,6 @@ Page({
     let that = this
     this.setData({
       top_btn: app.globalData.top_btn,
-      url: app.globalData.url,
       username: '',
       password: '',
       btnDisable: false
@@ -30,12 +30,32 @@ Page({
     this.reqCookie()
   },
 
+  inputUrl(e){
+    console.log(e.detail.value)
+    let url = e.detail.value
+    this.setData({
+      url,
+    })
+    const urlRegex = /^(http|https):\/\/([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$/i;
+    if (urlRegex.test(url)) {
+      this.reqCookie()
+    } else {
+      this.setData({
+        webInfo: {}
+      })
+    }
+  },
+
   reqCookie() {
-    app.api.status(app.globalData.url).then((res) => {
+    app.api.status(this.data.url).then((res) => {
       console.log(res)
       // wx.setStorageSync('cookie', res.cookies)
       this.setData({
-        webInfo: res.data.data
+        webInfo: res.data
+      })
+    }).catch((err) => {
+      this.setData({
+        webInfo: {}
       })
     })
   },
@@ -92,7 +112,7 @@ Page({
 
   copy() {
     wx.setClipboardData({
-      data: app.globalData.url_back,
+      data: this.data.url,
     })
   },
 
@@ -111,10 +131,10 @@ Page({
       wx.showLoading({
         title: that.data.language.common.loading,
       })
-      app.api.signUp(app.globalData.url, data)
+      app.api.signUp(this.data.url, data)
         .then(res => {
           console.log(res)
-          if (res.data) {
+          if (res.openId) {
             //创建成功
             wx.vibrateShort({
               type: 'light'
@@ -122,7 +142,7 @@ Page({
             wx.showLoading({
               title: that.data.language.welcom.signUpSuc,
             })
-            var openId = res.data.openId
+            var openId = res.openId
             wx.setStorage({
               key: "openId",
               data: openId,
@@ -212,13 +232,13 @@ Page({
       that.setData({
         btnDisable: true
       })
-      app.api.signIn(app.globalData.url, {
+      app.api.signIn(this.data.url, {
           "username": that.data.username,
           "password": that.data.password,
         })
         .then(res => {
-          if (res.data) {
-            console.log(res.data.openId)
+          if (res.ID) {
+            console.log(res)
             wx.vibrateShort({
               type: 'light'
             })
@@ -227,7 +247,7 @@ Page({
             })
             wx.setStorage({
               key: "openId",
-              data: res.data.openId,
+              data: res.OpenID,
               // encrypt: true,
               success(res) {
                 wx.setStorage({
@@ -312,7 +332,7 @@ Page({
   useWechatLogin() {
     wx.showLoading()
     app.getUnionId().then((r) => {
-      wx.setStorageSync('openId', r)
+      wx.setStorageSync('openId', r.openapi)
       this.sendMemo()
       wx.vibrateShort({
         type: 'light'
@@ -328,6 +348,7 @@ Page({
         title: 'something wrong',
       })
     })
+
   },
 
   goWebview() {
@@ -368,6 +389,18 @@ Page({
     this.setData({
       language: app.language[wx.getStorageSync('language') ? wx.getStorageSync('language') : 'chinese']
     })
+  },
+
+  /**
+   * 退出页面时触发基础库回调，由基础库内部处理系统登录态。
+   */
+  onUnload() {
+    // const eventChannel = this.getOpenerEventChannel();
+    // if (eventChannel) {
+    //   eventChannel.emit('__donutLogin__', {
+    //     success: this.data.loginSuccess
+    //   });
+    // }
   },
 
   onShareAppMessage() {

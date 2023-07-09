@@ -24,7 +24,7 @@
       <image class="img" catchtap="preview" data-src="{{image.url}}" data-url="{{item.imgList_preview}}" lazy-load mode="aspectFill" wx:key="image" wx:for="{{item.imgList_preview}}" wx:for-item="image" src="{{image.url}}"></image>
     </view>
     <view wx:if="{{item.video_preview.length > 0}}" class="videoList">
-      <video class="video" data-src="{{video.url}}" data-url="{{item.video_preview}}" lazy-load mode="aspectFill" wx:key="video" wx:for="{{item.video_preview}}" wx:for-item="video" src="{{video.url}}"></video>
+      <video class="video" catchtap="none" data-src="{{video.url}}" data-url="{{item.video_preview}}" lazy-load mode="aspectFill" wx:key="video" wx:for="{{item.video_preview}}" wx:for-item="video" src="{{video.url}}"></video>
     </view>
     <view wx:if="{{item.fileList_preview.length > 0}}" class="fileList">
       <view class="file" wx:for="{{item.fileList_preview}}" wx:key="file" wx:for-item="file" data-url="{{file.url}}" catchtap="copy">{{file.id}}</view>

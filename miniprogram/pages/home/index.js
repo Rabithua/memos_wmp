@@ -8,7 +8,7 @@ Page({
     halfDialog: 'closeHalfDialog',
     showSidebar: false,
     state: app.language.english.common.loading,
-    memos: [],
+    memos: wx.getStorageSync('memos') ? wx.getStorageSync('memos') : [],
     onlineColor: '#eeeeee',
     sendLoading: false,
     imgDraw: null,
@@ -26,39 +26,61 @@ Page({
       top_btn: app.globalData.top_btn
     })
     this.ifHideExplore()
+    if (!wx.getStorageSync('url')) {
+      wx.setStorageSync('url', app.globalData.url)
+    }
     if (wx.getStorageSync('openId')) {
+      if (app.globalData.ifWechatLogin) {
+        this.ifShowWeChatIcon()
+      }
       this.getAll()
     } else {
       if (app.globalData.ifWechatLogin) {
+        // #if MP
         app.getUnionId().then((r) => {
-          wx.setStorageSync('openId', r)
+          wx.setStorageSync('openId', r.openapi)
           that.getAll()
         }).catch((err) => {
           console.log(err)
           that.getAll()
         })
+        // #elif NATIVE
+        wx.redirectTo({
+          url: '../welcom/index',
+        })
+        // #endif
       } else {
         wx.redirectTo({
           url: '../welcom/index',
         })
       }
-
     }
 
+  },
+
+  ifShowWeChatIcon() {
+    app.getUnionId().then((r) => {
+      console.log(r)
+      if (r.openapi == wx.getStorageSync('openId')) {
+        this.setData({
+          wechatLogin: true
+        })
+      }
+    })
   },
 
   getAll() {
     let that = this
     that.setData({
-      url: app.globalData.url,
+      url: wx.getStorageSync('url'),
       onlineColor: '#FCA417'
     })
-    that.getMemos('NORMAL')
+    that.getMemos('NORMAL', 'refresh')
     that.getMe()
-    app.api.getTags(app.globalData.url)
+    app.api.getTags(wx.getStorageSync('url'))
       .then(res => {
         that.setData({
-          tags: res.data
+          tags: res
         })
         wx.setStorageSync('tags', res.data)
       })
@@ -446,9 +468,9 @@ Page({
     if (type == 'refresh') {
       offset = 0
     }
-    app.api.getMemos(app.globalData.url, this.data.limit, offset, rowStatus)
+    app.api.getMemos(wx.getStorageSync('url'), this.data.limit, offset, rowStatus)
       .then(result => {
-        if (!result.data) {} else if (result.data.length == 0) {
+        if (!result) {} else if (result.length == 0) {
           if (that.data.memos.length == 0) {
             that.setData({
               memos: [],
@@ -467,7 +489,7 @@ Page({
             title: that.data.language.home.thatIsAll
           })
         } else {
-          var memos = result.data
+          var memos = result
           for (let i = 0; i < memos.length; i++) {
             const ts = memos[i].displayTs
             var time = app.calTime(ts)
@@ -499,7 +521,6 @@ Page({
         that.setData({
           state: that.data.language.home.state.offline,
           onlineColor: '#eeeeee',
-          memos: wx.getStorageSync('memos')
         })
         wx.stopPullDownRefresh()
       })
@@ -555,8 +576,8 @@ Page({
     }
     app.api.changeUserSetting(this.data.url, item)
       .then(res => {
-        console.log(res.data)
-        if (res.data) {
+        console.log(res)
+        if (res.userId) {
           this.setData({
             me: me
           })
@@ -586,9 +607,10 @@ Page({
 
   getMe() {
     var that = this
-    app.api.getMe(app.globalData.url)
+    app.api.getMe(wx.getStorageSync('url'))
       .then(result => {
-        let me = result.data
+        // console.log(result)
+        let me = result
         wx.setStorageSync('me', me)
         that.getStats(me.id)
         let defaultUserSettingList = [{
@@ -630,10 +652,10 @@ Page({
 
   getStats(id) {
     let that = this
-    app.api.getStats(app.globalData.url, id)
+    app.api.getStats(wx.getStorageSync('url'), id)
       .then(result => {
         this.setData({
-          stats: result.data
+          stats: result
         })
         that.setHeatMap()
       })
@@ -643,7 +665,7 @@ Page({
     var that = this
     app.api.editMemo(url, id, data)
       .then(res => {
-        if (res.data) {
+        if (res) {
           var memos = that.data.memos
           for (let i = 0; i < memos.length; i++) {
             if (memos[i].id == id) {

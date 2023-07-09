@@ -52,7 +52,7 @@ Page({
 
     if (wx.getStorageSync('openId')) {
       that.setData({
-        url: app.globalData.url,
+        url: wx.getStorageSync('url'),
         language: app.language[wx.getStorageSync('language') ? wx.getStorageSync('language') : 'chinese']
       })
     } else {
@@ -298,11 +298,11 @@ Page({
     app.api.sendMemo(url, content, resourceIdList)
       .then(res => {
         // console.log(res.data)
-        if (res.data) {
+        if (res) {
           wx.setStorageSync('memoDraft', '')
           if (getCurrentPages().length > 1) {
             let eventChannel = that.data.eventChannel
-            eventChannel.emit('acceptDataFromOpenedPage', 'add', res.data)
+            eventChannel.emit('acceptDataFromOpenedPage', 'add', res)
             wx.navigateBack()
           }
         } else {

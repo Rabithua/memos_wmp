@@ -4,10 +4,10 @@
   <view>
     {{language.memo.visibility_1 + memo.visibility}}
   </view>
-  <view  wx:if="{{memo.visibility === 'PRIVATE'}}">
+  <view wx:if="{{memo.visibility === 'PRIVATE'}}">
     {{language.memo.visibility_2}}
   </view>
-  <view  wx:else>
+  <view wx:else>
     {{language.memo.visibility_3}}
   </view>
   <view class="tipBtn" catchtap="changeMemoVisibility">
@@ -17,17 +17,21 @@
 <view wx:if="{{memo}}" class="memoCard" style="padding-bottom: 50rpx;">
   <text class="time">{{memo.time}}</text>
   <text class="status">@{{memo.creatorName}}</text>
-  <view class="content" >
+  <view class="content">
     <rich-text data-content="{{memo.content}}" user-select nodes="{{memo.formatContent}}"></rich-text>
   </view>
   <view wx:if="{{memo.imgList_preview.length > 0}}" class="imgList">
     <image class="img" catchtap="preview" data-src="{{image.url}}" data-url="{{memo.imgList_preview}}" lazy-load mode="aspectFill" wx:key="image" wx:for="{{memo.imgList_preview}}" wx:for-item="image" src="{{image.url}}"></image>
   </view>
   <view wx:if="{{memo.video_preview.length > 0}}" class="videoList">
-    <video class="video" data-src="{{video.url}}" data-url="{{memo.video_preview}}" lazy-load mode="aspectFill" wx:key="video" wx:for="{{memo.video_preview}}" wx:for-item="video" src="{{video.url}}"></video>
+    <video class="video" catchtap="none" data-src="{{video.url}}" data-url="{{memo.video_preview}}" lazy-load mode="aspectFill" wx:key="video" wx:for="{{memo.video_preview}}" wx:for-item="video" src="{{video.url}}"></video>
   </view>
   <view wx:if="{{memo.fileList_preview.length > 0}}" class="fileList">
     <view class="file" wx:for="{{memo.fileList_preview}}" wx:key="file" wx:for-item="file" data-url="{{file.url}}" catchtap="copy">{{file.id}}</view>
+  </view>
+  <view wx:if="{{memo.aiTags.length > 0}}" class="aiTags">
+    <view class="title">{{language.memo.aiTags}}</view>
+    <view class="tag" bind:tap="tagTap" data-tag="{{tag}}" wx:for="{{memo.aiTags}}" wx:for-item="tag" wx:key="aitags">{{tag}}</view>
   </view>
 </view>
 
@@ -39,8 +43,13 @@
   </view>
 </view>
 
+<button style="transform: translateY(-100rpx);" class="shareBtn" bind:tap="share">
+  <view class="sIcon copyLinkIcon"></view>
+  复制链接
+</button>
+
 <button class="shareBtn" open-type="share">
-  <view class="shareIcon">
+  <view class="sIcon shareIcon">
   </view>
   {{language.memo.share}}
 </button>

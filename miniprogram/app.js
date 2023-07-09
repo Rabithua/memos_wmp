@@ -5,21 +5,13 @@ App({
 
   globalData: {
     // 【一般需要修改为 false】是否开启微信自动登录，需要手动配置后端接口以及开启小程序认证权限才能生效，否则会报错。
-    ifWechatLogin: true,
-    url: 'https://memos.wowow.club',
+    ifWechatLogin: false,
+    url: 'https://demo.usememos.com',
     // 搭配ifWechatLogin使用
-    backendUrl: 'https://maimoapi.wowow.club/mpunionid',
-    top_btn: null,
+    backendUrl: 'https://maimoapi.wowow.club',
     top_btn: wx.getMenuButtonBoundingClientRect()
   },
   onLaunch: function (options) {
-    if (!wx.cloud) {
-      console.error('请使用 2.2.3 或以上的基础库以使用云能力');
-    } else {
-      wx.cloud.init({
-        traceUser: true,
-      });
-    }
 
     //小程序更新提醒
     if (options.scene !== 1154){
@@ -42,30 +34,30 @@ App({
     }
 
     //加载字体
-    wx.loadFontFace({
-      global: true,
-      family: 'Smiley Sans Oblique',
-      source: 'https://img.rabithua.club/%E9%BA%A6%E9%BB%98/SmileySans-Oblique.ttf',
-      scopes: ['webview', 'native'],
-    });
-
+    // wx.loadFontFace({
+    //   global: true,
+    //   family: 'Smiley Sans Oblique',
+    //   source: 'https://img.rabithua.club/%E9%BA%A6%E9%BB%98/SmileySans-Oblique.ttf',
+    //   scopes: ['webview', 'native'],
+    // });
   },
 
   getUnionId() {
     let that = this
     return new Promise((resolve, reject) => {
+      // #if MP
       wx.login({
         success(res) {
           if (res.code) {
             //发起网络请求
             wx.request({
-              url: that.globalData.backendUrl,
+              url: that.globalData.backendUrl + '/mpunionid',
               data: {
                 code: res.code
               },
               success(r) {
-                let unionid = r.data
-                resolve(unionid)
+                console.log(r.data)
+                resolve(r.data)
               },
               fail(r) {
                 reject(r)
@@ -77,6 +69,31 @@ App({
           }
         }
       })
+      // #elif NATIVE
+      // wx.getMiniProgramCode({
+      //   success(res) {
+      //     if (res.code) {
+      //       //发起网络请求
+      //       wx.request({
+      //         url: that.globalData.backendUrl + '/mpunionid',
+      //         data: {
+      //           code: res.code
+      //         },
+      //         success(r) {
+      //           let unionid = r.data
+      //           resolve(unionid)
+      //         },
+      //         fail(r) {
+      //           reject(r)
+      //         }
+      //       })
+      //     } else {
+      //       console.log('登录失败！' + res.errMsg)
+      //       reject(res.errMsg)
+      //     }
+      //   }
+      // })
+      // #endif
     })
 
   },
@@ -88,7 +105,7 @@ App({
       title: '',
     });
     return new Promise((resolve, reject) => {
-      that.api.status(that.globalData.url).then((res) => {
+      that.api.status(wx.getStorageSync('url')).then((res) => {
         const cookie = res.header["Set-Cookie"];
         if (!cookie) {
           reject(new Error('No cookie was returned')); // 没有设置 cookie
@@ -190,7 +207,7 @@ App({
     for (let l = 0; l < memo.resourceList.length; l++) {
       const rescource = memo.resourceList[l];
       const rescource_id = rescource.publicId
-      let rescource_url = this.globalData.url + '/o/r/' + rescource.id + '/' + rescource.publicId
+      let rescource_url = wx.getStorageSync('url') + '/o/r/' + rescource.id
       if (rescource.externalLink) {
         rescource_url = rescource.externalLink
       }

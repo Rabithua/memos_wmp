@@ -2,6 +2,9 @@
 <view class="settings">
   <view wx:for="{{settings}}" class="setting" wx:for-item="setting" wx:key="settings">
     <view>{{setting.title}}</view>
-    <switch checked="{{setting.checked}}" data-index="{{index}}" bindchange="methods"/>
+    <switch checked="{{setting.checked}}" data-index="{{index}}" bindchange="methods" />
+  </view>
+  <view class="clearStorage setting" bind:tap="clearStorage">
+    <view>{{language.setting.clearStorage}}</view>
   </view>
 </view>

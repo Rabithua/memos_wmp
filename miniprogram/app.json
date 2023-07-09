@@ -1,4 +1,34 @@
 {
+  "mini-ios": {
+    "pages": [
+      "pages/home/index",
+      "pages/welcom/index",
+      "pages/search/index",
+      "pages/explore/index",
+      "pages/edit/index",
+      "pages/archived/index",
+      "pages/memo/index",
+      "pages/resource/index",
+      "pages/others/index",
+      "pages/openapi/index",
+      "pages/setting/index"
+    ]
+  },
+  "mini-android": {
+    "pages": [
+      "pages/home/index",
+      "pages/welcom/index",
+      "pages/search/index",
+      "pages/explore/index",
+      "pages/edit/index",
+      "pages/archived/index",
+      "pages/memo/index",
+      "pages/resource/index",
+      "pages/others/index",
+      "pages/openapi/index",
+      "pages/setting/index"
+    ]
+  },
   "pages": [
     "pages/home/index",
     "pages/welcom/index",

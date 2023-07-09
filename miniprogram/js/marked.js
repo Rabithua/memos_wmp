@@ -59,7 +59,7 @@ const parseMarkedToHtml = (markedStr) => {
       for (let res of iterator) {
         // console.log(res);
         let num = res[0].length - res[1].length - res[2].length - 1;
-        return `<span style='font-size: ${30-num}px; font-weight: bold; padding-bottom: 5px; '>${res[2]}</span>`;
+        return `<div style='font-size: ${30-num}px; font-weight: bold; padding-bottom: 5px; '>${res[2]}</div>`;
       }
       return '';
     })
@@ -86,7 +86,7 @@ const formatMemoContent = (content, addtionConfig) => {
   };
   const tempElement = parseMarkedToHtml(content);
   let outputString = tempElement;
-  var url = app.globalData.url;
+  var url = wx.getStorageSync('url');
 
   outputString = outputString
     .replace(IMAGE_URL_REG, "<img lazy-load class='img' src='http" + "$1'/>")

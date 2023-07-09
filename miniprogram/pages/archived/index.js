@@ -26,7 +26,7 @@ Page({
 
     if (wx.getStorageSync('openId')) {
       that.setData({
-        url: app.globalData.url
+        url: wx.getStorageSync('url')
       })
       that.getMemos('ARCHIVED')
     } else {
@@ -68,9 +68,9 @@ Page({
   getMemos(rowStatus) {
     var that = this
     let offset = this.data.memos.length
-    app.api.getMemos(app.globalData.url, this.data.limit, offset, rowStatus)
+    app.api.getMemos(wx.getStorageSync('url'), this.data.limit, offset, rowStatus)
       .then(result => {
-        if (!result.data) {
+        if (!result) {
           wx.vibrateLong()
           wx.showToast({
             icon: 'error',
@@ -78,7 +78,7 @@ Page({
             state: that.data.language.home.state.offline,
             onlineColor: '#eeeeee',
           })
-        } else if (result.data.length == 0) {
+        } else if (result.length == 0) {
           if (that.data.memos.length == 0) {
             that.setData({
               memos: []
@@ -89,7 +89,7 @@ Page({
             title: that.data.language.home.thatIsAll
           })
         } else {
-          var memos = result.data
+          var memos = result
           for (let i = 0; i < memos.length; i++) {
             const ts = memos[i].createdTs
             var time = app.calTime(ts)
@@ -202,7 +202,7 @@ Page({
     app.api.editMemo(url, id, data)
       .then(res => {
         // console.log(res)
-        if (res.data) {
+        if (res) {
           var memos = that.data.memos
           for (let i = 0; i < memos.length; i++) {
             if (memos[i].id == id) {

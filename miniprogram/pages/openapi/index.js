@@ -18,7 +18,7 @@ Page({
 
     if (wx.getStorageSync('openId')) {
       that.setData({
-        url: app.globalData.url
+        url: wx.getStorageSync('url')
       })
       // 获取用户信息
       this.getMe()
@@ -40,7 +40,7 @@ Page({
 
   getMe() {
     var that = this
-    app.api.getMe(app.globalData.url)
+    app.api.getMe(wx.getStorageSync('url'))
       .then(result => {
         let me = result.data
         that.setData({

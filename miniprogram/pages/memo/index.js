@@ -8,7 +8,7 @@ Page({
   data: {
     memo: null,
     id: null,
-    url: app.globalData.url,
+    url: wx.getStorageSync('url'),
     me: wx.getStorageSync('me')
   },
 
@@ -24,7 +24,7 @@ Page({
         this.getMemo(this.data.url, id)
       } else {
         app.getUnionId().then((r) => {
-          wx.setStorageSync('openId', r)
+          wx.setStorageSync('openId', r.openapi)
           this.getMemo(this.data.url, id)
         }).catch((err) => {
           console.log(err)
@@ -33,6 +33,13 @@ Page({
       }
 
     }
+  },
+
+  tagTap(e){
+    console.log(e.target.dataset.tag)
+    wx.vibrateShort({
+      type: 'light',
+    })
   },
 
   getMemo(url, id) {
@@ -47,6 +54,11 @@ Page({
           memo.formatContent = formatMemoContent(memo.content)
           memo.time = app.calTime(memo.createdTs)
           memo = app.memosRescourse(memo)
+          try {
+            memo.aiTags = JSON.parse(memo.aiTags)
+          } catch (error) {
+            memo.aiTags = []
+          }
           wx.setNavigationBarTitle({
             title: memo.creatorName,
           })
@@ -65,6 +77,16 @@ Page({
         console.log(err)
         wx.hideLoading()
       })
+  },
+
+  share() {
+    wx.vibrateShort({
+      type: 'light',
+    })
+    wx.setClipboardData({
+      data: `${this.data.url}/m/${this.data.id}`,
+    })
+
   },
 
   preview(e) {

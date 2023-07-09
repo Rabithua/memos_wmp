@@ -1,6 +1,6 @@
 <!--pages/search/index.wxml-->
 <view class="maskHeader"></view>
-<view style="height:{{top_btn.height}}px; margin: {{top_btn.top}}px 60rpx 30rpx 50rpx;">
+<view style="height:{{top_btn.height}}px; margin: {{top_btn.top}}px 60rpx 30rpx 50rpx; position: relative;">
   <input class="searchInput" style="width: calc(100% - {{top_btn.width + 90}}px); height: {{top_btn.height}}px;" type="text" placeholder="{{language.search.inputPlaceHolder}}" placeholder-style="color: #cccccc;" bindinput="search" />
 </view>
 <view class="tip" style="margin: 0 50rpx;">
@@ -31,7 +31,7 @@
 </view>
 
 <view class="memos" style="margin-top: 0rpx;">
-  <view class="memoCard" wx:for="{{showMemos}}" wx:key="memo" style="border-left: {{item.rowStatus == 'ARCHIVED' ? '5rpx solid #EF4C4E' : 'none'}};" data-memoId="{{item.id}}" id="memo{{item.id}}" catchtap="goMemo">
+  <view class="memoCard" wx:for="{{showMemos}}" wx:key="memo" style="border-left: {{item.rowStatus == 'ARCHIVED' ? '5rpx solid #EF4C4E' : 'none'}};" data-memoId="{{item.id}}" id="memo{{item.id}}" catch:longtap="goMemo">
     <view class="method">
       <text class="btn top" style="opacity: {{item.pinned ? 1:0.2}};" data-memoId="{{item.id}}" data-pinned="{{item.pinned}}" data-content="{{item.content}}" catchtap="changeMemoPinned"></text>
       <text class="btn delete" data-memoId="{{item.id}}" data-rowStatus="{{item.rowStatus}}" catchtap="deleteMemoFaker" catchlongpress="deleteMemo"></text>
@@ -51,7 +51,7 @@
       <image class="img" catchtap="preview" data-src="{{image.url}}" data-url="{{item.imgList_preview}}" lazy-load mode="aspectFill" wx:key="image" wx:for="{{item.imgList_preview}}" wx:for-item="image" src="{{image.url}}"></image>
     </view>
     <view wx:if="{{item.video_preview.length > 0}}" class="videoList">
-      <video class="video" data-src="{{video.url}}" data-url="{{item.video_preview}}" lazy-load mode="aspectFill" wx:key="video" wx:for="{{item.video_preview}}" wx:for-item="video" src="{{video.url}}"></video>
+      <video class="video" catchtap="none" data-src="{{video.url}}" data-url="{{item.video_preview}}" lazy-load mode="aspectFill" wx:key="video" wx:for="{{item.video_preview}}" wx:for-item="video" src="{{video.url}}"></video>
     </view>
     <view wx:if="{{item.fileList_preview.length > 0}}" class="fileList">
       <view class="file" wx:for="{{item.fileList_preview}}" wx:key="file" wx:for-item="file" data-url="{{file.url}}" catchtap="copy">{{file.id}}</view>

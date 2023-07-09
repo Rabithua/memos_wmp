@@ -29,7 +29,7 @@
     <view class="typeBtn codeBtn" bindtap="inputTodo"></view>
     <view class="typeBtn todoBtn" bindtap="inputCode"></view>
     <view class="typeBtn fileBtn" bindtap="fileUpload"></view>
-    <view class="fileNum">
+    <view class="fileNum" bindtap="fileUpload" wx:if="{{resourceIdList.length > 0}}">
       {{resourceIdList.length}}
     </view>
   </view>

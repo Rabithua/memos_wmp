@@ -6,6 +6,13 @@
   margin: 20rpx;
 }
 
+.clearStorage {
+  padding: 25rpx!important;
+  background-color: #EF4C4E10!important;
+  color: #EF4C4E!important;
+  border: 1rpx solid #EF4C4E50!important;
+}
+
 .settings .setting {
   display: flex;
   align-items: center;

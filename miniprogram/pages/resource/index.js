@@ -2,10 +2,12 @@ var app = getApp();
 
 Page({
   data: {
-    url: getApp().globalData.url,
+    me: wx.getStorageSync('me'),
+    url: wx.getStorageSync('url'),
     limit: 20,
     resources: [],
-    selectFileId: []
+    selectFileId: [],
+    uploading: 0
   },
 
   onLoad(o) {
@@ -70,60 +72,84 @@ Page({
 
   pickImg() {
     let that = this
-    let resources = this.data.resources
     wx.vibrateShort({
       type: 'light'
     })
-    wx.chooseMedia({
-      count: 1,
-      mediaType: ['image', 'video'],
+    wx.chooseImage({
+      count: 9,
+      mediaType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       maxDuration: 30,
       camera: 'back',
       success(res) {
-        console.log(res.tempFiles)
-        if (res.tempFiles[0].size > 32 * 1024 * 1024) {
-          wx.vibrateLong()
-          wx.showToast({
-            icon: 'error',
-            title: that.data.language.resource.tooLarge,
-          })
-        } else {
-          wx.showLoading({
-            title: '上传中...',
-          })
-          wx.uploadFile({
-            url: `${that.data.url}/api/resource/blob?openId=${wx.getStorageSync('openId')}`,
-            filePath: res.tempFiles[0].tempFilePath,
-            name: 'file',
-            timeout: 180 * 1000,
-            formData: {},
-            success(res) {
-              console.log(res)
-              if (res.statusCode == 200) {
-                let newFile = JSON.parse(res.data).data
-                newFile.time = app.fomaDay(newFile.createdTs * 1000)
-                newFile.sizeFomate = app.formatFileSize(newFile.size)
-                resources.unshift(newFile)
-                wx.hideLoading()
-                that.setData({
-                  resources
-                })
-              } else {
-                wx.hideLoading()
-                wx.showToast({
-                  icon: 'error',
-                  title: that.data.language.resource.uploadFailed,
-                })
-              }
-            }
-          }).onProgressUpdate((res) => {
-            console.log(res)
-          })
-        }
-
+        // console.log(res.tempFiles)
+        that.setData({
+          uploading: that.data.uploading + res.tempFiles.length
+        })
+        res.tempFiles.forEach((file) => {
+          that.uploadFile(file)
+        })
       }
     })
+  },
+
+  uploadFile(file) {
+    // console.log(file)
+    let that = this
+    let resources = this.data.resources
+    if (file.size > 32 * 1024 * 1024) {
+      wx.vibrateLong()
+      wx.showToast({
+        icon: 'error',
+        title: that.data.language.resource.tooLarge,
+      })
+    } else {
+      wx.uploadFile({
+        url: `${that.data.url}/api/v1/resource/blob?openId=${wx.getStorageSync('openId')}`,
+        filePath: file.path,
+        name: 'file',
+        timeout: 180 * 1000,
+        formData: {},
+        success(res) {
+          // console.log(res)
+          wx.vibrateShort({
+            type: 'light',
+          })
+          if (res.statusCode == 200) {
+            let newFile = JSON.parse(res.data)
+            newFile.time = app.fomaDay(newFile.createdTs * 1000)
+            newFile.sizeFomate = app.formatFileSize(newFile.size)
+            resources.unshift(newFile)
+            wx.hideLoading()
+            that.setData({
+              resources
+            })
+            that.setData({
+              uploading: that.data.uploading - 1
+            })
+            return
+          } else {
+            wx.showToast({
+              icon: 'error',
+              title: that.data.language.resource.uploadFailed,
+            })
+            that.setData({
+              uploading: that.data.uploading - 1
+            })
+            return
+          }
+        },
+        fail() {
+          wx.vibrateShort({
+            type: 'light',
+          })
+          that.setData({
+            uploading: that.data.uploading - 1
+          })
+          return
+        }
+      })
+    }
   },
 
   getResource() {
@@ -131,7 +157,7 @@ Page({
       title: this.data.language.common.loading,
     })
     app.api.getResource(this.data.url, this.data.limit, this.data.resources.length).then(res => {
-      let newResources = res.data
+      let newResources = res
       newResources.forEach(function (item) {
         item.time = app.fomaDay(item.createdTs * 1000);
         item.sizeFomate = app.formatFileSize(item.size)
@@ -161,6 +187,9 @@ Page({
     if (this.data.selectMode) {
       this.calcSelectNum(resources)
       if (!resources[idx].select) {
+        this.setData({
+          selectFileId: this.data.selectFileId.filter(item => item !== resources[idx].id)
+        })
         this.deleteMemoFile(resources[idx].id)
       }
       wx.vibrateShort({
@@ -177,7 +206,9 @@ Page({
       .filter(item => item.select)
       .map(item => item.id);
     this.setData({
-      selectFileId: selectedIds
+      selectFileId: this.data.selectFileId.concat(selectedIds).filter((value, index, self) => {
+        return self.indexOf(value) === index;
+      })
     })
   },
 
@@ -231,7 +262,7 @@ Page({
     }
   },
 
-  calcTotalSize(){
+  calcTotalSize() {
     let totalSize = 0
     this.data.resources.forEach(res => {
       totalSize = totalSize + res.size
@@ -258,7 +289,7 @@ Page({
     if (res[idx].externalLink) {
       url = res[idx].externalLink
     } else {
-      url = `${this.data.url}/o/r/${res[idx].id}/${res[idx].publicId}`
+      url = `${this.data.url}/o/r/${res[idx].id}`
     }
     wx.vibrateShort({
       type: 'light'
@@ -338,7 +369,7 @@ Page({
     if (res[idx].externalLink) {
       url = res[idx].externalLink
     } else {
-      url = `${this.data.url}/o/r/${res[idx].id}/${res[idx].publicId}`
+      url = `${this.data.url}/o/r/${res[idx].id}`
     }
     wx.vibrateShort({
       type: 'light'

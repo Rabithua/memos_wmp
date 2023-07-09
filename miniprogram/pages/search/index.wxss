@@ -7,6 +7,9 @@
 }
 
 .searchInput {
+  /* #if NATIVE */
+  width: 600rpx!important;
+  /* #endif */
   position: fixed;
   background: #ffffff80;
   padding-left: 40rpx;

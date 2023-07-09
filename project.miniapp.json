@@ -1,0 +1,67 @@
+{
+  "miniVersion": "v2",
+  "name": "麦默",
+  "version": "1.0.1",
+  "mini-android": {
+    "sdkVersion": "1.0.1",
+    "toolkitVersion": "0.7.1",
+    "useExtendedSdk": {
+      "media": true,
+      "bluetooth": false,
+      "network": true,
+      "scanner": false,
+      "xweb": false
+    },
+    "icons": {
+      "hdpi": "miniapp/android/icons/icon@80w.png",
+      "xhdpi": "miniapp/android/icons/icon@120w-1.png",
+      "xxhdpi": "miniapp/android/icons/icon@180w.png",
+      "xxxhdpi": "miniapp/android/icons/icon.png"
+    },
+    "splashscreen": {
+      "hdpi": "miniapp/android/splashscreen/splashscreen-2.png",
+      "xhdpi": "miniapp/android/splashscreen/splashscreen-1.png",
+      "xxhdpi": "miniapp/android/splashscreen/splashscreen.png"
+    },
+    "enableVConsole": "close",
+    "privacy": {
+      "enable": false
+    }
+  },
+  "mini-ios": {
+    "sdkVersion": "1.0.5",
+    "toolkitVersion": "0.0.9",
+    "useExtendedSdk": {
+      "WeAppOpenFuns": true,
+      "WeAppNetwork": true,
+      "WeAppBluetooth": false,
+      "WeAppMedia": true,
+      "WeAppLBS": true,
+      "WeAppOthers": true,
+      "WeAppIdaas": true
+    },
+    "enableVConsole": "open",
+    "icons": {
+      "mainIcon120": "miniapp/ios/icons/icon@120w.png",
+      "mainIcon180": "miniapp/ios/icons/icon@180w.png",
+      "spotlightIcon80": "miniapp/ios/icons/icon@80w.png",
+      "spotlightIcon120": "miniapp/ios/icons/icon@120w.png",
+      "settingsIcon58": "miniapp/ios/icons/icon@58w.png",
+      "settingsIcon87": "",
+      "notificationIcon40": "miniapp/ios/icons/icon@40w.png",
+      "notificationIcon60": "miniapp/ios/icons/icon@60w.png",
+      "appStore1024": "miniapp/ios/icons/icon@1024w.png",
+      "spotlightIcon87": "miniapp/ios/icons/icon@87w.png"
+    },
+    "splashScreen": {
+      "customImage": ""
+    },
+    "splashscreen": {
+      "customImage": "miniapp/ios/splashscreen/splashscreen.png"
+    },
+    "privateDescriptions": {
+      "NSAppleMusicUsageDescription": "media",
+      "NSPhotoLibraryUsageDescription": "xiangce"
+    }
+  }
+}

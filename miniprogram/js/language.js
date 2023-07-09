@@ -36,12 +36,18 @@ export const chinese = {
         title: "标签建议",
         checked: true,
       },
-    ]
+      {
+        title: "首页提示",
+        checked: wx.getStorageSync('showTips') ? wx.getStorageSync('showTips') : true,
+      },
+    ],
+    clearStorage: '清理缓存'
   },
   resource: {
     pageTitle: '资源库 📂',
     nothing: '这是一片无人的荒原🪐',
     upload: '上传',
+    uploading: '上传中',
     load_1: '已加载',
     load_2: '个～',
     confirm: '确认',
@@ -63,6 +69,7 @@ export const chinese = {
     nothing: '这是一片无人的荒原🪐'
   },
   memo: {
+    aiTags: '相关标签:',
     share: "分享",
     unSee: "Memo不可见",
     visibility_1: '可见性为：',
@@ -75,6 +82,8 @@ export const chinese = {
     headTitle: '麦默笔记',
     secondTitle: '把脑袋里的小碎片收集起来✨',
     dsc: '麦默是 Github 开源项目 usememos/memos 的小程序版本，同样的，麦默 Rabithua/memos_wmp 也是开源的！',
+    domain: '域名',
+    domainPlaceholder: 'https://xxx.xxx',
     username: '用户名',
     usernamePlaceholder: 'username',
     password: '密码',
@@ -223,19 +232,25 @@ export const english = {
   setting: {
     pageTitle: 'Local Settings',
     settings: [{
-    title: "Auto Fold",
-    checked: true,
-    },
-    {
-    title: "Tag Suggestions",
-    checked: true,
-    },
-    ]
-    },
+        title: "Auto Fold",
+        checked: true,
+      },
+      {
+        title: "Tag Suggestions",
+        checked: true,
+      },
+      {
+        title: "HomeTips",
+        checked: wx.getStorageSync('showTips') ? wx.getStorageSync('showTips') : true,
+      },
+    ],
+    clearStorage: 'ClearStorage'
+  },
   resource: {
     pageTitle: 'Resource📂',
     nothing: "There's nothing here 🪐",
     upload: 'Upload',
+    uploading: 'Uploading',
     load_1: 'Loaded ',
     load_2: ' files~',
     confirm: 'Confirm',
@@ -257,6 +272,7 @@ export const english = {
     nothing: "There's nothing here 🪐"
   },
   memo: {
+    aiTags: 'AiTags:',
     share: "Share",
     unSee: "Memo is hidden",
     visibility_1: 'Visibility: ',
@@ -269,6 +285,8 @@ export const english = {
     headTitle: 'Welcom Maimo',
     secondTitle: 'Collect the small pieces in your head.✨',
     dsc: 'Maimo is a WechatMiniProgram version of Github\'s open source project usememos/memos. Similarly, Maimo Rabithua/memos_wmp is also open source!',
+    domain: 'Domain',
+    domainPlaceholder: 'https://xxx.xxx',
     username: 'Username',
     usernamePlaceholder: 'username',
     password: 'Password',
