@@ -303,11 +303,6 @@ page {
   border-bottom: #00000010 1px solid;
 }
 
-.memoCard:active {
-  opacity: 0.8;
-  animation-duration: 200ms;
-}
-
 .memoCard:last-child {
   margin-bottom: 40rpx;
 }
