@@ -147,6 +147,28 @@ export const getMe = (url) => {
   })
 }
 
+export const getUserInfo = (url, userId) => {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: `${url}/api/user/${userId}`,
+      data: {
+        openId: wx.getStorageSync('openId')
+      },
+      success(res) {
+        resolve(res.data)
+      },
+      fail(err) {
+        wx.vibrateLong()
+        wx.showToast({
+          icon: 'none',
+          title: '获取失败',
+        })
+        reject(err)
+      }
+    })
+  })
+}
+
 export const getStats = (url, creatorId) => {
   return new Promise((resolve, reject) => {
     wx.request({
@@ -436,6 +458,24 @@ export const getExploreMemos = (url, offset, limit) => {
   return new Promise((resolve, reject) => {
     wx.request({
       url: `${url}/api/memo/all?offset=${offset}&limit=${limit}`,
+      success(res) {
+        resolve(res.data)
+      },
+      fail(err) {
+        wx.vibrateLong()
+        wx.showToast({
+          icon: 'none',
+          title: '获取失败',
+        })
+        reject(err)
+      }
+    })
+  })
+}
+export const getUserMemos = (url, offset, limit, creatorId) => {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: `${url}/api/memo?creatorId=${creatorId}&offset=${offset}&limit=${limit}&rowStatus=NORMAL`,
       success(res) {
         resolve(res.data)
       },

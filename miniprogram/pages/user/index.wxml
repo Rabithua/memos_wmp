@@ -1,0 +1,33 @@
+<view class="authorInfo">
+  <image bind:tap="goUser" class="avatar" src="{{author.avatarUrl ? author.avatarUrl : '../../images/icon.png'}}" mode="" />
+  <view class="name">{{author.nickname}}</view>
+  <view wx:if="{{author.role == 'HOST'}}" class="role">{{author.role}}</view>
+</view>
+<view class="memos">
+  <view class="memoCard" wx:for="{{showMemos}}" wx:key="memo" style="border-left: {{item.rowStatus == 'ARCHIVED' ? '5rpx solid #EF4C4E' : 'none'}};" data-memoId="{{item.id}}" id="memo{{item.id}}"  catchtap="goMemo">
+    <view class="part_top">
+      <view class="time" style="color: {{item.time == '刚刚' || item.time=='Now' ? '#07C160' : '' }};">{{item.time}}</view>
+      <view class="status" wx:if="{{showCreator}}">{{item.creatorName}}</view>
+      <view class="status">ID:{{item.creatorId}}</view>
+      <view class="{{'vis_icon ' + item.visibility}}"></view>
+    </view>
+    <view class="content" style="{{settings[0].checked ? 'max-height: 800rpx' : ''}}">
+      <rich-text data-content="{{item.content}}" nodes="{{item.formatContent}}"></rich-text>
+    </view>
+    <view wx:if="{{item.imgList_preview.length > 0}}" class="imgList">
+      <image class="img" catchtap="preview" data-src="{{image.url}}" data-url="{{item.imgList_preview}}" lazy-load mode="aspectFill" wx:key="image" wx:for="{{item.imgList_preview}}" wx:for-item="image" src="{{image.url}}"></image>
+    </view>
+    <view wx:if="{{item.video_preview.length > 0}}" class="videoList">
+      <video class="video" catchtap="none" data-src="{{video.url}}" data-url="{{item.video_preview}}" lazy-load mode="aspectFill" wx:key="video" wx:for="{{item.video_preview}}" wx:for-item="video" src="{{video.url}}"></video>
+    </view>
+    <view wx:if="{{item.fileList_preview.length > 0}}" class="fileList">
+      <view class="file" wx:for="{{item.fileList_preview}}" wx:key="file" wx:for-item="file" data-url="{{file.url}}" catchtap="copy">{{file.id}}</view>
+    </view>
+
+  </view>
+  <view style="height: 100rpx;"> </view>
+</view>
+
+<view wx:if="{{showMemos.length == 0}}" style="padding: 100rpx 30rpx; text-align: center;opacity: 0.8;">
+  {{language.explore.nothing}}
+</view>

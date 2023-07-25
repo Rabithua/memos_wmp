@@ -8,8 +8,18 @@
  */
 
 @media (prefers-color-scheme: dark) {
-    .shareBtn {
-        background: rgb(41, 41, 41);
-        border: none;
-    }
+  .shareBtn {
+    background: rgb(41, 41, 41);
+    border: none;
+  }
+
+  .config {
+    background: rgb(41, 41, 41);
+
+  }
+
+  .config .name {
+    color: #ffffff;
+  }
+
 }

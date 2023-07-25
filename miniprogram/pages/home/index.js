@@ -53,7 +53,15 @@ Page({
         })
       }
     }
+  },
 
+  goUser(){
+    wx.vibrateShort({
+      type: 'light',
+    })
+    wx.navigateTo({
+      url: `../user/index?id=${this.data.me.id}`,
+    })
   },
 
   ifShowWeChatIcon() {
