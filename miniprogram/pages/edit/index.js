@@ -298,11 +298,11 @@ Page({
     app.api.sendMemo(url, content, resourceIdList)
       .then(res => {
         // console.log(res.data)
-        if (res) {
+        if (res.data) {
           wx.setStorageSync('memoDraft', '')
           if (getCurrentPages().length > 1) {
             let eventChannel = that.data.eventChannel
-            eventChannel.emit('acceptDataFromOpenedPage', 'add', res)
+            eventChannel.emit('acceptDataFromOpenedPage', 'add', res.data)
             wx.navigateBack()
           }
         } else {

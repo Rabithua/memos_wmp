@@ -12,7 +12,7 @@ export const getMemos = (url, limit, offset, rowStatus) => {
       }
     }
     wx.request({
-      url: `${url}/api/v1/memo`,
+      url: `${url}/api/memo`,
       data,
       success(res) {
         resolve(res.data)
@@ -32,7 +32,7 @@ export const getResource = (url, limit, offset) => {
       openId: wx.getStorageSync('openId')
     }
     wx.request({
-      url: `${url}/api/v1/resource`,
+      url: `${url}/api/resource`,
       data,
       success(res) {
         resolve(res.data)
@@ -47,7 +47,7 @@ export const getResource = (url, limit, offset) => {
 export const deleteResource = (url, id) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/v1/resource/${id}?openId=${wx.getStorageSync('openId')}`,
+      url: `${url}/api/resource/${id}?openId=${wx.getStorageSync('openId')}`,
       method: "DELETE",
       success(res) {
         resolve(res.data)
@@ -67,7 +67,7 @@ export const deleteResource = (url, id) => {
 export const deleteMemoResource = (url, memoId, resourceId) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/v1/memo/${memoId}/resource/${resourceId}?openId=${wx.getStorageSync('openId')}`,
+      url: `${url}/api/memo/${memoId}/resource/${resourceId}?openId=${wx.getStorageSync('openId')}`,
       method: "DELETE",
       success(res) {
         resolve(res.data)
@@ -87,7 +87,7 @@ export const deleteMemoResource = (url, memoId, resourceId) => {
 export const createResource = (url, file) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/v1/resource/blob?openId=${wx.getStorageSync('openId')}`,
+      url: `${url}/api/resource/blob?openId=${wx.getStorageSync('openId')}`,
       method: "POST",
       data: {
         file
@@ -96,6 +96,11 @@ export const createResource = (url, file) => {
         resolve(res.data)
       },
       fail(err) {
+        wx.vibrateLong()
+        wx.showToast({
+          icon: 'none',
+          title: '删除失败',
+        })
         reject(err)
       }
     })
@@ -105,7 +110,7 @@ export const createResource = (url, file) => {
 export const getMemo = (url, id) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/v1/memo/${id}`,
+      url: `${url}/api/memo/${id}`,
       data: {
         openId: wx.getStorageSync('openId')
       },
@@ -123,29 +128,7 @@ export const getMemo = (url, id) => {
 export const getMe = (url) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/v1/user/me`,
-      data: {
-        openId: wx.getStorageSync('openId')
-      },
-      success(res) {
-        resolve(res.data)
-      },
-      fail(err) {
-        wx.vibrateLong()
-        wx.showToast({
-          icon: 'none',
-          title: '获取失败',
-        })
-        reject(err)
-      }
-    })
-  })
-}
-
-export const getUserInfo = (url, userId) => {
-  return new Promise((resolve, reject) => {
-    wx.request({
-      url: `${url}/api/user/${userId}`,
+      url: `${url}/api/user/me`,
       data: {
         openId: wx.getStorageSync('openId')
       },
@@ -167,7 +150,7 @@ export const getUserInfo = (url, userId) => {
 export const getStats = (url, creatorId) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/v1/memo/stats`,
+      url: `${url}/api/memo/stats`,
       data: {
         creatorId,
         openId: wx.getStorageSync('openId')
@@ -190,7 +173,7 @@ export const getStats = (url, creatorId) => {
 export const sendMemo = (url, content, resourceIdList) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/v1/memo?openId=${wx.getStorageSync('openId')}`,
+      url: `${url}/api/memo?openId=${wx.getStorageSync('openId')}`,
       method: "POST",
       data: {
         content,
@@ -214,7 +197,7 @@ export const sendMemo = (url, content, resourceIdList) => {
 export const signUp = (url, data) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/v1/auth/signup`,
+      url: `${url}/api/auth/signup`,
       method: "POST",
       data: data,
       success(res) {
@@ -235,7 +218,7 @@ export const signUp = (url, data) => {
 export const deleteMemo = (url, memoId) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/v1/memo/${memoId}?openId=${wx.getStorageSync('openId')}`,
+      url: `${url}/api/memo/${memoId}?openId=${wx.getStorageSync('openId')}`,
       method: "DELETE",
       success(res) {
         resolve(res.data)
@@ -255,7 +238,7 @@ export const deleteMemo = (url, memoId) => {
 export const editMemo = (url, memoId, data) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/v1/memo/${memoId}?openId=${wx.getStorageSync('openId')}`,
+      url: `${url}/api/memo/${memoId}?openId=${wx.getStorageSync('openId')}`,
       method: "PATCH",
       data,
       success(res) {
@@ -276,7 +259,7 @@ export const editMemo = (url, memoId, data) => {
 export const changeUserSetting = (url, data) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/v1/user/setting?openId=${wx.getStorageSync('openId')}`,
+      url: `${url}/api/user/setting?openId=${wx.getStorageSync('openId')}`,
       method: "POST",
       data: {
         ...data
@@ -299,13 +282,12 @@ export const changeUserSetting = (url, data) => {
 export const changeMemoPinned = (url, memoId, data) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/v1/memo/${memoId}/organizer?openId=${wx.getStorageSync('openId')}`,
+      url: `${url}/api/memo/${memoId}/organizer?openId=${wx.getStorageSync('openId')}`,
       method: "POST",
       data: {
         ...data
       },
       success(res) {
-        console.log(res)
         resolve(res.data)
       },
       fail(err) {
@@ -323,7 +305,7 @@ export const changeMemoPinned = (url, memoId, data) => {
 export const signIn = (url, data) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/v1/auth/signin`,
+      url: `${url}/api/auth/signin`,
       method: "POST",
       data: data,
       success(res) {
@@ -344,7 +326,7 @@ export const signIn = (url, data) => {
 export const getTags = (url) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/v1/tag?`,
+      url: `${url}/api/tag`,
       data: {
         openId: wx.getStorageSync('openId')
       },
@@ -366,7 +348,7 @@ export const getTags = (url) => {
 export const getTagsSuggestionList = (url) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/v1/tag/suggestion`,
+      url: `${url}/api/tag/suggestion`,
       data: {
         openId: wx.getStorageSync('openId')
       },
@@ -388,7 +370,7 @@ export const getTagsSuggestionList = (url) => {
 export const upsertTag = (url, TagName) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/v1/tag?openId=${wx.getStorageSync('openId')}`,
+      url: `${url}/api/tag?openId=${wx.getStorageSync('openId')}`,
       method: "POST",
       data: {
         name: TagName
@@ -411,7 +393,7 @@ export const upsertTag = (url, TagName) => {
 export const deleteTag = (url, TagName) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/v1/tag/delete?openId=${wx.getStorageSync('openId')}`,
+      url: `${url}/api/tag/delete?openId=${wx.getStorageSync('openId')}`,
       method: "POST",
       data: {
         name: TagName
@@ -434,7 +416,7 @@ export const deleteTag = (url, TagName) => {
 export const status = (url) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/v1/status`,
+      url: `${url}/api/status`,
       success(res) {
         resolve(res)
       },
@@ -453,25 +435,7 @@ export const status = (url) => {
 export const getExploreMemos = (url, offset, limit) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/v1/memo/all?offset=${offset}&limit=${limit}`,
-      success(res) {
-        resolve(res.data)
-      },
-      fail(err) {
-        wx.vibrateLong()
-        wx.showToast({
-          icon: 'none',
-          title: '获取失败',
-        })
-        reject(err)
-      }
-    })
-  })
-}
-export const getUserMemos = (url, offset, limit, creatorId) => {
-  return new Promise((resolve, reject) => {
-    wx.request({
-      url: `${url}/api/memo?creatorId=${creatorId}&offset=${offset}&limit=${limit}&rowStatus=NORMAL`,
+      url: `${url}/api/memo/all?offset=${offset}&limit=${limit}`,
       success(res) {
         resolve(res.data)
       },

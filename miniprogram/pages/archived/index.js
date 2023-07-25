@@ -70,7 +70,7 @@ Page({
     let offset = this.data.memos.length
     app.api.getMemos(wx.getStorageSync('url'), this.data.limit, offset, rowStatus)
       .then(result => {
-        if (!result) {
+        if (!result.data) {
           wx.vibrateLong()
           wx.showToast({
             icon: 'error',
@@ -78,7 +78,7 @@ Page({
             state: that.data.language.home.state.offline,
             onlineColor: '#eeeeee',
           })
-        } else if (result.length == 0) {
+        } else if (result.data.length == 0) {
           if (that.data.memos.length == 0) {
             that.setData({
               memos: []
@@ -89,7 +89,7 @@ Page({
             title: that.data.language.home.thatIsAll
           })
         } else {
-          var memos = result
+          var memos = result.data
           for (let i = 0; i < memos.length; i++) {
             const ts = memos[i].createdTs
             var time = app.calTime(ts)
@@ -202,7 +202,7 @@ Page({
     app.api.editMemo(url, id, data)
       .then(res => {
         // console.log(res)
-        if (res) {
+        if (res.data) {
           var memos = that.data.memos
           for (let i = 0; i < memos.length; i++) {
             if (memos[i].id == id) {

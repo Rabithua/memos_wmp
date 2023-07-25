@@ -59,7 +59,7 @@ const parseMarkedToHtml = (markedStr) => {
       for (let res of iterator) {
         // console.log(res);
         let num = res[0].length - res[1].length - res[2].length - 1;
-        return `<div style='font-size: ${30-num}px; font-weight: bold; padding-bottom: 5px; '>${res[2]}</div>`;
+        return `<span style='font-size: ${30-num}px; font-weight: bold; padding-bottom: 5px; '>${res[2]}</span>`;
       }
       return '';
     })

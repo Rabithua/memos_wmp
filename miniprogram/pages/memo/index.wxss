@@ -1,65 +1,4 @@
 /* pages/memo/index.wxss */
-page {
-  /* background-color: #ffffff; */
-}
-
-.configs {
-  display: flex;
-  width: 100%;
-  height: 160rpx;
-  position: fixed;
-  bottom: 0;
-}
-
-.config {
-  font-weight: 800;
-  background: #ffffff;
-  width: 33.33%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1rpx solid #00000020;
-  transition-duration: 300ms;
-}
-
-.config .name {
-  color: #000000;
-  font-size: 35rpx;
-  margin-bottom: 50rpx;
-}
-
-.config:active {
-  transform: scale(0.95);
-}
-
-
-.authorInfo {
-  display: flex;
-  align-items: center;
-  padding: 40rpx 20rpx;
-  gap: 20rpx;
-}
-.authorInfo .avatar {
-  width: 100rpx;
-  height: 100rpx;
-  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDMwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xMzkuNDk4IDcxLjY2YzcuMTAxLTEyLjI5OCAyMi44MjctMTYuNTEyIDM1LjEyNS05LjQxMWw0MS45NjYgMjQuMjI4YzEyLjI5OCA3LjEgMTYuNTEyIDIyLjgyNyA5LjQxMiAzNS4xMjVsLTI0LjIyOSA0MS45NjZjLS4xMzUuMjMzLS4yNzMuNDY0LS40MTQuNjkyLTMuNzIyIDYuMDEtNS40NDIgMjIuMDE4LjY4IDI1LjU1MyA0LjY3MSAyLjY5NyA0LjUxMiA5LjQ5My0uMjggMTEuOTY4bC05MC40MDcgNDYuNzAyYy0xMC4yMTEgNS4yNzUtMjIuNDU0LTEuNzkzLTIyLjk5Mi0xMy4yNzRsLTQuNzgyLTEwMi4xNjZjLS4yNDItNS4xNjMgNS4zMjItOC41NTEgOS43OTgtNS45NjcgNS44NjcgMy4zODggMTguMDQ5LTUuNjUgMjAuOTk1LTExLjc1MS4yNzctLjU3Mi41NzYtMS4xMzkuOS0xLjY5OWwyNC4yMjgtNDEuOTY2em0xNC42NDEgNTkuNzk1TDk3LjMzNCAyNDYuNTAxbDcxLjIzMS0xMDYuNzE3YzIuNjc4LTQuMDExIDEuNDA4LTkuNDUtMi43NjktMTEuODYyLTQuMTc3LTIuNDExLTkuNTIyLS43OTEtMTEuNjU3IDMuNTMzeiIgZmlsbD0iIzA3QzE2MCIvPjwvc3ZnPg==');
-  border-radius: 10rpx;
-  object-fit: cover;
-}
-
-.authorInfo .name {
-  font-size: 40rpx;
-  /* font-weight: bold; */
-}
-
-.authorInfo .role {
-  font-size: 100rpx;
-  position: absolute;
-  right: 10rpx;
-  color: #00000005;
-  font-family: 'Smiley Sans Oblique';
-}
 
 .aiTags {
   border-top: 1rpx solid #00000015;
@@ -92,9 +31,8 @@ page {
 }
 
 .tip {
-  padding: 20rpx 30rpx;
   margin: 0;
-  /* border-radius: 30rpx 30rpx 0 0; */
+  border-radius: 30rpx 30rpx 0 0;
   display: flex;
   align-items: center;
 }
@@ -118,7 +56,7 @@ page {
 
 .memoCard {
   border-bottom: none;
-  margin-bottom: 160rpx;
+  margin-bottom: 400rpx;
 }
 
 .nothing {
@@ -141,7 +79,7 @@ page {
 
 .shareBtn {
   position: fixed;
-  bottom: 200rpx;
+  bottom: 150rpx;
   right: 50rpx;
   background-color: #ffffff;
   border: 1rpx solid #00000015;

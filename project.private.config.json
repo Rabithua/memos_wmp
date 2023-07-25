@@ -8,8 +8,8 @@
       "list": [
         {
           "name": "",
-          "pathName": "pages/user/index",
-          "query": "id=101",
+          "pathName": "pages/home/index",
+          "query": "",
           "launchMode": "default",
           "scene": null
         },
@@ -65,7 +65,7 @@
         {
           "name": "",
           "pathName": "pages/memo/index",
-          "query": "id=2128",
+          "query": "id=2118",
           "launchMode": "default",
           "scene": null
         },
