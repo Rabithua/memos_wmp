@@ -1,9 +1,13 @@
 <!--pages/memo/index.wxml-->
-
+<view class="authorInfo">
+  <image bind:tap="goUser" class="avatar" src="{{author.avatarUrl ? author.avatarUrl : '../../images/icon.png'}}" mode="" />
+  <view class="name">{{author.nickname}}</view>
+  <view wx:if="{{author.role == 'HOST'}}" class="role">{{author.role}}</view>
+</view>
 <view class="tip" wx:if="{{me && me.id == memo.creatorId}}">
-  <view>
+  <!-- <view>
     {{language.memo.visibility_1 + memo.visibility}}
-  </view>
+  </view> -->
   <view wx:if="{{memo.visibility === 'PRIVATE'}}">
     {{language.memo.visibility_2}}
   </view>
@@ -11,7 +15,7 @@
     {{language.memo.visibility_3}}
   </view>
   <view class="tipBtn" catchtap="changeMemoVisibility">
-    切换
+    {{language.memo.switch}}
   </view>
 </view>
 <view wx:if="{{memo}}" class="memoCard" style="padding-bottom: 50rpx;">
@@ -43,13 +47,31 @@
   </view>
 </view>
 
-<button style="transform: translateY(-100rpx);" class="shareBtn" bind:tap="share">
+<button class="shareBtn" bind:tap="share">
   <view class="sIcon copyLinkIcon"></view>
-  复制链接
+  {{language.memo.copyLink}}
 </button>
 
-<button class="shareBtn" open-type="share">
+<!-- <button class="shareBtn" open-type="share">
   <view class="sIcon shareIcon">
   </view>
   {{language.memo.share}}
-</button>
+</button> -->
+
+<view class="configs" wx:if="{{me && me.id == memo.creatorId}}">
+  <view class="config"  data-memoId="{{memo.id}}" data-content="{{memo.content}}" catchtap="dialogEdit">
+    <view class="name">
+      {{language.memo.edit}}
+    </view>
+  </view>
+  <button open-type="share" style=" border-radius: 0;" class="config">
+    <view class="name">
+      {{language.memo.share}}
+    </view>
+  </button>
+  <view class="config"  data-memoId="{{memo.id}}" data-rowStatus="{{memo.rowStatus}}" catchtap="deleteMemoFaker" catch:longtap="deleteMemo">
+    <view class="name">
+      {{memo.rowStatus == 'ARCHIVED' ? language.memo.noArchive : language.memo.archive}}
+    </view>
+  </view>
+</view>

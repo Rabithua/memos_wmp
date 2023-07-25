@@ -5,8 +5,8 @@ App({
 
   globalData: {
     // 【一般需要修改为 false】是否开启微信自动登录，需要手动配置后端接口以及开启小程序认证权限才能生效，否则会报错。
-    ifWechatLogin: true,
-    url: 'https://memos.wowow.club',
+    ifWechatLogin: false,
+    url: 'https://demo.usememos.com',
     // 搭配ifWechatLogin使用
     backendUrl: 'https://maimoapi.wowow.club',
     top_btn: wx.getMenuButtonBoundingClientRect()
@@ -34,12 +34,12 @@ App({
     }
 
     //加载字体
-    wx.loadFontFace({
-      global: true,
-      family: 'Smiley Sans Oblique',
-      source: 'https://img.rabithua.club/%E9%BA%A6%E9%BB%98/SmileySans-Oblique.ttf',
-      scopes: ['webview', 'native'],
-    });
+    // wx.loadFontFace({
+    //   global: true,
+    //   family: 'Smiley Sans Oblique',
+    //   source: 'https://img.rabithua.club/%E9%BA%A6%E9%BB%98/SmileySans-Oblique.ttf',
+    //   scopes: ['webview', 'native'],
+    // });
   },
 
   getUnionId() {
@@ -207,7 +207,7 @@ App({
     for (let l = 0; l < memo.resourceList.length; l++) {
       const rescource = memo.resourceList[l];
       const rescource_id = rescource.publicId
-      let rescource_url = wx.getStorageSync('url') + '/o/r/' + rescource.id + '/' + rescource.publicId
+      let rescource_url = wx.getStorageSync('url') + '/o/r/' + rescource.id
       if (rescource.externalLink) {
         rescource_url = rescource.externalLink
       }

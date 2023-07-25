@@ -30,7 +30,9 @@ Page({
       wx.setStorageSync('url', app.globalData.url)
     }
     if (wx.getStorageSync('openId')) {
-      this.ifShowWeChatIcon()
+      if (app.globalData.ifWechatLogin) {
+        this.ifShowWeChatIcon()
+      }
       this.getAll()
     } else {
       if (app.globalData.ifWechatLogin) {
@@ -78,7 +80,7 @@ Page({
     app.api.getTags(wx.getStorageSync('url'))
       .then(res => {
         that.setData({
-          tags: res.data
+          tags: res
         })
         wx.setStorageSync('tags', res.data)
       })
@@ -334,8 +336,7 @@ Page({
     var that = this
     app.api.changeMemoPinned(this.data.url, memoid, data)
       .then(res => {
-        console.log(res)
-        if (res.data) {
+        if (res) {
           wx.vibrateShort({
             type: 'light'
           })
@@ -378,7 +379,7 @@ Page({
         visibility: (visibility == 'PRIVATE' ? 'PUBLIC' : 'PRIVATE')
       })
       .then(res => {
-        if (res.data) {
+        if (res) {
           var memos = that.data.memos
           for (let i = 0; i < memos.length; i++) {
             if (memos[i].id == id) {
@@ -468,7 +469,7 @@ Page({
     }
     app.api.getMemos(wx.getStorageSync('url'), this.data.limit, offset, rowStatus)
       .then(result => {
-        if (!result.data) {} else if (result.data.length == 0) {
+        if (!result) {} else if (result.length == 0) {
           if (that.data.memos.length == 0) {
             that.setData({
               memos: [],
@@ -487,7 +488,7 @@ Page({
             title: that.data.language.home.thatIsAll
           })
         } else {
-          var memos = result.data
+          var memos = result
           for (let i = 0; i < memos.length; i++) {
             const ts = memos[i].displayTs
             var time = app.calTime(ts)
@@ -574,8 +575,8 @@ Page({
     }
     app.api.changeUserSetting(this.data.url, item)
       .then(res => {
-        console.log(res.data)
-        if (res.data) {
+        console.log(res)
+        if (res.userId) {
           this.setData({
             me: me
           })
@@ -607,7 +608,8 @@ Page({
     var that = this
     app.api.getMe(wx.getStorageSync('url'))
       .then(result => {
-        let me = result.data
+        // console.log(result)
+        let me = result
         wx.setStorageSync('me', me)
         that.getStats(me.id)
         let defaultUserSettingList = [{
@@ -652,7 +654,7 @@ Page({
     app.api.getStats(wx.getStorageSync('url'), id)
       .then(result => {
         this.setData({
-          stats: result.data
+          stats: result
         })
         that.setHeatMap()
       })
@@ -662,7 +664,7 @@ Page({
     var that = this
     app.api.editMemo(url, id, data)
       .then(res => {
-        if (res.data) {
+        if (res) {
           var memos = that.data.memos
           for (let i = 0; i < memos.length; i++) {
             if (memos[i].id == id) {

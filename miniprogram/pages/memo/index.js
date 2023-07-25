@@ -8,7 +8,7 @@ Page({
   data: {
     memo: null,
     id: null,
-    url: wx.getStorageSync('url'),
+    url: wx.getStorageSync('url') ? wx.getStorageSync('url') : app.globalData.url,
     me: wx.getStorageSync('me')
   },
 
@@ -35,6 +35,91 @@ Page({
     }
   },
 
+  deleteMemoFaker(e) {
+    let rowstatus = e.currentTarget.dataset.rowstatus
+    var data = {
+      rowStatus: rowstatus == "NORMAL" ? 'ARCHIVED' : "NORMAL"
+    }
+    var url = this.data.url
+    var id = e.currentTarget.dataset.memoid
+    this.editMemoRowStatus(url, id, data)
+  },
+
+  editMemoRowStatus(url, id, data) {
+    var that = this
+    app.api.editMemo(url, id, data)
+      .then(res => {
+        if (res.data) {
+          console.log(res.data)
+          that.setData({
+            ['memo.rowStatus']: res.data.rowStatus
+          })
+          wx.vibrateShort({
+            type: 'light'
+          })
+        }
+      })
+      .catch((err) => console.log(err))
+  },
+
+  deleteMemo(e) {
+    var that = this
+    var id = e.currentTarget.dataset.memoid
+    wx.showModal({
+      confirmText: that.data.language.home.DeleteMemoModal.confirmText,
+      cancelText: that.data.language.home.DeleteMemoModal.cancelText,
+      confirmColor: '#B85156',
+      title: that.data.language.home.DeleteMemoModal.title,
+      content: that.data.language.home.DeleteMemoModal.content,
+      success(res) {
+        if (res.confirm) {
+          wx.vibrateShort({
+            type: 'light',
+          })
+          app.api.deleteMemo(that.data.url, id)
+            .then(res => {
+              if (res) {
+                wx.showToast({
+                  icon: 'none',
+                  title: that.data.language.home.deleted,
+                })
+                wx.navigateBack()
+              } else {
+                wx.showToast({
+                  icon: 'error',
+                  title: that.data.language.common.wrong,
+                })
+              }
+            })
+            .catch((err) => console.log(err))
+        }
+      }
+    })
+  },
+
+  dialogEdit(e) {
+    let memoid = e.currentTarget.dataset.memoid
+    let content = e.currentTarget.dataset.content
+    let resourceIdList = this.data.memo.resourceList.map(item => item.id)
+    wx.vibrateShort({
+      type: 'light'
+    })
+    wx.navigateTo({
+      url: '../edit/index?edit=true',
+      events: {
+        // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+      },
+      success: function (res) {
+        // 通过 eventChannel 向被打开页面传送数据
+        res.eventChannel.emit('acceptDataFromOpenerPage', {
+          editMemoId: memoid,
+          memo: content,
+          resourceIdList
+        })
+      }
+    })
+  },
+
   tagTap(e){
     console.log(e.target.dataset.tag)
     wx.vibrateShort({
@@ -49,8 +134,8 @@ Page({
     app.api.getMemo(url, id)
       .then(res => {
         console.log(res)
-        if (res.data) {
-          let memo = res.data
+        if (res) {
+          let memo = res
           memo.formatContent = formatMemoContent(memo.content)
           memo.time = app.calTime(memo.createdTs)
           memo = app.memosRescourse(memo)
@@ -59,9 +144,9 @@ Page({
           } catch (error) {
             memo.aiTags = []
           }
-          wx.setNavigationBarTitle({
-            title: memo.creatorName,
-          })
+          // wx.setNavigationBarTitle({
+          //   title: memo.creatorName,
+          // })
           wx.hideLoading()
           wx.vibrateShort({
             type: 'light'
@@ -69,6 +154,7 @@ Page({
           this.setData({
             memo
           })
+          this.getUserInfo()
         } else {
           wx.hideLoading()
         }
@@ -113,7 +199,7 @@ Page({
         visibility: (visibility == 'PRIVATE' ? 'PUBLIC' : 'PRIVATE')
       })
       .then(res => {
-        if (res.data) {
+        if (res) {
           that.setData({
             ['memo.visibility']: visibility == 'PRIVATE' ? 'PUBLIC' : 'PRIVATE'
           })
@@ -128,6 +214,28 @@ Page({
     })
   },
 
+  goUser(){
+    wx.vibrateShort({
+      type: 'light',
+    })
+    wx.navigateTo({
+      url: `../user/index?id=${this.data.author.id}`,
+    })
+  },
+
+  getUserInfo(){
+    app.api.getUserInfo(this.data.url, this.data.memo.creatorId)
+    .then(res => {
+      if (res.data) {
+        console.log(res.data)
+        this.setData({
+          author: res.data
+        })
+      }
+    })
+    .catch((err) => console.log(err))
+  },
+
   onReady() {
 
   },
@@ -136,6 +244,10 @@ Page({
     this.setData({
       language: app.language[wx.getStorageSync('language') ? wx.getStorageSync('language') : 'chinese']
     })
+    let id = this.data.id
+    if (id) {
+      this.getMemo(this.data.url, id)
+    }
   },
 
   onShareAppMessage() {

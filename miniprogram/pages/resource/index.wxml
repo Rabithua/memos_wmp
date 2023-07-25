@@ -11,11 +11,11 @@
 
 
 <view class="resource" wx:key="resources" wx:for="{{resources}}" wx:for-item="resource" bindtap="selectFile" bindtouchstart="setTouchStart" bindlongtap="changeMethodD" bindtouchmove="showMethod" data-index="{{index}}" style=" border-width: {{resource.select ? '10rpx' : '0rpx'}};">
-  <image wx:if="{{resource.type[0] + resource.type[1] == 'im'}}" mode="aspectFill" class="imgPreview" src="{{resource.externalLink ? resource.externalLink : url + '/o/r/' + resource.id + '/' + resource.publicId}}"></image>
+  <image wx:if="{{resource.type[0] + resource.type[1] == 'im'}}" mode="aspectFill" class="imgPreview" src="{{resource.externalLink ? resource.externalLink : url + '/o/r/' + resource.id + '?openId=' + me.openId}}"></image>
   <view wx:else class="icon fileIcon"></view>
   <view class="info">
     <view class="fileName" style="text-transform: uppercase;">
-      ID: {{resource.publicId}}
+      ID: {{resource.id}}
     </view>
     <view class="other">
       <view>
