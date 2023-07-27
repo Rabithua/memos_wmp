@@ -30,7 +30,7 @@ Page({
       })
       that.getMemos('ARCHIVED')
     } else {
-      wx.redirectTo({
+      wx.reLaunch({
         url: '../welcom/index',
       })
     }

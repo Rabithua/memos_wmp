@@ -67,7 +67,7 @@
           "pathName": "pages/memo/index",
           "query": "id=2128",
           "launchMode": "default",
-          "scene": null
+          "scene": 1000
         },
         {
           "name": "",

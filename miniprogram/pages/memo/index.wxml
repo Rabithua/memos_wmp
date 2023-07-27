@@ -1,10 +1,10 @@
 <!--pages/memo/index.wxml-->
 <view class="authorInfo">
   <image bind:tap="goUser" class="avatar" src="{{author.avatarUrl ? author.avatarUrl : '../../images/icon.png'}}" mode="" />
-  <view class="name">{{author.nickname}}</view>
+  <view class="name">{{author.nickname ?author.nickname :'MEMOS'}}</view>
   <view wx:if="{{author.role == 'HOST'}}" class="role">{{author.role}}</view>
 </view>
-<view class="tip" wx:if="{{me && me.id == memo.creatorId}}">
+<view class="tip" wx:if="{{me && me.id == memo.creatorId && !mpCodeMode}}">
   <!-- <view>
     {{language.memo.visibility_1 + memo.visibility}}
   </view> -->
@@ -47,11 +47,6 @@
   </view>
 </view>
 
-<button class="shareBtn" bind:tap="share">
-  <view class="sIcon copyLinkIcon"></view>
-  {{language.memo.copyLink}}
-</button>
-
 <!-- <button class="shareBtn" open-type="share">
   <view class="sIcon shareIcon">
   </view>
@@ -59,19 +54,32 @@
 </button> -->
 
 <view class="configs" wx:if="{{me && me.id == memo.creatorId}}">
-  <view class="config"  data-memoId="{{memo.id}}" data-content="{{memo.content}}" catchtap="dialogEdit">
+  <view class="config" data-memoId="{{memo.id}}" data-content="{{memo.content}}" catchtap="dialogEdit">
     <view class="name">
       {{language.memo.edit}}
     </view>
   </view>
-  <button open-type="share" style=" border-radius: 0;" class="config">
-    <view class="name">
+  <view class="config">
+    <view wx:if="{{ifShowShareMenu}}" class="sharer">
+      <view class="sharerBtn" bind:tap="share">{{language.memo.copyLink}}</view>
+      <view class="sharerBtn" bind:tap="changeMpcodeMode">小程序码</view>
+      <button open-type="share" class="sharerBtn">分享聊天</button>
+    </view>
+    <view class="name" bind:tap="showShareMenu">
       {{language.memo.share}}
     </view>
-  </button>
-  <view class="config"  data-memoId="{{memo.id}}" data-rowStatus="{{memo.rowStatus}}" catchtap="deleteMemoFaker" catch:longtap="deleteMemo">
+  </view>
+  <view class="config" data-memoId="{{memo.id}}" data-rowStatus="{{memo.rowStatus}}" catchtap="deleteMemoFaker" catch:longtap="deleteMemo">
     <view class="name">
       {{memo.rowStatus == 'ARCHIVED' ? language.memo.noArchive : language.memo.archive}}
     </view>
   </view>
+</view>
+<view wx:if="{{mpCodeMode}}" class="mpCode">
+  <view class="closeBtn" bind:tap="changeMpcodeMode"></view>
+  <view class="info">
+    <view class="itm_1">扫码查看笔记</view>
+    <view class="itm_2">麦默小程序✨</view>
+  </view>
+  <image src="{{mpCodeUrl}}" mode=""/>
 </view>

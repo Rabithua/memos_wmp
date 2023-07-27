@@ -23,7 +23,7 @@ Page({
       // 获取用户信息
       this.getMe()
     } else {
-      wx.redirectTo({
+      wx.reLaunch({
         url: '../welcom/index',
       })
     }

@@ -25,7 +25,7 @@ Page({
     if (wx.getStorageSync('openId')) {
       this.getResource()
     } else {
-      wx.redirectTo({
+      wx.reLaunch({
         url: '../welcom/index',
       })
     }

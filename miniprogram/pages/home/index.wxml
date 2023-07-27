@@ -1,4 +1,5 @@
 <!--pages/home/index.wxml-->
+<!-- <view bind:tap="test" style="position: fixed; width: 100rpx; z-index: 10; height: 100rpx; bottom: 100rpx;right: 100rpx; background: #000000;"></view> -->
 <view class="spacer" style="height: {{top_btn.top + top_btn.height + 10}}px;">
 </view>
 <view class="colorDot colorDot1">

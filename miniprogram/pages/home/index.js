@@ -4,6 +4,19 @@ import {
 var app = getApp()
 
 Page({
+
+  test(){
+    wx.scanCode({
+      success (res) {
+        console.log(res)
+        wx.showModal({
+          title: '扫码结果',
+          content: res.result
+        })
+      }
+    })
+  },
+  
   data: {
     halfDialog: 'closeHalfDialog',
     showSidebar: false,
@@ -43,12 +56,12 @@ Page({
           that.getAll()
         })
         // #elif NATIVE
-        wx.redirectTo({
+        wx.reLaunch({
           url: '../welcom/index',
         })
         // #endif
       } else {
-        wx.redirectTo({
+        wx.reLaunch({
           url: '../welcom/index',
         })
       }
@@ -796,7 +809,7 @@ Page({
         cancelText: this.data.language.home.goWelcomModal.cancelText,
         success(res) {
           if (res.confirm) {
-            wx.redirectTo({
+            wx.reLaunch({
               url: '../welcom/index',
             })
           } else if (res.cancel) {
@@ -805,7 +818,7 @@ Page({
         }
       })
     } else {
-      wx.redirectTo({
+      wx.reLaunch({
         url: '../welcom/index',
       })
     }

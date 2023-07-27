@@ -254,7 +254,7 @@ Page({
                   key: "url",
                   data: that.data.url,
                   success(res) {
-                    wx.redirectTo({
+                    wx.reLaunch({
                       url: '../home/index',
                     })
                   }
@@ -311,7 +311,7 @@ Page({
         console.log(res.data)
         if (res.data) {
           wx.setStorageSync('language', 'english')
-          wx.redirectTo({
+          wx.reLaunch({
             url: '../home/index',
           })
         } else {
@@ -321,7 +321,7 @@ Page({
             icon: 'none',
             title: 'something wrong',
           })
-          wx.redirectTo({
+          wx.reLaunch({
             url: '../home/index',
           })
         }
@@ -338,7 +338,7 @@ Page({
         type: 'light'
       })
       wx.hideLoading()
-      wx.redirectTo({
+      wx.reLaunch({
         url: '../home/index',
       })
     }).catch((err) => {
@@ -395,12 +395,12 @@ Page({
    * 退出页面时触发基础库回调，由基础库内部处理系统登录态。
    */
   onUnload() {
-    const eventChannel = this.getOpenerEventChannel();
-    if (eventChannel) {
-      eventChannel.emit('__donutLogin__', {
-        success: this.data.loginSuccess
-      });
-    }
+    // const eventChannel = this.getOpenerEventChannel();
+    // if (eventChannel) {
+    //   eventChannel.emit('__donutLogin__', {
+    //     success: this.data.loginSuccess
+    //   });
+    // }
   },
 
   onShareAppMessage() {

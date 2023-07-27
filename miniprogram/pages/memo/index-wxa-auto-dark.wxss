@@ -13,6 +13,32 @@
     border: none;
   }
 
+  .mpCode {
+    background: rgb(41, 41, 41);
+    box-shadow: 0 -50rpx 50rpx rgb(41, 41, 41);
+  }
+
+  .mpCode .info{
+    color: #ffffff;
+  }
+
+  .mpCode .info .itm_2 {
+    color: #ffffff20;
+  }
+
+  .mpCode image {
+    filter: invert(1);
+  }
+
+  .closeBtn {
+    filter: invert(1);
+  }
+
+  .config .sharer .sharerBtn {
+    background: rgb(41, 41, 41);
+    color: #ffffff;
+  }
+
   .config {
     background: rgb(41, 41, 41);
 

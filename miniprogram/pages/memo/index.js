@@ -8,6 +8,9 @@ Page({
   data: {
     memo: null,
     id: null,
+    mpCodeMode: false,
+    mpCodeUrl: '',
+    ifShowShareMenu: false,
     url: wx.getStorageSync('url') ? wx.getStorageSync('url') : app.globalData.url,
     me: wx.getStorageSync('me')
   },
@@ -18,6 +21,7 @@ Page({
     if (id) {
       this.setData({
         id,
+        mpCodeUrl: app.globalData.backendUrl + '/getmpcode?path=' + encodeURIComponent(`pages/memo/index?id=${id}`),
         language: app.language[wx.getStorageSync('language') ? wx.getStorageSync('language') : 'chinese']
       })
       if (wx.getStorageSync('openId')) {
@@ -31,8 +35,26 @@ Page({
           this.getMemo(this.data.url, id)
         })
       }
-
     }
+  },
+
+  showShareMenu(e){
+    wx.vibrateShort({
+      type: 'light',
+    })
+    this.setData({
+      ifShowShareMenu: !this.data.ifShowShareMenu
+    })
+  },
+
+  changeMpcodeMode(){
+    wx.vibrateShort({
+      type: 'light',
+    })
+    this.setData({
+      mpCodeMode: !this.data.mpCodeMode,
+      ifShowShareMenu: false
+    })
   },
 
   deleteMemoFaker(e) {
@@ -128,9 +150,9 @@ Page({
   },
 
   getMemo(url, id) {
-    wx.showLoading({
-      title: this.data.language.memo.getting,
-    })
+    // wx.showLoading({
+    //   title: this.data.language.memo.getting,
+    // })
     app.api.getMemo(url, id)
       .then(res => {
         console.log(res)
@@ -170,9 +192,11 @@ Page({
       type: 'light',
     })
     wx.setClipboardData({
-      data: `${this.data.url}/m/${this.data.id}`,
+      data: `${this.data.url}/m/${this.data.id}`
     })
-
+this.setData({
+  ifShowShareMenu: false
+})
   },
 
   preview(e) {
@@ -237,8 +261,13 @@ Page({
   },
 
   onReady() {
-
+    wx.showShareMenu({
+      withShareTicket: true,
+      menus: ['shareAppMessage', 'shareTimeline']
+    })
   },
+
+  
 
   onShow() {
     this.setData({
