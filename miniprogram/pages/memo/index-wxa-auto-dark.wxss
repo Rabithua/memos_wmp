@@ -14,8 +14,8 @@
   }
 
   .mpCode {
-    background: rgb(41, 41, 41);
-    box-shadow: 0 -50rpx 50rpx rgb(41, 41, 41);
+    background: rgb(31, 31, 31);
+    box-shadow: 0 -50rpx 50rpx rgb(31, 31, 31);
   }
 
   .mpCode .info{
@@ -26,22 +26,17 @@
     color: #ffffff20;
   }
 
-  .mpCode image {
-    filter: invert(1);
-  }
-
   .closeBtn {
     filter: invert(1);
   }
 
   .config .sharer .sharerBtn {
-    background: rgb(41, 41, 41);
+    background: rgb(31, 31, 31);
     color: #ffffff;
   }
 
   .config {
-    background: rgb(41, 41, 41);
-
+    background: rgb(31, 31, 31);
   }
 
   .config .name {

@@ -52,8 +52,7 @@ Page({
       type: 'light',
     })
     this.setData({
-      mpCodeMode: !this.data.mpCodeMode,
-      ifShowShareMenu: false
+      mpCodeMode: !this.data.mpCodeMode
     })
   },
 
@@ -194,9 +193,6 @@ Page({
     wx.setClipboardData({
       data: `${this.data.url}/m/${this.data.id}`
     })
-this.setData({
-  ifShowShareMenu: false
-})
   },
 
   preview(e) {
@@ -261,10 +257,12 @@ this.setData({
   },
 
   onReady() {
+    // #if MP
     wx.showShareMenu({
       withShareTicket: true,
       menus: ['shareAppMessage', 'shareTimeline']
     })
+    // #endif
   },
 
   

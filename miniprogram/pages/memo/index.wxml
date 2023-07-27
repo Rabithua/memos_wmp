@@ -59,13 +59,15 @@
       {{language.memo.edit}}
     </view>
   </view>
-  <view class="config">
+  <view class="config" bind:tap="showShareMenu">
     <view wx:if="{{ifShowShareMenu}}" class="sharer">
       <view class="sharerBtn" bind:tap="share">{{language.memo.copyLink}}</view>
       <view class="sharerBtn" bind:tap="changeMpcodeMode">小程序码</view>
+      <!-- #if MP -->
       <button open-type="share" class="sharerBtn">分享聊天</button>
+      <!-- #endif -->
     </view>
-    <view class="name" bind:tap="showShareMenu">
+    <view class="name">
       {{language.memo.share}}
     </view>
   </view>
