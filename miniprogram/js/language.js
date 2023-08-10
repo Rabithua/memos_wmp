@@ -71,11 +71,31 @@ export const chinese = {
   memo: {
     aiTags: '相关标签:',
     share: "分享",
+    copyLink: '复制链接',
+    edit: '编辑',
+    archive: '归档',
+    noArchive: '取消归档',
+    switch: '切换',
     unSee: "Memo不可见",
-    visibility_1: '可见性为：',
-    visibility_2: '（仅自己可见）',
-    visibility_3: '（任何人可见）',
-    getting: '拉取数据'
+    private: '私密',
+    public: '公开',
+    notice: '提醒',
+    getting: '拉取数据',
+    hf_notice: {
+      title: '设置定时提醒',
+      subTitle: '提醒通过麦默笔记公众号发送',
+      noticeType: '提醒类型',
+      onceNotice: '单次提醒',
+      isbh: '艾宾浩斯',
+      noticeTime: '提醒时间（只支持整点提醒）',
+      noticeDay: '提醒日期（几天后）',
+      noticeZy_1: '提醒摘要（共',
+      noticeZy_2: '条）',
+      unNotice: '（待提醒）',
+      noticed: '（已提醒）',
+      noticeHistory: '历史提醒',
+      noticeHistoryEmpty: '暂无历史提醒～'
+    }
   },
   welcom: {
     webVersion: '线上版本：',
@@ -113,6 +133,7 @@ export const chinese = {
       online: '在线',
       offline: '离线'
     },
+    pinFolder: '折叠置顶笔记',
     thatIsAll: '已全部加载~',
     edit: '编辑中…',
     newMemoPlaceholder: '记录有趣的想法~',
@@ -274,11 +295,31 @@ export const english = {
   memo: {
     aiTags: 'AiTags:',
     share: "Share",
+    copyLink: 'CopyLink',
+    edit: 'Edit',
+    archive: 'Archive',
+    noArchive: 'NoArchive',
+    switch: 'Switch',
     unSee: "Memo is hidden",
-    visibility_1: 'Visibility: ',
-    visibility_2: '(Only visible to yourself)',
-    visibility_3: '(visible to everyone)',
-    getting: 'Getting'
+    private: 'private',
+    public: 'public',
+    notice: 'notice',
+    getting: 'Getting',
+    hf_notice: {
+      title: 'Set Timed Reminder',
+      subTitle: 'Reminder sent via Maimo Note Official Account',
+      noticeType: 'Reminder Type',
+      onceNotice: 'One-time Reminder',
+      isbh: 'Ebbinghaus',
+      noticeTime: 'Reminder Time',
+      noticeDay: 'Reminder Date (in days)',
+      noticeZy_1: 'Reminder Summary (',
+      noticeZy_2: 'items in total)',
+      unNotice: '(Pending Reminder)',
+      noticed: '(Reminder Sent)',
+      noticeHistory: 'Notice History',
+      noticeHistoryEmpty: 'Notice History Empty!'
+    }
   },
   welcom: {
     webVersion: 'WebVersion:',
@@ -316,6 +357,7 @@ export const english = {
       online: 'Online',
       offline: 'Offline'
     },
+    pinFolder: 'PinFolder',
     thatIsAll: "That's all",
     edit: 'Editing...',
     newMemoPlaceholder: 'Record something interesting~',

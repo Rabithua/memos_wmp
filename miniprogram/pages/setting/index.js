@@ -26,7 +26,7 @@ Page({
 
   clearStorage(){
     wx.clearStorageSync()
-    wx.redirectTo({
+    wx.reLaunch({
       url: '../welcom/index',
     })
   },

@@ -51,7 +51,7 @@ Page({
       console.log(res)
       // wx.setStorageSync('cookie', res.cookies)
       this.setData({
-        webInfo: res.data
+        webInfo: res.data.data
       })
     }).catch((err) => {
       this.setData({
@@ -134,7 +134,7 @@ Page({
       app.api.signUp(this.data.url, data)
         .then(res => {
           console.log(res)
-          if (res.openId) {
+          if (res.data) {
             //创建成功
             wx.vibrateShort({
               type: 'light'
@@ -142,7 +142,7 @@ Page({
             wx.showLoading({
               title: that.data.language.welcom.signUpSuc,
             })
-            var openId = res.openId
+            var openId = res.data.openId
             wx.setStorage({
               key: "openId",
               data: openId,
@@ -237,8 +237,8 @@ Page({
           "password": that.data.password,
         })
         .then(res => {
-          if (res.ID) {
-            console.log(res)
+          if (res.data) {
+            console.log(res.data.openId)
             wx.vibrateShort({
               type: 'light'
             })
@@ -247,14 +247,14 @@ Page({
             })
             wx.setStorage({
               key: "openId",
-              data: res.OpenID,
+              data: res.data.openId,
               // encrypt: true,
               success(res) {
                 wx.setStorage({
                   key: "url",
                   data: that.data.url,
                   success(res) {
-                    wx.redirectTo({
+                    wx.reLaunch({
                       url: '../home/index',
                     })
                   }
@@ -311,7 +311,7 @@ Page({
         console.log(res.data)
         if (res.data) {
           wx.setStorageSync('language', 'english')
-          wx.redirectTo({
+          wx.reLaunch({
             url: '../home/index',
           })
         } else {
@@ -321,7 +321,7 @@ Page({
             icon: 'none',
             title: 'something wrong',
           })
-          wx.redirectTo({
+          wx.reLaunch({
             url: '../home/index',
           })
         }
@@ -338,7 +338,7 @@ Page({
         type: 'light'
       })
       wx.hideLoading()
-      wx.redirectTo({
+      wx.reLaunch({
         url: '../home/index',
       })
     }).catch((err) => {

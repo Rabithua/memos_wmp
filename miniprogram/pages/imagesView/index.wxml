@@ -1,0 +1,4 @@
+<!--pages/imagesView/index.wxml-->
+<image mode="widthFix" show-menu-by-longpress class="images" wx:for="{{imagesUrl}}" src="{{item}}" wx:key="index" />
+<view class="spacer300"></view>
+<view class="num">{{imagesUrl.length}}.<text style="font-size: large;">PIC</text></view>

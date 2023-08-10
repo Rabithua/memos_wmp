@@ -2,7 +2,6 @@ var app = getApp();
 
 Page({
   data: {
-    me: wx.getStorageSync('me'),
     url: wx.getStorageSync('url'),
     limit: 20,
     resources: [],
@@ -26,7 +25,7 @@ Page({
     if (wx.getStorageSync('openId')) {
       this.getResource()
     } else {
-      wx.redirectTo({
+      wx.reLaunch({
         url: '../welcom/index',
       })
     }
@@ -105,7 +104,7 @@ Page({
       })
     } else {
       wx.uploadFile({
-        url: `${that.data.url}/api/v1/resource/blob?openId=${wx.getStorageSync('openId')}`,
+        url: `${that.data.url}/api/resource/blob?openId=${wx.getStorageSync('openId')}`,
         filePath: file.path,
         name: 'file',
         timeout: 180 * 1000,
@@ -116,7 +115,7 @@ Page({
             type: 'light',
           })
           if (res.statusCode == 200) {
-            let newFile = JSON.parse(res.data)
+            let newFile = JSON.parse(res.data).data
             newFile.time = app.fomaDay(newFile.createdTs * 1000)
             newFile.sizeFomate = app.formatFileSize(newFile.size)
             resources.unshift(newFile)
@@ -157,7 +156,7 @@ Page({
       title: this.data.language.common.loading,
     })
     app.api.getResource(this.data.url, this.data.limit, this.data.resources.length).then(res => {
-      let newResources = res
+      let newResources = res.data
       newResources.forEach(function (item) {
         item.time = app.fomaDay(item.createdTs * 1000);
         item.sizeFomate = app.formatFileSize(item.size)
@@ -289,7 +288,7 @@ Page({
     if (res[idx].externalLink) {
       url = res[idx].externalLink
     } else {
-      url = `${this.data.url}/o/r/${res[idx].id}`
+      url = `${this.data.url}/o/r/${res[idx].id}/${res[idx].publicId}`
     }
     wx.vibrateShort({
       type: 'light'
@@ -369,7 +368,7 @@ Page({
     if (res[idx].externalLink) {
       url = res[idx].externalLink
     } else {
-      url = `${this.data.url}/o/r/${res[idx].id}`
+      url = `${this.data.url}/o/r/${res[idx].id}/${res[idx].publicId}`
     }
     wx.vibrateShort({
       type: 'light'

@@ -4,7 +4,22 @@ import {
 var app = getApp()
 
 Page({
+  changePinFolder() {
+    wx.vibrateShort({
+      type: 'light',
+    })
+    this.setData({
+      pinFolder: !this.data.pinFolder
+    })
+  },
+
+  test() {
+    
+  },
+
   data: {
+    pinFolder: false,
+    previewImage: false,
     halfDialog: 'closeHalfDialog',
     showSidebar: false,
     state: app.language.english.common.loading,
@@ -17,7 +32,8 @@ Page({
     showTips: false,
     limit: 20,
     showExplore: false,
-    x: 0
+    // x: 0,
+    language: {}
   },
 
   onLoad() {
@@ -30,9 +46,7 @@ Page({
       wx.setStorageSync('url', app.globalData.url)
     }
     if (wx.getStorageSync('openId')) {
-      if (app.globalData.ifWechatLogin) {
-        this.ifShowWeChatIcon()
-      }
+      this.ifShowWeChatIcon()
       this.getAll()
     } else {
       if (app.globalData.ifWechatLogin) {
@@ -45,17 +59,25 @@ Page({
           that.getAll()
         })
         // #elif NATIVE
-        wx.redirectTo({
+        wx.reLaunch({
           url: '../welcom/index',
         })
         // #endif
       } else {
-        wx.redirectTo({
+        wx.reLaunch({
           url: '../welcom/index',
         })
       }
     }
+  },
 
+  goUser() {
+    wx.vibrateShort({
+      type: 'light',
+    })
+    wx.navigateTo({
+      url: `../user/index?id=${this.data.me.id}`,
+    })
   },
 
   ifShowWeChatIcon() {
@@ -80,7 +102,7 @@ Page({
     app.api.getTags(wx.getStorageSync('url'))
       .then(res => {
         that.setData({
-          tags: res
+          tags: res.data
         })
         wx.setStorageSync('tags', res.data)
       })
@@ -96,26 +118,26 @@ Page({
     that.checkTips()
   },
 
-  scorllRef(id) {
-    clearTimeout(this.data.scorllTimer)
-    let scorllTimer = setTimeout(() => {
-      let that = this
-      wx.createSelectorQuery().select(id).boundingClientRect(function (res) {
-        let x = res.top + that.data.x - that.data.top_btn.top - that.data.top_btn.height - 20
-        console.log(res, x)
-        wx.pageScrollTo({
-          scrollTop: x,
-          duration: 300
-        })
-        that.setData({
-          x
-        })
-      }).exec()
-    }, 500);
-    this.setData({
-      scorllTimer
-    })
-  },
+  // scorllRef(id) {
+  //   clearTimeout(this.data.scorllTimer)
+  //   let scorllTimer = setTimeout(() => {
+  //     let that = this
+  //     wx.createSelectorQuery().select(id).boundingClientRect(function (res) {
+  //       let x = res.top + that.data.x - that.data.top_btn.top - that.data.top_btn.height - 20
+  //       console.log(res, x)
+  //       wx.pageScrollTo({
+  //         scrollTop: x,
+  //         duration: 300
+  //       })
+  //       that.setData({
+  //         x
+  //       })
+  //     }).exec()
+  //   }, 500);
+  //   this.setData({
+  //     scorllTimer
+  //   })
+  // },
 
   ifHideExplore() {
     const env = __wxConfig.envVersion;
@@ -130,11 +152,11 @@ Page({
     this.hideSidebar()
   },
 
-  onPageScroll(e) {
-    this.setData({
-      x: e.scrollTop
-    })
-  },
+  // onPageScroll(e) {
+  //   this.setData({
+  //     x: e.scrollTop
+  //   })
+  // },
 
   onShow() {
     let language = app.language[wx.getStorageSync('language') ? wx.getStorageSync('language') : 'chinese']
@@ -142,6 +164,11 @@ Page({
       language,
       settings: wx.getStorageSync('settings') ? wx.getStorageSync('settings') : language.setting.settings,
     })
+    if (this.data.previewImage) {
+      this.data.previewImage = false
+    }else {
+    wx.startPullDownRefresh()
+    }
   },
 
   onReachBottom() {
@@ -158,27 +185,29 @@ Page({
     this.getMemos('NORMAL')
   },
 
-  copy(e) {
-    console.log(e)
-    wx.vibrateShort({
-      type: 'light'
-    })
-    wx.setClipboardData({
-      data: e.target.dataset.url
-    })
-  },
   preview(e) {
-    console.log(e)
     const url = []
     for (let i = 0; i < e.target.dataset.url.length; i++) {
       const src = e.target.dataset.url[i].url;
       url.push(src)
     }
+    this.setData({
+      previewImage: true
+    })
     wx.previewImage({
       current: e.target.dataset.src, // 当前显示图片的 http 链接
       urls: url // 需要预览的图片 http 链接列表
     })
+    // wx.navigateTo({
+    //   url: '/pages/imagesView/index',
+    //   success(res) {
+    //     res.eventChannel.emit('acceptImagesUrlFromOpenerPage', {
+    //       imagesUrl: url
+    //     })
+    //   }
+    // })
   },
+
   goMemo(e) {
     // console.log(e.currentTarget.dataset.memoid)
     wx.navigateTo({
@@ -238,31 +267,7 @@ Page({
             sidebarStart: {}
           })
           wx.navigateTo({
-            url: '../edit/index',
-            events: {
-              // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
-              acceptDataFromOpenedPage: function (type, newMemo) {
-                newMemo = app.memosRescourse(newMemo)
-                let memos = that.data.memos
-                switch (type) {
-                  case 'add':
-                    memos.unshift({
-                      ...newMemo,
-                      formatContent: formatMemoContent(newMemo.content),
-                      time: app.calTime(newMemo.displayTs),
-                    })
-                    that.setData({
-                      memos: memos
-                    })
-                    that.scorllRef(`#memo${newMemo.id}`)
-                    app.globalData.memos = memos
-                    wx.setStorageSync('memos', memos)
-                    break;
-                  default:
-                    break;
-                }
-              }
-            }
+            url: '../edit/index'
           })
         }
       }
@@ -336,7 +341,8 @@ Page({
     var that = this
     app.api.changeMemoPinned(this.data.url, memoid, data)
       .then(res => {
-        if (res) {
+        console.log(res)
+        if (res.data) {
           wx.vibrateShort({
             type: 'light'
           })
@@ -379,7 +385,7 @@ Page({
         visibility: (visibility == 'PRIVATE' ? 'PUBLIC' : 'PRIVATE')
       })
       .then(res => {
-        if (res) {
+        if (res.data) {
           var memos = that.data.memos
           for (let i = 0; i < memos.length; i++) {
             if (memos[i].id == id) {
@@ -406,61 +412,6 @@ Page({
       .catch((err) => console.log(err))
   },
 
-  dialogEdit(e) {
-    let memoid = e.currentTarget.dataset.memoid
-    let content = e.currentTarget.dataset.content
-    let that = this
-    let memos = this.data.memos
-    let resourceIdList = memos.filter(item => item.id == memoid)[0].resourceList.map(item => item.id)
-    wx.vibrateShort({
-      type: 'light'
-    })
-    wx.navigateTo({
-      url: '../edit/index?edit=true',
-      events: {
-        // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
-        acceptDataFromOpenedPage: function (msg, newMemo) {
-          wx.vibrateShort({
-            type: 'light'
-          })
-          console.log(msg, newMemo)
-          let memos = that.data.memos
-          newMemo = app.memosRescourse(newMemo)
-          switch (msg) {
-            case 'refresh':
-              console.log(newMemo)
-              memos.map((memo, index) => {
-                if (memo.id == newMemo.id) {
-                  memos[index] = {
-                    ...newMemo,
-                    formatContent: formatMemoContent(newMemo.content),
-                    time: app.calTime(newMemo.displayTs)
-                  }
-                }
-              })
-              that.setData({
-                memos: memos
-              })
-              that.scorllRef(`#memo${newMemo.id}`)
-              app.globalData.memos = memos
-              wx.setStorageSync('memos', memos)
-              break;
-            default:
-              break;
-          }
-        }
-      },
-      success: function (res) {
-        // 通过 eventChannel 向被打开页面传送数据
-        res.eventChannel.emit('acceptDataFromOpenerPage', {
-          editMemoId: memoid,
-          memo: content,
-          resourceIdList
-        })
-      }
-    })
-  },
-
   getMemos(rowStatus, type) {
     var that = this
     let offset = this.data.memos.length
@@ -469,7 +420,7 @@ Page({
     }
     app.api.getMemos(wx.getStorageSync('url'), this.data.limit, offset, rowStatus)
       .then(result => {
-        if (!result) {} else if (result.length == 0) {
+        if (!result.data) {} else if (result.data.length == 0) {
           if (that.data.memos.length == 0) {
             that.setData({
               memos: [],
@@ -488,7 +439,7 @@ Page({
             title: that.data.language.home.thatIsAll
           })
         } else {
-          var memos = result
+          var memos = result.data
           for (let i = 0; i < memos.length; i++) {
             const ts = memos[i].displayTs
             var time = app.calTime(ts)
@@ -575,8 +526,8 @@ Page({
     }
     app.api.changeUserSetting(this.data.url, item)
       .then(res => {
-        console.log(res)
-        if (res.userId) {
+        console.log(res.data)
+        if (res.data) {
           this.setData({
             me: me
           })
@@ -608,8 +559,7 @@ Page({
     var that = this
     app.api.getMe(wx.getStorageSync('url'))
       .then(result => {
-        // console.log(result)
-        let me = result
+        let me = result.data
         wx.setStorageSync('me', me)
         that.getStats(me.id)
         let defaultUserSettingList = [{
@@ -654,41 +604,10 @@ Page({
     app.api.getStats(wx.getStorageSync('url'), id)
       .then(result => {
         this.setData({
-          stats: result
+          stats: result.data
         })
         that.setHeatMap()
       })
-  },
-
-  editMemoRowStatus(url, id, data) {
-    var that = this
-    app.api.editMemo(url, id, data)
-      .then(res => {
-        if (res) {
-          var memos = that.data.memos
-          for (let i = 0; i < memos.length; i++) {
-            if (memos[i].id == id) {
-              memos[i].rowStatus = data.rowStatus
-            }
-          }
-          that.setData({
-            memos: memos
-          })
-          wx.vibrateShort({
-            type: 'light'
-          })
-          wx.showToast({
-            icon: 'none',
-            title: that.data.language.home.rowStatusChange,
-          })
-          app.globalData.memos = memos
-          wx.setStorage({
-            key: 'memos',
-            data: memos
-          })
-        }
-      })
-      .catch((err) => console.log(err))
   },
 
   showHeatTip(e) {
@@ -719,64 +638,6 @@ Page({
     })
   },
 
-  deleteMemoFaker(e) {
-    let rowstatus = e.currentTarget.dataset.rowstatus
-    var data = {
-      rowStatus: rowstatus == "NORMAL" ? 'ARCHIVED' : "NORMAL"
-    }
-    var url = this.data.url
-    var id = e.currentTarget.dataset.memoid
-    this.editMemoRowStatus(url, id, data)
-  },
-
-  deleteMemo(e) {
-    var that = this
-    var memos = this.data.memos
-    var id = e.currentTarget.dataset.memoid
-    wx.showModal({
-      confirmText: that.data.language.home.DeleteMemoModal.confirmText,
-      cancelText: that.data.language.home.DeleteMemoModal.cancelText,
-      confirmColor: '#B85156',
-      title: that.data.language.home.DeleteMemoModal.title,
-      content: that.data.language.home.DeleteMemoModal.content,
-      success(res) {
-        if (res.confirm) {
-          wx.vibrateShort({
-            type: 'light',
-          })
-          app.api.deleteMemo(that.data.url, id)
-            .then(res => {
-              if (res) {
-                for (let i = 0; i < memos.length; i++) {
-                  if (memos[i].id == id) {
-                    memos.splice(i, 1)
-                  }
-                  that.setData({
-                    memos
-                  })
-                  app.globalData.memos = memos
-                  wx.setStorage({
-                    key: "memos",
-                    data: memos
-                  })
-                }
-                wx.showToast({
-                  icon: 'none',
-                  title: that.data.language.home.deleted,
-                })
-              } else {
-                wx.showToast({
-                  icon: 'error',
-                  title: that.data.language.common.wrong,
-                })
-              }
-            })
-            .catch((err) => console.log(err))
-        }
-      }
-    })
-  },
-
   goWelcom() {
     wx.vibrateShort({
       type: 'light'
@@ -790,7 +651,7 @@ Page({
         cancelText: this.data.language.home.goWelcomModal.cancelText,
         success(res) {
           if (res.confirm) {
-            wx.redirectTo({
+            wx.reLaunch({
               url: '../welcom/index',
             })
           } else if (res.cancel) {
@@ -799,7 +660,7 @@ Page({
         }
       })
     } else {
-      wx.redirectTo({
+      wx.reLaunch({
         url: '../welcom/index',
       })
     }
@@ -814,6 +675,7 @@ Page({
       url: '../setting/index',
     })
   },
+
   goSearch(e) {
     wx.vibrateShort({
       type: 'light'
@@ -858,17 +720,6 @@ Page({
     // console.log(e)
   },
 
-  refreshMemo() {
-    let that = this
-    that.setData({
-      state: this.data.language.common.refreshing,
-      onlineColor: '#FCA417'
-    })
-    that.getMemos('NORMAL', 'refresh')
-    setTimeout(() => {
-      wx.stopPullDownRefresh()
-    }, 300);
-  },
   onPullDownRefresh() {
     let that = this
     that.setData({
@@ -878,6 +729,6 @@ Page({
     that.getMemos('NORMAL', 'refresh')
     setTimeout(() => {
       wx.stopPullDownRefresh()
-    }, 300);
+    }, 1000);
   }
 })

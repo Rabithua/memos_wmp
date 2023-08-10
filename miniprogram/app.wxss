@@ -64,12 +64,14 @@ page {
 }
 
 .method .btn {
+  background-color: #f5f5f5;
+  border-radius: 5rpx;
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   margin-left: 20rpx;
-  width: 50rpx;
-  height: 50rpx;
+  width: 60rpx;
+  height: 60rpx;
 }
 
 .method .top {
@@ -301,11 +303,6 @@ page {
   font-weight: 400;
   padding-bottom: 50rpx;
   border-bottom: #00000010 1px solid;
-}
-
-.memoCard:active {
-  opacity: 0.8;
-  animation-duration: 200ms;
 }
 
 .memoCard:last-child {

@@ -1,0 +1,47 @@
+.authorInfo {
+  display: flex;
+  align-items: center;
+  padding: 40rpx 20rpx;
+  gap: 20rpx;
+}
+.authorInfo .avatar {
+  width: 100rpx;
+  height: 100rpx;
+  background-color: #00000005;
+  border-radius: 10rpx;
+  object-fit: cover;
+}
+
+.authorInfo .name {
+  font-size: 40rpx;
+  /* font-weight: bold; */
+}
+
+.authorInfo .role {
+  font-size: 100rpx;
+  position: absolute;
+  right: 10rpx;
+  color: #00000005;
+  font-family: 'Smiley Sans Oblique';
+}
+
+.headerContainer {
+  display: flex;
+  position: sticky;
+  margin: 90rpx 60rpx 30rpx 50rpx;
+  z-index: 5;
+  width: calc(100% - 100rpx);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  color: #000000;
+  font-weight: bolder;
+  background: #f5f5f580;
+  backdrop-filter: blur(30px);
+  padding: 5rpx 20rpx;
+  border-radius: 99rpx;
+  opacity: 0;
+  animation: show 300ms 100ms forwards;
+}

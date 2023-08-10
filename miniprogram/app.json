@@ -5,6 +5,7 @@
       "pages/welcom/index",
       "pages/search/index",
       "pages/explore/index",
+      "pages/user/index",
       "pages/edit/index",
       "pages/archived/index",
       "pages/memo/index",
@@ -20,6 +21,7 @@
       "pages/welcom/index",
       "pages/search/index",
       "pages/explore/index",
+      "pages/user/index",
       "pages/edit/index",
       "pages/archived/index",
       "pages/memo/index",
@@ -34,13 +36,15 @@
     "pages/welcom/index",
     "pages/search/index",
     "pages/explore/index",
+    "pages/user/index",
     "pages/edit/index",
     "pages/archived/index",
     "pages/memo/index",
     "pages/resource/index",
     "pages/others/index",
     "pages/openapi/index",
-    "pages/setting/index"
+    "pages/setting/index",
+    "pages/imagesView/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -52,5 +56,8 @@
   "style": "v2",
   "lazyCodeLoading": "requiredComponents",
   "themeLocation": "theme.json",
-  "darkmode": true
+  "darkmode": true,
+  "useExtendedLib": {
+    "weui": true
+  }
 }

@@ -39,7 +39,6 @@ Page({
     //页面监听器
     if (eventChannel.listener) {
       eventChannel.once('acceptDataFromOpenerPage', function (data) {
-        console.log(data)
         let formatMemo = formatMemoContent(data.memo)
         that.setData({
           ...data,
@@ -56,7 +55,7 @@ Page({
         language: app.language[wx.getStorageSync('language') ? wx.getStorageSync('language') : 'chinese']
       })
     } else {
-      wx.redirectTo({
+      wx.reLaunch({
         url: '../welcom/index',
       })
     }
@@ -84,7 +83,6 @@ Page({
       url: '../resource/index?selectMode=true',
       events: {
         addFiles: function (data) {
-          console.log(data)
           that.setData({
             resourceIdList: data
           })
@@ -109,14 +107,13 @@ Page({
   none() {},
 
   inputUserTag(e) {
-    console.log(e.currentTarget.dataset.tag)
     let tag = e.currentTarget.dataset.tag
     this.setData({
       memoFocus: false
     })
     wx.vibrateShort({
-        type: 'light'
-      })
+      type: 'light'
+    })
     setTimeout(() => {
       let memo = this.data.memo
       let cursor = this.data.cursor
@@ -135,8 +132,8 @@ Page({
     if (this.data.keyBoardHeight == 0) {
       if (e.touches[0].clientY - this.data.bottomTapPoint.clientY < -50 && Math.abs(e.touches[0].clientX - this.data.bottomTapPoint.clientX) < 20) {
         wx.vibrateShort({
-        type: 'light'
-      })
+          type: 'light'
+        })
         this.setData({
           memoFocus: true
         })
@@ -146,8 +143,8 @@ Page({
 
   setKeyBoard(e) {
     wx.vibrateShort({
-        type: 'light'
-      })
+      type: 'light'
+    })
     this.setData({
       keyBoardHeight: (e.detail.height - 30).toString()
     })
@@ -155,8 +152,8 @@ Page({
 
   memoFocus() {
     wx.vibrateShort({
-        type: 'light'
-      })
+      type: 'light'
+    })
     this.setData({
       memoFocus: true
     })
@@ -164,8 +161,8 @@ Page({
 
   memoBlur(e) {
     wx.vibrateShort({
-        type: 'light'
-      })
+      type: 'light'
+    })
     this.setData({
       keyBoardHeight: '0',
       cursor: this.data.memo.length,
@@ -185,8 +182,8 @@ Page({
 
   inputTag(e) {
     wx.vibrateShort({
-        type: 'light'
-      })
+      type: 'light'
+    })
     setTimeout(() => {
       let memo = this.data.memo
       let cursor = this.data.cursor
@@ -203,8 +200,8 @@ Page({
 
   inputTodo() {
     wx.vibrateShort({
-        type: 'light'
-      })
+      type: 'light'
+    })
     this.setData({
       memoFocus: false
     })
@@ -224,8 +221,8 @@ Page({
 
   inputCode() {
     wx.vibrateShort({
-        type: 'light'
-      })
+      type: 'light'
+    })
     this.setData({
       memoFocus: false
     })
@@ -245,8 +242,8 @@ Page({
 
   send() {
     wx.vibrateShort({
-        type: 'light'
-      })
+      type: 'light'
+    })
     var that = this
     var content = this.data.memo
     if (content !== '' || this.data.resourceIdList.length > 0) {
@@ -275,14 +272,10 @@ Page({
   },
 
   editMemoContent(url, id, data) {
-    let that = this
     app.api.editMemo(url, id, data)
       .then(res => {
-        // console.log(res)
         if (res.data) {
           wx.setStorageSync('memoDraft', '')
-          let eventChannel = that.data.eventChannel
-          eventChannel.emit('acceptDataFromOpenedPage', 'refresh', res.data)
           wx.navigateBack()
         }
       })
@@ -297,12 +290,9 @@ Page({
     var that = this
     app.api.sendMemo(url, content, resourceIdList)
       .then(res => {
-        // console.log(res.data)
-        if (res) {
+        if (res.data) {
           wx.setStorageSync('memoDraft', '')
           if (getCurrentPages().length > 1) {
-            let eventChannel = that.data.eventChannel
-            eventChannel.emit('acceptDataFromOpenedPage', 'add', res)
             wx.navigateBack()
           }
         } else {

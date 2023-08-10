@@ -4,6 +4,25 @@ page {
   animation: show 500ms 500ms forwards;
 }
 
+.pinFolder {
+  padding: 20rpx 32rpx;
+  border-bottom: 1rpx solid #00000010;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: rgb(66, 65, 63);
+}
+
+.arrowIcon {
+  animation-duration: 300ms;
+  transition-duration: 300ms;
+  width: 30rpx;
+  height: 30rpx;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0zMiA4Ny43ODVjMCAzLjAzNyAyLjgwMyA1LjU5NiA0Ljk1IDMuNDQ5bDM2Ljc3LTM2Ljc3YTcgNyAwIDAgMCAwLTkuOUwzNi45NSA3Ljc5NEMzNC44MDIgNS42NDkgMzIgOC4yMDcgMzIgMTEuMjQ0djQuNDUxYTkuOTUgOS45NSAwIDAgMCAyLjkxNCA3LjAzNmwxOS43MTMgMTkuNzEzYzMuOTA2IDMuOTA1IDMuOTA2IDEwLjIzNyAwIDE0LjE0MkwzNC45MTQgNzYuMjk4QTkuOTUgOS45NSAwIDAgMCAzMiA4My4zMzR2NC40NTF6IiBmaWxsPSIjMDAwIi8+PC9zdmc+');
+  background-size: cover;
+}
+
 .colorDot {
   position: absolute;
   background: #07C160;

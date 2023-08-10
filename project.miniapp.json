@@ -3,7 +3,7 @@
   "name": "麦默",
   "version": "1.0.1",
   "mini-android": {
-    "sdkVersion": "1.0.1",
+    "sdkVersion": "1.0.11",
     "toolkitVersion": "0.7.1",
     "useExtendedSdk": {
       "media": true,
@@ -29,18 +29,18 @@
     }
   },
   "mini-ios": {
-    "sdkVersion": "1.0.5",
+    "sdkVersion": "1.0.20",
     "toolkitVersion": "0.0.9",
     "useExtendedSdk": {
       "WeAppOpenFuns": true,
       "WeAppNetwork": true,
       "WeAppBluetooth": false,
       "WeAppMedia": true,
-      "WeAppLBS": true,
+      "WeAppLBS": false,
       "WeAppOthers": true,
       "WeAppIdaas": true
     },
-    "enableVConsole": "open",
+    "enableVConsole": "close",
     "icons": {
       "mainIcon120": "miniapp/ios/icons/icon@120w.png",
       "mainIcon180": "miniapp/ios/icons/icon@180w.png",
@@ -63,5 +63,6 @@
       "NSAppleMusicUsageDescription": "media",
       "NSPhotoLibraryUsageDescription": "xiangce"
     }
-  }
+  },
+  "versionCode": 100
 }

@@ -8,6 +8,15 @@
  */
 
 @media (prefers-color-scheme: dark) {
+  .pinFolder {
+    background: rgb(31, 31, 31);
+    color: #ffffff;
+  }
+
+  .arrowIcon {
+    filter: invert(1);
+  }
+
   .Tips {
     background-color: rgb(41, 41, 41);
     color: #ffffff90;

@@ -8,8 +8,63 @@
  */
 
 @media (prefers-color-scheme: dark) {
-    .shareBtn {
-        background: rgb(41, 41, 41);
-        border: none;
-    }
+
+  .hf_empty {
+    color: #ffffff;
+  }
+  .eyeCloseIcon {
+    filter: invert(1);
+  }
+
+  .shareBtn {
+    background: rgb(41, 41, 41);
+    border: none;
+  }
+
+  .mpCode {
+    background: rgb(31, 31, 31);
+    box-shadow: 0 -50rpx 50rpx rgb(31, 31, 31);
+  }
+
+  .mpCode .info{
+    color: #ffffff;
+  }
+
+  .mpCode .info .itm_2 {
+    color: #ffffff20;
+  }
+
+  .closeBtn {
+    filter: invert(1);
+  }
+
+  .hf_btn {
+    background: rgb(31, 31, 31);
+    color: #ffffff;
+  }
+
+  .hf_slider {
+    background: rgb(31, 31, 31);
+  }
+
+  .hf_time {
+    background: rgb(31, 31, 31);
+  }
+  .noticeCloseIcon {
+    filter: invert(1);
+  }
+
+  .config .sharer .sharerBtn {
+    background: rgb(31, 31, 31);
+    color: #ffffff;
+  }
+
+  .config {
+    background: rgb(31, 31, 31);
+  }
+
+  .config .name {
+    color: #ffffff;
+  }
+
 }

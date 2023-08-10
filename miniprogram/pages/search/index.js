@@ -27,7 +27,7 @@ Page({
     app.api.getTags(this.data.url)
       .then(res => {
         that.setData({
-          tags: res
+          tags: res.data
         })
         that.getSuggestionTags()
       })
@@ -47,14 +47,14 @@ Page({
       app.api.getMemos(wx.getStorageSync('url'), '', '')
         .then(result => {
           // console.log(result)
-          if (!result) {
+          if (!result.data) {
             wx.vibrateLong()
             wx.showToast({
               icon: 'error',
               title: that.data.language.common.wrong,
             })
           } else {
-            var memos = result
+            var memos = result.data
             for (let i = 0; i < memos.length; i++) {
               let ts = memos[i].createdTs
               let time = app.calTime(ts)
@@ -102,7 +102,7 @@ Page({
         that.setData({
           tagsSuggestionList: res.data
         })
-        // that.tagsDeleteDouble(that.data.tags, that.data.tagsSuggestionList)
+        that.tagsDeleteDouble(that.data.tags, that.data.tagsSuggestionList)
       })
       .catch((err) => console.log(err))
   },
@@ -316,7 +316,8 @@ Page({
     app.api.editMemo(url, id, data)
       .then(res => {
         // console.log(res)
-        if (res) {
+        if (res.data) {
+          console.log(res.data)
           let showMemos = that.data.showMemos
           let memos = that.data.memos
           memos.map((memo, index) => {
