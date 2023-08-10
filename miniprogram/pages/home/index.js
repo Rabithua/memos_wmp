@@ -4,12 +4,21 @@ import {
 var app = getApp()
 
 Page({
+  changePinFolder() {
+    wx.vibrateShort({
+      type: 'light',
+    })
+    this.setData({
+      pinFolder: !this.data.pinFolder
+    })
+  },
 
   test() {
     
   },
 
   data: {
+    pinFolder: false,
     previewImage: false,
     halfDialog: 'closeHalfDialog',
     showSidebar: false,
