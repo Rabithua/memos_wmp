@@ -5,19 +5,17 @@ var app = getApp()
 
 Page({
 
-  test(){
-    wx.scanCode({
-      success (res) {
-        console.log(res)
-        wx.showModal({
-          title: '扫码结果',
-          content: res.result
-        })
-      }
+  changePinFolder() {
+    wx.vibrateShort({
+      type: 'light',
+    })
+    this.setData({
+      pinFolder: !this.data.pinFolder
     })
   },
-  
+
   data: {
+    pinFolder: false,
     halfDialog: 'closeHalfDialog',
     showSidebar: false,
     state: app.language.english.common.loading,
@@ -68,7 +66,7 @@ Page({
     }
   },
 
-  goUser(){
+  goUser() {
     wx.vibrateShort({
       type: 'light',
     })

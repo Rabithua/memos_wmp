@@ -133,6 +133,7 @@ export const chinese = {
       online: '在线',
       offline: '离线'
     },
+    pinFolder: '折叠置顶笔记',
     thatIsAll: '已全部加载~',
     edit: '编辑中…',
     newMemoPlaceholder: '记录有趣的想法~',
@@ -356,6 +357,7 @@ export const english = {
       online: 'Online',
       offline: 'Offline'
     },
+    pinFolder: 'PinFolder',
     thatIsAll: "That's all",
     edit: 'Editing...',
     newMemoPlaceholder: 'Record something interesting~',
