@@ -8,14 +8,44 @@ Page({
   data: {
     memo: null,
     id: null,
+    ifShowNoticeSetting: false,
     mpCodeMode: false,
     mpCodeUrl: '',
     ifShowShareMenu: false,
     url: wx.getStorageSync('url') ? wx.getStorageSync('url') : app.globalData.url,
-    me: wx.getStorageSync('me')
+    me: wx.getStorageSync('me'),
+    buttons: [{
+        type: 'default',
+        className: '',
+        text: '取消',
+        value: 0
+      },
+      {
+        type: 'primary',
+        className: '',
+        text: '保存',
+        value: 1
+      }
+    ],
+    noticeType: [
+      '单次提醒', '艾宾浩斯'
+    ],
+    noticeHistory: [],
+    notice: {
+      type: 0,
+      time: 8,
+      day: 0
+    },
+    ibhs: [1, 2, 4, 7, 15, 30],
+    noticeZy: [{
+      timeStamp: 1690689600000,
+      done: false,
+      timeFormat: null
+    }]
   },
 
   onLoad(o) {
+    this.noticeData()
     console.log(o)
     let id = o.id
     if (id) {
@@ -36,9 +66,154 @@ Page({
         })
       }
     }
+    this.themeTypeConfig()
   },
 
-  showShareMenu(e){
+  themeTypeConfig() {
+    let that = this
+    wx.getSystemInfo({
+      success (res) {
+        that.setData({
+          themeType: res.theme
+        })
+      }
+    })
+
+    wx.onThemeChange((result) => {
+      that.setData({
+        themeType: result.theme
+      })
+    })
+  },
+
+  getNotice() {
+    app.api.getNotice('https://maimoapi.wowow.club', this.data.id).then(r => {
+      this.setData({
+        noticeHistory: r.data
+      })
+    })
+  },
+
+  noticeSave(e) {
+    switch (e.detail.index) {
+      case 0:
+        this.changeifShowNoticeSetting()
+        break;
+
+      case 1:
+        let data = {
+          memoId: this.data.id,
+          notice: this.data.noticeZy
+        }
+        app.api.createNotice('https://maimoapi.wowow.club', data).then(r => {
+          wx.vibrateShort({
+            type: 'light',
+          })
+          if (r.code == 0) {
+            wx.showToast({
+              title: '提醒创建成功～',
+            })
+            this.getNotice()
+            this.changeifShowNoticeSetting()
+          }
+        })
+        break;
+
+      default:
+        break;
+    }
+  },
+
+  changeifShowNoticeSetting() {
+    wx.vibrateShort({
+      type: 'light',
+    })
+    this.setData({
+      ifShowNoticeSetting: !this.data.ifShowNoticeSetting
+    })
+  },
+
+  sliderTimeChange(e) {
+    wx.vibrateShort({
+      type: 'light',
+    })
+    this.setData({
+      ['notice.time']: e.detail.value
+    })
+    this.noticeData()
+  },
+
+  noticeData() {
+    let noticeZy = []
+    switch (this.data.notice.type) {
+      case 0:
+        let timeStamp = this.calcTimeStamp(this.data.notice.day, this.data.notice.time)
+        noticeZy.push({
+          done: false,
+          timeStamp,
+          timeFormat: this.formatTimestamp(timeStamp)
+        })
+        this.setData({
+          noticeZy
+        })
+        break;
+      case 1:
+        this.data.ibhs.forEach((item, index) => {
+          let timeStamp = this.calcTimeStamp(item + this.data.notice.day, this.data.notice.time)
+          noticeZy.push({
+            done: false,
+            timeStamp,
+            timeFormat: this.formatTimestamp(timeStamp)
+          })
+        })
+        this.setData({
+          noticeZy
+        })
+        break;
+
+      default:
+        break;
+    }
+  },
+
+  calcTimeStamp(day, hour) {
+    const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() + day);
+    currentDate.setHours(hour, 0, 0, 0);
+    return currentDate.getTime();
+  },
+
+  sliderDateChange(e) {
+    wx.vibrateShort({
+      type: 'light',
+    })
+    this.setData({
+      ['notice.day']: e.detail.value
+    })
+    this.noticeData()
+  },
+
+  formatTimestamp(timestamp) {
+    var date = new Date(timestamp);
+    var year = date.getFullYear();
+    var month = ("0" + (date.getMonth() + 1)).slice(-2);
+    var day = ("0" + date.getDate()).slice(-2);
+    var hours = ("0" + date.getHours()).slice(-2);
+    var minutes = ("0" + date.getMinutes()).slice(-2);
+    return year + "/" + month + "/" + day + " " + hours + ":" + minutes;
+  },
+
+  changeNoticeType(e) {
+    wx.vibrateShort({
+      type: 'light',
+    })
+    this.setData({
+      ['notice.type']: e.currentTarget.dataset.index
+    })
+    this.noticeData()
+  },
+
+  showShareMenu(e) {
     wx.vibrateShort({
       type: 'light',
     })
@@ -47,7 +222,7 @@ Page({
     })
   },
 
-  changeMpcodeMode(){
+  changeMpcodeMode() {
     wx.vibrateShort({
       type: 'light',
     })
@@ -71,7 +246,6 @@ Page({
     app.api.editMemo(url, id, data)
       .then(res => {
         if (res.data) {
-          console.log(res.data)
           that.setData({
             ['memo.rowStatus']: res.data.rowStatus
           })
@@ -141,8 +315,7 @@ Page({
     })
   },
 
-  tagTap(e){
-    console.log(e.target.dataset.tag)
+  tagTap(e) {
     wx.vibrateShort({
       type: 'light',
     })
@@ -154,7 +327,6 @@ Page({
     // })
     app.api.getMemo(url, id)
       .then(res => {
-        console.log(res)
         if (res.data) {
           let memo = res.data
           memo.formatContent = formatMemoContent(memo.content)
@@ -176,6 +348,9 @@ Page({
             memo
           })
           this.getUserInfo()
+          if (memo.creatorId == this.data.me.id) {
+            this.getNotice()
+          }
         } else {
           wx.hideLoading()
         }
@@ -196,7 +371,6 @@ Page({
   },
 
   preview(e) {
-    console.log(e)
     const url = []
     for (let i = 0; i < e.target.dataset.url.length; i++) {
       const src = e.target.dataset.url[i].url;
@@ -234,7 +408,7 @@ Page({
     })
   },
 
-  goUser(){
+  goUser() {
     wx.vibrateShort({
       type: 'light',
     })
@@ -243,17 +417,16 @@ Page({
     })
   },
 
-  getUserInfo(){
+  getUserInfo() {
     app.api.getUserInfo(this.data.url, this.data.memo.creatorId)
-    .then(res => {
-      if (res.data) {
-        console.log(res.data)
-        this.setData({
-          author: res.data
-        })
-      }
-    })
-    .catch((err) => console.log(err))
+      .then(res => {
+        if (res.data) {
+          this.setData({
+            author: res.data
+          })
+        }
+      })
+      .catch((err) => console.log(err))
   },
 
   onReady() {
@@ -265,7 +438,7 @@ Page({
     // #endif
   },
 
-  
+
 
   onShow() {
     this.setData({

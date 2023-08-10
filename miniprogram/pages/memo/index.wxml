@@ -1,24 +1,55 @@
 <!--pages/memo/index.wxml-->
+<mp-half-screen-dialog data-weui-theme="{{themeType}}" bindbuttontap="noticeSave" show="{{ifShowNoticeSetting}}" maskClosable="{{true}}" title="{{language.memo.hf_notice.title}}" bindclose="changeifShowNoticeSetting" subTitle="{{language.memo.hf_notice.subTitle}}" buttons="{{buttons}}">
+  <view slot='desc' class="hfContainer">
+    <view class="hf_title">{{language.memo.hf_notice.noticeType}}</view>
+    <view class="hf_Btns">
+      <view class="hf_btn {{notice.type == index ? 'active' : ''}}" wx:for="{{noticeType}}" data-index="{{index}}" bind:tap="changeNoticeType" wx:key="noticeType">{{item}}</view>
+    </view>
+    <view class="hf_title">{{language.memo.hf_notice.noticeTime}}</view>
+    <view class="body-view">
+      <slider class="hf_slider" min='1' block-size='20' value='{{notice.time}}' max='24' bindchange="sliderTimeChange" show-value />
+    </view>
+    <view class="hf_title">{{language.memo.hf_notice.noticeDay}}</view>
+    <view class="body-view">
+      <slider class="hf_slider" min='0' block-size='20' value='{{notice.day}}' max='7' bindchange="sliderDateChange" show-value />
+    </view>
+    <view class="hf_title">{{ language.memo.hf_notice.noticeZy_1 + noticeZy.length + language.memo.hf_notice.noticeZy_2}}</view>
+    <view class="hf_timeContainer">
+      <view class="hf_time" wx:key="noticeZy" wx:for="{{noticeZy}}" wx:for-item="zy">
+        <view class="noticeCloseIcon"></view>{{(zy.timeFormat)}}{{zy.done ? language.memo.hf_notice.noticed: language.memo.hf_notice.unNotice}}
+      </view>
+    </view>
+    <view class="hf_title">{{ language.memo.hf_notice.noticeHistory}}</view>
+    <view class="hf_empty" wx:if="{{noticeHistory.length == 0}}">{{ language.memo.hf_notice.noticeHistoryEmpty}}</view>
+    <block wx:else>
+      <view class="hf_timeContainer" style="padding-bottom: 0;" wx:for="{{noticeHistory}}" wx:for-item="notice" wx:key="noticeHistory">
+        <view class="hf_time" wx:key="noticeZy" wx:for="{{notice.notice}}" wx:for-item="zy">
+          <view class="noticeCloseIcon"></view>{{(zy.timeFormat)}}{{zy.done ? language.memo.hf_notice.noticed: language.memo.hf_notice.unNotice}}
+        </view>
+      </view>
+    </block>
+
+  </view>
+</mp-half-screen-dialog>
 <view class="authorInfo">
   <image bind:tap="goUser" class="avatar" src="{{author.avatarUrl ? author.avatarUrl : '../../images/icon.png'}}" mode="" />
   <view class="name">{{author.nickname ?author.nickname :'MEMOS'}}</view>
-  <view wx:if="{{author.role == 'HOST'}}" class="role">{{author.role}}</view>
+  <view class="role">{{author.role}}</view>
 </view>
-<view class="tip" wx:if="{{me && me.id == memo.creatorId && !mpCodeMode}}">
-  <!-- <view>
-    {{language.memo.visibility_1 + memo.visibility}}
-  </view> -->
-  <view wx:if="{{memo.visibility === 'PRIVATE'}}">
-    {{language.memo.visibility_2}}
-  </view>
-  <view wx:else>
-    {{language.memo.visibility_3}}
-  </view>
-  <view class="tipBtn" catchtap="changeMemoVisibility">
-    {{language.memo.switch}}
-  </view>
-</view>
+
 <view wx:if="{{memo}}" class="memoCard" style="padding-bottom: 50rpx;">
+  <view class="headerBtns" wx:if="{{me && me.id == memo.creatorId && !mpCodeMode}}">
+    <view class="notice {{memo.visibility === 'PRIVATE' ? '' : 'active'}}" bind:tap="changeMemoVisibility">
+      <view class="{{memo.visibility === 'PRIVATE' ? 'eyeCloseIcon' : 'eyeIcon'}}"></view>
+      <text>{{memo.visibility === 'PRIVATE' ? language.memo.private : language.memo.public}}</text>
+    </view>
+    <view class="notice" bind:tap="changeifShowNoticeSetting">
+      <view class="noticeCloseIcon"></view>
+      <text>{{language.memo.notice}}</text>
+    </view>
+  </view>
+
+
   <text class="time">{{memo.time}}</text>
   <text class="status">@{{memo.creatorName}}</text>
   <view class="content">
@@ -83,5 +114,5 @@
     <view class="itm_1">扫码查看笔记</view>
     <view class="itm_2">麦默小程序✨</view>
   </view>
-  <image src="{{mpCodeUrl}}" mode=""/>
+  <image src="{{mpCodeUrl}}" mode="" />
 </view>

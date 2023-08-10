@@ -8,6 +8,14 @@
  */
 
 @media (prefers-color-scheme: dark) {
+
+  .hf_empty {
+    color: #ffffff;
+  }
+  .eyeCloseIcon {
+    filter: invert(1);
+  }
+
   .shareBtn {
     background: rgb(41, 41, 41);
     border: none;
@@ -27,6 +35,22 @@
   }
 
   .closeBtn {
+    filter: invert(1);
+  }
+
+  .hf_btn {
+    background: rgb(31, 31, 31);
+    color: #ffffff;
+  }
+
+  .hf_slider {
+    background: rgb(31, 31, 31);
+  }
+
+  .hf_time {
+    background: rgb(31, 31, 31);
+  }
+  .noticeCloseIcon {
     filter: invert(1);
   }
 

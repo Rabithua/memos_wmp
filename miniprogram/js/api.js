@@ -1,3 +1,34 @@
+export const getNotice = (url, memoId) => {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: `${url}/getnotice?openapi=${wx.getStorageSync('openId')}${memoId ? '&memoId=' + memoId : ''}`,
+      method: "GET",
+      success(res) {
+        resolve(res.data)
+      },
+      fail(err) {
+        reject(err)
+      }
+    })
+  })
+}
+
+export const createNotice = (url, data) => {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: `${url}/addnotice?openapi=${wx.getStorageSync('openId')}`,
+      method: "POST",
+      data,
+      success(res) {
+        resolve(res.data)
+      },
+      fail(err) {
+        reject(err)
+      }
+    })
+  })
+}
+
 export const getMemos = (url, limit, offset, rowStatus) => {
   return new Promise((resolve, reject) => {
     let data = {
@@ -96,11 +127,6 @@ export const createResource = (url, file) => {
         resolve(res.data)
       },
       fail(err) {
-        wx.vibrateLong()
-        wx.showToast({
-          icon: 'none',
-          title: '删除失败',
-        })
         reject(err)
       }
     })

@@ -55,5 +55,8 @@
   "style": "v2",
   "lazyCodeLoading": "requiredComponents",
   "themeLocation": "theme.json",
-  "darkmode": true
+  "darkmode": true,
+  "useExtendedLib": {
+    "weui": true
+  }
 }
