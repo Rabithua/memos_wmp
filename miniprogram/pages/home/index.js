@@ -5,9 +5,9 @@ var app = getApp()
 
 Page({
 
-  test(){
+  test() {
     wx.scanCode({
-      success (res) {
+      success(res) {
         console.log(res)
         wx.showModal({
           title: '扫码结果',
@@ -16,7 +16,7 @@ Page({
       }
     })
   },
-  
+
   data: {
     halfDialog: 'closeHalfDialog',
     showSidebar: false,
@@ -30,7 +30,8 @@ Page({
     showTips: false,
     limit: 20,
     showExplore: false,
-    x: 0
+    x: 0,
+    language: {}
   },
 
   onLoad() {
@@ -68,7 +69,7 @@ Page({
     }
   },
 
-  goUser(){
+  goUser() {
     wx.vibrateShort({
       type: 'light',
     })
@@ -157,10 +158,14 @@ Page({
 
   onShow() {
     let language = app.language[wx.getStorageSync('language') ? wx.getStorageSync('language') : 'chinese']
-    this.setData({
-      language,
-      settings: wx.getStorageSync('settings') ? wx.getStorageSync('settings') : language.setting.settings,
-    })
+    if (language.language !== this.data.language.language || this.data.language == {}) {
+      console.log('reload')
+      this.setData({
+        language,
+        settings: wx.getStorageSync('settings') ? wx.getStorageSync('settings') : language.setting.settings,
+      })
+    }
+
   },
 
   onReachBottom() {
@@ -197,6 +202,14 @@ Page({
       current: e.target.dataset.src, // 当前显示图片的 http 链接
       urls: url // 需要预览的图片 http 链接列表
     })
+    // wx.navigateTo({
+    //   url: '/pages/imagesView/index',
+    //   success(res) {
+    //     res.eventChannel.emit('acceptImagesUrlFromOpenerPage', {
+    //       imagesUrl: url
+    //     })
+    //   }
+    // })
   },
   goMemo(e) {
     // console.log(e.currentTarget.dataset.memoid)

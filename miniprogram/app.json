@@ -43,7 +43,8 @@
     "pages/resource/index",
     "pages/others/index",
     "pages/openapi/index",
-    "pages/setting/index"
+    "pages/setting/index",
+    "pages/imagesView/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

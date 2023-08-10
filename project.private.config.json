@@ -96,6 +96,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/imagesView/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
