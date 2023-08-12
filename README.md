@@ -27,7 +27,11 @@
 7. Once the translation is complete, you will be able to see the welcome interface of Maimai. 🎉
 8. Please try entering your username and password to see if you can log in successfully. If you do not see a register button, it is because public registration is not enabled. If you encounter any issues, please submit an issue for feedback.
 
+### Using [donut](https://dev.weixin.qq.com/) to convert WeChat Mini Program to an app.
 
+> You may need to install the [testing version of WeChat Developer Tools](https://developers.weixin.qq.com/miniprogram/dev/devtools/nightly.html).
+
+![Group 7949](https://github.com/Rabithua/memos_wmp/assets/34543831/a74e9685-cc82-49e5-a46e-49151111cb45)
 
 
 
