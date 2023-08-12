@@ -1,4 +1,4 @@
-> [中文指南](https://github.com/Rabithua/memos_wmp/edit/master/ChineseReadMe.md)
+> [中文指南](https://github.com/Rabithua/memos_wmp/blob/master/ChineseReadMe.md)
 > Note: This is a WeChat mini program. To publish a mini program on WeChat, you need a domain name that has been filed in China. According to recent policies, the mini program itself also requires additional filing, which is quite troublesome!
 
 <h1 align='center'>Maimo</h1>
