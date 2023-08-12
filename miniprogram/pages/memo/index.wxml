@@ -93,9 +93,9 @@
   <view class="config" bind:tap="showShareMenu">
     <view wx:if="{{ifShowShareMenu}}" class="sharer">
       <view class="sharerBtn" bind:tap="share">{{language.memo.copyLink}}</view>
-      <view class="sharerBtn" bind:tap="changeMpcodeMode">小程序码</view>
+      <view class="sharerBtn" bind:tap="changeMpcodeMode">{{language.memo.wmpCode}}</view>
       <!-- #if MP -->
-      <button open-type="share" class="sharerBtn">分享聊天</button>
+      <button open-type="share" class="sharerBtn">{{language.memo.wechatShare}}</button>
       <!-- #endif -->
     </view>
     <view class="name">
