@@ -5,8 +5,7 @@
 
 <p align='center'><a href="https://github.com/usememos/memos">usememos/memos(Base v0.13.1)</a>·WechatMiniProgram.</p>
 
-![Group 7952](https://github.com/Rabithua/memos_wmp/assets/34543831/b98badab-f9a9-4939-9484-8c226faab645)
-![Group 7950](https://github.com/Rabithua/memos_wmp/assets/34543831/3179a51e-2cfd-40b0-a0b1-b2b125527419)![Group 7951](https://github.com/Rabithua/memos_wmp/assets/34543831/4e4aa938-6fe3-4c20-9578-e0620b5aa7ba)
+![Group 7952](https://github.com/Rabithua/memos_wmp/assets/34543831/e28aa6ba-09a3-4261-bcfa-e46faafc6793)
 
 ### Feature 
 - [x] 🔍 Read&Search memos（Tags&Tag Suggestions）
@@ -36,6 +35,11 @@
 
 ![Group 7949](https://github.com/Rabithua/memos_wmp/assets/34543831/a74e9685-cc82-49e5-a46e-49151111cb45)
 
+## Have a look
+
+![Group 7952](https://github.com/Rabithua/memos_wmp/assets/34543831/b98badab-f9a9-4939-9484-8c226faab645)
+![Group 7950](https://github.com/Rabithua/memos_wmp/assets/34543831/3179a51e-2cfd-40b0-a0b1-b2b125527419)
+![Group 7951](https://github.com/Rabithua/memos_wmp/assets/34543831/4e4aa938-6fe3-4c20-9578-e0620b5aa7ba)
 
 
 `Translated by ChatGPT.`
