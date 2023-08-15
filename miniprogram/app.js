@@ -6,9 +6,9 @@ App({
   globalData: {
     // 【一般需要修改为 false】是否开启微信自动登录，需要手动配置后端接口以及开启小程序认证权限才能生效，否则会报错。
     ifWechatLogin: true,
-    url: 'https://memos.wowow.club',
+    url: 'https://cornfield.wiki',
     // 搭配ifWechatLogin使用
-    backendUrl: 'https://maimoapi.wowow.club',
+    backendUrl: 'https://api.cornfield.wiki',
     top_btn: wx.getMenuButtonBoundingClientRect()
   },
   onLaunch: function (options) {

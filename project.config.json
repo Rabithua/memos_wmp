@@ -21,8 +21,6 @@
     "compileHotReLoad": false,
     "lazyloadPlaceholderEnable": false,
     "useMultiFrameRuntime": true,
-    "useApiHook": true,
-    "useApiHostProcess": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -49,9 +47,6 @@
     ],
     "skylineRenderEnable": false
   },
-  "appid": "wx93424d86ffa7d6ac",
-  "projectname": "memos",
-  "libVersion": "2.14.1",
   "condition": {
     "search": {
       "list": []
@@ -69,17 +64,18 @@
   },
   "srcMiniprogramRoot": "miniprogram/",
   "compileType": "miniprogram",
-  "packOptions": {
-    "ignore": [],
-    "include": []
-  },
   "editorSetting": {
     "tabIndent": "insertSpaces",
     "tabSize": 2
   },
   "cloudfunctionTemplateRoot": "cloudfunctionTemplate/",
-  "projectArchitecture": "multiPlatform",
   "simulatorPluginLibVersion": {
     "wxext14566970e7e9f62": "2.27.3"
-  }
+  },
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
+  "appid": "wxc804bd2514816c72",
+  "projectArchitecture": "multiPlatform"
 }
