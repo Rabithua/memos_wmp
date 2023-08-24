@@ -82,6 +82,8 @@
       <image wx:if="{{me.avatarUrl}}" bind:tap="goUser" class="avatar" src="{{me.avatarUrl}}" mode="aspectFill" />
       <view class="name">{{me.nickname ? me.nickname : me.username}}</view>
       <view wx:if="{{wechatLogin}}" class="wechatIcon"></view>
+      <view bind:tap="goUserInfo" class="editBtn"></view>
+      <view bind:tap="goUserInfo" wx:if="{{!me.avatarUrl}}" class="getUserInfoBtn">设置微信头像昵称</view>
       <!-- <view class="badge" style="{{me.role == 'HOST' ? 'color: #ffffff; background: #07C160' : ''}}">{{me.role}}</view> -->
     </view>
     <view class="count">

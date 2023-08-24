@@ -1,3 +1,18 @@
+export const changeUserInfo = (url, data) => {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: `${url}/api/user/${data.id}?openId=${wx.getStorageSync('openId')}`,
+      method: "PATCH",
+      data,
+      success(res) {
+        resolve(res.data)
+      },
+      fail(err) {
+        reject(err)
+      }
+    })
+  })
+}
 export const getNotice = (url, memoId) => {
   return new Promise((resolve, reject) => {
     wx.request({

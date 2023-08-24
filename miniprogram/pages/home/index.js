@@ -208,6 +208,15 @@ Page({
     // })
   },
 
+  goUserInfo() {
+    wx.vibrateShort({
+      type: 'light',
+    })
+    wx.navigateTo({
+      url: `../userInfo/index`,
+    })
+  },
+  
   goMemo(e) {
     // console.log(e.currentTarget.dataset.memoid)
     wx.navigateTo({
