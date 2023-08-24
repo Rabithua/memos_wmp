@@ -23,7 +23,7 @@ export const chinese = {
     tips: 'openAPI基本包含了账号的所有权限！务必保管好openAPI，避免泄漏。'
   },
   archived: {
-    pageTitle: '已归档Memos🌒',
+    pageTitle: '已归档记录🌒',
     nothing: '这是一片无人的荒原🪐'
   },
   setting: {
@@ -59,7 +59,7 @@ export const chinese = {
     deleteModal: {
       title: '警告',
       content_1: '当前资源已被',
-      content_2: '个MEMO引用，删除会导致MEMO文件丢失！',
+      content_2: '个笔记引用，删除会导致笔记文件丢失！',
       cancel: '取消',
       confirm: '删除'
     }
@@ -78,14 +78,14 @@ export const chinese = {
     archive: '归档',
     noArchive: '取消归档',
     switch: '切换',
-    unSee: "Memo不可见",
+    unSee: "笔记不可见",
     private: '私密',
     public: '公开',
     notice: '提醒',
     getting: '拉取数据',
     hf_notice: {
       title: '设置定时提醒',
-      subTitle: '提醒通过麦默笔记公众号发送',
+      subTitle: '提醒通过玉米地笔记公众号发送',
       noticeType: '提醒类型',
       onceNotice: '单次提醒',
       isbh: '艾宾浩斯',
@@ -101,9 +101,9 @@ export const chinese = {
   },
   welcom: {
     webVersion: '线上版本：',
-    headTitle: '麦默笔记',
+    headTitle: '玉米地笔记',
     secondTitle: '把脑袋里的小碎片收集起来✨',
-    dsc: '麦默是 Github 开源项目 usememos/memos 的小程序版本，同样的，麦默 Rabithua/memos_wmp 也是开源的！',
+    dsc: '玉米地是 Github 开源项目 usememos/memos 的小程序版本，同样的，玉米地 Rabithua/memos_wmp 也是开源的！',
     domain: '域名',
     domainPlaceholder: 'https://xxx.xxx',
     username: '用户名',
@@ -127,7 +127,7 @@ export const chinese = {
       content: '账户不存在，直接注册?',
     },
     shareMsg: {
-      title: '麦默',
+      title: '玉米地',
     }
   },
   home: {
@@ -154,7 +154,7 @@ export const chinese = {
       title: '提示',
       confirmText: '删除',
       cancelText: '取消',
-      content: '删除当前 Memo ?',
+      content: '删除当前笔记 ?',
     },
     goWelcomModal: {
       title: '提示',
@@ -167,7 +167,7 @@ export const chinese = {
       tags: '标签',
       mon: '周一',
       sun: '周日',
-      memoVisibility: 'Memo 可见性',
+      memoVisibility: '笔记可见性',
       locale: '语言',
       openResource: '资源库📁 →',
       openExplore: '探索✨ →',
@@ -183,24 +183,24 @@ export const chinese = {
     Tips: {
       p_close: '不再显示',
       title_1: '操作指南',
-      p_1: `💫 「新建 Memo」，向左侧滑
+      p_1: `💫 「新建笔记」，向左侧滑
       💫 「打开用户中心」，向右侧滑
-      💫 「用户中心 - 点击时间图」，可以快速查看当日 Memo
+      💫 「用户中心 - 点击时间图」，可以快速查看当日笔记
       💫 「切换账号密码登陆」，点击顶部左侧胶囊
       💫 「标签删除」搜索页面可以长按标签(删除后会出现在标签建议中)
       💫 「编辑资源库文件」，长按或者向左侧滑资源卡片`,
       title_2: '功能更新',
-      p_2: `✨ 新增本地设置页面，可以设置 memo 是否折叠显示以及是否显示标签建议
+      p_2: `✨ 新增本地设置页面，可以设置 笔记 是否折叠显示以及是否显示标签建议
       ✨ Search 页面新增 Tag 建议，支持从建议创建 Tag
-      ✨ 新建或编辑 memo 时自动缓存，妈妈再也不会担心我写了一半的小作文丢失了
-      ✨ Search 页面memo卡片完整操作支持🎉
+      ✨ 新建或编辑 笔记 时自动缓存，妈妈再也不会担心我写了一半的小作文丢失了
+      ✨ Search 页面笔记卡片完整操作支持🎉
       ✨ 归档页面，资源库页面可以上传图片或视频了🧩
-      ✨ 可以通过左侧的侧滑栏中的热点图直接跳转到搜索页面，检索对应日期的Memo🔎
+      ✨ 可以通过左侧的侧滑栏中的热点图直接跳转到搜索页面，检索对应日期的笔记🔎
       ✨ 以及数不清的细节，懒得写了`,
     }
   },
   search: {
-    tip: '目前仅支持检索最近200条memo，更多数据检索可以在web端使用。',
+    tip: '目前仅支持检索最近200条笔记，更多数据检索可以在web端使用。',
     inputPlaceHolder: '根据内容搜索…',
     cantEmpty: '搜索内容不能为空',
     nothing: '这里什么也没有 🕸',
@@ -216,10 +216,10 @@ export const chinese = {
   },
   edit: {
     pageTitle_add: '记录新的想法',
-    pageTitle_edit: '编辑Memo',
+    pageTitle_edit: '编辑笔记',
     placeHolder: '让回忆有迹可循...',
     send: '发送',
-    previewRender: '语法渲染预览',
+    previewRender: '笔记预览',
     rendering: '渲染中...'
   }
 }
@@ -311,7 +311,7 @@ export const english = {
     getting: 'Getting',
     hf_notice: {
       title: 'Set Timed Reminder',
-      subTitle: 'Reminder sent via Maimo Note Official Account',
+      subTitle: 'Reminder sent via 玉米地 Official Account',
       noticeType: 'Reminder Type',
       onceNotice: 'One-time Reminder',
       isbh: 'Ebbinghaus',

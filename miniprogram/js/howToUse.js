@@ -2,8 +2,8 @@
 ### 中文指南
 默认注册后的语言为英文，可以点击左侧侧滑栏语言切换为中文。
  #Welcom 
-欢迎注册麦默🎉现在你需要了解一下麦默以及它的使用方法~
-麦默是基于**笔记类**开源web项目[memos](https://github.com/usememos/memos)定制的微信小程序客户端，并且[麦默](https://github.com/Rabithua/memos_wmp)也是开源的。因此你也可以通过网页使用memo，网址是**https://memos.wowow.club**，以下是使用说明(**当然你也可以点击右上角编辑查看语法，这条memo基本涵盖了所有语法**)：
+欢迎注册玉米地🎉现在你需要了解一下玉米地以及它的使用方法~
+玉米地是基于**笔记类**开源web项目[memos](https://github.com/usememos/memos)定制的微信小程序客户端，并且[玉米地](https://github.com/Rabithua/memos_wmp)也是开源的。因此你也可以通过网页使用memo，网址是**https://memos.wowow.club**，以下是使用说明(**当然你也可以点击右上角编辑查看语法，这条memo基本涵盖了所有语法**)：
 
  - 【新建Memo✨】主页向左滑动可以打开编辑页面，创建新的Memo。
 

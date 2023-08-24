@@ -1,0 +1,35 @@
+/* pages/userInfo/index.wxss */
+page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+}
+
+.saveBtn {
+  position: fixed;
+  bottom: 100rpx;
+}
+
+.avatar-wrapper {
+  width: 150rpx!important;
+  height: 150rpx;
+  background-color: none;
+  padding: 0!important;
+}
+.avatar {
+  width: 150rpx;
+  height: 150rpx;
+}
+
+.weui-input {
+  border-top: 1rpx solid #00000010;
+  border-bottom: 1rpx solid #00000010;
+  padding: 20rpx;
+  margin: 40rpx;
+  margin-bottom: 100rpx;
+  width: 50%;
+  border-radius: 10rpx;
+  text-align: center;
+}

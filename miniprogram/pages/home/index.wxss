@@ -4,6 +4,23 @@ page {
   animation: show 500ms 500ms forwards;
 }
 
+.editBtn {
+  width: 50rpx;
+  height: 50rpx;
+  background-size: cover;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTMuNDA2IDQuMzc1YS4zMDIuMzAyIDAgMCAxIDAtLjQzOGwxLjMyOC0xLjMyOGEuMzAyLjMwMiAwIDAgMSAuNDM4IDBsMi4yMDMgMi4yMDRhLjMwMi4zMDIgMCAwIDEgMCAuNDM3bC0xLjMyOCAxLjMyOGEuMzAyLjMwMiAwIDAgMS0uNDM4IDBsLTIuMjAzLTIuMjAzek03LjUgMTUuMTU2bDcuMjY2LTcuMjY1Yy4xMDktLjExLjA5My0uMjk3LS4wMzItLjQwN2wtMi4yMDMtMi4yMThjLS4xMjUtLjEyNS0uMzEyLS4xNDEtLjQwNi0uMDMyTDQuODQ0IDEyLjUgMy43NSAxNi4yNWwzLjc1LTEuMDk0ek0xLjI1IDE3LjV2MS4yNWgxNy41VjE3LjVIMS4yNXoiIGZpbGw9IiMwN0MxNjAiLz48L3N2Zz4=);
+}
+
+.getUserInfoBtn {
+  position: absolute;
+  background-color: #ffffff20;
+  padding: 20rpx 30rpx;
+  border: 1rpx solid #00000010;
+  color: #07C160;
+  backdrop-filter: blur(20px);
+  border-radius: 20rpx;
+}
+
 .pinFolder {
   padding: 20rpx 32rpx;
   border-bottom: 1rpx solid #00000010;
@@ -167,7 +184,6 @@ page {
   border: 1rpx solid #00000010;
   border-radius: 20rpx 0 0 20rpx;
   font-weight: bolder;
-  color: #ffffff;
   transition-duration: 300ms;
 }
 
@@ -181,6 +197,7 @@ page {
   /* justify-content: center; */
   align-items: center;
   border-bottom: 1rpx solid #00000010;
+  position: relative;
 }
 
 .sidebar .user .badge {

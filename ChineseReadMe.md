@@ -1,4 +1,4 @@
-<h1 align='center'>麦默</h1>
+<h1 align='center'>玉米地</h1>
 
 <p align='center'><a href="https://github.com/usememos/memos">usememos/memos</a>的微信小程序版。</p>
 
@@ -7,7 +7,7 @@
 > 发现了绕过域名限制的另一个办法，通过云函数发起请求，感兴趣的可以百度`微信小程序云函数request`👈
 
 ### 【新版】直接扫码打开就会创建一个与微信绑定的账号
-> 搭配 [web](https://memos.wowow.club/) 扫码登录，以及公众号 麦默笔记 做到三端同步记录，公众号关注后，发送信息会自动保存为 memo 。
+> 搭配 [web](https://memos.wowow.club/) 扫码登录，以及公众号 玉米地笔记 做到三端同步记录，公众号关注后，发送信息会自动保存为 memo 。
 
 #### 旧版测试账号：test@mail.com 密码：rabithua 
 
@@ -42,5 +42,5 @@ git clone https://github.com/Rabithua/memos_wmp
 3. 下载微信小程序[开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)
 4. 导入当前文件夹，选择测试号或者使用你注册好的微信小程序的 appid ，不使用云开发。
 5. 在 `app.js` 中修改 `globalData.url` 为你自己的域名，`globalData.ifWechatLogin` 修改为false。
-6. 不出意外的话编译完毕你就可以看到麦默的欢迎界面了🎉
+6. 不出意外的话编译完毕你就可以看到玉米地的欢迎界面了🎉
 7. 尝试输入用户名和密码，看是否登陆成功，如果没有注册按钮是因为没有开启公共注册，遇到问题请提交 issue 反馈给我。

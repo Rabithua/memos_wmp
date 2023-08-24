@@ -112,7 +112,7 @@
   <view class="closeBtn" bind:tap="changeMpcodeMode"></view>
   <view class="info">
     <view class="itm_1">扫码查看笔记</view>
-    <view class="itm_2">麦默小程序✨</view>
+    <view class="itm_2">玉米地小程序✨</view>
   </view>
   <image src="{{mpCodeUrl}}" mode="" />
 </view>

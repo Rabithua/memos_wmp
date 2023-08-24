@@ -1,7 +1,7 @@
 {
   "name": "memos",
   "version": "1.0.0",
-  "description": "<h1 align='center'>麦默</h1>",
+  "description": "<h1 align='center'>玉米地</h1>",
   "main": "index.js",
   "dependencies": {
     "lottie-miniprogram": "^1.0.12"

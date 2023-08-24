@@ -9,7 +9,7 @@
 <view class="headerContainer" style="margin-top: {{top_btn.top}}px">
   <view bindtap="showSideBar" class="header" style="height:{{top_btn.height}}px;">
     <image src="{{me.avatarUrl ? me.avatarUrl: '../../images/icon.png'}}" class="icon"></image>
-    <view>{{state == language.home.state.online ? memos.length + " MEMOS" : state}}</view>
+    <view>{{state == language.home.state.online ? memos.length + " Corns" : state}}</view>
     <view style="width: 10rpx; height: 10rpx; border-radius: 20rpx; background-color: {{onlineColor}}; box-shadow: 0 0 20rpx {{onlineColor}}; margin-left: 20rpx;"></view>
   </view>
   <view class="headerIcons" style="height:{{top_btn.height}}px; margin-left: auto; margin-right: {{top_btn.width}}px;">
@@ -72,7 +72,7 @@
 </view>
 
 <view class="createMemoBtn" bindtap="goEdit">
-  ✍️
+  记录
 </view>
 
 <view class="sidebar" catchtouchmove="none" style="transform: translateX({{showSidebar?'0rpx':'-750rpx'}});">
@@ -82,6 +82,8 @@
       <image wx:if="{{me.avatarUrl}}" bind:tap="goUser" class="avatar" src="{{me.avatarUrl}}" mode="aspectFill" />
       <view class="name">{{me.nickname ? me.nickname : me.username}}</view>
       <view wx:if="{{wechatLogin}}" class="wechatIcon"></view>
+      <view bind:tap="goUserInfo" class="editBtn"></view>
+      <view bind:tap="goUserInfo" wx:if="{{!me.avatarUrl}}" class="getUserInfoBtn">设置微信头像昵称</view>
       <!-- <view class="badge" style="{{me.role == 'HOST' ? 'color: #ffffff; background: #07C160' : ''}}">{{me.role}}</view> -->
     </view>
     <view class="count">
@@ -120,15 +122,15 @@
     <navigator url="../archived/index" class="archived">
       {{language.home.sideBar.goarchived}}
     </navigator>
-    <navigator url="../openapi/index" class="openWeview">
+    <!-- <navigator url="../openapi/index" class="openWeview">
       {{language.home.sideBar.goOpenAPI}}
     </navigator>
     <navigator url="../others/index" class="archived">
       {{language.home.sideBar.goOthers}}
-    </navigator>
-    <view class="archived" bindtap="goWelcom">
+    </navigator> -->
+    <!-- <view class="archived" bindtap="goWelcom">
       {{language.home.sideBar.goWelcom}}
-    </view>
+    </view> -->
     <view class="date">{{language.home.sideBar.date_1}}<text style="font-weight: bold; font-family: 'Smiley Sans Oblique';">{{me.day}}</text> {{language.home.sideBar.date_2}}</view>
   </view>
   <view class="heatTip" data-time="{{heatTip.time}}" catchtap="goSearch" wx:if="{{showHeatTip}}">{{heatTip.time}} {{heatTip.num}} {{language.home.sideBar.heatTipMemo}} →</view>

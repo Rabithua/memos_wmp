@@ -103,6 +103,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/userInfo/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

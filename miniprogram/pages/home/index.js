@@ -14,7 +14,7 @@ Page({
   },
 
   test() {
-    
+
   },
 
   data: {
@@ -77,6 +77,15 @@ Page({
     })
     wx.navigateTo({
       url: `../user/index?id=${this.data.me.id}`,
+    })
+  },
+
+  goUserInfo() {
+    wx.vibrateShort({
+      type: 'light',
+    })
+    wx.navigateTo({
+      url: `../userInfo/index`,
     })
   },
 
@@ -166,8 +175,8 @@ Page({
     })
     if (this.data.previewImage) {
       this.data.previewImage = false
-    }else {
-    wx.startPullDownRefresh()
+    } else {
+      wx.startPullDownRefresh()
     }
   },
 

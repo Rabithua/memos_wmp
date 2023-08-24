@@ -13,7 +13,7 @@ Page({
         appid: 'wx77f858b31146d3fa'
       },
       {
-        name: '麦默',
+        name: '玉米地',
         id: 'memos',
         desc: '把脑袋里的碎片收集起来🧩',
         appid: 'wx93424d86ffa7d6ac'
