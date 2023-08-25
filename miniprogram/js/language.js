@@ -135,6 +135,8 @@ export const chinese = {
       online: '在线',
       offline: '离线'
     },
+    setUserInfo: '设置头像昵称',
+    mark: '马克',
     pinFolder: '折叠置顶笔记',
     thatIsAll: '已全部加载~',
     edit: '编辑中…',
@@ -361,6 +363,8 @@ export const english = {
       online: 'Online',
       offline: 'Offline'
     },
+    setUserInfo: 'Set UserInfo',
+    mark: 'Mark',
     pinFolder: 'PinFolder',
     thatIsAll: "That's all",
     edit: 'Editing...',
