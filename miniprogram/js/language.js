@@ -188,7 +188,6 @@ export const chinese = {
       p_1: `💫 「新建笔记」，向左侧滑
       💫 「打开用户中心」，向右侧滑
       💫 「用户中心 - 点击时间图」，可以快速查看当日笔记
-      💫 「切换账号密码登陆」，点击顶部左侧胶囊
       💫 「标签删除」搜索页面可以长按标签(删除后会出现在标签建议中)
       💫 「编辑资源库文件」，长按或者向左侧滑资源卡片`,
       title_2: '功能更新',
@@ -416,7 +415,6 @@ export const english = {
       p_1: `💫 To create a new Memo, swipe left
       💫 To access the user center, swipe right
       💫 In the user center, click on the time chart to quickly view the memos for that day
-      💫 To switch to a different account, click on the top left capsule
       💫 On the search page, long press a tag to delete it (the tag will be added to the suggested tags)
       💫 To open a Memo page, long press the pin button
       💫 "Edit resource library file", long press or swipe left on the resource card.`,

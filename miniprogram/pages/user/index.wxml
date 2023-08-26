@@ -1,5 +1,5 @@
 <view class="authorInfo">
-  <image bind:tap="goUser" class="avatar" src="{{author.avatarUrl ? author.avatarUrl : '../../images/icon.png'}}" mode="" />
+  <image bind:tap="goUser" class="avatar" src="{{author.avatarUrl ? author.avatarUrl : '../../images/avatar.svg'}}" mode="" />
   <view class="name">{{author.nickname}}</view>
   <view wx:if="{{author.role == 'HOST'}}" class="role">{{author.role}}</view>
 </view>

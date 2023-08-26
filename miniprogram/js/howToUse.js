@@ -3,7 +3,7 @@
 默认注册后的语言为英文，可以点击左侧侧滑栏语言切换为中文。
  #Welcom 
 欢迎注册玉米地🎉现在你需要了解一下玉米地以及它的使用方法~
-玉米地是基于**笔记类**开源web项目[memos](https://github.com/usememos/memos)定制的微信小程序客户端，并且[玉米地](https://github.com/Rabithua/memos_wmp)也是开源的。因此你也可以通过网页使用memo，网址是**https://memos.wowow.club**，以下是使用说明(**当然你也可以点击右上角编辑查看语法，这条memo基本涵盖了所有语法**)：
+玉米地是基于**笔记类**开源web项目[memos](https://github.com/usememos/memos)定制的微信小程序客户端，并且[玉米地](https://github.com/Rabithua/memos_wmp)也是开源的。因此你也可以通过网页使用memo，网址是**https://cornfield.wiki**，以下是使用说明(**当然你也可以点击右上角编辑查看语法，这条memo基本涵盖了所有语法**)：
 
  - 【新建Memo✨】主页向左滑动可以打开编辑页面，创建新的Memo。
 
@@ -49,7 +49,7 @@ The following content is translate by ChatGPT.
 
 #Welcome
 Welcome to register for Meimo 🎉 Now you need to learn about Meimo and how to use it~ 
-Meimo is a WeChat app client customized based on the open-source web project [memos](https://github.com/usememos/memos) for note-taking, and [Meimo](https://github.com/Rabithua/memos_wmp) is also open-source. Therefore, you can also use Memos through the web page, which is located at **https://memos.wowow.club**. Below is the usage instructions (**of course, you can also click the "Edit" button in the upper right corner to view the syntax; this memo basically covers all the syntax**):
+Meimo is a WeChat app client customized based on the open-source web project [memos](https://github.com/usememos/memos) for note-taking, and [Meimo](https://github.com/Rabithua/memos_wmp) is also open-source. Therefore, you can also use Memos through the web page, which is located at **https://cornfield.wiki**. Below is the usage instructions (**of course, you can also click the "Edit" button in the upper right corner to view the syntax; this memo basically covers all the syntax**):
  
 - There are **three modes** for a Memo: Normal/Archived/Deleted. The delete button is located on the top right corner of the Memo card. Click once to archive or unarchive 📦, and after archiving, it can be found in the **Archived** section of the sliding menu. Long press to delete directly 🗑.
  

@@ -87,7 +87,7 @@ Page({
   },
 
   getNotice() {
-    app.api.getNotice('https://api.玉米地.wiki', this.data.id).then(r => {
+    app.api.getNotice('https://api.cornfield.wiki', this.data.id).then(r => {
       this.setData({
         noticeHistory: r.data
       })
@@ -105,7 +105,7 @@ Page({
           memoId: this.data.id,
           notice: this.data.noticeZy
         }
-        app.api.createNotice('https://api.玉米地.wiki', data).then(r => {
+        app.api.createNotice('https://api.cornfield.wiki', data).then(r => {
           wx.vibrateShort({
             type: 'light',
           })

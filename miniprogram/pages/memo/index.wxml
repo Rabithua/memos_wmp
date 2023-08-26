@@ -32,7 +32,7 @@
   </view>
 </mp-half-screen-dialog>
 <view class="authorInfo">
-  <image bind:tap="goUser" class="avatar" src="{{author.avatarUrl ? author.avatarUrl : '../../images/icon.png'}}" mode="" />
+  <image bind:tap="goUser" class="avatar" src="{{author.avatarUrl ? author.avatarUrl : '../../images/avatar.svg'}}" mode="" />
   <view class="name">{{author.nickname ?author.nickname :'MEMOS'}}</view>
   <view class="role">{{author.role}}</view>
 </view>
@@ -92,7 +92,7 @@
   </view>
   <view class="config" bind:tap="showShareMenu">
     <view wx:if="{{ifShowShareMenu}}" class="sharer">
-      <view class="sharerBtn" bind:tap="share">{{language.memo.copyLink}}</view>
+      <!-- <view class="sharerBtn" bind:tap="share">{{language.memo.copyLink}}</view> -->
       <view class="sharerBtn" bind:tap="changeMpcodeMode">{{language.memo.wmpCode}}</view>
       <!-- #if MP -->
       <button open-type="share" class="sharerBtn">{{language.memo.wechatShare}}</button>

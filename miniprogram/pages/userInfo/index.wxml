@@ -1,6 +1,6 @@
 <!--pages/userInfo/index.wxml-->
 <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
-  <image class="avatar" src="{{avatarUrl}}"></image>
+  <image class="avatar" src="{{avatarUrl ? avatarUrl : '../../images/avatar.svg'}}"></image>
 </button> 
 <input type="nickname" model:value="{{nickName}}" onBlur="changeUsername" class="weui-input" placeholder="请输入昵称"/>
 <button bind:tap="saveUserInfo" class="saveBtn" type="primary">保存</button>
