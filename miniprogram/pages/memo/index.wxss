@@ -9,8 +9,7 @@ page {
 }
 
 .hfContainer {
-  max-height: 50vh;
-  overflow-y: scroll;
+  max-height: 600rpx;
 }
 
 .hfContainer .hf_Btns {
@@ -37,13 +36,15 @@ page {
 }
 
 .hf_timeContainer {
-  padding: 20rpx 0;
   display: flex;
   overflow-y: scroll;
   gap: 10rpx;
+  height: 80rpx;
+  margin: 20rpx 0;
 }
 
 .hf_time {
+  margin: 0 10rpx;
   flex-shrink: 0;
   padding: 20rpx;
   border-radius: 10rpx;
