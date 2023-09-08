@@ -43,8 +43,8 @@
       <view class="{{memo.visibility === 'PRIVATE' ? 'eyeCloseIcon' : 'eyeIcon'}}"></view>
       <text>{{memo.visibility === 'PRIVATE' ? language.memo.private : language.memo.public}}</text>
     </view>
-    <view class="notice" bind:tap="changeifShowNoticeSetting">
-      <view class="noticeCloseIcon"></view>
+    <view class="notice {{ifNoticeUnSend ? 'active' : ''}}" bind:tap="changeifShowNoticeSetting">
+      <view class="{{ifNoticeUnSend ? 'noticeIcon' : 'noticeCloseIcon'}}"></view>
       <text>{{language.memo.notice}}</text>
     </view>
   </view>
