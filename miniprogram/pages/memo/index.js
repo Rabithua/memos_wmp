@@ -88,10 +88,27 @@ Page({
 
   getNotice() {
     app.api.getNotice('https://api.cornfield.wiki', this.data.id).then(r => {
+      console.log(JSON.stringify(r.data))
       this.setData({
-        noticeHistory: r.data
+        noticeHistory: r.data,
+        ifNoticeUnSend: this.checkNoticeStatus(r.data)
       })
     })
+  },
+
+  checkNoticeStatus(noticeArray) {
+    // 遍历数组中的每个对象
+    for (let i = 0; i < noticeArray.length; i++) {
+      // 如果对象的 done 属性为 false，则返回 true
+      for (let j = 0; j < noticeArray[i].notice.length; j++) {
+        if (noticeArray[i].notice[j].done === false) {
+          return true;
+        }
+      }
+    }
+  
+    // 如果数组中的所有对象的 done 属性都为 true，则返回 false
+    return false;
   },
 
   noticeSave(e) {

@@ -23,7 +23,7 @@ Page({
     halfDialog: 'closeHalfDialog',
     showSidebar: false,
     state: app.language.english.common.loading,
-    memos: wx.getStorageSync('memos') ? wx.getStorageSync('memos') : [],
+    memos: [],
     onlineColor: '#eeeeee',
     sendLoading: false,
     imgDraw: null,
@@ -116,14 +116,14 @@ Page({
         wx.setStorageSync('tags', res.data)
       })
       .catch((err) => console.log(err))
-    wx.getStorage({
-      key: "memos",
-      success(res) {
-        that.setData({
-          storageMemos: res.data
-        })
-      }
-    })
+    // wx.getStorage({
+    //   key: "memos",
+    //   success(res) {
+    //     that.setData({
+    //       storageMemos: res.data
+    //     })
+    //   }
+    // })
     that.checkTips()
   },
 
@@ -429,8 +429,9 @@ Page({
     }
     app.api.getMemos(wx.getStorageSync('url'), this.data.limit, offset, rowStatus)
       .then(result => {
-        if (!result.data) {} else if (result.data.length == 0) {
-          if (that.data.memos.length == 0) {
+        console.log(result)
+        if (result.data.length == 0) {
+          if (offset == 0) {
             that.setData({
               memos: [],
               storageMemos: [],

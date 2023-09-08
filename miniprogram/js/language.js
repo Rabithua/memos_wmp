@@ -85,7 +85,7 @@ export const chinese = {
     getting: '拉取数据',
     hf_notice: {
       title: '设置定时提醒',
-      subTitle: '提醒通过玉米地笔记公众号发送',
+      subTitle: '提醒通过 Cornfield 公众号发送',
       noticeType: '提醒类型',
       onceNotice: '单次提醒',
       isbh: '艾宾浩斯',
