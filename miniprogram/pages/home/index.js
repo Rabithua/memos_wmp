@@ -106,7 +106,6 @@ Page({
       url: wx.getStorageSync('url'),
       onlineColor: '#FCA417'
     })
-    that.getMemos('NORMAL', 'refresh')
     that.getMe()
     app.api.getTags(wx.getStorageSync('url'))
       .then(res => {
