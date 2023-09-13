@@ -27,9 +27,9 @@
       <!-- #if MP -->
       <div class="btn defaultBtn" wx:if="{{ifWechatLogin}}" style="margin-top: 40rpx;" bindtap="useWechatLogin">{{language.welcom.btnWechatLogIn}}</div>
       <!-- #endif -->
-      <!-- #if NATIVE -->
+
       <div class="btn defaultBtn" wx:if="{{webInfo.allowSignUp}}" style="margin-top: 40rpx;" bindtap="signUp">{{language.welcom.btnSignUp}}</div>
-      <!-- #endif -->
+
       <!-- 审核不通过，暂时注释了 -->
       <!-- <view style="color: #66666630; text-align: center; padding-top: 30rpx; font-size: 30rpx; text-decoration: underline;" bindtap="goWebview">{{language.welcom.explore}}</view> -->
     </view>

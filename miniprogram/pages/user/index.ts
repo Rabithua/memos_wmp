@@ -25,10 +25,10 @@ Page({
   getUserInfo(){
     app.api.getUserInfo(this.data.url, this.data.id)
     .then(res => {
-      if (res.data) {
-        console.log(res.data)
+      if (res) {
+        console.log(res)
         this.setData({
-          author: res.data
+          author: res
         })
       }
     })
@@ -67,14 +67,14 @@ Page({
       .getUserMemos(this.data.url, this.data.offset, this.data.limit, this.data.id)
       .then((result) => {
         console.log(result);
-        if (!result.data) {
+        if (!result) {
           wx.vibrateLong();
           wx.showToast({
             icon: "error",
             title: that.data.language.common.wrong,
           });
         } else {
-          var memos = result.data;
+          var memos = result;
           for (let i = 0; i < memos.length; i++) {
             const ts = memos[i].createdTs;
             var time = app.calTime(ts);

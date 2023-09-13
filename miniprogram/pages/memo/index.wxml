@@ -1,36 +1,4 @@
 <!--pages/memo/index.wxml-->
-<mp-half-screen-dialog data-weui-theme="{{themeType}}" bindbuttontap="noticeSave" show="{{ifShowNoticeSetting}}" maskClosable="{{true}}" title="{{language.memo.hf_notice.title}}" bindclose="changeifShowNoticeSetting" subTitle="{{language.memo.hf_notice.subTitle}}" buttons="{{buttons}}">
-  <scroll-view scroll-y="true" slot='desc' class="hfContainer">
-    <view class="hf_title">{{language.memo.hf_notice.noticeType}}</view>
-    <view class="hf_Btns">
-      <view class="hf_btn {{notice.type == index ? 'active' : ''}}" wx:for="{{noticeType}}" data-index="{{index}}" bind:tap="changeNoticeType" wx:key="noticeType">{{item}}</view>
-    </view>
-    <view class="hf_title">{{language.memo.hf_notice.noticeTime}}</view>
-    <view class="body-view">
-      <slider class="hf_slider" min='1' block-size='20' value='{{notice.time}}' max='24' bindchange="sliderTimeChange" show-value />
-    </view>
-    <view class="hf_title">{{language.memo.hf_notice.noticeDay}}</view>
-    <view class="body-view">
-      <slider class="hf_slider" min='0' block-size='20' value='{{notice.day}}' max='7' bindchange="sliderDateChange" show-value />
-    </view>
-    <view class="hf_title">{{ language.memo.hf_notice.noticeZy_1 + noticeZy.length + language.memo.hf_notice.noticeZy_2}}</view>
-    <scroll-view enable-flex scroll-x class="hf_timeContainer">
-      <view class="hf_time" wx:key="noticeZy" wx:for="{{noticeZy}}" wx:for-item="zy">
-        <view class="noticeCloseIcon"></view>{{(zy.timeFormat)}}{{zy.done ? language.memo.hf_notice.noticed: language.memo.hf_notice.unNotice}}
-      </view>
-    </scroll-view>
-    <view class="hf_title">{{ language.memo.hf_notice.noticeHistory}}</view>
-    <view class="hf_empty" wx:if="{{noticeHistory.length == 0}}">{{ language.memo.hf_notice.noticeHistoryEmpty}}</view>
-    <block wx:else>
-      <scroll-view enable-flex scroll-x class="hf_timeContainer" style="padding-bottom: 0;" wx:for="{{noticeHistory}}" wx:for-item="notice" wx:key="noticeHistory">
-        <view class="hf_time" wx:key="noticeZy" wx:for="{{notice.notice}}" wx:for-item="zy">
-          <view class="noticeCloseIcon"></view>{{(zy.timeFormat)}}{{zy.done ? language.memo.hf_notice.noticed: language.memo.hf_notice.unNotice}}
-        </view>
-      </scroll-view>
-    </block>
-
-  </scroll-view>
-</mp-half-screen-dialog>
 <view class="authorInfo">
   <image bind:tap="goUser" class="avatar" src="{{author.avatarUrl ? author.avatarUrl : '../../images/icon.png'}}" mode="" />
   <view class="name">{{author.nickname ?author.nickname :'MEMOS'}}</view>
@@ -42,10 +10,6 @@
     <view class="notice {{memo.visibility === 'PRIVATE' ? '' : 'active'}}" bind:tap="changeMemoVisibility">
       <view class="{{memo.visibility === 'PRIVATE' ? 'eyeCloseIcon' : 'eyeIcon'}}"></view>
       <text>{{memo.visibility === 'PRIVATE' ? language.memo.private : language.memo.public}}</text>
-    </view>
-    <view class="notice {{ifNoticeUnSend ? 'active' : ''}}" bind:tap="changeifShowNoticeSetting">
-      <view class="{{ifNoticeUnSend ? 'noticeIcon' : 'noticeCloseIcon'}}"></view>
-      <text>{{language.memo.notice}}</text>
     </view>
   </view>
 
@@ -93,7 +57,6 @@
   <view class="config" bind:tap="showShareMenu">
     <view wx:if="{{ifShowShareMenu}}" class="sharer">
       <view class="sharerBtn" bind:tap="share">{{language.memo.copyLink}}</view>
-      <view class="sharerBtn" bind:tap="changeMpcodeMode">{{language.memo.wmpCode}}</view>
       <!-- #if MP -->
       <button open-type="share" class="sharerBtn">{{language.memo.wechatShare}}</button>
       <!-- #endif -->

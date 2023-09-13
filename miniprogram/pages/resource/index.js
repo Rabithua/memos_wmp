@@ -104,18 +104,18 @@ Page({
       })
     } else {
       wx.uploadFile({
-        url: `${that.data.url}/api/resource/blob?openId=${wx.getStorageSync('openId')}`,
+        url: `${that.data.url}/api/v1/resource/blob?openId=${wx.getStorageSync('openId')}`,
         filePath: file.path,
         name: 'file',
         timeout: 180 * 1000,
         formData: {},
         success(res) {
-          // console.log(res)
+          console.log(res)
           wx.vibrateShort({
             type: 'light',
           })
           if (res.statusCode == 200) {
-            let newFile = JSON.parse(res.data).data
+            let newFile = JSON.parse(res.data)
             newFile.time = app.fomaDay(newFile.createdTs * 1000)
             newFile.sizeFomate = app.formatFileSize(newFile.size)
             resources.unshift(newFile)
@@ -156,7 +156,7 @@ Page({
       title: this.data.language.common.loading,
     })
     app.api.getResource(this.data.url, this.data.limit, this.data.resources.length).then(res => {
-      let newResources = res.data
+      let newResources = res
       newResources.forEach(function (item) {
         item.time = app.fomaDay(item.createdTs * 1000);
         item.sizeFomate = app.formatFileSize(item.size)

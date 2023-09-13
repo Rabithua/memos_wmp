@@ -51,7 +51,7 @@ Page({
       console.log(res)
       // wx.setStorageSync('cookie', res.cookies)
       this.setData({
-        webInfo: res.data.data
+        webInfo: res.data
       })
     }).catch((err) => {
       this.setData({
@@ -134,7 +134,7 @@ Page({
       app.api.signUp(this.data.url, data)
         .then(res => {
           console.log(res)
-          if (res.data) {
+          if (res) {
             //创建成功
             wx.vibrateShort({
               type: 'light'
@@ -142,7 +142,7 @@ Page({
             wx.showLoading({
               title: that.data.language.welcom.signUpSuc,
             })
-            var openId = res.data.openId
+            var openId = res.openId
             wx.setStorage({
               key: "openId",
               data: openId,
@@ -237,8 +237,8 @@ Page({
           "password": that.data.password,
         })
         .then(res => {
-          if (res.data) {
-            console.log(res.data.openId)
+          if (res.openId) {
+            console.log(res.openId)
             wx.vibrateShort({
               type: 'light'
             })
@@ -247,7 +247,7 @@ Page({
             })
             wx.setStorage({
               key: "openId",
-              data: res.data.openId,
+              data: res.openId,
               // encrypt: true,
               success(res) {
                 wx.setStorage({
@@ -308,8 +308,8 @@ Page({
     var url = this.data.url
     app.api.sendMemo(url, content, [])
       .then(res => {
-        console.log(res.data)
-        if (res.data) {
+        console.log(res)
+        if (res) {
           wx.setStorageSync('language', 'english')
           wx.reLaunch({
             url: '../home/index',

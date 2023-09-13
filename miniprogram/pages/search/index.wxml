@@ -34,7 +34,7 @@
   <view class="memoCard" wx:for="{{showMemos}}" wx:key="memo" style="border-left: {{item.rowStatus == 'ARCHIVED' ? '5rpx solid #EF4C4E' : 'none'}};" data-memoId="{{item.id}}" id="memo{{item.id}}" catchtap="goMemo">
     <view class="method">
       <text class="btn top" style="opacity: {{item.pinned ? 1:0.2}};" data-memoId="{{item.id}}" data-pinned="{{item.pinned}}" data-content="{{item.content}}" catchtap="changeMemoPinned"></text>
-      <text class="btn delete" data-memoId="{{item.id}}" data-rowStatus="{{item.rowStatus}}" catchtap="deleteMemoFaker" catchlongpress="deleteMemo"></text>
+      <text class="btn delete" style="opacity: {{item.rowStatus == 'ARCHIVED' ? 1:0.2}};" data-memoId="{{item.id}}" data-rowStatus="{{item.rowStatus}}" catchtap="deleteMemoFaker" catchlongpress="deleteMemo"></text>
       <text class="btn edit" data-memoId="{{item.id}}" data-content="{{item.content}}" catchtap="dialogEdit"></text>
     </view>
     <view class="part_top">

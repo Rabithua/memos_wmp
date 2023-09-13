@@ -274,7 +274,7 @@ Page({
   editMemoContent(url, id, data) {
     app.api.editMemo(url, id, data)
       .then(res => {
-        if (res.data) {
+        if (res) {
           wx.setStorageSync('memoDraft', '')
           wx.navigateBack()
         }
@@ -290,7 +290,7 @@ Page({
     var that = this
     app.api.sendMemo(url, content, resourceIdList)
       .then(res => {
-        if (res.data) {
+        if (res) {
           wx.setStorageSync('memoDraft', '')
           if (getCurrentPages().length > 1) {
             wx.navigateBack()

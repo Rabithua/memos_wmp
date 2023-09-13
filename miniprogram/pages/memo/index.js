@@ -8,7 +8,6 @@ Page({
   data: {
     memo: null,
     id: null,
-    ifShowNoticeSetting: false,
     mpCodeMode: false,
     mpCodeUrl: '',
     ifShowShareMenu: false,
@@ -27,25 +26,9 @@ Page({
         value: 1
       }
     ],
-    noticeType: [
-      '单次提醒', '艾宾浩斯'
-    ],
-    noticeHistory: [],
-    notice: {
-      type: 0,
-      time: 8,
-      day: 0
-    },
-    ibhs: [1, 2, 4, 7, 15, 30],
-    noticeZy: [{
-      timeStamp: 1690689600000,
-      done: false,
-      timeFormat: null
-    }]
   },
 
   onLoad(o) {
-    this.noticeData()
     console.log(o)
     let id = o.id
     if (id) {
@@ -86,127 +69,11 @@ Page({
     })
   },
 
-  getNotice() {
-    app.api.getNotice('https://maimoapi.wowow.club', this.data.id).then(r => {
-      console.log(JSON.stringify(r.data))
-      this.setData({
-        noticeHistory: r.data,
-        ifNoticeUnSend: this.checkNoticeStatus(r.data)
-      })
-    })
-  },
-
-  checkNoticeStatus(noticeArray) {
-    // 遍历数组中的每个对象
-    for (let i = 0; i < noticeArray.length; i++) {
-      // 如果对象的 done 属性为 false，则返回 true
-      for (let j = 0; j < noticeArray[i].notice.length; j++) {
-        if (noticeArray[i].notice[j].done === false) {
-          return true;
-        }
-      }
-    }
-    // 如果数组中的所有对象的 done 属性都为 true，则返回 false
-    return false;
-  },
-
-  noticeSave(e) {
-    switch (e.detail.index) {
-      case 0:
-        this.changeifShowNoticeSetting()
-        break;
-
-      case 1:
-        let data = {
-          memoId: this.data.id,
-          notice: this.data.noticeZy
-        }
-        app.api.createNotice('https://maimoapi.wowow.club', data).then(r => {
-          wx.vibrateShort({
-            type: 'light',
-          })
-          if (r.code == 0) {
-            wx.showToast({
-              title: '提醒创建成功～',
-            })
-            this.getNotice()
-            this.changeifShowNoticeSetting()
-          }
-        })
-        break;
-
-      default:
-        break;
-    }
-  },
-
-  changeifShowNoticeSetting() {
-    wx.vibrateShort({
-      type: 'light',
-    })
-    this.setData({
-      ifShowNoticeSetting: !this.data.ifShowNoticeSetting
-    })
-  },
-
-  sliderTimeChange(e) {
-    wx.vibrateShort({
-      type: 'light',
-    })
-    this.setData({
-      ['notice.time']: e.detail.value
-    })
-    this.noticeData()
-  },
-
-  noticeData() {
-    let noticeZy = []
-    switch (this.data.notice.type) {
-      case 0:
-        let timeStamp = this.calcTimeStamp(this.data.notice.day, this.data.notice.time)
-        noticeZy.push({
-          done: false,
-          timeStamp,
-          timeFormat: this.formatTimestamp(timeStamp)
-        })
-        this.setData({
-          noticeZy
-        })
-        break;
-      case 1:
-        this.data.ibhs.forEach((item, index) => {
-          let timeStamp = this.calcTimeStamp(item + this.data.notice.day, this.data.notice.time)
-          noticeZy.push({
-            done: false,
-            timeStamp,
-            timeFormat: this.formatTimestamp(timeStamp)
-          })
-        })
-        this.setData({
-          noticeZy
-        })
-        break;
-
-      default:
-        break;
-    }
-  },
-
   calcTimeStamp(day, hour) {
     const currentDate = new Date();
     currentDate.setDate(currentDate.getDate() + day);
     currentDate.setHours(hour, 0, 0, 0);
     return currentDate.getTime();
-  },
-
-  sliderDateChange(e) {
-    wx.vibrateShort({
-      type: 'light',
-    })
-    this.setData({
-      ['notice.day']: e.detail.value
-    })
-    this.noticeData()
   },
 
   formatTimestamp(timestamp) {
@@ -217,16 +84,6 @@ Page({
     var hours = ("0" + date.getHours()).slice(-2);
     var minutes = ("0" + date.getMinutes()).slice(-2);
     return year + "/" + month + "/" + day + " " + hours + ":" + minutes;
-  },
-
-  changeNoticeType(e) {
-    wx.vibrateShort({
-      type: 'light',
-    })
-    this.setData({
-      ['notice.type']: e.currentTarget.dataset.index
-    })
-    this.noticeData()
   },
 
   showShareMenu(e) {
@@ -261,9 +118,9 @@ Page({
     var that = this
     app.api.editMemo(url, id, data)
       .then(res => {
-        if (res.data) {
+        if (res) {
           that.setData({
-            ['memo.rowStatus']: res.data.rowStatus
+            ['memo.rowStatus']: res.rowStatus
           })
           wx.vibrateShort({
             type: 'light'
@@ -343,8 +200,8 @@ Page({
     // })
     app.api.getMemo(url, id)
       .then(res => {
-        if (res.data) {
-          let memo = res.data
+        if (res) {
+          let memo = res
           memo.formatContent = formatMemoContent(memo.content)
           memo.time = app.calTime(memo.createdTs)
           memo = app.memosRescourse(memo)
@@ -364,9 +221,6 @@ Page({
             memo
           })
           this.getUserInfo()
-          if (memo.creatorId == this.data.me.id) {
-            this.getNotice()
-          }
         } else {
           wx.hideLoading()
         }
@@ -409,7 +263,7 @@ Page({
         visibility: (visibility == 'PRIVATE' ? 'PUBLIC' : 'PRIVATE')
       })
       .then(res => {
-        if (res.data) {
+        if (res) {
           that.setData({
             ['memo.visibility']: visibility == 'PRIVATE' ? 'PUBLIC' : 'PRIVATE'
           })
@@ -436,9 +290,9 @@ Page({
   getUserInfo() {
     app.api.getUserInfo(this.data.url, this.data.memo.creatorId)
       .then(res => {
-        if (res.data) {
+        if (res) {
           this.setData({
-            author: res.data
+            author: res
           })
         }
       })

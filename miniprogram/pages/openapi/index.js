@@ -42,7 +42,7 @@ Page({
     var that = this
     app.api.getMe(wx.getStorageSync('url'))
       .then(result => {
-        let me = result.data
+        let me = result
         that.setData({
           me: me
         })

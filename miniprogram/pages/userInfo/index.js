@@ -24,10 +24,10 @@ Page({
       .then(result => {
         console.log(result)
         that.setData({
-          nickName: result.data.nickname,
-          avatarUrl: result.data.avatarUrl,
-          id: result.data.id,
-          me: result.data
+          nickName: result.nickname,
+          avatarUrl: result.avatarUrl,
+          id: result.id,
+          me: result
         })
       })
   },
@@ -56,7 +56,7 @@ Page({
         app.api.changeUserInfo(wx.getStorageSync('url'), data)
           .then(r => {
             console.log(r)
-            if (r.data.id) {
+            if (r.id) {
               wx.reLaunch({
                 url: '../home/index',
               })
@@ -80,7 +80,7 @@ Page({
             app.api.changeUserInfo(wx.getStorageSync('url'), data)
               .then(r => {
                 console.log(r)
-                if (r.data.id) {
+                if (r.id) {
                   wx.reLaunch({
                     url: '../home/index',
                   })
