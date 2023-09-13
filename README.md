@@ -3,7 +3,7 @@
 
 <h1 align='center'>Maimo</h1>
 
-<p align='center'><a href="https://github.com/usememos/memos">usememos/memos(Base v0.13.1)</a>·WechatMiniProgram.</p>
+<p align='center'><a href="https://github.com/usememos/memos">usememos/memos(version > v0.13.1)</a>·WechatMiniProgram.</p>
 
 ![Group 7952](https://github.com/Rabithua/memos_wmp/assets/34543831/e28aa6ba-09a3-4261-bcfa-e46faafc6793)
 
