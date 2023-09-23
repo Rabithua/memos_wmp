@@ -21,8 +21,8 @@ Page({
     let that = this
     this.setData({
       top_btn: app.globalData.top_btn,
-      username: 'demohero',
-      password: 'secret',
+      username: '',
+      password: '',
       btnDisable: false
     })
 

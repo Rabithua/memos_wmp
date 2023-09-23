@@ -11,9 +11,8 @@
       <text class="content">{{webInfo.customizedProfile.name ? webInfo.customizedProfile.name : language.welcom.headTitle}}</text>
       <image bindtap="dog" wx:if="{{webInfo.customizedProfile.logoUrl}}" src="{{webInfo.customizedProfile.logoUrl}}" class="avatar" mode="aspectFill" />
     </view>
-    <text class="slogan">{{webInfo.customizedProfile.description ? webInfo.customizedProfile.description : language.welcom.secondTitle}}</text>
+    <text class="dsc">{{webInfo.profile.mode ? webInfo.profile.mode : language.welcom.webVersion}} {{webInfo.profile.version ? webInfo.profile.version : "UNKNOWN"}}</text>
     <text class="dsc">{{language.welcom.dsc}}</text>
-    <text class="dsc" style="opacity: 0.2;">{{webInfo.profile.mode ? webInfo.profile.mode : language.welcom.webVersion}} {{webInfo.profile.version ? webInfo.profile.version : "UNKNOWN"}}</text>
     <view class="form">
       <!-- #if NATIVE -->
       <text class="title">{{language.welcom.domain}}</text>
