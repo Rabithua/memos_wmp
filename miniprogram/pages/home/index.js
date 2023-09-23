@@ -45,29 +45,14 @@ Page({
     if (!wx.getStorageSync('url')) {
       wx.setStorageSync('url', app.globalData.url)
     }
-    if (wx.getStorageSync('openId')) {
+    if (wx.getStorageSync('cookie')) {
       this.getAll()
     } else {
-      if (app.globalData.ifWechatLogin) {
-        // #if MP
-        app.getUnionId().then((r) => {
-          wx.setStorageSync('openId', r.openapi)
-          that.getAll()
-        }).catch((err) => {
-          console.log(err)
-          that.getAll()
-        })
-        // #elif NATIVE
-        wx.reLaunch({
-          url: '../welcom/index',
-        })
-        // #endif
-      } else {
-        wx.reLaunch({
-          url: '../welcom/index',
-        })
-      }
+      wx.reLaunch({
+        url: '../welcom/index',
+      })
     }
+
   },
 
   goUser() {
