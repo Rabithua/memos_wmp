@@ -33,6 +33,8 @@ App({
       }
     }
 
+    this.checkCookieExpired()
+
     //加载字体
     wx.loadFontFace({
       global: true,
@@ -40,6 +42,25 @@ App({
       source: 'https://img.rabithua.club/%E9%BA%A6%E9%BB%98/SmileySans-Oblique.ttf',
       scopes: ['webview', 'native'],
     });
+  },
+
+  checkCookieExpired(){
+    var match = wx.getStorageSync('cookie').match(/Expires=([^;]+)/);
+      if (match) {
+        var expires = new Date(match[1]);
+
+        // 判断是否过期
+        if (expires < new Date()) {
+          console.log('cookie Expired!')
+          wx.removeStorageSync('cookie')
+          wx.redirectTo({
+            url: './pages/welcom/index',
+          })
+        } else {
+          console.log('cookie Ok!')
+          return false; // 未过期
+        }
+      }
   },
 
   getUnionId() {
