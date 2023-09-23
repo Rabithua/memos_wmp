@@ -30,7 +30,7 @@
 - [x] 部署后端外挂后，开启自动注册登录与微信绑定的账号
 
 
-## 开始搭建 可以看看更详细的b站[视频教程，已过时](https://www.bilibili.com/video/BV1KX4y1C7vx)
+## 开始搭建 [可以看看更详细的b站](https://www.bilibili.com/video/BV1Hp4y1w7oi/)
 
 好了，现在假装你已经有了一个合法的域名搭建好了 memos 并且开启了 https ~
 
