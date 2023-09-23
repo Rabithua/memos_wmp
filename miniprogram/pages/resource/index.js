@@ -22,7 +22,7 @@ Page({
         "chinese"
       ],
     });
-    if (wx.getStorageSync('openId')) {
+    if (wx.getStorageSync('cookie')) {
       this.getResource()
     } else {
       wx.reLaunch({
@@ -104,7 +104,10 @@ Page({
       })
     } else {
       wx.uploadFile({
-        url: `${that.data.url}/api/v1/resource/blob?openId=${wx.getStorageSync('openId')}`,
+        url: `${that.data.url}/api/v1/resource/blob`,
+        header: {
+          'cookie': wx.getStorageSync('cookie')
+        },
         filePath: file.path,
         name: 'file',
         timeout: 180 * 1000,

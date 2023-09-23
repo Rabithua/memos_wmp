@@ -1,38 +1,11 @@
 export const changeUserInfo = (url, data) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/v1/user/${data.id}?openId=${wx.getStorageSync('openId')}`,
+      url: `${url}/api/v1/user/${data.id}`,
       method: "PATCH",
-      data,
-      success(res) {
-        resolve(res.data)
+      header: {
+        'cookie': wx.getStorageSync('cookie')
       },
-      fail(err) {
-        reject(err)
-      }
-    })
-  })
-}
-export const getNotice = (url, memoId) => {
-  return new Promise((resolve, reject) => {
-    wx.request({
-      url: `${url}/getnotice?openapi=${wx.getStorageSync('openId')}${memoId ? '&memoId=' + memoId : ''}`,
-      method: "GET",
-      success(res) {
-        resolve(res.data)
-      },
-      fail(err) {
-        reject(err)
-      }
-    })
-  })
-}
-
-export const createNotice = (url, data) => {
-  return new Promise((resolve, reject) => {
-    wx.request({
-      url: `${url}/addnotice?openapi=${wx.getStorageSync('openId')}`,
-      method: "POST",
       data,
       success(res) {
         resolve(res.data)
@@ -48,8 +21,7 @@ export const getMemos = (url, limit, offset, rowStatus) => {
   return new Promise((resolve, reject) => {
     let data = {
       limit,
-      offset,
-      openId: wx.getStorageSync('openId')
+      offset
     }
     if (rowStatus) {
       data = {
@@ -59,6 +31,9 @@ export const getMemos = (url, limit, offset, rowStatus) => {
     }
     wx.request({
       url: `${url}/api/v1/memo`,
+      header: {
+        'cookie': wx.getStorageSync('cookie')
+      },
       data,
       success(res) {
         resolve(res.data)
@@ -75,10 +50,12 @@ export const getResource = (url, limit, offset) => {
     let data = {
       limit,
       offset,
-      openId: wx.getStorageSync('openId')
     }
     wx.request({
       url: `${url}/api/v1/resource`,
+      header: {
+        'cookie': wx.getStorageSync('cookie')
+      },
       data,
       success(res) {
         resolve(res.data)
@@ -93,7 +70,10 @@ export const getResource = (url, limit, offset) => {
 export const deleteResource = (url, id) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/v1/resource/${id}?openId=${wx.getStorageSync('openId')}`,
+      url: `${url}/api/v1/resource/${id}`,
+      header: {
+        'cookie': wx.getStorageSync('cookie')
+      },
       method: "DELETE",
       success(res) {
         resolve(res.data)
@@ -113,7 +93,10 @@ export const deleteResource = (url, id) => {
 export const deleteMemoResource = (url, memoId, resourceId) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/v1/memo/${memoId}/resource/${resourceId}?openId=${wx.getStorageSync('openId')}`,
+      url: `${url}/api/v1/memo/${memoId}/resource/${resourceId}`,
+      header: {
+        'cookie': wx.getStorageSync('cookie')
+      },
       method: "DELETE",
       success(res) {
         resolve(res.data)
@@ -133,7 +116,10 @@ export const deleteMemoResource = (url, memoId, resourceId) => {
 export const createResource = (url, file) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/v1/resource/blob?openId=${wx.getStorageSync('openId')}`,
+      url: `${url}/api/v1/resource/blob`,
+      header: {
+        'cookie': wx.getStorageSync('cookie')
+      },
       method: "POST",
       data: {
         file
@@ -152,11 +138,10 @@ export const getMemo = (url, id) => {
   return new Promise((resolve, reject) => {
     wx.request({
       url: `${url}/api/v1/memo/${id}`,
-      data: {
-        openId: wx.getStorageSync('openId')
+      header: {
+        'cookie': wx.getStorageSync('cookie')
       },
       success(res) {
-        console.log(res)
         resolve(res.data)
       },
       fail(err) {
@@ -170,8 +155,8 @@ export const getMe = (url) => {
   return new Promise((resolve, reject) => {
     wx.request({
       url: `${url}/api/v1/user/me`,
-      data: {
-        openId: wx.getStorageSync('openId')
+      header: {
+        'cookie': wx.getStorageSync('cookie')
       },
       success(res) {
         resolve(res.data)
@@ -192,8 +177,8 @@ export const getUserInfo = (url, userId) => {
   return new Promise((resolve, reject) => {
     wx.request({
       url: `${url}/api/v1/user/${userId}`,
-      data: {
-        openId: wx.getStorageSync('openId')
+      header: {
+        'cookie': wx.getStorageSync('cookie')
       },
       success(res) {
         resolve(res.data)
@@ -215,8 +200,10 @@ export const getStats = (url, creatorId) => {
     wx.request({
       url: `${url}/api/v1/memo/stats`,
       data: {
-        creatorId,
-        openId: wx.getStorageSync('openId')
+        creatorId
+      },
+      header: {
+        'cookie': wx.getStorageSync('cookie')
       },
       success(res) {
         resolve(res.data)
@@ -236,7 +223,10 @@ export const getStats = (url, creatorId) => {
 export const sendMemo = (url, content, resourceIdList) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/v1/memo?openId=${wx.getStorageSync('openId')}`,
+      url: `${url}/api/v1/memo`,
+      header: {
+        'cookie': wx.getStorageSync('cookie')
+      },
       method: "POST",
       data: {
         content,
@@ -281,7 +271,10 @@ export const signUp = (url, data) => {
 export const deleteMemo = (url, memoId) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/v1/memo/${memoId}?openId=${wx.getStorageSync('openId')}`,
+      url: `${url}/api/v1/memo/${memoId}`,
+      header: {
+        'cookie': wx.getStorageSync('cookie')
+      },
       method: "DELETE",
       success(res) {
         resolve(res.data)
@@ -301,7 +294,10 @@ export const deleteMemo = (url, memoId) => {
 export const editMemo = (url, memoId, data) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/v1/memo/${memoId}?openId=${wx.getStorageSync('openId')}`,
+      url: `${url}/api/v1/memo/${memoId}`,
+      header: {
+        'cookie': wx.getStorageSync('cookie')
+      },
       method: "PATCH",
       data,
       success(res) {
@@ -322,7 +318,10 @@ export const editMemo = (url, memoId, data) => {
 export const changeUserSetting = (url, data) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/v1/user/setting?openId=${wx.getStorageSync('openId')}`,
+      url: `${url}/api/v1/user/setting`,
+      header: {
+        'cookie': wx.getStorageSync('cookie')
+      },
       method: "POST",
       data: {
         ...data
@@ -345,7 +344,10 @@ export const changeUserSetting = (url, data) => {
 export const changeMemoPinned = (url, memoId, data) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/v1/memo/${memoId}/organizer?openId=${wx.getStorageSync('openId')}`,
+      url: `${url}/api/v1/memo/${memoId}/organizer`,
+      header: {
+        'cookie': wx.getStorageSync('cookie')
+      },
       method: "POST",
       data: {
         ...data
@@ -372,6 +374,8 @@ export const signIn = (url, data) => {
       method: "POST",
       data: data,
       success(res) {
+        console.log(res)
+        wx.setStorageSync('cookie', res.header["Set-Cookie"])
         resolve(res.data)
       },
       fail(err) {
@@ -390,8 +394,8 @@ export const getTags = (url) => {
   return new Promise((resolve, reject) => {
     wx.request({
       url: `${url}/api/v1/tag`,
-      data: {
-        openId: wx.getStorageSync('openId')
+      header: {
+        'cookie': wx.getStorageSync('cookie')
       },
       success(res) {
         resolve(res.data)
@@ -412,8 +416,8 @@ export const getTagsSuggestionList = (url) => {
   return new Promise((resolve, reject) => {
     wx.request({
       url: `${url}/api/v1/tag/suggestion`,
-      data: {
-        openId: wx.getStorageSync('openId')
+      header: {
+        'cookie': wx.getStorageSync('cookie')
       },
       success(res) {
         resolve(res.data)
@@ -433,7 +437,10 @@ export const getTagsSuggestionList = (url) => {
 export const upsertTag = (url, TagName) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/v1/tag?openId=${wx.getStorageSync('openId')}`,
+      url: `${url}/api/v1/tag`,
+      header: {
+        'cookie': wx.getStorageSync('cookie')
+      },
       method: "POST",
       data: {
         name: TagName
@@ -456,8 +463,11 @@ export const upsertTag = (url, TagName) => {
 export const deleteTag = (url, TagName) => {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${url}/api/v1/tag/delete?openId=${wx.getStorageSync('openId')}`,
+      url: `${url}/api/v1/tag/delete`,
       method: "POST",
+      header: {
+        'cookie': wx.getStorageSync('cookie')
+      },
       data: {
         name: TagName
       },

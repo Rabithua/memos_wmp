@@ -30,7 +30,7 @@ Page({
     this.reqCookie()
   },
 
-  inputUrl(e){
+  inputUrl(e) {
     console.log(e.detail.value)
     let url = e.detail.value
     this.setData({
@@ -142,28 +142,14 @@ Page({
             wx.showLoading({
               title: that.data.language.welcom.signUpSuc,
             })
-            var openId = res.openId
-            wx.setStorage({
-              key: "openId",
-              data: openId,
-              // encrypt: true,
-              success(res) {
+            app.api.getMemos(that.data.url)
+              .then((res) => {
                 console.log(res)
-                app.api.getMemos(that.data.url, openId)
-                  .then((res) => {
-                    console.log(res)
-                    that.sendMemo(openId)
-                  })
-                  .catch((err) => {
-                    console.log(err)
-                  })
-              },
-              fail(err) {
-                wx.showToast({
-                  title: that.data.language.common.wrong,
-                })
-              }
-            })
+                that.sendMemo()
+              })
+              .catch((err) => {
+                console.log(err)
+              })
           } else if (res.message) {
             wx.vibrateLong()
             wx.showToast({
@@ -237,37 +223,14 @@ Page({
           "password": that.data.password,
         })
         .then(res => {
-          if (res.openId) {
-            console.log(res.openId)
-            wx.vibrateShort({
-              type: 'light'
-            })
-            wx.showLoading({
-              title: that.data.language.welcom.signInSuc,
-            })
+          if (res.username) {
             wx.setStorage({
-              key: "openId",
-              data: res.openId,
-              // encrypt: true,
+              key: "url",
+              data: that.data.url,
               success(res) {
-                wx.setStorage({
-                  key: "url",
-                  data: that.data.url,
-                  success(res) {
-                    wx.reLaunch({
-                      url: '../home/index',
-                    })
-                  }
+                wx.reLaunch({
+                  url: '../home/index',
                 })
-              },
-              fail(err) {
-                wx.showToast({
-                  title: that.data.language.common.wrong,
-                })
-                that.setData({
-                  btnDisable: false
-                })
-                wx.hideLoading()
               }
             })
           } else {
@@ -327,28 +290,6 @@ Page({
         }
       })
       .catch((err) => console.log(err))
-  },
-
-  useWechatLogin() {
-    wx.showLoading()
-    app.getUnionId().then((r) => {
-      wx.setStorageSync('openId', r.openapi)
-      this.sendMemo()
-      wx.vibrateShort({
-        type: 'light'
-      })
-      wx.hideLoading()
-      wx.reLaunch({
-        url: '../home/index',
-      })
-    }).catch((err) => {
-      console.log(err)
-      wx.hideLoading()
-      wx.showToast({
-        title: 'something wrong',
-      })
-    })
-
   },
 
   goWebview() {

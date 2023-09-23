@@ -37,17 +37,7 @@ Page({
         mpCodeUrl: app.globalData.backendUrl + '/getmpcode?path=' + encodeURIComponent(`pages/memo/index?id=${id}`),
         language: app.language[wx.getStorageSync('language') ? wx.getStorageSync('language') : 'chinese']
       })
-      if (wx.getStorageSync('openId')) {
-        this.getMemo(this.data.url, id)
-      } else {
-        app.getUnionId().then((r) => {
-          wx.setStorageSync('openId', r.openapi)
-          this.getMemo(this.data.url, id)
-        }).catch((err) => {
-          console.log(err)
-          this.getMemo(this.data.url, id)
-        })
-      }
+      this.getMemo(this.data.url, id)
     }
     this.themeTypeConfig()
   },
@@ -55,7 +45,7 @@ Page({
   themeTypeConfig() {
     let that = this
     wx.getSystemInfo({
-      success (res) {
+      success(res) {
         that.setData({
           themeType: res.theme
         })

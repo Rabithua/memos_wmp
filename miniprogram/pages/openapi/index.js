@@ -16,7 +16,7 @@ Page({
       top_btn: app.globalData.top_btn
     })
 
-    if (wx.getStorageSync('openId')) {
+    if (wx.getStorageSync('cookie')) {
       that.setData({
         url: wx.getStorageSync('url')
       })

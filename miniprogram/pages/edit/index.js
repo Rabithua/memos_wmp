@@ -49,7 +49,7 @@ Page({
       })
     }
 
-    if (wx.getStorageSync('openId')) {
+    if (wx.getStorageSync('cookie')) {
       that.setData({
         url: wx.getStorageSync('url'),
         language: app.language[wx.getStorageSync('language') ? wx.getStorageSync('language') : 'chinese']
