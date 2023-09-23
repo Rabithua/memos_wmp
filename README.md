@@ -19,7 +19,7 @@
 - [x] 💫 Automatically bind an account through the WeChat user identifier.
 - [x] ⏰ Send scheduled reminders through WeChat official account.
 
-### How to use？
+### How to use？[bilibili](https://www.bilibili.com/video/BV1Hp4y1w7oi/)
 1. Preparation: A domain name that has been registered in China, pointing to a well-built memos web project (note that the version number is after 0.13.1). The old version may not work properly due to changes in the API. You can search for a suitable version in the releases, but note that it has fewer features compared to the latest version.
 2. Please apply for a WeChat mini program. Choose the category "Tools-Reminder" and in the development management section, fill in the field "Request legal domain name" with the domain name you have set up for "memos".
 3. Create a local folder and pull the project. `git clone https://github.com/Rabithua/memos_wmp`
