@@ -124,14 +124,19 @@ Page({
 
   onShow() {
     let language = app.language[wx.getStorageSync('language') ? wx.getStorageSync('language') : 'chinese']
+
+    let settings = wx.getStorageSync('settings') ? wx.getStorageSync('settings') : language.setting.settings
+
     this.setData({
       language,
-      settings: wx.getStorageSync('settings') ? wx.getStorageSync('settings') : language.setting.settings,
+      settings,
     })
     if (this.data.previewImage) {
       this.data.previewImage = false
     } else {
-      wx.startPullDownRefresh()
+      if (settings[3].checked || this.data.memos.length == 0) {
+        wx.startPullDownRefresh()
+      }
     }
   },
 
