@@ -40,6 +40,10 @@ export const chinese = {
         title: "首页提示",
         checked: wx.getStorageSync('showTips') ? wx.getStorageSync('showTips') : true,
       },
+      {
+        title: "首页自动刷新",
+        checked: true,
+      },
     ],
     clearStorage: '清理缓存'
   },
@@ -265,6 +269,10 @@ export const english = {
       {
         title: "HomeTips",
         checked: wx.getStorageSync('showTips') ? wx.getStorageSync('showTips') : true,
+      },
+      {
+        title: "Auto refresh",
+        checked: true,
       },
     ],
     clearStorage: 'ClearStorage'
