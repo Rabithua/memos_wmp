@@ -14,7 +14,7 @@ Page({
   },
 
   test() {
-    
+
   },
 
   data: {
@@ -151,14 +151,17 @@ Page({
 
   onShow() {
     let language = app.language[wx.getStorageSync('language') ? wx.getStorageSync('language') : 'chinese']
+    let settings = wx.getStorageSync('settings') ? wx.getStorageSync('settings') : language.setting.settings
     this.setData({
       language,
-      settings: wx.getStorageSync('settings') ? wx.getStorageSync('settings') : language.setting.settings,
+      settings,
     })
     if (this.data.previewImage) {
       this.data.previewImage = false
-    }else {
-    wx.startPullDownRefresh()
+    } else {
+      if (settings[3].checked || this.data.memos.length == 0) {
+        wx.startPullDownRefresh()
+      }
     }
   },
 
@@ -207,7 +210,7 @@ Page({
       url: `../userInfo/index`,
     })
   },
-  
+
   goMemo(e) {
     // console.log(e.currentTarget.dataset.memoid)
     wx.navigateTo({

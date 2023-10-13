@@ -3,7 +3,7 @@
   "name": "麦默",
   "version": "1.0.1",
   "mini-android": {
-    "sdkVersion": "1.0.14",
+    "sdkVersion": "1.0.19",
     "toolkitVersion": "0.7.1",
     "useExtendedSdk": {
       "media": true,
@@ -29,7 +29,7 @@
     }
   },
   "mini-ios": {
-    "sdkVersion": "1.0.23",
+    "sdkVersion": "1.0.30",
     "toolkitVersion": "0.0.9",
     "useExtendedSdk": {
       "WeAppOpenFuns": true,
