@@ -2,7 +2,7 @@
 
 > Note: This is a WeChat mini program. To publish a mini program on WeChat, you need a domain name that has been filed in China. According to recent policies, the mini program itself also requires additional filing, which is quite troublesome!
 
-> [Using donut to convert WeChat Mini Program to an app.](https://github.com/Rabithua/memos_wmp#using-donut-to-convert-wechat-mini-program-to-an-app)
+> [Using donut to convert WeChat Mini Program to an IOS app or Android app.](https://github.com/Rabithua/memos_wmp#using-donut-to-convert-wechat-mini-program-to-an-app)
 
 <h1 align='center'>Maimo</h1>
 
