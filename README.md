@@ -36,6 +36,8 @@
 
 > You may need to install the [testing version of WeChat Developer Tools](https://developers.weixin.qq.com/miniprogram/dev/devtools/nightly.html). And you need to enable donut for your mini program.
 
+> [Download APK file](https://github.com/Rabithua/memos_wmp/releases)
+
 ![Group 7949](https://github.com/Rabithua/memos_wmp/assets/34543831/a74e9685-cc82-49e5-a46e-49151111cb45)
 
 ### Have a look
