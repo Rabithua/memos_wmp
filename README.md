@@ -4,7 +4,7 @@
 
 > [Using donut to convert WeChat Mini Program to an IOS app or Android app.](https://github.com/Rabithua/memos_wmp#using-donut-to-convert-wechat-mini-program-to-an-app)
 
-<h1 align='center'>Maimo</h1>
+<h1 align='center'>Maimo（近期尝试适配新版中，稍安勿躁）</h1>
 
 <p align='center'><a href="https://github.com/usememos/memos">usememos/memos(version > v0.15.1)</a>·WechatMiniProgram.</p>
 
